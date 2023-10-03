@@ -1,0 +1,27 @@
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: BuildAndTest
+
+on:
+  push:
+  pull_request:
+    types: [opened]
+
+jobs:
+  build:
+
+    runs-on: macos-13
+
+    steps:
+      
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+        
+    - name: Build project
+      run: swift package clean
+      
+    - name: Build project
+      run: swift build -v
+      
+    - name: Run tests
+      run: swift test -v

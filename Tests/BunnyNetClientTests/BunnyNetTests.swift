@@ -1,4 +1,4 @@
 import XCTest
-@testable import BunnyNet
+@testable import BunnyNetClient
 
 final class BunnyNetTests: XCTestCase {}

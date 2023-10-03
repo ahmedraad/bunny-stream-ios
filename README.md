@@ -1,1 +1,3 @@
-# bunny-stream-ios
+# BunnyNet
+
+A description of this package.
