@@ -3,6 +3,17 @@
 <p align="center">
   <img src="Resources/Images/bunnynet.svg" width="70%" alt="BunnyNet" />
 </p>
+<p align="center">
+    <a href="https://www.swift.org" alt="Swift">
+        <img src="https://img.shields.io/badge/Swift-5.8-orange.svg" />
+    </a>
+    <a href="./LICENSE" alt="License">
+        <img src="https://img.shields.io/badge/Licence-MIT-green.svg" />
+    </a>
+    <a href="https://github.com/poviolabs/bunny-stream-ios/actions/workflows/BuildAndTest.yml" alt="Tests Status">
+        <img src="https://github.com/poviolabs/bunny-stream-ios/actions/workflows/BuildAndTest.yml/badge.svg" />
+    </a>
+</p>
 
 BunnyNet Stream SDK is a powerful and easy-to-use Swift Package Manager (SPM) package that provides Swift API client capabilities for the BunnyNet REST Stream API, along with a video player for smooth content playback.
 
