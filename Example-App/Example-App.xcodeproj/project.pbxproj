@@ -7,18 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7789473C2ACFFEFD00DAF8DB /* Example_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473B2ACFFEFD00DAF8DB /* Example_AppApp.swift */; };
+		7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */; };
 		7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473D2ACFFEFD00DAF8DB /* ContentView.swift */; };
 		778947402ACFFEFF00DAF8DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7789473F2ACFFEFF00DAF8DB /* Assets.xcassets */; };
 		778947432ACFFEFF00DAF8DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 778947422ACFFEFF00DAF8DB /* Preview Assets.xcassets */; };
+		7789474E2AD0032900DAF8DB /* StreamAPIDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789474D2AD0032900DAF8DB /* StreamAPIDemoView.swift */; };
+		778947502AD0033800DAF8DB /* StreamAPIDemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */; };
+		778947522AD0035900DAF8DB /* BunnyNetClient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */; };
+		778947552AD0037900DAF8DB /* BunnyNetClient in Frameworks */ = {isa = PBXBuildFile; productRef = 778947542AD0037900DAF8DB /* BunnyNetClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7747D2242AD01D9C005A1070 /* bunny-stream-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bunny-stream-ios"; path = ..; sourceTree = "<group>"; };
 		778947382ACFFEFD00DAF8DB /* Example-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7789473B2ACFFEFD00DAF8DB /* Example_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_AppApp.swift; sourceTree = "<group>"; };
+		7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		7789473D2ACFFEFD00DAF8DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7789473F2ACFFEFF00DAF8DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		778947422ACFFEFF00DAF8DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7789474D2AD0032900DAF8DB /* StreamAPIDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamAPIDemoView.swift; sourceTree = "<group>"; };
+		7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamAPIDemoViewModel.swift; sourceTree = "<group>"; };
+		778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BunnyNetClient+Extension.swift"; sourceTree = "<group>"; };
+		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,15 +35,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				778947552AD0037900DAF8DB /* BunnyNetClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7747D2232AD01D9C005A1070 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				7747D2242AD01D9C005A1070 /* bunny-stream-ios */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		7789472F2ACFFEFD00DAF8DB = {
 			isa = PBXGroup;
 			children = (
+				7747D2232AD01D9C005A1070 /* Packages */,
 				7789473A2ACFFEFD00DAF8DB /* Example-App */,
 				778947392ACFFEFD00DAF8DB /* Products */,
 			);
@@ -51,9 +70,10 @@
 		7789473A2ACFFEFD00DAF8DB /* Example-App */ = {
 			isa = PBXGroup;
 			children = (
-				7789473B2ACFFEFD00DAF8DB /* Example_AppApp.swift */,
-				7789473D2ACFFEFD00DAF8DB /* ContentView.swift */,
-				7789473F2ACFFEFF00DAF8DB /* Assets.xcassets */,
+				77C1421F2AD02EF100B419FB /* Info.plist */,
+				7789474B2AD002CA00DAF8DB /* Scenes */,
+				7789474A2AD002B900DAF8DB /* Resources */,
+				778947492AD002AF00DAF8DB /* App */,
 				778947412ACFFEFF00DAF8DB /* Preview Content */,
 			);
 			path = "Example-App";
@@ -65,6 +85,41 @@
 				778947422ACFFEFF00DAF8DB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		778947492AD002AF00DAF8DB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */,
+				7789473D2ACFFEFD00DAF8DB /* ContentView.swift */,
+				778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7789474A2AD002B900DAF8DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7789473F2ACFFEFF00DAF8DB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7789474B2AD002CA00DAF8DB /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7789474C2AD002CF00DAF8DB /* StreamAPIDemo */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7789474C2AD002CF00DAF8DB /* StreamAPIDemo */ = {
+			isa = PBXGroup;
+			children = (
+				7789474D2AD0032900DAF8DB /* StreamAPIDemoView.swift */,
+				7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */,
+			);
+			path = StreamAPIDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +138,9 @@
 			dependencies = (
 			);
 			name = "Example-App";
+			packageProductDependencies = (
+				778947542AD0037900DAF8DB /* BunnyNetClient */,
+			);
 			productName = "Example-App";
 			productReference = 778947382ACFFEFD00DAF8DB /* Example-App.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +169,8 @@
 				Base,
 			);
 			mainGroup = 7789472F2ACFFEFD00DAF8DB;
+			packageReferences = (
+			);
 			productRefGroup = 778947392ACFFEFD00DAF8DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +198,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */,
-				7789473C2ACFFEFD00DAF8DB /* Example_AppApp.swift in Sources */,
+				7789474E2AD0032900DAF8DB /* StreamAPIDemoView.swift in Sources */,
+				778947522AD0035900DAF8DB /* BunnyNetClient+Extension.swift in Sources */,
+				778947502AD0033800DAF8DB /* StreamAPIDemoViewModel.swift in Sources */,
+				7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +260,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -269,23 +332,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Example-App/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = GX6PPA6X9F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Example-App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = BunnyStreamSDK;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "bunny.Example-App";
+				PRODUCT_BUNDLE_IDENTIFIER = net.bunny.StreamSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Stream SDK Demo Provisioning profile";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -297,23 +369,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Example-App/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = GX6PPA6X9F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Example-App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = BunnyStreamSDK;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "bunny.Example-App";
+				PRODUCT_BUNDLE_IDENTIFIER = net.bunny.StreamSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Stream SDK Demo Provisioning profile";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -342,6 +423,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		778947542AD0037900DAF8DB /* BunnyNetClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BunnyNetClient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 778947302ACFFEFD00DAF8DB /* Project object */;
 }
