@@ -109,6 +109,15 @@
       }
     },
     {
+      "identity" : "tuskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tus/TUSKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3afde4888638e434392a60f9cf6363244351b352"
+      }
+    },
+    {
       "identity" : "yams",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jpsim/Yams.git",

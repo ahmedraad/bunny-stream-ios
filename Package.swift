@@ -8,11 +8,13 @@ let package = Package(
   platforms: [.iOS(.v15), .macOS(.v13)],
   products: [
     .library(name: "BunnyNetClient", targets: ["BunnyNetClient"]),
+    .library(name: "BunnyNetVideoUploader", targets: ["BunnyNetVideoUploader"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-openapi-generator", branch: "main"),
     .package(url: "https://github.com/apple/swift-openapi-runtime", branch: "main"),
     .package(url: "https://github.com/apple/swift-openapi-urlsession", branch: "main"),
+    .package(url: "https://github.com/tus/TUSKit.git", branch: "main")
   ],
   targets: [
     .target(
@@ -32,6 +34,13 @@ let package = Package(
         .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
       ]
     ),
+    .target(
+      name: "BunnyNetVideoUploader",
+      dependencies: [
+        .byName(name: "BunnyNetClient"),
+        .product(name: "TUSKit", package: "TUSKit")
+      ],
+      path: "Sources/BunnyNetVideoUploader"),
     .testTarget(
       name: "BunnyNetClientTests",
       dependencies: ["BunnyNetClient"],
