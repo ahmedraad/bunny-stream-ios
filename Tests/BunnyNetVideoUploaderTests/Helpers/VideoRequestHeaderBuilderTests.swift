@@ -1,0 +1,36 @@
+import XCTest
+@testable import BunnyNetVideoUploader
+
+final class VideoRequestHeaderBuilderTests: XCTestCase {
+  var headerBuilder: VideoRequestHeaderBuilder!
+  
+  override func setUp() {
+    super.setUp()
+    headerBuilder = VideoRequestHeaderBuilder()
+  }
+  
+  override func tearDown() {
+    headerBuilder = nil
+    super.tearDown()
+  }
+  
+  func testBuildHeaders() {
+    // Given
+    let info = VideoInfo(content: .data(Data()), title: "SampleVideo", libraryId: 123123, expirationTime: 123123123)
+    let signature = "sampleSignature"
+    let videoId = "video123"
+    let filetype = "video/quicktime"
+    
+    // When
+    let headers = headerBuilder.buildHeaders(for: info, with: signature, videoId: videoId, fileType: filetype)
+    
+    // Then
+    XCTAssertEqual(headers["AuthorizationSignature"], signature)
+    XCTAssertEqual(headers["AuthorizationExpire"], "123123123")
+    XCTAssertEqual(headers["VideoId"], "video123")
+    XCTAssertEqual(headers["LibraryId"], "123123")
+    let filenameBase64 = "SampleVideo".data(using: .utf8)?.base64EncodedString()
+    let filetypeBase64 = "video/quicktime".data(using: .utf8)?.base64EncodedString()
+    XCTAssertEqual(headers["Upload-Metadata"], "filename \(filenameBase64 ?? ""),filetype \(filetypeBase64 ?? "")")
+  }
+}

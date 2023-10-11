@@ -44,6 +44,12 @@ let package = Package(
     .testTarget(
       name: "BunnyNetClientTests",
       dependencies: ["BunnyNetClient"],
-      path: "Tests/BunnyNetClientTests"),
+      path: "Tests/BunnyNetClientTests"
+    ),
+    .testTarget(
+      name: "BunnyNetVideoUploaderTests",
+      dependencies: ["BunnyNetVideoUploader"],
+      path: "Tests/BunnyNetVideoUploaderTests"
+    ),
   ]
 )
