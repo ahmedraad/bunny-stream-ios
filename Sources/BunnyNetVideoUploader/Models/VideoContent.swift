@@ -1,6 +1,6 @@
 import Foundation
 
-public enum VideoContent {
+public enum VideoContent: Hashable {
   case data(Data)
   case url(URL)
   

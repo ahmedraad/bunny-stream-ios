@@ -16,13 +16,16 @@ final class VideoRequestHeaderBuilderTests: XCTestCase {
   
   func testBuildHeaders() {
     // Given
-    let info = VideoInfo(content: .data(Data()), title: "SampleVideo", libraryId: 123123, expirationTime: 123123123)
+    let info = VideoInfo(content: .data(Data()),
+                         title: "SampleVideo",
+                         fileType: "video/quicktime",
+                         libraryId: 123123,
+                         expirationTime: 123123123)
     let signature = "sampleSignature"
     let videoId = "video123"
-    let filetype = "video/quicktime"
     
     // When
-    let headers = headerBuilder.buildHeaders(for: info, with: signature, videoId: videoId, fileType: filetype)
+    let headers = headerBuilder.buildHeaders(for: info, signature: signature, videoId: videoId)
     
     // Then
     XCTAssertEqual(headers["AuthorizationSignature"], signature)

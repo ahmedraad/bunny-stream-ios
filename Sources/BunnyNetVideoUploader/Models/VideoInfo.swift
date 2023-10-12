@@ -1,30 +1,25 @@
 import Foundation
 
-public struct VideoInfo {
-  let content: VideoContent
-  let title: String
-  let collectionId: String?
-  let libraryId: Int
-  let expirationTime: TimeInterval
+public struct VideoInfo: Hashable {
+  public let content: VideoContent
+  public let title: String
+  public let fileType: String
+  public let collectionId: String?
+  public let libraryId: Int
+  public let expirationTime: TimeInterval
   
   public init(content: VideoContent,
               title: String,
+              fileType: String,
               collectionId: String? = nil,
               libraryId: Int,
               expirationTime: TimeInterval = Date().addingTimeInterval(3600).timeIntervalSince1970) {
     self.content = content
     self.title = title
+    self.fileType = fileType
     self.collectionId = collectionId
     self.libraryId = libraryId
     self.expirationTime = expirationTime
-  }
-  
-  public var videoTitle: String {
-    if let fileExtension = content.fileExtension {
-      return (title + ".\(fileExtension)").uppercased()
-    } else {
-      return title
-    }
   }
   
   public var expirationTimeString: String {

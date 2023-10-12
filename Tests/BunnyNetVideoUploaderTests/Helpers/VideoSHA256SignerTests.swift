@@ -16,7 +16,7 @@ final class VideoSHA256SignerTests: XCTestCase {
   
   func testGenerateSignature() {
     // Given
-    let info = VideoInfo(content: .data(Data()), title: "title", libraryId: 12312, expirationTime: 1696971042)
+    let info = VideoInfo(content: .data(Data()), title: "title", fileType: "mpeg4", libraryId: 12312, expirationTime: 1696971042)
     let apiKey = "testApiKey"
     let videoId = "testVideoId"
     
@@ -30,7 +30,7 @@ final class VideoSHA256SignerTests: XCTestCase {
   
   func testGenerateSignatureWithEmptyValues() {
     // Given
-    let info = VideoInfo(content: .data(Data()), title: "title", libraryId: 12312, expirationTime: 1696971042)
+    let info = VideoInfo(content: .data(Data()), title: "title", fileType: "mpeg4", libraryId: 12312, expirationTime: 1696971042)
     let apiKey = ""
     let videoId = ""
     

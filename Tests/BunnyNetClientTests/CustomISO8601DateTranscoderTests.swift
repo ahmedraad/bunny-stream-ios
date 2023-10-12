@@ -55,7 +55,8 @@ class CustomISO8601DateTranscoderTests: XCTestCase {
     if let decodingError = decodingError as? DecodingError {
       switch decodingError {
       case .dataCorrupted(let context):
-        XCTAssertEqual(context.debugDescription, "Expected date string to be in the format: yyyy-MM-dd'T'HH:mm:ss.SSS")
+        XCTAssertEqual(context.debugDescription,
+                       "Expected date string to be in either of the formats: yyyy-MM-dd'T'HH:mm:ss.SSS or yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'")
       default:
         XCTFail("Unexpected decoding error type.")
       }
