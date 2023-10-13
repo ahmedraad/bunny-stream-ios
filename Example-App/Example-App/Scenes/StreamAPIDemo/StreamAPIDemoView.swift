@@ -43,5 +43,8 @@ struct StreamAPIDemoView: View {
       }
     }
     .padding()
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .contentShape(Rectangle())
+    .onTapGesture { endEditing() }
   }
 }

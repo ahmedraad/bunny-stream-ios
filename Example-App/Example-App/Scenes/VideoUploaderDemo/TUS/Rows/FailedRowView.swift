@@ -42,7 +42,7 @@ struct FailedRowView: View {
   @ViewBuilder
   func ActionsView(withTitle: Bool) -> some View {
     DestructiveButton(title: withTitle ? "Remove" : nil) {
-      actions.removeUpload(for: info)
+      try? actions.removeUpload(for: info)
     }
   }
 }

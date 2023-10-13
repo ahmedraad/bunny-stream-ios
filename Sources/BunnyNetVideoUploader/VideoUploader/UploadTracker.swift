@@ -35,12 +35,14 @@ public class UploadTracker {
       handleUpdates(for: info, status: status)
     }
   }
-  
-  private func findVideoInfo(for id: UUID) -> UploadVideoInfo? {
+}
+
+private extension UploadTracker {
+  func findVideoInfo(for id: UUID) -> UploadVideoInfo? {
     uploads.keys.first { $0.uuid == id }
   }
   
-  private func handleUpdates(for info: UploadVideoInfo, status: UploadStatus) {
+  func handleUpdates(for info: UploadVideoInfo, status: UploadStatus) {
     uploads[info] = status
     delegate?.uploadTracker(self, didUpdateUploadWithInfo: info, toStatus: status)
   }

@@ -68,7 +68,7 @@ struct ProgressRowView: View {
   @ViewBuilder
   private func pausedActionsView(showTitle: Bool) -> some View {
     Button {
-      actions.resumeUpload(for: info)
+      try? actions.resumeUpload(for: info)
     } label: {
       if showTitle {
         Text("Resume")
@@ -77,14 +77,14 @@ struct ProgressRowView: View {
     }
     
     DestructiveButton(title: showTitle ? "Remove" : nil) {
-      actions.removeUpload(for: info)
+      try? actions.removeUpload(for: info)
     }
   }
   
   @ViewBuilder
   private func uploadingActionsView(showTitle: Bool) -> some View {
     Button {
-      actions.pauseUpload(for: info)
+      try? actions.pauseUpload(for: info)
     } label: {
       if showTitle {
         Text("Pause")
@@ -93,7 +93,7 @@ struct ProgressRowView: View {
     }
     
     DestructiveButton(title: showTitle ? "Remove" : nil) {
-      actions.removeUpload(for: info)
+      try? actions.removeUpload(for: info)
     }
   }
 }

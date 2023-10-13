@@ -25,11 +25,6 @@ struct TUSVideoUploaderView: View {
   var body: some View {
     NavigationStack {
       VStack {
-        TextField("Library ID", text: $libraryId)
-          .keyboardType(.numberPad)
-          .padding()
-          .defaultStyle()
-        
         if let errorMessage = errorMessage {
           Text(errorMessage)
             .padding()
@@ -38,7 +33,15 @@ struct TUSVideoUploaderView: View {
         uploadRecordsListView()
         
         Spacer()
+        
+        TextField("Library ID", text: $libraryId)
+          .keyboardType(.numberPad)
+          .padding()
+          .defaultStyle()
       }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .contentShape(Rectangle())
+      .onTapGesture { endEditing() }
     }
     .toolbar {
       Button("Pick Videos") {

@@ -47,19 +47,19 @@ extension TUSVideoUploader: VideoUploader {
 
 // MARK: - VideoUploaderActions
 extension TUSVideoUploader: VideoUploaderActions {
-  public func pauseUpload(for info: UploadVideoInfo) {
-    try? tusClient.cancel(id: info.uuid)
+  public func pauseUpload(for info: UploadVideoInfo) throws {
+    try tusClient.cancel(id: info.uuid)
     uploadTracker.pauseUpload(id: info.uuid)
   }
   
-  public func resumeUpload(for info: UploadVideoInfo) {
-    _ = try? tusClient.resume(id: info.uuid)
+  public func resumeUpload(for info: UploadVideoInfo) throws {
+    _ = try tusClient.resume(id: info.uuid)
     uploadTracker.resumeUpload(id: info.uuid)
   }
   
-  public func removeUpload(for info: UploadVideoInfo) {
-    _ = try? tusClient.cancel(id: info.uuid)
-    _ = try? tusClient.removeCacheFor(id: info.uuid)
+  public func removeUpload(for info: UploadVideoInfo) throws {
+    _ = try tusClient.cancel(id: info.uuid)
+    _ = try tusClient.removeCacheFor(id: info.uuid)
     Task { try? await bunnyNetService.deleteVideo(info.videoUUID.uuidString, libraryId: info.info.libraryId) }
     uploadTracker.removeUpload(id: info.uuid)
   }
@@ -74,6 +74,11 @@ public extension TUSVideoUploader {
     try? handleStoredUploads()
     
     tusClient.cleanup()
+  }
+  
+  func registerBackgroundHandler(_ handler: @escaping () -> Void,
+                                 forSession sessionIdentifier: String) {
+    tusClient.registerBackgroundHandler(handler, forSession: sessionIdentifier)
   }
 }
 

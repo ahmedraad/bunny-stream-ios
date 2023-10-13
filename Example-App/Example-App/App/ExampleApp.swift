@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct ExampleApp: App {
-  @StateObject var dependenciesManager = DependenciesManager()
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .environmentObject(dependenciesManager)
+        .environmentObject(appDelegate.dependenciesManager)
     }
   }
 }

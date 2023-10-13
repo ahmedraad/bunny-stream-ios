@@ -29,6 +29,7 @@
 		7789CFB22AD6CB5B00CC8BCE /* UploadRecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB12AD6CB5B00CC8BCE /* UploadRecordRow.swift */; };
 		7789CFB42AD6DCCC00CC8BCE /* UploadActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */; };
 		7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */; };
+		77FB975D2AD9AD0B004CED84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadActionImage.swift; sourceTree = "<group>"; };
 		7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
 		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */,
 				7789473D2ACFFEFD00DAF8DB /* ContentView.swift */,
 				778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */,
+				77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				7789CFB42AD6DCCC00CC8BCE /* UploadActionImage.swift in Sources */,
 				7789CFAE2AD6CA2A00CC8BCE /* FailedRowView.swift in Sources */,
+				77FB975D2AD9AD0B004CED84 /* AppDelegate.swift in Sources */,
 				7789CF9C2AD6AAEC00CC8BCE /* VideoUploaderTypesView.swift in Sources */,
 				7789CFA72AD6C86E00CC8BCE /* UploadedRowView.swift in Sources */,
 				7703757B2AD877040034C47F /* DefaultTextFieldStyle.swift in Sources */,
@@ -435,7 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Example-App/Preview Content\"";
@@ -460,7 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.bunny.StreamSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Stream SDK Demo Provisioning profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Stream SDK Demo App Development profile";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

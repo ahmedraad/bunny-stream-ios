@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol VideoUploaderActions {
-  func pauseUpload(for info: UploadVideoInfo)
-  func resumeUpload(for info: UploadVideoInfo)
-  func removeUpload(for info: UploadVideoInfo)
+  func pauseUpload(for info: UploadVideoInfo) throws
+  func resumeUpload(for info: UploadVideoInfo) throws
+  func removeUpload(for info: UploadVideoInfo) throws
 }
 

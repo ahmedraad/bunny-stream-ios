@@ -9,7 +9,7 @@ import Foundation
 import BunnyNetClient
 
 extension BunnyNetClient {
-  static func make(accessKey: String?) -> BunnyNetClient {
-    BunnyNetClient(accessKey: accessKey ?? "")
+  static func make(accessKey: String) -> BunnyNetClient {
+    BunnyNetClient(accessKey: accessKey)
   }
 }
