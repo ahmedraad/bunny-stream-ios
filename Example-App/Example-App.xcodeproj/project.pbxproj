@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770375792AD832B40034C47F /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770375782AD832B40034C47F /* VideoPicker.swift */; };
+		7703757B2AD877040034C47F /* DefaultTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703757A2AD877040034C47F /* DefaultTextFieldStyle.swift */; };
+		7742EC8E2AD93E6A0043D2BF /* DependenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742EC8D2AD93E6A0043D2BF /* DependenciesManager.swift */; };
 		7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */; };
 		7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473D2ACFFEFD00DAF8DB /* ContentView.swift */; };
 		778947402ACFFEFF00DAF8DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7789473F2ACFFEFF00DAF8DB /* Assets.xcassets */; };
@@ -15,9 +18,23 @@
 		778947502AD0033800DAF8DB /* StreamAPIDemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */; };
 		778947522AD0035900DAF8DB /* BunnyNetClient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */; };
 		778947552AD0037900DAF8DB /* BunnyNetClient in Frameworks */ = {isa = PBXBuildFile; productRef = 778947542AD0037900DAF8DB /* BunnyNetClient */; };
+		7789CF9C2AD6AAEC00CC8BCE /* VideoUploaderTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CF9B2AD6AAEC00CC8BCE /* VideoUploaderTypesView.swift */; };
+		7789CF9F2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CF9E2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift */; };
+		7789CFA42AD6AD6800CC8BCE /* BunnyNetVideoUploader in Frameworks */ = {isa = PBXBuildFile; productRef = 7789CFA32AD6AD6800CC8BCE /* BunnyNetVideoUploader */; };
+		7789CFA72AD6C86E00CC8BCE /* UploadedRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFA62AD6C86E00CC8BCE /* UploadedRowView.swift */; };
+		7789CFAA2AD6C8B600CC8BCE /* UploadStatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFA92AD6C8B600CC8BCE /* UploadStatusIndicator.swift */; };
+		7789CFAC2AD6C8D700CC8BCE /* UploadListCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFAB2AD6C8D700CC8BCE /* UploadListCategory.swift */; };
+		7789CFAE2AD6CA2A00CC8BCE /* FailedRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFAD2AD6CA2A00CC8BCE /* FailedRowView.swift */; };
+		7789CFB02AD6CA6200CC8BCE /* ProgressRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFAF2AD6CA6200CC8BCE /* ProgressRowView.swift */; };
+		7789CFB22AD6CB5B00CC8BCE /* UploadRecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB12AD6CB5B00CC8BCE /* UploadRecordRow.swift */; };
+		7789CFB42AD6DCCC00CC8BCE /* UploadActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */; };
+		7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		770375782AD832B40034C47F /* VideoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
+		7703757A2AD877040034C47F /* DefaultTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextFieldStyle.swift; sourceTree = "<group>"; };
+		7742EC8D2AD93E6A0043D2BF /* DependenciesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesManager.swift; sourceTree = "<group>"; };
 		7747D2242AD01D9C005A1070 /* bunny-stream-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "bunny-stream-ios"; path = ..; sourceTree = "<group>"; };
 		778947382ACFFEFD00DAF8DB /* Example-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
@@ -27,6 +44,16 @@
 		7789474D2AD0032900DAF8DB /* StreamAPIDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamAPIDemoView.swift; sourceTree = "<group>"; };
 		7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamAPIDemoViewModel.swift; sourceTree = "<group>"; };
 		778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BunnyNetClient+Extension.swift"; sourceTree = "<group>"; };
+		7789CF9B2AD6AAEC00CC8BCE /* VideoUploaderTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploaderTypesView.swift; sourceTree = "<group>"; };
+		7789CF9E2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUSVideoUploaderView.swift; sourceTree = "<group>"; };
+		7789CFA62AD6C86E00CC8BCE /* UploadedRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedRowView.swift; sourceTree = "<group>"; };
+		7789CFA92AD6C8B600CC8BCE /* UploadStatusIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadStatusIndicator.swift; sourceTree = "<group>"; };
+		7789CFAB2AD6C8D700CC8BCE /* UploadListCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadListCategory.swift; sourceTree = "<group>"; };
+		7789CFAD2AD6CA2A00CC8BCE /* FailedRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedRowView.swift; sourceTree = "<group>"; };
+		7789CFAF2AD6CA6200CC8BCE /* ProgressRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRowView.swift; sourceTree = "<group>"; };
+		7789CFB12AD6CB5B00CC8BCE /* UploadRecordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadRecordRow.swift; sourceTree = "<group>"; };
+		7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadActionImage.swift; sourceTree = "<group>"; };
+		7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
 		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				778947552AD0037900DAF8DB /* BunnyNetClient in Frameworks */,
+				7789CFA42AD6AD6800CC8BCE /* BunnyNetVideoUploader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +84,7 @@
 				7747D2232AD01D9C005A1070 /* Packages */,
 				7789473A2ACFFEFD00DAF8DB /* Example-App */,
 				778947392ACFFEFD00DAF8DB /* Products */,
+				7789CFA22AD6AD6800CC8BCE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +119,7 @@
 		778947492AD002AF00DAF8DB /* App */ = {
 			isa = PBXGroup;
 			children = (
+				7742EC8D2AD93E6A0043D2BF /* DependenciesManager.swift */,
 				7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */,
 				7789473D2ACFFEFD00DAF8DB /* ContentView.swift */,
 				778947512AD0035900DAF8DB /* BunnyNetClient+Extension.swift */,
@@ -108,6 +138,8 @@
 		7789474B2AD002CA00DAF8DB /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7789CFA82AD6C8AB00CC8BCE /* Components */,
+				7789CF992AD6AABC00CC8BCE /* VideoUploaderDemo */,
 				7789474C2AD002CF00DAF8DB /* StreamAPIDemo */,
 			);
 			path = Scenes;
@@ -120,6 +152,63 @@
 				7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */,
 			);
 			path = StreamAPIDemo;
+			sourceTree = "<group>";
+		};
+		7789CF992AD6AABC00CC8BCE /* VideoUploaderDemo */ = {
+			isa = PBXGroup;
+			children = (
+				7789CF9D2AD6ABD500CC8BCE /* TUS */,
+				7789CF9A2AD6AACC00CC8BCE /* UploaderTypes */,
+			);
+			path = VideoUploaderDemo;
+			sourceTree = "<group>";
+		};
+		7789CF9A2AD6AACC00CC8BCE /* UploaderTypes */ = {
+			isa = PBXGroup;
+			children = (
+				7789CF9B2AD6AAEC00CC8BCE /* VideoUploaderTypesView.swift */,
+			);
+			path = UploaderTypes;
+			sourceTree = "<group>";
+		};
+		7789CF9D2AD6ABD500CC8BCE /* TUS */ = {
+			isa = PBXGroup;
+			children = (
+				7789CFA52AD6C85A00CC8BCE /* Rows */,
+				7789CF9E2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift */,
+				7789CFAB2AD6C8D700CC8BCE /* UploadListCategory.swift */,
+			);
+			path = TUS;
+			sourceTree = "<group>";
+		};
+		7789CFA22AD6AD6800CC8BCE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7789CFA52AD6C85A00CC8BCE /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				7789CFA62AD6C86E00CC8BCE /* UploadedRowView.swift */,
+				7789CFAD2AD6CA2A00CC8BCE /* FailedRowView.swift */,
+				7789CFAF2AD6CA6200CC8BCE /* ProgressRowView.swift */,
+				7789CFB12AD6CB5B00CC8BCE /* UploadRecordRow.swift */,
+			);
+			path = Rows;
+			sourceTree = "<group>";
+		};
+		7789CFA82AD6C8AB00CC8BCE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7789CFA92AD6C8B600CC8BCE /* UploadStatusIndicator.swift */,
+				7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */,
+				7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */,
+				770375782AD832B40034C47F /* VideoPicker.swift */,
+				7703757A2AD877040034C47F /* DefaultTextFieldStyle.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +229,7 @@
 			name = "Example-App";
 			packageProductDependencies = (
 				778947542AD0037900DAF8DB /* BunnyNetClient */,
+				7789CFA32AD6AD6800CC8BCE /* BunnyNetVideoUploader */,
 			);
 			productName = "Example-App";
 			productReference = 778947382ACFFEFD00DAF8DB /* Example-App.app */;
@@ -197,10 +287,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7789CFB42AD6DCCC00CC8BCE /* UploadActionImage.swift in Sources */,
+				7789CFAE2AD6CA2A00CC8BCE /* FailedRowView.swift in Sources */,
+				7789CF9C2AD6AAEC00CC8BCE /* VideoUploaderTypesView.swift in Sources */,
+				7789CFA72AD6C86E00CC8BCE /* UploadedRowView.swift in Sources */,
+				7703757B2AD877040034C47F /* DefaultTextFieldStyle.swift in Sources */,
+				770375792AD832B40034C47F /* VideoPicker.swift in Sources */,
+				7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */,
 				7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */,
 				7789474E2AD0032900DAF8DB /* StreamAPIDemoView.swift in Sources */,
+				7789CFAC2AD6C8D700CC8BCE /* UploadListCategory.swift in Sources */,
+				7789CFAA2AD6C8B600CC8BCE /* UploadStatusIndicator.swift in Sources */,
 				778947522AD0035900DAF8DB /* BunnyNetClient+Extension.swift in Sources */,
+				7789CFB02AD6CA6200CC8BCE /* ProgressRowView.swift in Sources */,
 				778947502AD0033800DAF8DB /* StreamAPIDemoViewModel.swift in Sources */,
+				7742EC8E2AD93E6A0043D2BF /* DependenciesManager.swift in Sources */,
+				7789CFB22AD6CB5B00CC8BCE /* UploadRecordRow.swift in Sources */,
+				7789CF9F2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift in Sources */,
 				7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +531,10 @@
 		778947542AD0037900DAF8DB /* BunnyNetClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BunnyNetClient;
+		};
+		7789CFA32AD6AD6800CC8BCE /* BunnyNetVideoUploader */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BunnyNetVideoUploader;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

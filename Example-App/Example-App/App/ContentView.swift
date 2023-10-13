@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import BunnyNetVideoUploader
 
 struct ContentView: View {
-  @AppStorage("accessKey") var accessKey: String?
+  @EnvironmentObject var dependenciesManager: DependenciesManager
   @State private var isShowingSheet = false
   @State private var tempAccessKey: String = ""
   
@@ -16,32 +17,43 @@ struct ContentView: View {
     NavigationStack {
       List {
         NavigationLink("Bunny Stream API Demo") {
-          StreamAPIDemoView(viewModel: .init(bunnyNetClient: .make(accessKey: accessKey)))
+          StreamAPIDemoView(viewModel: .init(bunnyNetClient: dependenciesManager.bunnyNetClient))
+        }
+        NavigationLink("Bunny Video Uploader Demo") {
+          VideoUploaderTypesView()
+            .environmentObject(dependenciesManager)
         }
       }
       .navigationTitle("Examples")
       
-      Button("Enter BunnyNet Access Key") {
-        isShowingSheet = true
-      }
-      .sheet(isPresented: $isShowingSheet) {
-        VStack {
-          Text("Enter BunnyNet Access Key")
-            .font(.headline)
-          TextField("Access Key", text: $tempAccessKey)
-            .padding()
-            .border(Color.gray)
-          Button("Save") {
-            accessKey = tempAccessKey
-            isShowingSheet = false
-          }
+      accessKeyView()
+    }
+    .onAppear {
+      tempAccessKey = dependenciesManager.accessKey
+    }
+  }
+}
+
+private extension ContentView {
+  @ViewBuilder
+  func accessKeyView() -> some View {
+    Button("Enter BunnyNet Access Key") {
+      isShowingSheet = true
+    }
+    .sheet(isPresented: $isShowingSheet) {
+      VStack {
+        Text("Enter BunnyNet Access Key")
+          .font(.headline)
+        TextField("Access Key", text: $tempAccessKey)
           .padding()
+          .border(Color.gray)
+        Button("Save") {
+          dependenciesManager.accessKey = tempAccessKey
+          isShowingSheet = false
         }
         .padding()
       }
-    }
-    .onAppear {
-      tempAccessKey = accessKey ?? ""
+      .padding()
     }
   }
 }

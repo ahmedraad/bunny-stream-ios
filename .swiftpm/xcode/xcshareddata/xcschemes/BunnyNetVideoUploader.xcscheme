@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1430"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BunnyNetClient"
-               BuildableName = "BunnyNetClient"
-               BlueprintName = "BunnyNetClient"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BunnyNetClientTests"
-               BuildableName = "BunnyNetClientTests"
-               BlueprintName = "BunnyNetClientTests"
+               BlueprintIdentifier = "BunnyNetVideoUploader"
+               BuildableName = "BunnyNetVideoUploader"
+               BlueprintName = "BunnyNetVideoUploader"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,18 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BunnyNetClientTests"
-               BuildableName = "BunnyNetClientTests"
-               BlueprintName = "BunnyNetClientTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -75,9 +49,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BunnyNetClient"
-            BuildableName = "BunnyNetClient"
-            BlueprintName = "BunnyNetClient"
+            BlueprintIdentifier = "BunnyNetVideoUploader"
+            BuildableName = "BunnyNetVideoUploader"
+            BlueprintName = "BunnyNetVideoUploader"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

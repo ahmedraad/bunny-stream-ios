@@ -6,9 +6,9 @@ public final class UploadTrackerObservable: ObservableObject {
   
   @Published public var uploads: [UploadVideoInfo: UploadStatus]
   
-  public init(tracker: UploadTracker, uploads: [UploadVideoInfo: UploadStatus] = [:]) {
+  public init(tracker: UploadTracker) {
     self.tracker = tracker
-    self.uploads = uploads
+    self.uploads = tracker.uploads
     self.tracker.delegate = self
   }
 }

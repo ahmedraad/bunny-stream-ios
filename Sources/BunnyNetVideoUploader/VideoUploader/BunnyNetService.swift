@@ -16,6 +16,8 @@ final class BunnyNetService {
       if case .json(let viewModel) = okResponse.body {
         return viewModel.guid
       }
+    case .unauthorized:
+      throw VideoUploaderError.failedToCreateVideoWithReason(message: "Not authorized to create videos in this library!")
     default:
       throw VideoUploaderError.failedToCreateVideo
     }

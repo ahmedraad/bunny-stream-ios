@@ -23,7 +23,7 @@ struct StreamAPIDemoView: View {
       TextField("Library ID", text: $libraryId)
         .keyboardType(.numberPad)
         .padding()
-        .border(Color.gray)
+        .defaultStyle()
       
       Button(action: {
         if let libraryId = Int64(libraryId) {
