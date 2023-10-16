@@ -13,7 +13,9 @@ struct ProgressRowView: View {
   let bytesUploaded: Int
   let totalBytes: Int
   let category: UploadListCategory
-  let actions: VideoUploaderActions
+  let pauseAction: ((UploadVideoInfo) -> Void)?
+  let resumeAction: ((UploadVideoInfo) -> Void)?
+  let deleteAction: ((UploadVideoInfo) -> Void)?
   
   var body: some View {
     VStack {
@@ -68,7 +70,7 @@ struct ProgressRowView: View {
   @ViewBuilder
   private func pausedActionsView(showTitle: Bool) -> some View {
     Button {
-      try? actions.resumeUpload(for: info)
+      resumeAction?(info)
     } label: {
       if showTitle {
         Text("Resume")
@@ -77,14 +79,14 @@ struct ProgressRowView: View {
     }
     
     DestructiveButton(title: showTitle ? "Remove" : nil) {
-      try? actions.removeUpload(for: info)
+      deleteAction?(info)
     }
   }
   
   @ViewBuilder
   private func uploadingActionsView(showTitle: Bool) -> some View {
     Button {
-      try? actions.pauseUpload(for: info)
+      pauseAction?(info)
     } label: {
       if showTitle {
         Text("Pause")
@@ -93,7 +95,7 @@ struct ProgressRowView: View {
     }
     
     DestructiveButton(title: showTitle ? "Remove" : nil) {
-      try? actions.removeUpload(for: info)
+      deleteAction?(info)
     }
   }
 }

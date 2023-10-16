@@ -16,13 +16,14 @@ final class VideoRequestHeaderBuilderTests: XCTestCase {
   
   func testBuildHeaders() {
     // Given
+    let videoId = "video123"
     let info = VideoInfo(content: .data(Data()),
                          title: "SampleVideo",
                          fileType: "video/quicktime",
+                         videoId: videoId,
                          libraryId: 123123,
                          expirationTime: 123123123)
     let signature = "sampleSignature"
-    let videoId = "video123"
     
     // When
     let headers = headerBuilder.buildHeaders(for: info, signature: signature, videoId: videoId)

@@ -16,6 +16,7 @@ extension UploadInfo {
     let videoInfo = VideoInfo(content: videoContent,
                               title: title,
                               fileType: mimeType ?? "mpeg4",
+                              videoId: videoUUIDString,
                               collectionId: nil,
                               libraryId: libraryId)
     

@@ -4,20 +4,17 @@ import TUSKit
 public final class TUSVideoUploader {
   public let uploadTracker: UploadTracker
   private let tusClient: TUSClient
-  private let bunnyNetService: BunnyNetService
   private let videoSigner: VideoSHA256Signer
   private let videoRequestHeaderBuilder: VideoRequestHeaderBuilder
   private let accessKey: String
   
   init(uploadTracker: UploadTracker,
        tusClient: TUSClient,
-       bunnyNetService: BunnyNetService,
        videoSigner: VideoSHA256Signer,
        videoRequestHeaderBuilder: VideoRequestHeaderBuilder,
        accessKey: String) {
     self.uploadTracker = uploadTracker
     self.tusClient = tusClient
-    self.bunnyNetService = bunnyNetService
     self.videoSigner = videoSigner
     self.videoRequestHeaderBuilder = videoRequestHeaderBuilder
     self.accessKey = accessKey
@@ -28,14 +25,10 @@ public final class TUSVideoUploader {
 extension TUSVideoUploader: VideoUploader {
   public func uploadVideos(with infos: [VideoInfo]) async throws {
     for info in infos {
-      guard let videoUUID = try await bunnyNetService.createVideo(title: info.title, libraryId: info.libraryId) else {
-        throw VideoUploaderError.failedToCreateVideo
-      }
+      let headers = prepareHeaders(for: info, videoId: info.videoId)
       
-      let headers = prepareHeaders(for: info, videoId: videoUUID)
-      
-      guard let validUUID = uploadContent(from: info, headers: headers), let videoUUIDInstance = UUID(uuidString: videoUUID) else {
-        try? await bunnyNetService.deleteVideo(videoUUID, libraryId: info.libraryId)
+      guard let validUUID = uploadContent(from: info, headers: headers),
+            let videoUUIDInstance = UUID(uuidString: info.videoId) else {
         throw VideoUploaderError.failedToUploadVideo
       }
       
@@ -60,7 +53,6 @@ extension TUSVideoUploader: VideoUploaderActions {
   public func removeUpload(for info: UploadVideoInfo) throws {
     _ = try tusClient.cancel(id: info.uuid)
     _ = try tusClient.removeCacheFor(id: info.uuid)
-    Task { try? await bunnyNetService.deleteVideo(info.videoUUID.uuidString, libraryId: info.info.libraryId) }
     uploadTracker.removeUpload(id: info.uuid)
   }
 }

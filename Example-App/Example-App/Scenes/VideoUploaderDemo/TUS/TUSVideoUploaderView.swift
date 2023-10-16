@@ -9,17 +9,17 @@ import SwiftUI
 import BunnyNetVideoUploader
 
 struct TUSVideoUploaderView: View {
-  let videoUploader: TUSVideoUploader
   @StateObject private var uploadTrackerObservable: UploadTrackerObservable
-  
+  @ObservedObject var viewModel: TUSVideoUploaderViewModel
   @State private var libraryId: String = ""
   @State private var errorMessage: String? = nil
   @State private var showingVideoPicker = false
   @State private var selectedVideos: [VideoPicker.Video] = []
   
-  init(videoUploader: TUSVideoUploader) {
-    self.videoUploader = videoUploader
+  init(videoUploader: TUSVideoUploader,
+       viewModel: TUSVideoUploaderViewModel) {
     _uploadTrackerObservable = StateObject(wrappedValue: UploadTrackerObservable(tracker: videoUploader.uploadTracker))
+    self.viewModel = viewModel
   }
   
   var body: some View {
@@ -49,7 +49,10 @@ struct TUSVideoUploaderView: View {
       }
     }
     .sheet(isPresented: $showingVideoPicker) {
-      VideoPicker(selectedVideos: $selectedVideos, onCompletion: uploadVideos)
+      VideoPicker(selectedVideos: $selectedVideos) { videos in
+        guard let libraryId = Int(libraryId) else { return }
+        self.viewModel.uploadVideos(videos, libraryId: libraryId)
+      }
     }
   }
 }
@@ -64,27 +67,13 @@ extension TUSVideoUploaderView {
         VStack(spacing: 0) {
           Divider()
           ForEach(Array(uploadTrackerObservable.uploads), id: \.key) { uploadPair in
-            UploadRecordRow(uploadStatus: uploadPair.value, info: uploadPair.key, actions: videoUploader)
+            UploadRecordRow(uploadStatus: uploadPair.value,
+                            info: uploadPair.key,
+                            pauseAction: viewModel.pauseAction,
+                            resumeAction: viewModel.resumeAction,
+                            deleteAction: viewModel.deleteAction)
           }
         }
-      }
-    }
-  }
-  
-  func uploadVideos(_ videos: [VideoPicker.Video]) {
-    guard let libraryId = Int(libraryId) else { return }
-    Task {
-      do {
-        let infos = videos.map {
-          VideoInfo(content: .data($0.data),
-                    title: $0.name,
-                    fileType: $0.type,
-                    libraryId: libraryId)
-        }
-        try await videoUploader.uploadVideos(with: infos)
-        errorMessage = nil
-      } catch {
-        errorMessage = error.localizedDescription
       }
     }
   }

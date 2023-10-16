@@ -15,10 +15,8 @@ public extension TUSVideoUploader {
                                    chunkSize: chunkSize)
     
     let uploadTracker = UploadTracker()
-    let bunnyNetService = BunnyNetService(bunnyNetClient: .init(accessKey: accessKey))
     let videoUploader = TUSVideoUploader(uploadTracker: uploadTracker,
                                          tusClient: tusClient,
-                                         bunnyNetService: bunnyNetService,
                                          videoSigner: .init(),
                                          videoRequestHeaderBuilder: .init(),
                                          accessKey: accessKey)

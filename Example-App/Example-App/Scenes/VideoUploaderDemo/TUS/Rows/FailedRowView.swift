@@ -11,7 +11,7 @@ import BunnyNetVideoUploader
 struct FailedRowView: View {
   let info: UploadVideoInfo
   let error: Error
-  let actions: VideoUploaderActions
+  let deleteAction: ((UploadVideoInfo) -> Void)?
   
   var body: some View {
     HStack(spacing: 8) {
@@ -42,7 +42,7 @@ struct FailedRowView: View {
   @ViewBuilder
   func ActionsView(withTitle: Bool) -> some View {
     DestructiveButton(title: withTitle ? "Remove" : nil) {
-      try? actions.removeUpload(for: info)
+      deleteAction?(info)
     }
   }
 }

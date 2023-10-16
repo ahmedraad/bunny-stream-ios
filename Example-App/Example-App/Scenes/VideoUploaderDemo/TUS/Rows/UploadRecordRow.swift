@@ -11,7 +11,10 @@ import BunnyNetVideoUploader
 struct UploadRecordRow: View {
   let uploadStatus: UploadStatus
   let info: UploadVideoInfo
-  let actions: VideoUploaderActions
+  
+  let pauseAction: ((UploadVideoInfo) -> Void)?
+  let resumeAction: ((UploadVideoInfo) -> Void)?
+  let deleteAction: ((UploadVideoInfo) -> Void)?
   
   var body: some View {
     Group {
@@ -21,15 +24,19 @@ struct UploadRecordRow: View {
                         bytesUploaded: progress.bytesUploaded,
                         totalBytes: progress.totalBytes,
                         category: .paused,
-                        actions: actions)
+                        pauseAction: pauseAction,
+                        resumeAction: resumeAction,
+                        deleteAction: deleteAction)
       case .uploading(let progress):
         ProgressRowView(info: info,
                         bytesUploaded: progress.bytesUploaded,
                         totalBytes: progress.totalBytes,
                         category: .uploading,
-                        actions: actions)
+                        pauseAction: pauseAction,
+                        resumeAction: resumeAction,
+                        deleteAction: deleteAction)
       case .failed(let error):
-        FailedRowView(info: info, error: error, actions: actions)
+        FailedRowView(info: info, error: error, deleteAction: deleteAction)
       case .uploaded(let url):
         UploadedRowView(info: info, url: url)
      default:

@@ -30,6 +30,8 @@
 		7789CFB42AD6DCCC00CC8BCE /* UploadActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */; };
 		7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */; };
 		77FB975D2AD9AD0B004CED84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */; };
+		77FB976B2ADD339C004CED84 /* TUSVideoUploaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976A2ADD339C004CED84 /* TUSVideoUploaderViewModel.swift */; };
+		77FB976D2ADD5E0C004CED84 /* BunnyNetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
 		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		77FB976A2ADD339C004CED84 /* TUSVideoUploaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUSVideoUploaderViewModel.swift; sourceTree = "<group>"; };
+		77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnyNetService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,8 @@
 				7789CFA52AD6C85A00CC8BCE /* Rows */,
 				7789CF9E2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift */,
 				7789CFAB2AD6C8D700CC8BCE /* UploadListCategory.swift */,
+				77FB976A2ADD339C004CED84 /* TUSVideoUploaderViewModel.swift */,
+				77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */,
 			);
 			path = TUS;
 			sourceTree = "<group>";
@@ -306,7 +312,9 @@
 				7789CFB02AD6CA6200CC8BCE /* ProgressRowView.swift in Sources */,
 				778947502AD0033800DAF8DB /* StreamAPIDemoViewModel.swift in Sources */,
 				7742EC8E2AD93E6A0043D2BF /* DependenciesManager.swift in Sources */,
+				77FB976D2ADD5E0C004CED84 /* BunnyNetService.swift in Sources */,
 				7789CFB22AD6CB5B00CC8BCE /* UploadRecordRow.swift in Sources */,
+				77FB976B2ADD339C004CED84 /* TUSVideoUploaderViewModel.swift in Sources */,
 				7789CF9F2AD6ABEC00CC8BCE /* TUSVideoUploaderView.swift in Sources */,
 				7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */,
 			);

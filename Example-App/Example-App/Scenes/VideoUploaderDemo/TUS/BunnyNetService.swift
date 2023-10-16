@@ -1,3 +1,10 @@
+//
+//  BunnyNetService.swift
+//  Example-App
+//
+//  Created by Egzon Arifi on 16/10/2023.
+//
+
 import Foundation
 import BunnyNetClient
 
@@ -27,5 +34,22 @@ final class BunnyNetService {
   func deleteVideo(_ videoId: String, libraryId: Int) async throws {
     _ = try await bunnyNetClient.streamAPI.Video_DeleteVideo(path: .init(libraryId: Int64(libraryId),
                                                                          videoId: videoId.lowercased()))
+  }
+}
+
+extension BunnyNetService {
+  enum VideoUploaderError: LocalizedError {
+    case failedToCreateVideoWithReason(message: String)
+    case failedToCreateVideo
+    
+    
+    public var errorDescription: String? {
+      switch self {
+      case .failedToCreateVideoWithReason(let message):
+        return "An error occurred while creating the video! \nReason: \(message)"
+      case .failedToCreateVideo:
+        return "An error occurred while creating the video!"
+      }
+    }
   }
 }
