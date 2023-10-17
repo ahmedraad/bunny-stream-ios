@@ -8,7 +8,8 @@ let package = Package(
   platforms: [.iOS(.v15), .macOS(.v13)],
   products: [
     .library(name: "BunnyNetClient", targets: ["BunnyNetClient"]),
-    .library(name: "BunnyNetVideoUploader", targets: ["BunnyNetVideoUploader"])
+    .library(name: "BunnyNetVideoUploader", targets: ["BunnyNetVideoUploader"]),
+    .library(name: "BunnyNetVideoPlayer", targets: ["BunnyNetVideoPlayer"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-openapi-generator", branch: "main"),
@@ -41,6 +42,10 @@ let package = Package(
         .product(name: "TUSKit", package: "TUSKit")
       ],
       path: "Sources/BunnyNetVideoUploader"),
+    .target(
+      name: "BunnyNetVideoPlayer",
+      path: "Sources/BunnyNetVideoPlayer"),
+    
     .testTarget(
       name: "BunnyNetClientTests",
       dependencies: ["BunnyNetClient"],
