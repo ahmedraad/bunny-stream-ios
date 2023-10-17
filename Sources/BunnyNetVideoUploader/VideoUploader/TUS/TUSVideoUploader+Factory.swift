@@ -17,8 +17,8 @@ public extension TUSVideoUploader {
     let uploadTracker = UploadTracker()
     let videoUploader = TUSVideoUploader(uploadTracker: uploadTracker,
                                          tusClient: tusClient,
-                                         videoSigner: .init(),
-                                         videoRequestHeaderBuilder: .init(),
+                                         videoSigner: VideoSHA256Signer(),
+                                         videoRequestHeaderBuilder: VideoRequestHeaderBuilder(),
                                          accessKey: accessKey)
     tusClient.delegate = videoUploader
     

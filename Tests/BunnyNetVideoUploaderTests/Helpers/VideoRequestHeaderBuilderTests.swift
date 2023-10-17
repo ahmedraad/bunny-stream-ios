@@ -26,7 +26,7 @@ final class VideoRequestHeaderBuilderTests: XCTestCase {
     let signature = "sampleSignature"
     
     // When
-    let headers = headerBuilder.buildHeaders(for: info, signature: signature, videoId: videoId)
+    let headers = headerBuilder.buildHeaders(for: info, signature: signature)
     
     // Then
     XCTAssertEqual(headers["AuthorizationSignature"], signature)

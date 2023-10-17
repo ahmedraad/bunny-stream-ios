@@ -22,10 +22,10 @@ public final class TUSVideoUploader {
 }
 
 // MARK: - VideoUploader
-extension TUSVideoUploader: VideoUploader {
+extension TUSVideoUploader: VideoUploadable {
   public func uploadVideos(with infos: [VideoInfo]) async throws {
     for info in infos {
-      let headers = prepareHeaders(for: info, videoId: info.videoId)
+      let headers = prepareHeaders(for: info)
       
       guard let validUUID = uploadContent(from: info, headers: headers),
             let videoUUIDInstance = UUID(uuidString: info.videoId) else {
@@ -92,7 +92,7 @@ extension TUSVideoUploader: TUSClientDelegate {
   }
   
   public func uploadFailed(id: UUID, error: Error, context: [String : String]?, client: TUSClient) {
-    let status = UploadStatus.failed(error: error)
+    let status = UploadStatus.failed(error: error.localizedDescription)
     uploadTracker.addOrUpdateUpload(id: id, status: status)
   }
   
@@ -103,12 +103,12 @@ extension TUSVideoUploader: TUSClientDelegate {
 
 // MARK: - Private methods
 private extension TUSVideoUploader {
-  func prepareHeaders(for info: VideoInfo, videoId: String) -> [String: String] {
-    let signature = videoSigner.sign(info: info, apiKey: accessKey, videoId: videoId)
-    return videoRequestHeaderBuilder.buildHeaders(for: info, signature: signature, videoId: videoId)
+  func prepareHeaders(for info: VideoInfo) -> Headers {
+    let signature = videoSigner.sign(info: info, apiKey: accessKey)
+    return videoRequestHeaderBuilder.buildHeaders(for: info, signature: signature)
   }
   
-  func uploadContent(from info: VideoInfo, headers: [String: String]) -> UUID? {
+  func uploadContent(from info: VideoInfo, headers: Headers) -> UUID? {
     switch info.content {
     case .url(let url):
       return try? tusClient.uploadFileAt(filePath: url, customHeaders: headers)

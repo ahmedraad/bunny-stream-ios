@@ -23,13 +23,12 @@ final class VideoSHA256SignerTests: XCTestCase {
                          libraryId: 12312,
                          expirationTime: 1696971042)
     let apiKey = "testApiKey"
-    let videoId = "testVideoId"
     
     // When
-    let signature = videoSHA256Signer.sign(info: info, apiKey: apiKey, videoId: videoId)
+    let signature = videoSHA256Signer.sign(info: info, apiKey: apiKey)
     
     // Then
-    let expectedSignature = "877c7b5010b795f4daacc4ba26166aebd9ea04c387cfd67757291426332032d8"
+    let expectedSignature = "384dca7be9469534e1ac9883e9eaeebdbb23fb92dad1186009e07ff3a4d31186"
     XCTAssertEqual(signature, expectedSignature, "Generated signature does not match expected value.")
   }
   
@@ -42,13 +41,12 @@ final class VideoSHA256SignerTests: XCTestCase {
                          libraryId: 12312,
                          expirationTime: 1696971042)
     let apiKey = ""
-    let videoId = ""
     
     // When
-    let signature = videoSHA256Signer.sign(info: info, apiKey: apiKey, videoId: videoId)
+    let signature = videoSHA256Signer.sign(info: info, apiKey: apiKey)
     
     // Then
-    let expectedSignature = "99343598819b8f5108e1a8af918f63d118c453841a299d3656a4d3517c77c7d0"
+    let expectedSignature = "88e83f35155e63a87b12ac0f6370f76abd23ec1aa9af961fa64a1234c958b2b0"
     XCTAssertEqual(signature, expectedSignature, "Generated signature does not match expected value for empty inputs.")
   }
 }

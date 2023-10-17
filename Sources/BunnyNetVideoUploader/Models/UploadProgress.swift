@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UploadProgress {
+public struct UploadProgress: Equatable {
   public let bytesUploaded: Int
   public let totalBytes: Int
   

@@ -1,5 +1,4 @@
 import Foundation
-import TUSKit
 
 public class UploadTracker {
   public private(set) var uploads: [UploadVideoInfo: UploadStatus] = [:]
