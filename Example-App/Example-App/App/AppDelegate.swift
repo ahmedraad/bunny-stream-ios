@@ -19,6 +19,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    handleEventsForBackgroundURLSession identifier: String,
                    completionHandler: @escaping () -> Void) {
-    dependenciesManager.videoUploader.registerBackgroundHandler(completionHandler, forSession: identifier)
+    dependenciesManager.tusVideoUploader.registerBackgroundHandler(completionHandler, forSession: identifier)
   }
 }

@@ -1,5 +1,5 @@
 //
-//  TUSVideoUploaderView.swift
+//  VideoUploaderView.swift
 //  Example-App
 //
 //  Created by Egzon Arifi on 11/10/2023.
@@ -8,16 +8,16 @@
 import SwiftUI
 import BunnyNetVideoUploader
 
-struct TUSVideoUploaderView: View {
+struct VideoUploaderView: View {
   @StateObject private var uploadTrackerObservable: UploadTrackerObservable
-  @ObservedObject var viewModel: TUSVideoUploaderViewModel
+  @ObservedObject var viewModel: VideoUploaderViewModel
   @State private var libraryId: String = ""
   @State private var errorMessage: String? = nil
   @State private var showingVideoPicker = false
   @State private var selectedVideos: [VideoPicker.Video] = []
   
-  init(videoUploader: TUSVideoUploader,
-       viewModel: TUSVideoUploaderViewModel) {
+  init(videoUploader: VideoUploader,
+       viewModel: VideoUploaderViewModel) {
     _uploadTrackerObservable = StateObject(wrappedValue: UploadTrackerObservable(tracker: videoUploader.uploadTracker))
     self.viewModel = viewModel
   }
@@ -47,6 +47,7 @@ struct TUSVideoUploaderView: View {
       Button("Pick Videos") {
         showingVideoPicker.toggle()
       }
+      .disabled(Int(libraryId) == nil)
     }
     .sheet(isPresented: $showingVideoPicker) {
       VideoPicker(selectedVideos: $selectedVideos) { videos in
@@ -57,7 +58,7 @@ struct TUSVideoUploaderView: View {
   }
 }
 
-extension TUSVideoUploaderView {
+extension VideoUploaderView {
   @ViewBuilder
   private func uploadRecordsListView() -> some View {
     if uploadTrackerObservable.uploads.isEmpty {

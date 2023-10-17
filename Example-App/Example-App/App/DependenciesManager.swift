@@ -16,19 +16,22 @@ class DependenciesManager: ObservableObject {
   }
   @Published var accessKey: String
   
-  var videoUploader: TUSVideoUploader
+  var tusVideoUploader: TUSVideoUploader
+  var urlSessionVideoUploader: URLSessionVideoUploader
   var bunnyNetClient: BunnyNetClient
   
   init() {
     let initialKey: String = UserDefaults.standard.string(forKey: "accessKey") ?? ""
     self.accessKey = initialKey
-    self.videoUploader = TUSVideoUploader.make(accessKey: initialKey)
+    self.tusVideoUploader = TUSVideoUploader.make(accessKey: initialKey)
+    self.urlSessionVideoUploader = URLSessionVideoUploader.make(accessKey: initialKey)
     self.bunnyNetClient = BunnyNetClient.make(accessKey: initialKey)
   }
   
   private func updateAccessKey() {
     self.accessKey = storedAccessKey ?? ""
-    self.videoUploader = TUSVideoUploader.make(accessKey: accessKey)
+    self.tusVideoUploader = TUSVideoUploader.make(accessKey: accessKey)
+    self.urlSessionVideoUploader = URLSessionVideoUploader.make(accessKey: accessKey)
     self.bunnyNetClient = BunnyNetClient.make(accessKey: accessKey)
   }
 }

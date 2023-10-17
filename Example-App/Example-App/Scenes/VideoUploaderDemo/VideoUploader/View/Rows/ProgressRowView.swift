@@ -34,9 +34,9 @@ struct ProgressRowView: View {
               .font(.caption2)
           }
           
-          Text("Video - \(info.info.title)")
+          Text("Video: \(info.info.title)")
             .font(.caption)
-          Text("Video ID - \(info.videoUUID)")
+          Text("VideoID: \(info.videoUUID)")
             .font(.caption)
         }
         

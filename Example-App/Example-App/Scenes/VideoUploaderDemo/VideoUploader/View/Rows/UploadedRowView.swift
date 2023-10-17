@@ -22,7 +22,7 @@ struct UploadedRowView: View {
           .font(.subheadline)
           .bold()
         
-        Text("Video - \(info.info.title)")
+        Text("Video: \(info.info.title)")
           .font(.caption)
         
         Link("Uploaded link", destination: url)

@@ -14,10 +14,11 @@ struct VideoUploaderTypesView: View {
     NavigationStack {
       List {
         NavigationLink("TUS Resumable Uploads") {
-          let bunnyNetService = BunnyNetService(bunnyNetClient: dependenciesManager.bunnyNetClient)
-          let viewModel = TUSVideoUploaderViewModel(bunnyNetService: bunnyNetService,
-                                                    videoUploader: dependenciesManager.videoUploader)
-          TUSVideoUploaderView(videoUploader: dependenciesManager.videoUploader, viewModel: viewModel)
+          VideoUploaderView.makeTUSVideoUploaderView(dependenciesManager)
+        }
+        
+        NavigationLink("Non Resumable Uploads") {
+          VideoUploaderView.makeURLSessionVideoUploaderView(dependenciesManager)
         }
       }
     }

@@ -1,5 +1,5 @@
 //
-//  TUSVideoUploaderViewModel.swift
+//  VideoUploaderViewModel.swift
 //  Example-App
 //
 //  Created by Egzon Arifi on 16/10/2023.
@@ -10,12 +10,12 @@ import SwiftUI
 import BunnyNetVideoUploader
 import BunnyNetClient
 
-class TUSVideoUploaderViewModel: ObservableObject {
-  let bunnyNetService: BunnyNetService
-  let videoUploader: TUSVideoUploader
+class VideoUploaderViewModel: ObservableObject {
+  private let bunnyNetService: BunnyNetService
+  private let videoUploader: VideoUploader
   @Published var errorMessage: String?
   
-  init(bunnyNetService: BunnyNetService, videoUploader: TUSVideoUploader) {
+  init(bunnyNetService: BunnyNetService, videoUploader: VideoUploader) {
     self.bunnyNetService = bunnyNetService
     self.videoUploader = videoUploader
   }

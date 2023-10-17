@@ -10,7 +10,7 @@ import BunnyNetVideoUploader
 
 struct FailedRowView: View {
   let info: UploadVideoInfo
-  let error: Error
+  let error: String
   let deleteAction: ((UploadVideoInfo) -> Void)?
   
   var body: some View {
@@ -23,12 +23,12 @@ struct FailedRowView: View {
           .font(.subheadline)
           .bold()
         
-        Text("Video - \(info.info.title)")
+        Text("Video: \(info.info.title)")
           .font(.caption)
-        Text("Video ID - \(info.videoUUID)")
+        Text("VideoID: \(info.videoUUID)")
           .font(.caption)
         
-        Text("Error - \(error.localizedDescription)")
+        Text("Error: \(error)")
           .font(.caption)
           .foregroundColor(.gray)
       }
