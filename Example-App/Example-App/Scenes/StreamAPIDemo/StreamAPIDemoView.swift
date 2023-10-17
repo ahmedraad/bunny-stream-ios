@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StreamAPIDemoView: View {
   @ObservedObject private var viewModel: StreamAPIDemoViewModel
-  @State private var libraryId: String = ""
+  @State private var libraryId: String = "160961"
   
   init(viewModel: StreamAPIDemoViewModel) {
     self.viewModel = viewModel
@@ -39,10 +39,15 @@ struct StreamAPIDemoView: View {
       .padding()
       
       if let description = viewModel.description {
-        Text("Response:\n\(description)")
+        Text(description)
       }
+      
+      List(viewModel.videoInfos.indices, id: \.self) { index in
+        StreamAPIDemoVideoRow(video: viewModel.videoInfos[index])
+      }
+      .listStyle(.plain)
     }
-    .padding()
+    .padding(4)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .contentShape(Rectangle())
     .onTapGesture { endEditing() }

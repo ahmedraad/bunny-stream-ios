@@ -37,8 +37,8 @@ struct UploadRecordRow: View {
                         deleteAction: deleteAction)
       case .failed(let error):
         FailedRowView(info: info, error: error, deleteAction: deleteAction)
-      case .uploaded(let url):
-        UploadedRowView(info: info, url: url)
+      case .uploaded(_):
+        UploadedRowView(info: info)
      default:
         EmptyView()
       }

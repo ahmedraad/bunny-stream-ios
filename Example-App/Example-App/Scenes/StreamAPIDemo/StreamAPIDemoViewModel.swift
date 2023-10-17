@@ -12,6 +12,7 @@ import BunnyNetClient
 class StreamAPIDemoViewModel: ObservableObject {
   let bunnyNetClient: BunnyNetClient
   @Published var description: String?
+  @Published var videoInfos: [(title: String?, url: URL?)] = []
   
   init(bunnyNetClient: BunnyNetClient, description: String? = nil) {
     self.bunnyNetClient = bunnyNetClient
@@ -33,7 +34,7 @@ class StreamAPIDemoViewModel: ObservableObject {
       switch okResponse.body {
       case .json(let viewModel):
         guard let items = viewModel.items else { return }
-        description = items.compactMap { $0.description }.joined(separator: "\n")
+        videoInfos = items.map { ($0.title, URL.makeVideoURL(libraryId: Int($0.videoLibraryId), videoId: $0.guid ?? "")) }
       default:
         break
       }
@@ -44,11 +45,5 @@ class StreamAPIDemoViewModel: ObservableObject {
     case .internalServerError(_):
       description = "Internal Server Error"
     }
-  }
-}
-
-extension Components.Schemas.VideoModel {
-  var description: String {
-    "• \(title ?? "no title"), \(dateUploaded.description)"
   }
 }

@@ -30,6 +30,7 @@
 		7789CFB42AD6DCCC00CC8BCE /* UploadActionImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */; };
 		7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */; };
 		77950FA22ADDA60F0091A498 /* VideoUploaderView+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77950FA12ADDA60F0091A498 /* VideoUploaderView+Factory.swift */; };
+		77950FA72ADEBB0D0091A498 /* StreamAPIDemoVideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77950FA62ADEBB0D0091A498 /* StreamAPIDemoVideoRow.swift */; };
 		77FB975D2AD9AD0B004CED84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */; };
 		77FB976B2ADD339C004CED84 /* VideoUploaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */; };
 		77FB976D2ADD5E0C004CED84 /* BunnyNetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */; };
@@ -59,6 +60,7 @@
 		7789CFB32AD6DCCC00CC8BCE /* UploadActionImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadActionImage.swift; sourceTree = "<group>"; };
 		7789CFB52AD6DD0700CC8BCE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
 		77950FA12ADDA60F0091A498 /* VideoUploaderView+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoUploaderView+Factory.swift"; sourceTree = "<group>"; };
+		77950FA62ADEBB0D0091A498 /* StreamAPIDemoVideoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamAPIDemoVideoRow.swift; sourceTree = "<group>"; };
 		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploaderViewModel.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				7789474D2AD0032900DAF8DB /* StreamAPIDemoView.swift */,
 				7789474F2AD0033800DAF8DB /* StreamAPIDemoViewModel.swift */,
+				77950FA62ADEBB0D0091A498 /* StreamAPIDemoVideoRow.swift */,
 			);
 			path = StreamAPIDemo;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				77FB976B2ADD339C004CED84 /* VideoUploaderViewModel.swift in Sources */,
 				7789CF9F2AD6ABEC00CC8BCE /* VideoUploaderView.swift in Sources */,
 				7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */,
+				77950FA72ADEBB0D0091A498 /* StreamAPIDemoVideoRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

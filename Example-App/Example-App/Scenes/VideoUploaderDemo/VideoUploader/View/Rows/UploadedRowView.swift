@@ -10,7 +10,6 @@ import BunnyNetVideoUploader
 
 struct UploadedRowView: View {
   let info: UploadVideoInfo
-  let url: URL
   
   var body: some View {
     HStack(spacing: 8) {
@@ -25,13 +24,21 @@ struct UploadedRowView: View {
         Text("Video: \(info.info.title)")
           .font(.caption)
         
-        Link("Uploaded link", destination: url)
-          .font(.caption2)
+        if let videoURL = URL.makeVideoURL(libraryId: info.info.libraryId, videoId: info.videoUUID.uuidString) {
+          Link("Uploaded link", destination: videoURL)
+            .font(.caption2)
+        }
         
         Spacer()
       }
       
       Spacer()
     }
+  }
+}
+
+extension URL {
+  static func makeVideoURL(libraryId: Int, videoId: String) -> URL? {
+    URL(string: "https://video.bunnycdn.com/play/\(libraryId)/\(videoId.lowercased())")
   }
 }
