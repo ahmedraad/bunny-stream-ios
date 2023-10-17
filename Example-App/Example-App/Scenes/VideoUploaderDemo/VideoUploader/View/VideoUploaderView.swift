@@ -11,7 +11,7 @@ import BunnyNetVideoUploader
 struct VideoUploaderView: View {
   @StateObject private var uploadTrackerObservable: UploadTrackerObservable
   @ObservedObject var viewModel: VideoUploaderViewModel
-  @State private var libraryId: String = ""
+  @State private var libraryId: String = "160961"
   @State private var errorMessage: String? = nil
   @State private var showingVideoPicker = false
   @State private var selectedVideos: [VideoPicker.Video] = []

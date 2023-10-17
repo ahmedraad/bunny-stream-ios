@@ -17,8 +17,7 @@ struct StreamAPIDemoView: View {
   
   var body: some View {
     VStack {
-      Text("🐇").font(.largeTitle)
-      Text("Get videos from Stream API")
+      Text("🐇 Get videos from Stream API")
       
       TextField("Library ID", text: $libraryId)
         .keyboardType(.numberPad)

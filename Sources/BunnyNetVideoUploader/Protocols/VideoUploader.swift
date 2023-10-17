@@ -10,3 +10,11 @@ public protocol VideoUploadable {
   /// - Parameter infos: multiple video informations
   func uploadVideos(with infos: [VideoInfo]) async throws
 }
+
+public extension VideoUploadable {
+  /// Upload a single video file
+  /// - Parameter info: a video information
+  func uploadVideo(with info: VideoInfo) async throws {
+    try await uploadVideos(with: [info])
+  }
+}
