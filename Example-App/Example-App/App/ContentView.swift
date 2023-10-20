@@ -23,6 +23,9 @@ struct ContentView: View {
           VideoUploaderTypesView()
             .environmentObject(dependenciesManager)
         }
+        NavigationLink("Bunny Video Player Demo") {
+          VideoPlayerDemoView()
+        }
       }
       .navigationTitle("Examples")
       
