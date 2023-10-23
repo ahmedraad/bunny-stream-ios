@@ -9,9 +9,10 @@ public struct VideoPlayerView: View {
   }
   
   public var body: some View {
-    VStack {
+    ZStack {
       VideoPlayer(player: player)
         .disabled(true)
+      VideoPlayerControls(player: player)
     }
   }
 }
