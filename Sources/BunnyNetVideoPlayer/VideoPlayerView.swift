@@ -2,9 +2,9 @@ import SwiftUI
 import AVKit
 
 public struct VideoPlayerView: View {
-  @State var player: AVPlayer
+  @State var player: MediaPlayer
   
-  public init(player: AVPlayer) {
+  public init(player: MediaPlayer) {
     self.player = player
   }
   

@@ -5,8 +5,9 @@ import Combine
 struct VideoPlayerControls: View {
   @ObservedObject var viewModel: VideoPlayerViewModel
   
-  init(player: AVPlayer) {
+  init(player: MediaPlayer) {
     viewModel = VideoPlayerViewModel(player: player)
+    player.delegate = viewModel
   }
   
   var body: some View {
@@ -27,9 +28,6 @@ struct VideoPlayerControls: View {
       }
     }
     .background(.black.opacity(0.2))
-    .onAppear {
-      viewModel.setupPlayer()
-    }
   }
 }
  
@@ -138,9 +136,9 @@ extension VideoPlayerControls {
         viewModel.player.seek(to: seekTime)
       }
     })
-    .onChange(of: viewModel.currentTime) { _ in
-      guard let duration = viewModel.player.currentItem?.duration.seconds else { return }
-      viewModel.sliderValue = viewModel.currentTime.seconds / duration
+    .onChange(of: viewModel.elapsedTime) { _ in
+      guard viewModel.player.duration != .zero else { return }
+      viewModel.sliderValue = viewModel.elapsedTime / viewModel.player.duration
     }
   }
   

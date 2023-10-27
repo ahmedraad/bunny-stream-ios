@@ -10,7 +10,7 @@ import BunnyNetVideoPlayer
 import AVKit
 
 struct VideoPlayerDemoView: View {
-  @State private var player = AVPlayer(url: URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")!)
+  @State private var player = MediaPlayer(url: URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")!)
 
   var body: some View {
     VideoPlayerView(player: player)
