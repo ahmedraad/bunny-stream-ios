@@ -64,9 +64,11 @@ extension VideoPlayerViewModel {
   func optionsAction() { }
   
   func airplayAction() { }
-}
-
-private extension VideoPlayerViewModel {
+  
+  func generateThumbnail(at seconds: Double) async -> Image? {
+    await player.generateThumbnail(at: seconds)
+  }
+  
   func secondsToTime(_ seconds: Double) -> String {
     let hours = Int(seconds) / 3600
     let minutes = (Int(seconds) % 3600) / 60
