@@ -51,7 +51,7 @@ private extension ContentView {
           .padding()
           .border(Color.gray)
         Button("Save") {
-          dependenciesManager.accessKey = tempAccessKey
+          dependenciesManager.storedAccessKey = tempAccessKey
           isShowingSheet = false
         }
         .padding()

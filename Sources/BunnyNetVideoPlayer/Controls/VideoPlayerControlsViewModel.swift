@@ -18,6 +18,10 @@ class VideoPlayerViewModel: ObservableObject {
 }
 
 extension VideoPlayerViewModel {
+  var duration: Double {
+    player.duration
+  }
+  
   var currentFormattedTime: String {
     secondsToTime(elapsedTime)
   }

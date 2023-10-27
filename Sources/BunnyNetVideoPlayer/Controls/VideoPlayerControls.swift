@@ -4,6 +4,7 @@ import Combine
 
 struct VideoPlayerControls: View {
   @ObservedObject var viewModel: VideoPlayerViewModel
+  @State private var isDraggingSeekBar: Bool = false
   
   init(player: MediaPlayer) {
     viewModel = VideoPlayerViewModel(player: player)
@@ -16,15 +17,16 @@ struct VideoPlayerControls: View {
         topControlsView()
           .padding(.vertical, 4)
           .padding(.horizontal, 8)
+          .opacity(isDraggingSeekBar ? 0 : 1)
         
         Spacer()
         
         centerControlsView()
+          .opacity(isDraggingSeekBar ? 0 : 1)
         
         Spacer()
         
         bottomControlsView()
-          .padding(.vertical, 4)
       }
     }
     .background(.black.opacity(0.2))
@@ -128,18 +130,8 @@ extension VideoPlayerControls {
   }
   
   func seekBarView() -> some View {
-    Slider(value: $viewModel.sliderValue, in: 0...1, onEditingChanged: { editing in
-      if !editing {
-        guard let duration = viewModel.player.currentItem?.duration.seconds else { return }
-        let newTime = duration * viewModel.sliderValue
-        let seekTime = CMTime(seconds: newTime, preferredTimescale: 1)
-        viewModel.player.seek(to: seekTime)
-      }
-    })
-    .onChange(of: viewModel.elapsedTime) { _ in
-      guard viewModel.player.duration != .zero else { return }
-      viewModel.sliderValue = viewModel.elapsedTime / viewModel.player.duration
-    }
+    SeekBar(viewModel: viewModel, isDraggingOutside: $isDraggingSeekBar)
+      .padding(.bottom, -16)
   }
   
   func timeView() -> some View {
