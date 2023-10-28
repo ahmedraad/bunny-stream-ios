@@ -9,6 +9,7 @@ public protocol MediaPlayerDelegate: AnyObject {
   func mediaPlayer(didEndBuffering player: MediaPlayer)
   func mediaPlayer(_ player: MediaPlayer, didProgressToTime seconds: Double)
   func mediaPlayer(_ player: MediaPlayer, onProgressUpdate progress: Float)
+  func mediaPlayer(_ player: MediaPlayer, didChangeVolume volume: Float)
 
   func mediaPlayer(_ player: MediaPlayer, didFailWithError error: Error)
   func mediaPlayer(_ player: MediaPlayer, didUpdatePlaybackState playbackState: MediaPlayer.PlaybackState)
@@ -25,6 +26,7 @@ public extension MediaPlayerDelegate {
   func mediaPlayer(_ player: MediaPlayer, didFailWithError error: Error) {}
   func mediaPlayer(_ player: MediaPlayer, didUpdatePlaybackState playbackState: MediaPlayer.PlaybackState) {}
   func mediaPlayer(_ player: MediaPlayer, onProgressUpdate progress: Float) {}
+  func mediaPlayer(_ player: MediaPlayer, didChangeVolume volume: Float) {}
 }
 
 public class MediaPlayer: AVPlayer {
@@ -77,25 +79,26 @@ public class MediaPlayer: AVPlayer {
   public weak var delegate: MediaPlayerDelegate?
 
   /// Boolean flag `true` when item is prepared and can be played
-  private var canPlayVideo: Bool = false
+  private(set) var canPlayVideo: Bool = false
   /// Flipped to `true` when trying to start playing but `canPlayVideo` is false
   private var playWhenReady: Bool = false
   private var playerItemObserver: NSKeyValueObservation?
   private var periodicTimeObserver: Any?
+  private var volumeObservation: NSKeyValueObservation?
 
   override public init() {
     super.init()
-    setupPlayerItemObserver()
+    setupObservers()
   }
 
   public override init(url: URL) {
     super.init(url: url)
-    setupPlayerItemObserver()
+    setupObservers()
   }
 
   public override init(playerItem item: AVPlayerItem?) {
     super.init(playerItem: item)
-    setupPlayerItemObserver()
+    setupObservers()
   }
 
   convenience public init(asset: AVURLAsset) {
@@ -233,6 +236,11 @@ public class MediaPlayer: AVPlayer {
 
 // MARK: - Private Methods
 private extension MediaPlayer {
+  func setupObservers() {
+    setupPlayerItemObserver()
+    setupVolumeObserver()
+  }
+  
   func setupPlayerItemObserver() {
     guard playerItemObserver == nil else {
       setupPeriodicTimeObserver()
@@ -286,7 +294,23 @@ private extension MediaPlayer {
       : delegate?.mediaPlayer(didBeginBuffering: self)
     }
   }
+  
+  func setupVolumeObserver() {
+#if os(iOS)
+    volumeObservation = AVAudioSession.sharedInstance().observe(\.outputVolume) { [weak self] (audioSession, change) in
+      guard let self = self else { return }
+      let volume = audioSession.outputVolume
+      self.delegate?.mediaPlayer(self, didChangeVolume: volume)
+    }
+#endif
+  }
 
+  @objc func volumeChanged(notification: NSNotification) {
+    if let volume = notification.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float {
+      delegate?.mediaPlayer(self, didChangeVolume: volume)
+    }
+  }
+  
   func timeObserverCallback(time: CMTime) {
     guard time.seconds >= playbackInterval.endAt else { return }
 

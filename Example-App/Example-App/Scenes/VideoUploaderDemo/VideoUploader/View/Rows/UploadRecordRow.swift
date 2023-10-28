@@ -40,7 +40,7 @@ struct UploadRecordRow: View {
       case .uploaded(_):
         UploadedRowView(info: info)
      default:
-        EmptyView()
+        Spacer()
       }
     }
     .rowPadding()

@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Egzon Arifi on 20/10/2023.
 //
@@ -13,7 +13,7 @@ struct VideoPlayerDemoView: View {
   @State private var player = MediaPlayer(url: URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")!)
 
   var body: some View {
-    VideoPlayerView(player: player)
+    BunnyNetVideoPlayer(player: player)
       .frame(height: 220)
       .onAppear {
         player.play()

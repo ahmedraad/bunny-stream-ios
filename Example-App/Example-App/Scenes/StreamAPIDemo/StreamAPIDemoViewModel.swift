@@ -38,6 +38,7 @@ class StreamAPIDemoViewModel: ObservableObject {
       default:
         break
       }
+      description = nil
     case .undocumented(statusCode: let statusCode, _):
       description = "🥺 undocumented response: \(statusCode)"
     case .unauthorized:

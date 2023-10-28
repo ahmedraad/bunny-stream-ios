@@ -1,18 +1,19 @@
 import SwiftUI
 import AVKit
 
-public struct VideoPlayerView: View {
-  @State var player: MediaPlayer
+struct VideoPlayerView: View {
+  @State var controlsViewModel: VideoPlayerControlsViewModel
   
-  public init(player: MediaPlayer) {
-    self.player = player
+  init(controlsViewModel: VideoPlayerControlsViewModel) {
+    self.controlsViewModel = controlsViewModel
   }
   
-  public var body: some View {
-    ZStack {
-      VideoPlayer(player: player)
-        .disabled(true)
-      VideoPlayerControls(player: player)
-    }
+  var body: some View {
+    VideoPlayer(player: controlsViewModel.player)
+      .disabled(true)
+      .overlay {
+        VideoPlayerControls(viewModel: controlsViewModel)
+      }
+      .background(controlsViewModel.isFullScreen ? .black : .clear)
   }
 }

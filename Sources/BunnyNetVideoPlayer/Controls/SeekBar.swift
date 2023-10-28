@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct SeekBar: View {
-  @ObservedObject var viewModel: VideoPlayerViewModel
+  @ObservedObject var viewModel: VideoPlayerControlsViewModel
   @Binding var isDraggingOutside: Bool
   @State private var isDragging: Bool = false
-  @State private var dragPosition: CGFloat = 0
+  @State private var dragPosition: CGFloat = .zero
   @State private var size: CGSize = .zero
   @State private var thumbnailImage: Image?
   @State private var thumbnailTime: String = ""
@@ -14,13 +14,11 @@ struct SeekBar: View {
     static let activeBarHeight: CGFloat = 6
     static let circleDiameter: CGFloat = 15
     static let activeDiameter: CGFloat = 20
-    static let circleOffset: CGFloat = circleDiameter / 2
+    static let circleOffset: CGFloat = activeDiameter / 2
     static let seekBarFrameHeight: CGFloat = 40
     static let thumbnailWidth: CGFloat = 100
     static let thumbnailHeight: CGFloat = 70
-    static let thumbnailOffset: CGFloat = thumbnailWidth / 2
-    static let thumbnailOffsetY: CGFloat = -70
-    static let initialThumbnailPercentage: Double = 0.5
+    static let thumbnailOffsetY: CGFloat = -80
   }
   
   var body: some View {
@@ -32,28 +30,16 @@ struct SeekBar: View {
         
         Rectangle()
           .foregroundColor(.blue)
-          .frame(width: max(.zero, dragPosition), height: isDragging ? UI.activeBarHeight : UI.inactiveBarHeight)
+          .frame(width: max(.zero, dragPosition), 
+                 height: isDragging ? UI.activeBarHeight : UI.inactiveBarHeight)
         
-        if let thumbnail = thumbnailImage, isDragging {
-          VStack {
-            thumbnail
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .cornerRadius(5.0)
-            
-            Text(thumbnailTime)
-              .foregroundColor(.white)
-              .font(.caption)
-          }
-          .frame(width: UI.thumbnailWidth, height: UI.thumbnailHeight)
-          .shadow(radius: 5)
-          .offset(x: thumbnailOffsetX, y: UI.thumbnailOffsetY)
-        }
+        thumbnailPreviewView()
         
         Circle()
           .foregroundColor(.blue)
-          .frame(width: isDragging ? UI.activeDiameter : UI.circleDiameter, height: isDragging ? UI.activeDiameter : UI.circleDiameter)
-          .offset(x: dragPosition - UI.circleOffset, y: .zero)
+          .frame(width: isDragging ? UI.activeDiameter : UI.circleDiameter,
+                 height: isDragging ? UI.activeDiameter : UI.circleDiameter)
+          .offset(x: safeDragPosition - UI.circleOffset, y: .zero)
       }
       .onAppear {
         updateSizeAndPosition(with: geometry.size)
@@ -65,10 +51,10 @@ struct SeekBar: View {
     }
     .frame(height: UI.seekBarFrameHeight)
     .background(.gray.opacity(0.001))
-    .gesture(DragGesture().onChanged { value in
+    .gesture(DragGesture(minimumDistance: .zero).onChanged { value in
       isDragging = true
       isDraggingOutside = true
-      dragPosition = min(max(value.location.x, -UI.circleOffset), size.width - UI.circleOffset)
+      dragPosition = min(max(value.location.x, 0), size.width)
       
       Task {
         thumbnailImage = await viewModel.generateThumbnail(at: Double(dragPosition / size.width) * viewModel.duration)
@@ -85,18 +71,44 @@ struct SeekBar: View {
       guard !isDragging else { return }
       let duration = viewModel.duration
       guard duration != .zero else { return }
-      let percentage = viewModel.elapsedTime / duration
-      dragPosition = min(max(size.width * CGFloat(percentage), -UI.circleOffset), size.width - UI.circleOffset)
+      let percentage = currentTime / duration
+      dragPosition = min(max(size.width * CGFloat(percentage), -UI.circleOffset), size.width)
     }
   }
 }
 
 private extension SeekBar {
+  @ViewBuilder
+  func thumbnailPreviewView() -> some View {
+    if let thumbnail = thumbnailImage, isDragging {
+      VStack {
+        ZStack {
+          thumbnail
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .cornerRadius(5.0)
+          VStack {
+            Spacer()
+            Text(thumbnailTime)
+              .foregroundColor(.white)
+              .font(.caption)
+              .shadow(radius: 5)
+              .padding(.bottom, 2)
+          }
+        }
+      }
+      .frame(width: UI.thumbnailWidth, height: UI.thumbnailHeight)
+      .shadow(radius: 5)
+      .offset(x: thumbnailOffsetX, y: UI.thumbnailOffsetY)
+    }
+  }
+  
   func updatePlayerPosition(for size: CGSize) {
     let duration = viewModel.duration
     guard duration != .zero else { return }
     let percentage = Double(dragPosition / size.width)
     let seekTimeSeconds = duration * percentage
+    viewModel.elapsedTime = seekTimeSeconds
     viewModel.player.jump(to: seekTimeSeconds)
   }
   
@@ -105,19 +117,19 @@ private extension SeekBar {
     let duration = viewModel.duration
     guard duration != .zero else { return }
     let percentage = viewModel.elapsedTime / duration
-    dragPosition = min(max(newSize.width * CGFloat(percentage), -UI.circleOffset), newSize.width - UI.circleOffset)
+    dragPosition = min(max(newSize.width * CGFloat(percentage), -UI.circleOffset), newSize.width)
   }
   
   var thumbnailOffsetX: CGFloat {
-    let leftLimit = UI.thumbnailOffset
-    let rightLimit = size.width - UI.thumbnailOffset
-    
-    if dragPosition < leftLimit {
-      return .zero
-    } else if dragPosition > rightLimit {
-      return size.width - UI.thumbnailWidth
-    } else {
-      return dragPosition - UI.thumbnailOffset
-    }
+    let potentialOffset = dragPosition - UI.thumbnailWidth / 2
+    let offset: CGFloat = 12
+    let offsetFromLeft = max(potentialOffset, offset)
+    let offsetFromRight = min(offsetFromLeft, size.width - UI.thumbnailWidth - offset)
+    return offsetFromRight
+  }
+  
+  var safeDragPosition: CGFloat {
+    let buffer: CGFloat = 6.0
+    return min(max(dragPosition, UI.circleOffset - buffer), size.width + buffer)
   }
 }

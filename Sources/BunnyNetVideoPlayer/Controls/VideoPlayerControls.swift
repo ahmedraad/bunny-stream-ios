@@ -3,12 +3,11 @@ import AVKit
 import Combine
 
 struct VideoPlayerControls: View {
-  @ObservedObject var viewModel: VideoPlayerViewModel
+  @ObservedObject private var viewModel: VideoPlayerControlsViewModel
   @State private var isDraggingSeekBar: Bool = false
   
-  init(player: MediaPlayer) {
-    viewModel = VideoPlayerViewModel(player: player)
-    player.delegate = viewModel
+  init(viewModel: VideoPlayerControlsViewModel) {
+    self.viewModel = viewModel
   }
   
   var body: some View {
@@ -29,6 +28,7 @@ struct VideoPlayerControls: View {
         bottomControlsView()
       }
     }
+    .opacity(viewModel.player.canPlayVideo ? 1 : 0)
     .background(.black.opacity(0.2))
   }
 }
@@ -149,5 +149,4 @@ extension VideoPlayerControls {
         .foregroundColor(.white)
     }
   }
-
 }

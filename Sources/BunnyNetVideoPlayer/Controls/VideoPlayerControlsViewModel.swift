@@ -2,22 +2,21 @@ import Combine
 import AVKit
 import SwiftUI
 
-class VideoPlayerViewModel: ObservableObject {
-  @Published var player: MediaPlayer
-  
+class VideoPlayerControlsViewModel: ObservableObject {
+  var player: MediaPlayer
   @Published var isFullScreen: Bool = false
   @Published var isMuted: Bool = false
   @Published var isPlaying: Bool = false
   @Published var playbackState: MediaPlayer.PlaybackState = .preparing
   @Published var elapsedTime: Double = 0
-  @Published var sliderValue: Double = 0.0
   
   init(player: MediaPlayer) {
     self.player = player
+    setupPlayer()
   }
 }
 
-extension VideoPlayerViewModel {
+extension VideoPlayerControlsViewModel {
   var duration: Double {
     player.duration
   }
@@ -40,18 +39,20 @@ extension VideoPlayerViewModel {
   
   func skipBackward() {
     guard playbackState != .readyToPlay else { return }
-    let newTime = player.currentTimeSeconds - 10
-    player.jump(to: newTime)
+    let elapsedTime = max(elapsedTime - 10, 0)
+    player.jump(to: elapsedTime)
   }
   
   func skipForward() {
     guard playbackState != .ended else { return }
-    let newTime = player.currentTimeSeconds + 10
-    player.jump(to: newTime)
+    let elapsedTime = min(elapsedTime + 10, player.duration)
+    player.jump(to: elapsedTime)
   }
   
   func toggleFullScreenMode() {
-    withAnimation {
+    var transaction = Transaction()
+    transaction.disablesAnimations = true
+    withTransaction(transaction) {
       isFullScreen.toggle()
     }
   }
@@ -82,8 +83,18 @@ extension VideoPlayerViewModel {
   }
 }
 
+private extension VideoPlayerControlsViewModel {
+  func setupPlayer() {
+    player.delegate = self
+    isMuted = player.isMuted
+    isPlaying = player.isPlaying
+    playbackState = player.state
+    elapsedTime = player.currentTimeSeconds
+  }
+}
+
 // MARK: - MediaPlayerDelegate
-extension VideoPlayerViewModel: MediaPlayerDelegate {
+extension VideoPlayerControlsViewModel: MediaPlayerDelegate {
   func mediaPlayer(didBeginPlayback player: MediaPlayer) {
     isPlaying = true
   }
@@ -107,5 +118,9 @@ extension VideoPlayerViewModel: MediaPlayerDelegate {
   
   func mediaPlayer(_ player: MediaPlayer, didUpdatePlaybackState playbackState: MediaPlayer.PlaybackState) {
     self.playbackState = playbackState
+  }
+  
+  func mediaPlayer(_ player: MediaPlayer, didChangeVolume volume: Float) {
+    self.isMuted = volume.isZero
   }
 }
