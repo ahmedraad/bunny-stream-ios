@@ -2,8 +2,9 @@ import SwiftUI
 import AVKit
 
 extension MediaPlayer {
-  func generateThumbnail(at seconds: Double) async -> Image? {
-    guard let asset = self.currentItem?.asset else { return nil }
+  
+  func generateThumbnail(at seconds: Double) async -> (image: Image?, size: CGSize) {
+    guard let asset = self.currentItem?.asset else { return (image: nil, size: .zero) }
     let assetIG = AVAssetImageGenerator(asset: asset)
     
     assetIG.appliesPreferredTrackTransform = true
@@ -17,15 +18,17 @@ extension MediaPlayer {
       let cgImage = try await assetIG.copyCGImageAsync(at: time, actualTime: nil)
       
 #if os(iOS)
-      return Image(uiImage: UIImage(cgImage: cgImage))
+      return (image: Image(uiImage: UIImage(cgImage: cgImage)),
+              size: CGSize(width: cgImage.width, height: cgImage.height))
 #elseif os(macOS)
       let platformImage = NSImage(cgImage: cgImage, size: NSSize(width: cgImage.width, height: cgImage.height))
-      return Image(nsImage: platformImage)
+      return (image: Image(nsImage: platformImage),
+              size: CGSize(width: cgImage.width, height: cgImage.height))
 #endif
       
     } catch {
       print(error.localizedDescription)
-      return nil
+      return (image: nil, size: .zero)
     }
   }
 }

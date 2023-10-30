@@ -20,7 +20,6 @@ public struct BunnyNetVideoPlayer: View {
     VideoPlayerView(controlsViewModel: controlsViewModel)
       .sheet(isPresented: $controlsViewModel.isFullScreen) {
         VideoPlayerView(controlsViewModel: controlsViewModel)
-          .background(Color.black.scaleEffect(controlsViewModel.isFullScreen ? 2 : 0))
       }
 #endif
   }

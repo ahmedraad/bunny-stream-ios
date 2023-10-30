@@ -13,10 +13,20 @@ struct VideoPlayerDemoView: View {
   @State private var player = MediaPlayer(url: URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")!)
 
   var body: some View {
-    BunnyNetVideoPlayer(player: player)
-      .frame(height: 220)
-      .onAppear {
-        player.play()
+    GeometryReader { geometryReader in
+      VStack {
+        BunnyNetVideoPlayer(player: player)
+          .frame(height: geometryReader.size.height > geometryReader.size.width ? geometryReader.size.height * 0.309 : geometryReader.size.height)
+          .onAppear {
+            player.play()
+          }
+          .onDisappear {
+            player.pause()
+          }
+        
+        Spacer()
       }
+    }
+    .navigationBarTitle(Text("Video Player"), displayMode: .inline)
   }
 }

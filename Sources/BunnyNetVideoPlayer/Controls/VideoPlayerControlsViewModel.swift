@@ -3,15 +3,21 @@ import AVKit
 import SwiftUI
 
 class VideoPlayerControlsViewModel: ObservableObject {
-  var player: MediaPlayer
+  let player: MediaPlayer
+  let playbackSpeedViewModel: PlaybackSpeedViewModel
+  @Published var seekBarViewModel: SeekBarViewModel
   @Published var isFullScreen: Bool = false
   @Published var isMuted: Bool = false
   @Published var isPlaying: Bool = false
   @Published var playbackState: MediaPlayer.PlaybackState = .preparing
-  @Published var elapsedTime: Double = 0
+  @Published var isDraggingSeekBar: Bool = false
+  @Published var isOptionsMenuActive = false
+  private var cancellables = Set<AnyCancellable>()
   
   init(player: MediaPlayer) {
     self.player = player
+    playbackSpeedViewModel = PlaybackSpeedViewModel(player: player)
+    seekBarViewModel = SeekBarViewModel(player: player)
     setupPlayer()
   }
 }
@@ -22,11 +28,11 @@ extension VideoPlayerControlsViewModel {
   }
   
   var currentFormattedTime: String {
-    secondsToTime(elapsedTime)
+    seekBarViewModel.elapsedTime.toFormattedTime()
   }
   
   var totalFormattedTime: String {
-    secondsToTime(player.duration)
+    player.duration.toFormattedTime()
   }
 
   func togglePlayPause() {
@@ -34,18 +40,21 @@ extension VideoPlayerControlsViewModel {
       player.pause()
     } else {
       player.play()
+      player.playerSpeed = playbackSpeedViewModel.playbackSpeed.speed
     }
   }
   
   func skipBackward() {
     guard playbackState != .readyToPlay else { return }
-    let elapsedTime = max(elapsedTime - 10, 0)
+    let elapsedTime = max(seekBarViewModel.elapsedTime - 10, .zero)
+    seekBarViewModel.elapsedTime = elapsedTime
     player.jump(to: elapsedTime)
   }
   
   func skipForward() {
     guard playbackState != .ended else { return }
-    let elapsedTime = min(elapsedTime + 10, player.duration)
+    let elapsedTime = min(seekBarViewModel.elapsedTime + 10, player.duration)
+    seekBarViewModel.elapsedTime = elapsedTime
     player.jump(to: elapsedTime)
   }
   
@@ -61,35 +70,26 @@ extension VideoPlayerControlsViewModel {
     isMuted.toggle()
     player.isMuted = isMuted
   }
-  
-  func optionsAction() { }
-  
   func airplayAction() { }
-  
-  func generateThumbnail(at seconds: Double) async -> Image? {
-    await player.generateThumbnail(at: seconds)
-  }
-  
-  func secondsToTime(_ seconds: Double) -> String {
-    let hours = Int(seconds) / 3600
-    let minutes = (Int(seconds) % 3600) / 60
-    let seconds = Int(seconds) % 60
-    
-    if hours > 0 {
-      return String(format: "%d:%02d:%02d", hours, minutes, seconds)
-    } else {
-      return String(format: "%d:%02d", minutes, seconds)
-    }
-  }
 }
 
 private extension VideoPlayerControlsViewModel {
   func setupPlayer() {
     player.delegate = self
+    player.allowsExternalPlayback = true
     isMuted = player.isMuted
     isPlaying = player.isPlaying
     playbackState = player.state
-    elapsedTime = player.currentTimeSeconds
+    seekBarViewModel.elapsedTime = player.currentTimeSeconds
+    setupListeners()
+  }
+  
+  func setupListeners() {
+    seekBarViewModel.objectWillChange
+      .sink { [weak self] _ in
+        self?.objectWillChange.send()
+      }
+      .store(in: &cancellables)
   }
 }
 
@@ -105,11 +105,11 @@ extension VideoPlayerControlsViewModel: MediaPlayerDelegate {
   
   func mediaPlayer(didEndPlayback player: MediaPlayer) {
     isPlaying = false
-    player.jump(to: 0)
+    player.jump(to: .zero)
   }
   
   func mediaPlayer(_ player: MediaPlayer, didProgressToTime seconds: Double) {
-    elapsedTime = seconds
+    seekBarViewModel.elapsedTime = seconds
   }
   
   func mediaPlayer(_ player: MediaPlayer, didFailWithError error: Error) {
@@ -121,6 +121,11 @@ extension VideoPlayerControlsViewModel: MediaPlayerDelegate {
   }
   
   func mediaPlayer(_ player: MediaPlayer, didChangeVolume volume: Float) {
-    self.isMuted = volume.isZero
+    isMuted = volume.isZero
+    player.isMuted = isMuted
+  }
+  
+  func mediaPlayer(_ player: MediaPlayer, didChangeRate rate: Float) {
+    isPlaying = player.isPlaying
   }
 }

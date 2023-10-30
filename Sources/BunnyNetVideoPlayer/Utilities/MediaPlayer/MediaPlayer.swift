@@ -10,6 +10,7 @@ public protocol MediaPlayerDelegate: AnyObject {
   func mediaPlayer(_ player: MediaPlayer, didProgressToTime seconds: Double)
   func mediaPlayer(_ player: MediaPlayer, onProgressUpdate progress: Float)
   func mediaPlayer(_ player: MediaPlayer, didChangeVolume volume: Float)
+  func mediaPlayer(_ player: MediaPlayer, didChangeRate rate: Float)
 
   func mediaPlayer(_ player: MediaPlayer, didFailWithError error: Error)
   func mediaPlayer(_ player: MediaPlayer, didUpdatePlaybackState playbackState: MediaPlayer.PlaybackState)
@@ -27,6 +28,7 @@ public extension MediaPlayerDelegate {
   func mediaPlayer(_ player: MediaPlayer, didUpdatePlaybackState playbackState: MediaPlayer.PlaybackState) {}
   func mediaPlayer(_ player: MediaPlayer, onProgressUpdate progress: Float) {}
   func mediaPlayer(_ player: MediaPlayer, didChangeVolume volume: Float) {}
+  func mediaPlayer(_ player: MediaPlayer, didChangeRate rate: Float) {}
 }
 
 public class MediaPlayer: AVPlayer {
@@ -77,6 +79,11 @@ public class MediaPlayer: AVPlayer {
   }
 
   public weak var delegate: MediaPlayerDelegate?
+  
+  /// Player speed
+  public var playerSpeed: Float = 1.0 {
+    didSet { rate = playerSpeed }
+  }
 
   /// Boolean flag `true` when item is prepared and can be played
   private(set) var canPlayVideo: Bool = false
@@ -85,6 +92,7 @@ public class MediaPlayer: AVPlayer {
   private var playerItemObserver: NSKeyValueObservation?
   private var periodicTimeObserver: Any?
   private var volumeObservation: NSKeyValueObservation?
+  private var rateObservation: NSKeyValueObservation?
 
   override public init() {
     super.init()
@@ -121,6 +129,7 @@ public class MediaPlayer: AVPlayer {
     setupPlayerItemObserver()
     super.play()
     state = .playing
+    rate = playerSpeed
   }
 
   /// Starts playing the media from a specified time.
@@ -239,6 +248,7 @@ private extension MediaPlayer {
   func setupObservers() {
     setupPlayerItemObserver()
     setupVolumeObserver()
+    setupRateObserver()
   }
   
   func setupPlayerItemObserver() {
@@ -303,6 +313,13 @@ private extension MediaPlayer {
       self.delegate?.mediaPlayer(self, didChangeVolume: volume)
     }
 #endif
+  }
+  
+  func setupRateObserver() {
+    rateObservation = observe(\.rate, options: [.new]) { [weak self] (player, change) in
+      guard let newRate = change.newValue else { return }
+      self?.delegate?.mediaPlayer(player, didChangeRate: newRate)
+    }
   }
 
   @objc func volumeChanged(notification: NSNotification) {

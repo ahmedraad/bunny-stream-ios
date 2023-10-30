@@ -112,7 +112,9 @@ extension VideoPlayerControls {
   }
   
   func optionsButton() -> some View {
-    Button(action: viewModel.optionsAction) {
+    Menu {
+      PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
+    } label: {
       Image(systemName: "ellipsis.circle")
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
@@ -122,7 +124,7 @@ extension VideoPlayerControls {
   
   func airplayButton() -> some View {
     Button(action: viewModel.airplayAction) {
-      Image(systemName: "airplayvideo.circle")
+      Image(systemName: "airplayvideo")
         .aspectRatio(contentMode: .fit)
         .frame(width: 40, height: 40)
         .foregroundColor(.white)
@@ -130,7 +132,7 @@ extension VideoPlayerControls {
   }
   
   func seekBarView() -> some View {
-    SeekBar(viewModel: viewModel, isDraggingOutside: $isDraggingSeekBar)
+    SeekBarView(viewModel: viewModel.seekBarViewModel, isDraggingOutside: $isDraggingSeekBar)
       .padding(.bottom, -16)
   }
   

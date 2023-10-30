@@ -1,13 +1,11 @@
 import SwiftUI
 
-struct SeekBar: View {
-  @ObservedObject var viewModel: VideoPlayerControlsViewModel
+struct SeekBarView: View {
+  @ObservedObject var viewModel: SeekBarViewModel
   @Binding var isDraggingOutside: Bool
+  @State private var size: CGSize = .zero
   @State private var isDragging: Bool = false
   @State private var dragPosition: CGFloat = .zero
-  @State private var size: CGSize = .zero
-  @State private var thumbnailImage: Image?
-  @State private var thumbnailTime: String = ""
   
   enum UI {
     static let inactiveBarHeight: CGFloat = 3
@@ -18,6 +16,7 @@ struct SeekBar: View {
     static let seekBarFrameHeight: CGFloat = 40
     static let thumbnailWidth: CGFloat = 100
     static let thumbnailHeight: CGFloat = 70
+    static let thumbnailSize: CGFloat = 100
     static let thumbnailOffsetY: CGFloat = -80
   }
   
@@ -25,12 +24,12 @@ struct SeekBar: View {
     GeometryReader { geometry in
       ZStack(alignment: .leading) {
         Rectangle()
-          .frame(height: isDragging ? UI.activeBarHeight : UI.inactiveBarHeight)
           .foregroundColor(Color.gray.opacity(0.4))
+          .frame(height: isDragging ? UI.activeBarHeight : UI.inactiveBarHeight)
         
         Rectangle()
           .foregroundColor(.blue)
-          .frame(width: max(.zero, dragPosition), 
+          .frame(width: max(.zero, dragPosition),
                  height: isDragging ? UI.activeBarHeight : UI.inactiveBarHeight)
         
         thumbnailPreviewView()
@@ -54,11 +53,10 @@ struct SeekBar: View {
     .gesture(DragGesture(minimumDistance: .zero).onChanged { value in
       isDragging = true
       isDraggingOutside = true
-      dragPosition = min(max(value.location.x, 0), size.width)
+      dragPosition = min(max(value.location.x, .zero), size.width)
       
       Task {
-        thumbnailImage = await viewModel.generateThumbnail(at: Double(dragPosition / size.width) * viewModel.duration)
-        thumbnailTime = viewModel.secondsToTime(dragPosition / size.width * viewModel.duration)
+        await viewModel.generateThumbnail(at: Double(dragPosition / size.width) * viewModel.duration)
       }
     }
       .onEnded { _ in
@@ -77,10 +75,10 @@ struct SeekBar: View {
   }
 }
 
-private extension SeekBar {
+private extension SeekBarView {
   @ViewBuilder
   func thumbnailPreviewView() -> some View {
-    if let thumbnail = thumbnailImage, isDragging {
+    if let thumbnail = viewModel.thumbnailImage, isDragging {
       VStack {
         ZStack {
           thumbnail
@@ -89,7 +87,7 @@ private extension SeekBar {
             .cornerRadius(5.0)
           VStack {
             Spacer()
-            Text(thumbnailTime)
+            Text(viewModel.thumbnailTime)
               .foregroundColor(.white)
               .font(.caption)
               .shadow(radius: 5)
