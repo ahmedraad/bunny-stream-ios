@@ -70,7 +70,6 @@ extension VideoPlayerControlsViewModel {
     isMuted.toggle()
     player.isMuted = isMuted
   }
-  func airplayAction() { }
 }
 
 private extension VideoPlayerControlsViewModel {

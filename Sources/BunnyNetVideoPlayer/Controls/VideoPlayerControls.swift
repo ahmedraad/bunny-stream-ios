@@ -123,12 +123,8 @@ extension VideoPlayerControls {
   }
   
   func airplayButton() -> some View {
-    Button(action: viewModel.airplayAction) {
-      Image(systemName: "airplayvideo")
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 40, height: 40)
-        .foregroundColor(.white)
-    }
+    AirPlayButton()
+      .frame(width: 40, height: 40)
   }
   
   func seekBarView() -> some View {

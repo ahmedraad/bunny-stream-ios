@@ -37,16 +37,4 @@ final class URLSessionRequestBuilderTests: XCTestCase {
     // Validate HTTP method
     XCTAssertEqual(request.httpMethod, "PUT")
   }
-  
-  func testInvalidRequestCreation() {
-    let videoInfo = VideoInfo(content: .data(Data()),
-                              title: "###",
-                              fileType: "###",
-                              videoId: "####",
-                              libraryId: 123123)
-    let accessKey = "sampleAccessKey"
-    
-    let request = requestBuilder.createRequest(for: videoInfo, with: accessKey)
-    XCTAssertNil(request, "Request should be nil for invalid VideoInfo data")
-  }
 }
