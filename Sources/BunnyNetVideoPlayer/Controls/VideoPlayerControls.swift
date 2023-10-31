@@ -4,8 +4,8 @@ import Combine
 
 struct VideoPlayerControls: View {
   @ObservedObject private var viewModel: VideoPlayerControlsViewModel
-  @State private var isDraggingSeekBar: Bool = false
-  
+  @State private var airPlayView = AirPlayView()
+
   init(viewModel: VideoPlayerControlsViewModel) {
     self.viewModel = viewModel
   }
@@ -16,23 +16,21 @@ struct VideoPlayerControls: View {
         topControlsView()
           .padding(.vertical, 4)
           .padding(.horizontal, 8)
-          .opacity(isDraggingSeekBar ? 0 : 1)
+          .opacity(viewModel.isDraggingSeekBar ? 0 : 1)
         
         Spacer()
         
         centerControlsView()
-          .opacity(isDraggingSeekBar ? 0 : 1)
+          .opacity(viewModel.isDraggingSeekBar ? 0 : 1)
         
         Spacer()
         
         bottomControlsView()
       }
     }
-    .opacity(viewModel.player.canPlayVideo ? 1 : 0)
-    .background(.black.opacity(0.2))
   }
 }
- 
+
 // MARK: - Views
 extension VideoPlayerControls {
   func topControlsView() -> some View {
@@ -111,6 +109,7 @@ extension VideoPlayerControls {
     }
   }
   
+  @ViewBuilder
   func optionsButton() -> some View {
     Menu {
       PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
@@ -120,15 +119,24 @@ extension VideoPlayerControls {
         .frame(width: 30, height: 30)
         .foregroundColor(.white)
     }
+    .contentShape(Rectangle())
+    .simultaneousGesture(TapGesture().onEnded {
+      viewModel.isOptionsMenuActive = true
+    })
   }
   
   func airplayButton() -> some View {
-    AirPlayButton()
-      .frame(width: 40, height: 40)
+    Button(action: {
+      airPlayView.showAirPlayMenu()
+    }) {
+      airPlayView
+    }
+    .buttonStyle(PlainButtonStyle())
+    .frame(width: 40, height: 40)
   }
   
   func seekBarView() -> some View {
-    SeekBarView(viewModel: viewModel.seekBarViewModel, isDraggingOutside: $isDraggingSeekBar)
+    SeekBarView(viewModel: viewModel.seekBarViewModel, isDraggingOutside: $viewModel.isDraggingSeekBar)
       .padding(.bottom, -16)
   }
   

@@ -14,6 +14,7 @@ class VideoPlayerControlsViewModel: ObservableObject {
   @Published var isOptionsMenuActive = false
   private var cancellables = Set<AnyCancellable>()
   
+  
   init(player: MediaPlayer) {
     self.player = player
     playbackSpeedViewModel = PlaybackSpeedViewModel(player: player)
@@ -39,6 +40,7 @@ extension VideoPlayerControlsViewModel {
     if player.isPlaying {
       player.pause()
     } else {
+      handlePlayerSeekTimeStateIsEnded()
       player.play()
       player.playerSpeed = playbackSpeedViewModel.playbackSpeed.speed
     }
@@ -55,7 +57,7 @@ extension VideoPlayerControlsViewModel {
     guard playbackState != .ended else { return }
     let elapsedTime = min(seekBarViewModel.elapsedTime + 10, player.duration)
     seekBarViewModel.elapsedTime = elapsedTime
-    player.jump(to: elapsedTime)
+    player.jump(to: round(elapsedTime))
   }
   
   func toggleFullScreenMode() {
@@ -90,6 +92,11 @@ private extension VideoPlayerControlsViewModel {
       }
       .store(in: &cancellables)
   }
+  
+  func handlePlayerSeekTimeStateIsEnded() {
+    guard playbackState == .ended else { return }
+    player.jump(to: seekBarViewModel.elapsedTime == player.duration ? .zero : seekBarViewModel.elapsedTime)
+  }
 }
 
 // MARK: - MediaPlayerDelegate
@@ -104,7 +111,6 @@ extension VideoPlayerControlsViewModel: MediaPlayerDelegate {
   
   func mediaPlayer(didEndPlayback player: MediaPlayer) {
     isPlaying = false
-    player.jump(to: .zero)
   }
   
   func mediaPlayer(_ player: MediaPlayer, didProgressToTime seconds: Double) {

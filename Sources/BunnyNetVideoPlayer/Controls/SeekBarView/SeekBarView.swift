@@ -9,13 +9,11 @@ struct SeekBarView: View {
   
   enum UI {
     static let inactiveBarHeight: CGFloat = 3
-    static let activeBarHeight: CGFloat = 6
+    static let activeBarHeight: CGFloat = 8
     static let circleDiameter: CGFloat = 15
-    static let activeDiameter: CGFloat = 20
+    static let activeDiameter: CGFloat = 26
     static let circleOffset: CGFloat = activeDiameter / 2
     static let seekBarFrameHeight: CGFloat = 40
-    static let thumbnailWidth: CGFloat = 100
-    static let thumbnailHeight: CGFloat = 70
     static let thumbnailSize: CGFloat = 100
     static let thumbnailOffsetY: CGFloat = -80
   }
@@ -79,24 +77,25 @@ private extension SeekBarView {
   @ViewBuilder
   func thumbnailPreviewView() -> some View {
     if let thumbnail = viewModel.thumbnailImage, isDragging {
-      VStack {
-        ZStack {
-          thumbnail
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .cornerRadius(5.0)
-          VStack {
-            Spacer()
-            Text(viewModel.thumbnailTime)
-              .foregroundColor(.white)
-              .font(.caption)
-              .shadow(radius: 5)
-              .padding(.bottom, 2)
-          }
+      ZStack {
+        thumbnail
+          .resizable()
+          .scaledToFit()
+          .cornerRadius(5.0)
+        
+        VStack {
+          Spacer()
+          Text(viewModel.thumbnailTime)
+            .foregroundColor(.white)
+            .font(.caption)
+            .shadow(radius: 5)
+            .padding(4)
         }
       }
-      .frame(width: UI.thumbnailWidth, height: UI.thumbnailHeight)
+      .frame(width: viewModel.thumbnailSize.width, height: viewModel.thumbnailSize.height)
       .shadow(radius: 5)
+      .cornerRadius(5.0)
+      .clipped()
       .offset(x: thumbnailOffsetX, y: UI.thumbnailOffsetY)
     }
   }
@@ -119,10 +118,9 @@ private extension SeekBarView {
   }
   
   var thumbnailOffsetX: CGFloat {
-    let potentialOffset = dragPosition - UI.thumbnailWidth / 2
-    let offset: CGFloat = 12
-    let offsetFromLeft = max(potentialOffset, offset)
-    let offsetFromRight = min(offsetFromLeft, size.width - UI.thumbnailWidth - offset)
+    let potentialOffset = dragPosition - viewModel.thumbnailSize.width / 2
+    let offsetFromLeft = max(potentialOffset, .zero)
+    let offsetFromRight = min(offsetFromLeft, size.width - viewModel.thumbnailSize.width)
     return offsetFromRight
   }
   

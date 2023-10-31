@@ -353,7 +353,8 @@ private extension MediaPlayer {
   }
 
   func setPlaybackPosition(to value: Double) {
-    seek(to: CMTimeMakeWithSeconds(value, preferredTimescale: 6_000))
+    let seekTime = CMTimeMakeWithSeconds(round(value), preferredTimescale: 6_000)
+    seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
   }
 
   func onStateUpdate() {
