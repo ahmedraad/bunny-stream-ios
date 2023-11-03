@@ -10,18 +10,20 @@ struct SeekBarView: View {
   
   enum UI {
     static let inactiveBarHeight: CGFloat = 3
-    static let activeBarHeight: CGFloat = 8
-    static let scrubberDiameter: CGFloat = 15
-    static let activeScrubberDiameter: CGFloat = 26
+    static let activeBarHeight: CGFloat = 6
+    static let scrubberDiameter: CGFloat = 0
+    static let activeScrubberDiameter: CGFloat = 14
     static let momentCircleDiameter: CGFloat = 10
     static let scrubberOffset: CGFloat = activeScrubberDiameter / 2
     static let seekBarFrameHeight: CGFloat = 40
     static let thumbnailSize: CGFloat = 100
+    static let heatmapHeight: CGFloat = 31
   }
   
   var body: some View {
     GeometryReader { geometry in
       ZStack(alignment: .leading) {
+        heatmapGraphView()
         chapterMarksView()
         progressMarksView()
         momentsView()
@@ -154,8 +156,14 @@ private extension SeekBarView {
         .onPreferenceChange(ViewSizeKey.self) { size in
           self.activeLabelTextSize = size
         }
-        .offset(x: safeActiveLabelXOffset(), y: -UI.activeScrubberDiameter)
+        .offset(x: safeActiveLabelXOffset(), y: -UI.heatmapHeight)
     }
+  }
+  
+  func heatmapGraphView() -> some View {
+    HeatmapGraphView(heatmap: viewModel.heatmap, playedPercentage: CGFloat(dragPosition / adjustedWidth))
+      .frame(height: UI.heatmapHeight)
+      .offset(x: .zero, y: -UI.seekBarFrameHeight / 2 + UI.inactiveBarHeight)
   }
 }
 

@@ -20,4 +20,3 @@ struct MomentView: View {
       .frame(width: diameter, height: diameter)
   }
 }
-

@@ -2,6 +2,7 @@ import SwiftUI
 
 class SeekBarViewModel: ObservableObject {
   @Published var video: Video
+  @Published var heatmap: Heatmap
   @Published var elapsedTime: Double = .zero
   @Published var thumbnailImage: Image?
   @Published var thumbnailTime: String = ""
@@ -9,9 +10,10 @@ class SeekBarViewModel: ObservableObject {
   
   let player: MediaPlayer
   
-  init(player: MediaPlayer, video: Video) {
+  init(player: MediaPlayer, video: Video, heatmap: Heatmap) {
     self.player = player
     self.video = video
+    self.heatmap = heatmap
   }
   
   var duration: Double {
@@ -22,7 +24,7 @@ class SeekBarViewModel: ObservableObject {
     if thumbnailSize.width > thumbnailSize.height {
       return -thumbnailSize.height * 1.5
     } else {
-      return -thumbnailSize.width * 2.1
+      return -thumbnailSize.width * 1.8
     }
   }
   
