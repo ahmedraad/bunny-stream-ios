@@ -7,7 +7,7 @@ public struct BunnyNetVideoPlayer: View {
 
   public init(player: MediaPlayer) {
     self.player = player
-    self._controlsViewModel = StateObject(wrappedValue: VideoPlayerControlsViewModel(player: player))
+    self._controlsViewModel = StateObject(wrappedValue: VideoPlayerControlsViewModel(player: player, video: Video(chaptersList: .init(originalChapters: [], duration: .zero), moments: [])))
     self._videoPlayerViewModel = StateObject(wrappedValue: VideoPlayerViewModel())
   }
   

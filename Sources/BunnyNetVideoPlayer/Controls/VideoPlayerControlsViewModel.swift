@@ -15,10 +15,10 @@ class VideoPlayerControlsViewModel: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   
   
-  init(player: MediaPlayer) {
+  init(player: MediaPlayer, video: Video) {
     self.player = player
     playbackSpeedViewModel = PlaybackSpeedViewModel(player: player)
-    seekBarViewModel = SeekBarViewModel(player: player)
+    seekBarViewModel = SeekBarViewModel(player: player, video: video)
     setupPlayer()
   }
 }
