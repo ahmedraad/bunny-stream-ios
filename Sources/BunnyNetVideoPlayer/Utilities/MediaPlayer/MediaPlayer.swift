@@ -93,7 +93,8 @@ public class MediaPlayer: AVPlayer {
   private var periodicTimeObserver: Any?
   private var volumeObservation: NSKeyValueObservation?
   private var rateObservation: NSKeyValueObservation?
-
+  private var fairPlayHandler: FairPlayStreamHandler?
+  
   override public init() {
     super.init()
     setupObservers()
@@ -112,6 +113,12 @@ public class MediaPlayer: AVPlayer {
   convenience public init(asset: AVURLAsset) {
     let item = AVPlayerItem(asset: asset)
     self.init(playerItem: item)
+  }
+  
+  convenience init(url: URL, fairPlayHandler: FairPlayStreamHandler) {
+    let playerItem = fairPlayHandler.setupAssetPlayback(url: url)
+    self.init(playerItem: playerItem)
+    self.fairPlayHandler = fairPlayHandler
   }
 
   // MARK: - Public methods

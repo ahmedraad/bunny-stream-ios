@@ -10,8 +10,10 @@ import BunnyNetVideoPlayer
 import AVKit
 
 struct VideoPlayerDemoView: View {
-  @State private var player = MediaPlayer(url: URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")!)
-
+  @State private var player = MediaPlayer.make(videoId: "01d32d4a-46b4-4b6e-848f-9512c6d1d29e",
+                                               libraryId: 160961,
+                                               cdn: "vz-3230d8ac-c35.b-cdn.net")
+  
   var body: some View {
     GeometryReader { geometryReader in
       VStack {
@@ -23,7 +25,6 @@ struct VideoPlayerDemoView: View {
           .onDisappear {
             player.pause()
           }
-        
         Spacer()
       }
     }
