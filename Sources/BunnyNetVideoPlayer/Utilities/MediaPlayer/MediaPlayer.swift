@@ -301,7 +301,7 @@ private extension MediaPlayer {
         return
       }
 
-      delegate?.mediaPlayer(self, didProgressToTime: time.seconds)
+      delegate?.mediaPlayer(self, didProgressToTime: ceil(time.seconds))
       delegate?.mediaPlayer(self, onProgressUpdate: Float(time.seconds / duration))
       timeObserverCallback(time: time)
 
@@ -336,7 +336,7 @@ private extension MediaPlayer {
   }
   
   func timeObserverCallback(time: CMTime) {
-    guard time.seconds >= playbackInterval.endAt else { return }
+    guard (time.seconds + Double(timeObservingMiliseconds) / 1_000) >= playbackInterval.endAt else { return }
 
     // at this point, item has ended
     if allowsLooping {
@@ -360,7 +360,7 @@ private extension MediaPlayer {
   }
 
   func setPlaybackPosition(to value: Double) {
-    let seekTime = CMTimeMakeWithSeconds(round(value), preferredTimescale: 6_000)
+    let seekTime = CMTimeMakeWithSeconds(ceil(value), preferredTimescale: 6_000)
     seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
   }
 

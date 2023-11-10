@@ -25,7 +25,7 @@ class VideoPlayerControlsViewModel: ObservableObject {
 
 extension VideoPlayerControlsViewModel {
   var duration: Double {
-    player.duration
+    ceil(player.duration)
   }
   
   var currentFormattedTime: String {
@@ -33,7 +33,7 @@ extension VideoPlayerControlsViewModel {
   }
   
   var totalFormattedTime: String {
-    player.duration.toFormattedTime()
+    duration.toFormattedTime()
   }
 
   func togglePlayPause() {
@@ -57,7 +57,7 @@ extension VideoPlayerControlsViewModel {
     guard playbackState != .ended else { return }
     let elapsedTime = min(seekBarViewModel.elapsedTime + 10, player.duration)
     seekBarViewModel.elapsedTime = elapsedTime
-    player.jump(to: round(elapsedTime))
+    player.jump(to: ceil(elapsedTime))
   }
   
   func toggleFullScreenMode() {
@@ -95,7 +95,7 @@ private extension VideoPlayerControlsViewModel {
   
   func handlePlayerSeekTimeStateIsEnded() {
     guard playbackState == .ended else { return }
-    player.jump(to: seekBarViewModel.elapsedTime == player.duration ? .zero : seekBarViewModel.elapsedTime)
+    player.jump(to: seekBarViewModel.elapsedTime == duration ? .zero : seekBarViewModel.elapsedTime)
   }
 }
 

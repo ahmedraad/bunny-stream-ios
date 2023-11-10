@@ -7,7 +7,8 @@ public struct BunnyNetVideoPlayer: View {
 
   public init(player: MediaPlayer) {
     self.player = player
-    let video = Video(chaptersList: .init(originalChapters: [], duration: .zero), moments: [])
+    // TODO: inject video from API
+    let video = Video(guid: "", chaptersList: nil, moments: [], thumbnailCount: .zero, width: .zero, height: .zero, length: .zero, cdn: "")
     self._controlsViewModel = StateObject(wrappedValue: VideoPlayerControlsViewModel(player: player,
                                                                                      video: video,
                                                                                      heatmap: .init(data: [:], for: .zero)))

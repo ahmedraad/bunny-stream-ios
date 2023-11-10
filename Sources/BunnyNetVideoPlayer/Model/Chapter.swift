@@ -26,6 +26,6 @@ extension Chapter {
   }
   
   func widthPercentage(duration: Double) -> CGFloat {
-    CGFloat(end - start) / CGFloat(round(duration))
+    CGFloat(end - start) / CGFloat(ceil(duration))
   }
 }

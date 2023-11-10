@@ -45,10 +45,6 @@ struct SeekBarView: View {
       isDragging = true
       isDraggingOutside = true
       dragPosition = min(max(value.location.x, .zero), size.width)
-      
-      Task {
-        await viewModel.generateThumbnail(at: Double(dragPosition / size.width) * viewModel.duration)
-      }
     }
       .onEnded { _ in
         isDragging = false
@@ -70,23 +66,23 @@ struct SeekBarView: View {
 private extension SeekBarView {
   @ViewBuilder
   func thumbnailPreviewView() -> some View {
-    if let thumbnail = viewModel.thumbnailImage, isDragging {
-      ZStack {
-        thumbnail
-          .resizable()
-          .scaledToFit()
-          .cornerRadius(5.0)
-        
+    if isDragging {
+      ThumbnailAsyncImageView(
+        video: viewModel.video,
+        second: draggingTime,
+        thumbnailSize: $viewModel.thumbnailSize
+      )
+      .overlay {
         VStack {
           Spacer()
-          Text(viewModel.thumbnailTime)
+          Text(draggingTime.toFormattedTime())
             .foregroundColor(.white)
             .font(.caption)
             .shadow(radius: 5)
             .padding(4)
         }
       }
-      .frame(width: viewModel.thumbnailSize.width, height: viewModel.thumbnailSize.height)
+      .frame(width: viewModel.scaledThumbnailSize.width, height: viewModel.scaledThumbnailSize.height)
       .shadow(radius: 5)
       .cornerRadius(5.0)
       .clipped()
@@ -133,7 +129,7 @@ private extension SeekBarView {
   func momentsView() -> some View {
     ZStack {
       ForEach(viewModel.video.moments, id: \.id) { moment in
-        let xOffset = (CGFloat(moment.second) / CGFloat(viewModel.duration)) * adjustedWidth
+        let xOffset = (CGFloat(moment.second) / CGFloat(viewModel.duration)) * size.width
         MomentView(diameter: UI.momentCircleDiameter)
           .offset(x: xOffset - UI.momentCircleDiameter / 2, y: .zero)
       }
@@ -161,7 +157,7 @@ private extension SeekBarView {
   }
   
   func heatmapGraphView() -> some View {
-    HeatmapGraphView(heatmap: viewModel.heatmap, playedPercentage: CGFloat(dragPosition / adjustedWidth))
+    HeatmapGraphView(heatmap: viewModel.heatmap, playedPercentage: CGFloat(dragPosition / size.width))
       .frame(height: UI.heatmapHeight)
       .offset(x: .zero, y: -UI.seekBarFrameHeight / 2 + UI.inactiveBarHeight)
   }
@@ -184,7 +180,7 @@ private extension SeekBarView {
   }
   
   var currentPosition: CGFloat {
-    (dragPosition / adjustedWidth) * CGFloat(viewModel.duration)
+    (dragPosition / size.width) * CGFloat(viewModel.duration)
   }
   
   func playedDuration(in chapter: Chapter) -> CGFloat {
@@ -201,7 +197,7 @@ private extension SeekBarView {
   }
   
   func activeLabel() -> String? {
-    if let moment = viewModel.video.moments.first(where: { isDragging && $0.contains(currentPosition) }) {
+    if let moment = viewModel.video.moments.first(where: { isDragging && $0.contains(currentPosition, in: Int(viewModel.duration)) }) {
       return moment.label
     } else if let chapter = viewModel.video.chaptersList?.first(where: { isDragging && $0.contains(currentPosition) }),
               case .regular(let title) = chapter.type {
@@ -213,7 +209,7 @@ private extension SeekBarView {
   func updatePlayerPosition(for size: CGSize) {
     let duration = viewModel.duration
     guard duration != .zero else { return }
-    let percentage = Double(dragPosition / adjustedWidth)
+    let percentage = Double(dragPosition / size.width)
     let seekTimeSeconds = duration * percentage
     viewModel.elapsedTime = seekTimeSeconds
     viewModel.player.jump(to: seekTimeSeconds)
@@ -228,9 +224,9 @@ private extension SeekBarView {
   }
   
   var thumbnailOffsetX: CGFloat {
-    let potentialOffset = dragPosition - viewModel.thumbnailSize.width / 2
+    let potentialOffset = dragPosition - viewModel.scaledThumbnailSize.width / 2
     let offsetFromLeft = max(potentialOffset, .zero)
-    let offsetFromRight = min(offsetFromLeft, size.width - viewModel.thumbnailSize.width)
+    let offsetFromRight = min(offsetFromLeft, size.width - viewModel.scaledThumbnailSize.width)
     return offsetFromRight
   }
   
@@ -238,11 +234,15 @@ private extension SeekBarView {
     let xOffset = dragPosition
     let potentialOffset = xOffset - activeLabelTextSize.width / 2
     let offsetFromLeft = max(potentialOffset, .zero)
-    return min(offsetFromLeft, adjustedWidth - viewModel.thumbnailSize.width)
+    return min(offsetFromLeft, adjustedWidth - viewModel.scaledThumbnailSize.width)
   }
   
   var safeDragPosition: CGFloat {
     let buffer: CGFloat = 6.0
-    return min(max(dragPosition, UI.scrubberOffset - buffer), adjustedWidth + buffer)
+    return min(max(dragPosition, UI.scrubberOffset - buffer), size.width - buffer)
+  }
+  
+  var draggingTime: Double {
+    Double(dragPosition / size.width) * viewModel.duration
   }
 }
