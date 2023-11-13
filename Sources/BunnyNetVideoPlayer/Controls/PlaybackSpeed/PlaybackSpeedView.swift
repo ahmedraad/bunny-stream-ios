@@ -35,7 +35,7 @@ extension PlaybackSpeedView {
       
       Spacer()
       
-      Image(systemName: "gauge.with.dots.needle.67percent")
+      Image(systemName: "timer")
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)

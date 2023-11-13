@@ -7,7 +7,7 @@ class VideoPlayerViewModel: ObservableObject {
   @Published var isDraggingSeekBar: Bool = false
   var hideControlsTimer: Timer?
   let hideAfterSeconds: Double = 3.0
-  
+
   deinit {
     hideControlsTimer?.invalidate()
   }
