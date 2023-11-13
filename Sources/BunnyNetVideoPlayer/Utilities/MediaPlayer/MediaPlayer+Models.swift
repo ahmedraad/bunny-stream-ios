@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MediaPlayer {
+extension MediaPlayer {
   enum Error: Swift.Error {
     case undefinedState
     case undefinedError
@@ -47,7 +47,7 @@ extension MediaPlayer.PlaybackState {
 }
 
 extension MediaPlayer.PlaybackState: Equatable {
-  public static func == (lhs: MediaPlayer.PlaybackState, rhs: MediaPlayer.PlaybackState) -> Bool {
+  static func == (lhs: MediaPlayer.PlaybackState, rhs: MediaPlayer.PlaybackState) -> Bool {
     switch (lhs, rhs) {
     case (.preparing, .preparing),
       (.readyToPlay, .readyToPlay),
@@ -65,7 +65,7 @@ extension MediaPlayer.PlaybackState: Equatable {
 }
 
 extension MediaPlayer.Error: LocalizedError {
-  public var errorDescription: String? {
+  var errorDescription: String? {
     switch self {
     case .undefinedState:
       return "MediaPlayer state is undefined!"

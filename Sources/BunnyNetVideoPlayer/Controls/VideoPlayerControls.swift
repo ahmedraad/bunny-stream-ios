@@ -113,6 +113,9 @@ extension VideoPlayerControls {
   func optionsButton() -> some View {
     Menu {
       PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
+      if !viewModel.captionsMenuViewModel.captions.isEmpty {
+        CaptionsMenuView(viewModel: viewModel.captionsMenuViewModel)
+      }
     } label: {
       Image(systemName: "ellipsis.circle")
         .aspectRatio(contentMode: .fit)

@@ -1,21 +1,21 @@
 import SwiftUI
 
-public struct BunnyNetVideoPlayer: View {
-  @State public var player: MediaPlayer
+struct BunnyNetVideoPlayer: View {
+  @State var player: MediaPlayer
   @StateObject var controlsViewModel: VideoPlayerControlsViewModel
   @StateObject var videoPlayerViewModel: VideoPlayerViewModel
 
-  public init(player: MediaPlayer) {
+  init(player: MediaPlayer) {
     self.player = player
     // TODO: inject video from API
-    let video = Video(guid: "", chaptersList: nil, moments: [], thumbnailCount: .zero, width: .zero, height: .zero, length: .zero, cdn: "")
+    let video = Video(guid: "", chaptersList: nil, moments: [], thumbnailCount: .zero, width: .zero, height: .zero, length: .zero, cdn: "", captions: [], libraryId: .zero)
     self._controlsViewModel = StateObject(wrappedValue: VideoPlayerControlsViewModel(player: player,
                                                                                      video: video,
                                                                                      heatmap: .init(data: [:], for: .zero)))
     self._videoPlayerViewModel = StateObject(wrappedValue: VideoPlayerViewModel())
   }
   
-  public var body: some View {
+  var body: some View {
 #if os(iOS)
     VideoPlayerView(controlsViewModel: controlsViewModel, viewModel: videoPlayerViewModel)
       .fullScreenCover(isPresented: $controlsViewModel.isFullScreen) {

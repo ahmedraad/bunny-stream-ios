@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "dsfregex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/DSFRegex",
+      "state" : {
+        "revision" : "f1ce5c208384bb238b07905d140c2e60182e3601",
+        "version" : "3.3.1"
+      }
+    },
+    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
@@ -115,6 +124,24 @@
       "state" : {
         "revision" : "3b13e439a341bbbfe0f710c7d1be37221745ef1a",
         "version" : "0.6.1"
+      }
+    },
+    {
+      "identity" : "swiftsubtitles",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/SwiftSubtitles.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9610acc4a62f0b274f4fc62c4d600da098fe5892"
+      }
+    },
+    {
+      "identity" : "tinycsv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/TinyCSV",
+      "state" : {
+        "revision" : "63f30830cd986de84cd844d59926cf1aa2009f0b",
+        "version" : "0.5.3"
       }
     },
     {

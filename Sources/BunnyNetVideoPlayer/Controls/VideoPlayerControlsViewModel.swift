@@ -5,6 +5,7 @@ import SwiftUI
 class VideoPlayerControlsViewModel: ObservableObject {
   let player: MediaPlayer
   let playbackSpeedViewModel: PlaybackSpeedViewModel
+  let captionsMenuViewModel: CaptionsMenuViewModel
   @Published var seekBarViewModel: SeekBarViewModel
   @Published var isFullScreen: Bool = false
   @Published var isMuted: Bool = false
@@ -12,6 +13,7 @@ class VideoPlayerControlsViewModel: ObservableObject {
   @Published var playbackState: MediaPlayer.PlaybackState = .preparing
   @Published var isDraggingSeekBar: Bool = false
   @Published var isOptionsMenuActive = false
+  @Published var captions: String?
   private var cancellables = Set<AnyCancellable>()
   
   
@@ -19,6 +21,7 @@ class VideoPlayerControlsViewModel: ObservableObject {
     self.player = player
     playbackSpeedViewModel = PlaybackSpeedViewModel(player: player)
     seekBarViewModel = SeekBarViewModel(player: player, video: video, heatmap: heatmap)
+    captionsMenuViewModel = CaptionsMenuViewModel(player: player, captions: video.captions)
     setupPlayer()
   }
 }
@@ -132,5 +135,9 @@ extension VideoPlayerControlsViewModel: MediaPlayerDelegate {
   
   func mediaPlayer(_ player: MediaPlayer, didChangeRate rate: Float) {
     isPlaying = player.isPlaying
+  }
+  
+  func mediaPlayer(_ player: MediaPlayer, didChangeSubtitle subtitle: String?) {
+    captions = subtitle
   }
 }

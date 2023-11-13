@@ -16,7 +16,8 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-openapi-runtime", branch: "main"),
     .package(url: "https://github.com/apple/swift-openapi-urlsession", branch: "main"),
     .package(url: "https://github.com/tus/TUSKit.git", branch: "main"),
-    .package(url: "https://github.com/onevcat/Kingfisher.git", branch: "master")
+    .package(url: "https://github.com/onevcat/Kingfisher.git", branch: "master"),
+    .package(url: "https://github.com/dagronf/SwiftSubtitles.git", branch: "main"),
   ],
   targets: [
     .target(
@@ -45,7 +46,7 @@ let package = Package(
       path: "Sources/BunnyNetVideoUploader"),
     .target(
       name: "BunnyNetVideoPlayer",
-      dependencies: ["Kingfisher"],
+      dependencies: ["Kingfisher", "SwiftSubtitles", "BunnyNetClient"],
       path: "Sources/BunnyNetVideoPlayer"),
     
     .testTarget(

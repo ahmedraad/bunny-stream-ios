@@ -9,6 +9,8 @@ struct Video {
   var height: CGFloat
   var length: Double
   var cdn: String
+  var captions: [Caption]
+  var libraryId: Int
 }
 
 extension Video {
