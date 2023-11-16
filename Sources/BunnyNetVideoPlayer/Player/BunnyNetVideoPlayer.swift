@@ -25,7 +25,7 @@ public struct BunnyNetVideoPlayer: View {
   }
   
   public var body: some View {
-    Group {
+    VStack(alignment: .center) {
       switch loadingState {
       case .loading:
         ProgressView()
@@ -37,12 +37,14 @@ public struct BunnyNetVideoPlayer: View {
       case .loaderFailed(let error):
         switch error {
         case .notFound:
-          Image(systemName: "play.slash.fill")
-            .resizable()
-            .scaledToFill()
-            .frame(width: 40, height: 40)
-          Text("Video not found!")
-            .font(.caption)
+          VStack(spacing: 8) {
+            Image(systemName: "play.slash.fill")
+              .resizable()
+              .scaledToFill()
+              .frame(width: 40, height: 40)
+            Text("Video not found!")
+              .font(.caption)
+          }
         case .loadError:
           reloadButton()
         }

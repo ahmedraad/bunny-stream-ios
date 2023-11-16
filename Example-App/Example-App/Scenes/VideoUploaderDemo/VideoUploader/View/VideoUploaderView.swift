@@ -9,9 +9,9 @@ import SwiftUI
 import BunnyNetVideoUploader
 
 struct VideoUploaderView: View {
+  @EnvironmentObject var dependenciesManager: DependenciesManager
   @StateObject private var uploadTrackerObservable: UploadTrackerObservable
   @ObservedObject var viewModel: VideoUploaderViewModel
-  @State private var libraryId: String = "160961"
   @State private var errorMessage: String? = nil
   @State private var showingVideoPicker = false
   @State private var selectedVideos: [VideoPicker.Video] = []
@@ -31,13 +31,6 @@ struct VideoUploaderView: View {
         }
         
         uploadRecordsListView()
-        
-        Spacer()
-        
-        TextField("Library ID", text: $libraryId)
-          .keyboardType(.numberPad)
-          .padding()
-          .defaultStyle()
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .contentShape(Rectangle())
@@ -47,12 +40,10 @@ struct VideoUploaderView: View {
       Button("Pick Videos") {
         showingVideoPicker.toggle()
       }
-      .disabled(Int(libraryId) == nil)
     }
     .sheet(isPresented: $showingVideoPicker) {
       VideoPicker(selectedVideos: $selectedVideos) { videos in
-        guard let libraryId = Int(libraryId) else { return }
-        self.viewModel.uploadVideos(videos, libraryId: libraryId)
+        viewModel.uploadVideos(videos, libraryId: dependenciesManager.libraryId)
       }
     }
   }

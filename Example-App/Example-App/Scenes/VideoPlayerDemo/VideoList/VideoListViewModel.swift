@@ -1,5 +1,5 @@
 //
-//  StreamAPIDemoViewModel.swift
+//  VideoListViewModel.swift
 //  Example-App
 //
 //  Created by Egzon Arifi on 06/10/2023.
@@ -9,10 +9,10 @@ import Foundation
 import BunnyNetClient
 
 @MainActor
-class StreamAPIDemoViewModel: ObservableObject {
+class VideoListViewModel: ObservableObject {
   let bunnyNetClient: BunnyNetClient
   @Published var description: String?
-  @Published var videoInfos: [(title: String?, url: URL?)] = []
+  @Published var videoInfos: [VideoResponseInfo] = []
   
   init(bunnyNetClient: BunnyNetClient, description: String? = nil) {
     self.bunnyNetClient = bunnyNetClient
@@ -34,7 +34,20 @@ class StreamAPIDemoViewModel: ObservableObject {
       switch okResponse.body {
       case .json(let viewModel):
         guard let items = viewModel.items else { return }
-        videoInfos = items.map { ($0.title, URL.makeVideoURL(libraryId: Int($0.videoLibraryId), videoId: $0.guid ?? "")) }
+        videoInfos = items.map {
+          VideoResponseInfo(id: $0.guid ?? "",
+                            title: $0.title,
+                            thumbnailCount: $0.thumbnailCount,
+                            width: Float($0.width),
+                            height: Float($0.height),
+                            length: $0.length,
+                            libraryId: $0.videoLibraryId,
+                            encodeProgress: $0.encodeProgress,
+                            storageSize: Double($0.storageSize),
+                            thumbnailFileName: $0.thumbnailFileName,
+                            averageWatchTime: $0.averageWatchTime,
+                            views: Int($0.views))
+        }
       default:
         break
       }

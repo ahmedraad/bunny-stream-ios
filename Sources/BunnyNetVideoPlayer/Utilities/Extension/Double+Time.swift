@@ -1,6 +1,6 @@
 import Foundation
 
-extension Double {
+public extension Double {
   func toFormattedTime() -> String {
     let hours = Int(self) / 3600
     let minutes = (Int(self) % 3600) / 60

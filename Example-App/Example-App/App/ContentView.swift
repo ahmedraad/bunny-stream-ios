@@ -12,19 +12,19 @@ struct ContentView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
   @State private var isShowingSheet = false
   @State private var tempAccessKey: String = ""
+  @State private var cdnHostname: String = ""
+  @State private var libraryId: String = ""
   
   var body: some View {
     NavigationStack {
       List {
-        NavigationLink("Bunny Stream API Demo") {
-          StreamAPIDemoView(viewModel: .init(bunnyNetClient: dependenciesManager.bunnyNetClient))
+        NavigationLink("Bunny Stream Videos Demo") {
+          VideoListView(viewModel: .init(bunnyNetClient: dependenciesManager.bunnyNetClient))
+            .environmentObject(dependenciesManager)
         }
         NavigationLink("Bunny Video Uploader Demo") {
           VideoUploaderTypesView()
             .environmentObject(dependenciesManager)
-        }
-        NavigationLink("Bunny Video Player Demo") {
-          VideoPlayerDemoView()
         }
       }
       .navigationTitle("Examples")
@@ -33,6 +33,8 @@ struct ContentView: View {
     }
     .onAppear {
       tempAccessKey = dependenciesManager.accessKey
+      cdnHostname = dependenciesManager.cdnHostname
+      libraryId = String(dependenciesManager.libraryId)
     }
   }
 }
@@ -40,23 +42,29 @@ struct ContentView: View {
 private extension ContentView {
   @ViewBuilder
   func accessKeyView() -> some View {
-    Button("Enter BunnyNet Access Key") {
+    Button("BunnyNet Configuration") {
       isShowingSheet = true
     }
     .sheet(isPresented: $isShowingSheet) {
-      VStack {
-        Text("Enter BunnyNet Access Key")
-          .font(.headline)
-        TextField("Access Key", text: $tempAccessKey)
-          .padding()
-          .border(Color.gray)
-        Button("Save") {
-          dependenciesManager.storedAccessKey = tempAccessKey
-          isShowingSheet = false
+      Form {
+        Section(header: Text("Enter BunnyNet config data").font(.subheadline)) {
+          DefaultTextField(label: "Access Key", text: $tempAccessKey, placeholder: "Enter your access key")
+          DefaultTextField(label: "CDN hostname", text: $cdnHostname, placeholder: "Enter CDN hostname")
+          DefaultTextField(label: "Library ID", text: $libraryId, placeholder: "Enter Library ID", keyboardType: .numberPad)
         }
-        .padding()
+        
+        Button("Save", action: saveConfig)
       }
-      .padding()
+      .formStyle(.grouped)
+      .navigationTitle("Settings")
+      .navigationBarItems(trailing: Button("Cancel") { isShowingSheet = false })
     }
+  }
+
+  private func saveConfig() {
+    dependenciesManager.storedAccessKey = tempAccessKey
+    dependenciesManager.cdnHostname = cdnHostname
+    dependenciesManager.libraryId = Int(libraryId) ?? .zero
+    isShowingSheet = false
   }
 }
