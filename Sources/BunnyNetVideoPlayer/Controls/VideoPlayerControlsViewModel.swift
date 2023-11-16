@@ -14,6 +14,7 @@ class VideoPlayerControlsViewModel: ObservableObject {
   @Published var isDraggingSeekBar: Bool = false
   @Published var isOptionsMenuActive = false
   @Published var captions: String?
+  @Published var isAdPlaying: Bool = false
   private var cancellables = Set<AnyCancellable>()
   
   

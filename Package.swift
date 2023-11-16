@@ -18,6 +18,7 @@ let package = Package(
     .package(url: "https://github.com/tus/TUSKit.git", branch: "main"),
     .package(url: "https://github.com/onevcat/Kingfisher.git", branch: "master"),
     .package(url: "https://github.com/dagronf/SwiftSubtitles.git", branch: "main"),
+    .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", exact: "3.18.4")
   ],
   targets: [
     .target(
@@ -46,7 +47,12 @@ let package = Package(
       path: "Sources/BunnyNetVideoUploader"),
     .target(
       name: "BunnyNetVideoPlayer",
-      dependencies: ["Kingfisher", "SwiftSubtitles", "BunnyNetClient"],
+      dependencies: [
+        .byName(name: "Kingfisher"),
+        .byName(name: "SwiftSubtitles"),
+        .byName(name: "BunnyNetClient"),
+        .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
+      ],
       path: "Sources/BunnyNetVideoPlayer"),
     
     .testTarget(

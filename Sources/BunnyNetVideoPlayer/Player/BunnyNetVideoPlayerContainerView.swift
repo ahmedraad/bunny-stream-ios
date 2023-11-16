@@ -4,27 +4,40 @@ struct BunnyNetVideoPlayerContainerView: View {
   @State var player: MediaPlayer
   @StateObject var controlsViewModel: VideoPlayerControlsViewModel
   @StateObject var videoPlayerViewModel: VideoPlayerViewModel
-  
+  private var adComponent: MediaPlayerAdComponent
+  private let video: Video
+
   init(player: MediaPlayer, video: Video) {
     self.player = player
+    self.video = video
     self._controlsViewModel = StateObject(wrappedValue: VideoPlayerControlsViewModel(player: player,
                                                                                      video: video,
                                                                                      heatmap: .init(data: [:], for: .zero)))
     self._videoPlayerViewModel = StateObject(wrappedValue: VideoPlayerViewModel())
+    self.adComponent = MediaPlayerAdComponent(player: player)
   }
   
   public var body: some View {
 #if os(iOS)
-    VideoPlayerView(controlsViewModel: controlsViewModel, viewModel: videoPlayerViewModel)
+    videoPlayerView()
       .fullScreenCover(isPresented: $controlsViewModel.isFullScreen) {
-        VideoPlayerView(controlsViewModel: controlsViewModel, viewModel: videoPlayerViewModel)
+        videoPlayerView()
           .background(Color.black.scaleEffect(controlsViewModel.isFullScreen ? 2 : 0))
       }
 #elseif os(macOS)
-    VideoPlayerView(controlsViewModel: controlsViewModel, viewModel: videoPlayerViewModel)
+    videoPlayerView()
       .sheet(isPresented: $controlsViewModel.isFullScreen) {
-        VideoPlayerView(controlsViewModel: controlsViewModel, viewModel: videoPlayerViewModel)
+        videoPlayerView()
       }
 #endif
+  }
+}
+
+private extension BunnyNetVideoPlayerContainerView {
+  func videoPlayerView() -> some View {
+    VideoPlayerView(controlsViewModel: controlsViewModel,
+                    viewModel: videoPlayerViewModel,
+                    adComponent: adComponent,
+                    video: video)
   }
 }

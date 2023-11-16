@@ -4,17 +4,27 @@ import AVKit
 struct VideoPlayerView: View {
   @ObservedObject var controlsViewModel: VideoPlayerControlsViewModel
   @ObservedObject var viewModel: VideoPlayerViewModel
-
+  private var adComponent: MediaPlayerAdComponent
+  private let video: Video
+  
   init(controlsViewModel: VideoPlayerControlsViewModel,
-       viewModel: VideoPlayerViewModel) {
+       viewModel: VideoPlayerViewModel,
+       adComponent: MediaPlayerAdComponent,
+       video: Video) {
     self.controlsViewModel = controlsViewModel
     self.viewModel = viewModel
+    self.adComponent = adComponent
+    self.video = video
   }
-
+  
   var body: some View {
     VStack {
-      AVPlayerViewControllerRepresentable(player: controlsViewModel.player)
-        .overlay {
+      AVPlayerViewControllerRepresentable(player: controlsViewModel.player) { controller in
+        guard video.hasAds else { return }
+        adComponent.setupAdsInController(controller)
+      }
+      .overlay {
+        if !controlsViewModel.isAdPlaying {
           ZStack {
             VStack {
               Spacer()
@@ -26,18 +36,32 @@ struct VideoPlayerView: View {
               .background(Color.black.opacity(viewModel.isVisible ? 0.3 : 0.001))
           }
         }
-        .onTapGesture {
-          viewModel.toggleControlsVisibility()
-        }
-        .onChange(of: controlsViewModel.isPlaying, perform: viewModel.isPlayingChange)
-        .onChange(of: controlsViewModel.isMuted, perform: viewModel.resetControlsHideTimer)
-        .onChange(of: controlsViewModel.isDraggingSeekBar, perform: viewModel.isDraggingSeekBarChange)
-        .onChange(of: controlsViewModel.isFullScreen, perform: viewModel.resetControlsHideTimer)
-        .onChange(of: controlsViewModel.playbackState, perform: viewModel.playBackStateChange)
-        .onChange(of: controlsViewModel.isOptionsMenuActive, perform: viewModel.isPlayingChange)
-        .onAppear {
-          viewModel.resetControlsHideTimer()
-        }
+      }
+      .onTapGesture {
+        viewModel.toggleControlsVisibility()
+      }
+      .onChange(of: controlsViewModel.isPlaying, perform: viewModel.isPlayingChange)
+      .onChange(of: controlsViewModel.isMuted, perform: viewModel.resetControlsHideTimer)
+      .onChange(of: controlsViewModel.isDraggingSeekBar, perform: viewModel.isDraggingSeekBarChange)
+      .onChange(of: controlsViewModel.isFullScreen, perform: viewModel.resetControlsHideTimer)
+      .onChange(of: controlsViewModel.playbackState, perform: viewModel.playBackStateChange)
+      .onChange(of: controlsViewModel.isOptionsMenuActive, perform: viewModel.isPlayingChange)
+      .onAppear {
+        viewModel.resetControlsHideTimer()
+      }
+    }
+    .onChange(of: controlsViewModel.playbackState) { newState in
+      if newState == .readyToPlay, let tagUrl = video.tagUrl {
+        adComponent.requestAds(adTagUrl: tagUrl)
+      }
+    }
+    .onAppear {
+      adComponent.onAdPlaybackChanged = { isPlaying in
+        controlsViewModel.isAdPlaying = isPlaying
+      }
+    }
+    .onDisappear {
+      adComponent.destroy()
     }
   }
 }

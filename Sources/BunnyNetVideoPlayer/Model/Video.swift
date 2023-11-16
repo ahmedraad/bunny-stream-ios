@@ -11,9 +11,14 @@ struct Video {
   var cdn: String
   var captions: [Caption]
   var libraryId: Int
+  var tagUrl: String?
 }
 
 extension Video {
+  var hasAds: Bool {
+    tagUrl != nil
+  }
+  
   var seekThumbnail: SeekThumbnail {
     let thumbnailsPerImage = 36
     let urls = seekThumbnailURLs(thumbnailsPerImage: thumbnailsPerImage)

@@ -30,7 +30,8 @@ struct VideoLoader {
                      length: Double(viewModel.length),
                      cdn: cdn,
                      captions: captions ?? [],
-                     libraryId: Int(viewModel.videoLibraryId))
+                     libraryId: Int(viewModel.videoLibraryId),
+                     tagUrl: Constants.testTagUrl) // TODO: change when api changes are ready
       default:
         throw VideoLoaderError.notFound
       }

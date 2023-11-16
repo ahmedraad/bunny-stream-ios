@@ -4,10 +4,12 @@ import SwiftUI
 
 struct AVPlayerViewControllerRepresentable: UIViewControllerRepresentable {
   var player: AVPlayer
+  var setupAds: ((AVPlayerViewController) -> Void)?
   
   func makeUIViewController(context: Context) -> AVPlayerViewController {
     let controller = AVPlayerViewController()
     controller.player = player
+    context.coordinator.avPlayerViewController = controller
     controller.showsPlaybackControls = false
     if #available(iOS 16.0, *) {
       controller.allowsVideoFrameAnalysis = false
@@ -17,8 +19,23 @@ struct AVPlayerViewControllerRepresentable: UIViewControllerRepresentable {
   
   func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
     uiViewController.player = player
+    setupAds?(uiViewController)
+  }
+  
+  func makeCoordinator() -> Coordinator {
+    Coordinator(self)
+  }
+  
+  class Coordinator: NSObject {
+    var avPlayerViewController: AVPlayerViewController?
+    var parent: AVPlayerViewControllerRepresentable
+    
+    init(_ parent: AVPlayerViewControllerRepresentable) {
+      self.parent = parent
+    }
   }
 }
+
 #endif
 
 #if os(macOS)
