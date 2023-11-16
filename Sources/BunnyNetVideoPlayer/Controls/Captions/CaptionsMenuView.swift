@@ -17,6 +17,7 @@ extension CaptionsMenuView {
       } label: {
         HStack {
           Text("Disabled")
+            .font(theme.font.size(14))
         }
       }
       ForEach(viewModel.captions, id: \.self) { caption in
@@ -25,6 +26,7 @@ extension CaptionsMenuView {
         } label: {
           HStack {
             Text("\(caption.label) (\(caption.languageCode))")
+              .font(theme.font.size(14))
             if caption == viewModel.caption {
               Image(systemName: "checkmark")
               Spacer()
@@ -35,6 +37,7 @@ extension CaptionsMenuView {
     } label: {
       sectionView()
     }
+    .font(theme.font.size(14))
   }
   
   func sectionView() -> some View {

@@ -18,6 +18,7 @@ extension PlaybackSpeedView {
         } label: {
           HStack {
             Text(speed.title)
+              .font(theme.font.size(14))
             if speed == viewModel.playbackSpeed {
               Image(systemName: "checkmark")
               Spacer()
@@ -33,6 +34,7 @@ extension PlaybackSpeedView {
   func sectionView() -> some View {
     HStack {
       Text("Playback Speed")
+        .font(theme.font.size(14))
       
       Spacer()
       

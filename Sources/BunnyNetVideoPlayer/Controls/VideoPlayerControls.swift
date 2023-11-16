@@ -158,7 +158,7 @@ extension VideoPlayerControls {
   func timeView() -> some View {
     HStack(spacing: 0) {
       Text(viewModel.currentFormattedTime)
-        .font(.caption)
+        .font(theme.font.size(11))
         .foregroundColor(.white)
         .shouldAddView(controlsToCheck: .currentTime, in: videoPlayerConfig.controls)
       
@@ -168,7 +168,7 @@ extension VideoPlayerControls {
         .shouldAddView(controlsToCheck: .captions, .duration, in: videoPlayerConfig.controls)
       
       Text(viewModel.totalFormattedTime)
-        .font(.caption)
+        .font(theme.font.size(11))
         .foregroundColor(.white)
         .shouldAddView(controlsToCheck: .duration, in: videoPlayerConfig.controls)
     }

@@ -4,12 +4,12 @@ struct CaptionsView: View {
   var captions: String?
   var backgroundColor: Color
   var fontColor: Color
-  var fontSize: CGFloat
+  var font: Font
   
   var body: some View {
     if let captions {
       Text(captions)
-        .font(.system(size: fontSize))
+        .font(font)
         .foregroundColor(fontColor)
         .padding(8)
         .background(backgroundColor)

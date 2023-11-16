@@ -25,6 +25,7 @@ public struct BunnyNetVideoPlayer: View {
     self.libraryId = libraryId
     self.cdn = cdn
     videoLoader = VideoLoader(bunnyNetClient: .init(accessKey: accessKey))
+    FontManager.registerFonts()
   }
   
   public var body: some View {
@@ -48,7 +49,7 @@ public struct BunnyNetVideoPlayer: View {
               .scaledToFill()
               .frame(width: 40, height: 40)
             Text("Video not found!")
-              .font(.caption)
+              .font(theme.font.size(11))
           }
         case .loadError:
           reloadButton()

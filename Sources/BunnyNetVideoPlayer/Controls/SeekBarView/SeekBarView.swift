@@ -80,7 +80,7 @@ private extension SeekBarView {
           Spacer()
           Text(draggingTime.toFormattedTime())
             .foregroundColor(.white)
-            .font(.caption)
+            .font(theme.font.size(11))
             .shadow(radius: 5)
             .padding(4)
         }
@@ -143,7 +143,7 @@ private extension SeekBarView {
   func activeLabelView() -> some View {
     if let label = activeLabel() {
       Text(label)
-        .font(.system(size: 12))
+        .font(theme.font.size(12))
         .foregroundColor(.white)
         .shadow(radius: 10)
         .padding(10)

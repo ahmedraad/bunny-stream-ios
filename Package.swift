@@ -53,8 +53,9 @@ let package = Package(
         .byName(name: "BunnyNetClient"),
         .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
       ],
-      path: "Sources/BunnyNetVideoPlayer"),
-    
+      path: "Sources/BunnyNetVideoPlayer",
+      resources: [.process("Resources")]
+    ),
     .testTarget(
       name: "BunnyNetClientTests",
       dependencies: ["BunnyNetClient"],

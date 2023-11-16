@@ -33,7 +33,7 @@ struct VideoPlayerView: View {
               CaptionsView(captions: controlsViewModel.captions,
                            backgroundColor: theme.caption.backgroundColor,
                            fontColor: theme.caption.fontColor,
-                           fontSize: theme.caption.fontSize)
+                           font: theme.font.size(theme.caption.fontSize))
                 .padding(.bottom, viewModel.isVisible ? 50 : 0)
             }
             VideoPlayerControls(viewModel: controlsViewModel)

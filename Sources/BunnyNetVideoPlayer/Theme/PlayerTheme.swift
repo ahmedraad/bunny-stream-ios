@@ -3,7 +3,7 @@ import SwiftUI
 
 struct VideoPlayerTheme {
   var caption: Caption
-  var font: Font
+  var font: Fonts
   var tintColor: Color
   var images: Images
   
@@ -38,7 +38,7 @@ extension VideoPlayerTheme {
                    fontColor: .white,
                    fontSize: 13,
                    image: .init(systemName: "captions.bubble")),
-    font: Font.system(size: 14),
+    font: .system,
     tintColor: .accentColor,
     images: VideoPlayerTheme.Images(play: Image(systemName: "play.fill"),
                                     pause: Image(systemName: "pause.fill"),
@@ -67,7 +67,7 @@ extension VideoPlayerTheme {
         fontSize: CGFloat(config.captionsFontSize),
         image: VideoPlayerTheme.defaultTheme.caption.image
       ),
-      font: VideoPlayerTheme.defaultTheme.font,
+      font: Fonts(rawValue: config.fontFamily) ?? VideoPlayerTheme.defaultTheme.font,
       tintColor: .init(hex: config.playerKeyColor) ?? VideoPlayerTheme.defaultTheme.tintColor,
       images: VideoPlayerTheme.defaultTheme.images
     )
