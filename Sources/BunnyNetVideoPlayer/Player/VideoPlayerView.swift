@@ -2,6 +2,8 @@ import SwiftUI
 import AVKit
 
 struct VideoPlayerView: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
+  @Environment(\.videoPlayerConfig) var videoPlayerConfig: VideoPlayerConfig
   @ObservedObject var controlsViewModel: VideoPlayerControlsViewModel
   @ObservedObject var viewModel: VideoPlayerViewModel
   private var adComponent: MediaPlayerAdComponent
@@ -20,7 +22,7 @@ struct VideoPlayerView: View {
   var body: some View {
     VStack {
       AVPlayerViewControllerRepresentable(player: controlsViewModel.player) { controller in
-        guard video.hasAds else { return }
+        guard videoPlayerConfig.hasAds else { return }
         adComponent.setupAdsInController(controller)
       }
       .overlay {
@@ -28,12 +30,17 @@ struct VideoPlayerView: View {
           ZStack {
             VStack {
               Spacer()
-              CaptionsView(captions: controlsViewModel.captions, backgroundColor: .black.opacity(0.6), fontColor: .white, fontSize: 15)
+              CaptionsView(captions: controlsViewModel.captions,
+                           backgroundColor: theme.caption.backgroundColor,
+                           fontColor: theme.caption.fontColor,
+                           fontSize: theme.caption.fontSize)
                 .padding(.bottom, viewModel.isVisible ? 50 : 0)
             }
             VideoPlayerControls(viewModel: controlsViewModel)
               .opacity(viewModel.isVisible ? 1 : 0)
               .background(Color.black.opacity(viewModel.isVisible ? 0.3 : 0.001))
+              .environment(\.videoPlayerTheme, theme)
+              .environment(\.videoPlayerConfig, videoPlayerConfig)
           }
         }
       }
@@ -51,7 +58,7 @@ struct VideoPlayerView: View {
       }
     }
     .onChange(of: controlsViewModel.playbackState) { newState in
-      if newState == .readyToPlay, let tagUrl = video.tagUrl {
+      if newState == .readyToPlay, let tagUrl = videoPlayerConfig.vastTagUrl {
         adComponent.requestAds(adTagUrl: tagUrl)
       }
     }

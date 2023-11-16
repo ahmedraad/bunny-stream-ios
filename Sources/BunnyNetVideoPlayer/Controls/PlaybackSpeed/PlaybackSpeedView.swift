@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PlaybackSpeedView: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
   @ObservedObject var viewModel: PlaybackSpeedViewModel
   
   var body: some View {
@@ -35,7 +36,7 @@ extension PlaybackSpeedView {
       
       Spacer()
       
-      Image(systemName: "timer")
+      theme.images.playbackSpeed
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)

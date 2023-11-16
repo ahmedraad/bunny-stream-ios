@@ -3,9 +3,11 @@ import AVKit
 import Combine
 
 struct VideoPlayerControls: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
+  @Environment(\.videoPlayerConfig) var videoPlayerConfig: VideoPlayerConfig
   @ObservedObject private var viewModel: VideoPlayerControlsViewModel
   @State private var airPlayView = AirPlayView()
-
+  
   init(viewModel: VideoPlayerControlsViewModel) {
     self.viewModel = viewModel
   }
@@ -37,6 +39,7 @@ extension VideoPlayerControls {
     HStack {
       Spacer()
       fullScreenButton()
+        .shouldAddView(controlsToCheck: .fullScreen, in: videoPlayerConfig.controls)
     }
   }
   
@@ -45,32 +48,35 @@ extension VideoPlayerControls {
       Spacer()
       
       Button(action: viewModel.skipBackward) {
-        Image(systemName: "gobackward.10")
+        theme.images.seekBackward
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 30, height: 30)
           .foregroundColor(.white)
       }
+      .shouldAddView(controlsToCheck: .rewind, in: videoPlayerConfig.controls)
       
       Spacer()
       
       Button(action: viewModel.togglePlayPause) {
-        Image(systemName: viewModel.isPlaying ? "pause.fill" : "play.fill")
+        (viewModel.isPlaying ? theme.images.pause : theme.images.play)
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 40, height: 40)
           .foregroundColor(.white)
       }
+      .shouldAddView(controlsToCheck: .play, in: videoPlayerConfig.controls)
       
       Spacer()
       
       Button(action: viewModel.skipForward) {
-        Image(systemName: "goforward.10")
+        theme.images.seekForward
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 30, height: 30)
           .foregroundColor(.white)
       }
+      .shouldAddView(controlsToCheck: .fastForward, in: videoPlayerConfig.controls)
       
       Spacer()
     }
@@ -79,13 +85,16 @@ extension VideoPlayerControls {
   func bottomControlsView() -> some View {
     VStack {
       seekBarView()
+        .shouldAddView(controlsToCheck: .progress, in: videoPlayerConfig.controls)
       
       HStack {
         timeView()
         Spacer()
         optionsButton()
+          .shouldAddView(controlsToCheck: .settings, in: videoPlayerConfig.controls)
         airplayButton()
         volumeButton()
+          .shouldAddView(controlsToCheck: .mute, in: videoPlayerConfig.controls)
       }
       .padding(.horizontal, 8)
     }
@@ -93,7 +102,7 @@ extension VideoPlayerControls {
   
   func fullScreenButton() -> some View {
     Button(action: viewModel.toggleFullScreenMode) {
-      Image(systemName: viewModel.isFullScreen ? "arrow.down.forward.and.arrow.up.backward" : "arrow.up.left.and.arrow.down.right")
+      (viewModel.isFullScreen ? theme.images.fullscreenExpanded : theme.images.fullscreenCollapsed)
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)
@@ -102,7 +111,7 @@ extension VideoPlayerControls {
   
   func volumeButton() -> some View {
     Button(action: viewModel.toggleMute) {
-      Image(systemName: viewModel.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
+      (viewModel.isMuted ? theme.images.volumeOff : theme.images.volumeOn)
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)
@@ -113,11 +122,13 @@ extension VideoPlayerControls {
   func optionsButton() -> some View {
     Menu {
       PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
-      if !viewModel.captionsMenuViewModel.captions.isEmpty {
-        CaptionsMenuView(viewModel: viewModel.captionsMenuViewModel)
-      }
+        .environment(\.videoPlayerTheme, theme)
+      CaptionsMenuView(viewModel: viewModel.captionsMenuViewModel)
+        .shouldAddView(!viewModel.captionsMenuViewModel.captions.isEmpty)
+        .shouldAddView(controlsToCheck: .captions, in: videoPlayerConfig.controls)
+        .environment(\.videoPlayerTheme, theme)
     } label: {
-      Image(systemName: "ellipsis.circle")
+      theme.images.settings
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)
@@ -140,6 +151,7 @@ extension VideoPlayerControls {
   
   func seekBarView() -> some View {
     SeekBarView(viewModel: viewModel.seekBarViewModel, isDraggingOutside: $viewModel.isDraggingSeekBar)
+      .environment(\.videoPlayerConfig, videoPlayerConfig)
       .padding(.bottom, -16)
   }
   
@@ -148,14 +160,17 @@ extension VideoPlayerControls {
       Text(viewModel.currentFormattedTime)
         .font(.caption)
         .foregroundColor(.white)
+        .shouldAddView(controlsToCheck: .currentTime, in: videoPlayerConfig.controls)
       
       Text(" / ")
         .font(.caption)
         .foregroundColor(.white)
+        .shouldAddView(controlsToCheck: .captions, .duration, in: videoPlayerConfig.controls)
       
       Text(viewModel.totalFormattedTime)
         .font(.caption)
         .foregroundColor(.white)
+        .shouldAddView(controlsToCheck: .duration, in: videoPlayerConfig.controls)
     }
   }
 }

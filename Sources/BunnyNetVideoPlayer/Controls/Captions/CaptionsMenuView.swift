@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CaptionsMenuView: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
   @ObservedObject var viewModel: CaptionsMenuViewModel
   
   var body: some View {
@@ -42,7 +43,7 @@ extension CaptionsMenuView {
       
       Spacer()
       
-      Image(systemName: "captions.bubble")
+      theme.images.captions
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)

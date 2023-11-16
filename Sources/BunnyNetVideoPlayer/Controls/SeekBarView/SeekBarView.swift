@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SeekBarView: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
+  @Environment(\.videoPlayerConfig) var videoPlayerConfig: VideoPlayerConfig
   @ObservedObject var viewModel: SeekBarViewModel
   @Binding var isDraggingOutside: Bool
   @State private var size: CGSize = .zero
@@ -24,6 +26,7 @@ struct SeekBarView: View {
     GeometryReader { geometry in
       ZStack(alignment: .leading) {
         heatmapGraphView()
+          .shouldAddView(videoPlayerConfig.showHeatmap)
         chapterMarksView()
         progressMarksView()
         momentsView()
@@ -92,7 +95,7 @@ private extension SeekBarView {
   
   func scrubberView() -> some View {
     Circle()
-      .foregroundColor(.blue)
+      .foregroundColor(theme.tintColor)
       .frame(width: isDragging ? UI.activeScrubberDiameter : UI.scrubberDiameter,
              height: isDragging ? UI.activeScrubberDiameter : UI.scrubberDiameter)
       .offset(x: safeDragPosition - UI.scrubberOffset, y: .zero)
@@ -119,7 +122,7 @@ private extension SeekBarView {
         ForEach(chapters, id: \.id) { chapter in
           let isActiveChapter = isDragging && chapter.contains(currentPosition)
           Rectangle()
-            .fill(Color.blue)
+            .fill(theme.tintColor)
             .frame(width: playedWidth(for: chapter), height: isActiveChapter ? UI.activeBarHeight : UI.inactiveBarHeight)
         }
       }
@@ -160,6 +163,7 @@ private extension SeekBarView {
     HeatmapGraphView(heatmap: viewModel.heatmap, playedPercentage: CGFloat(dragPosition / size.width))
       .frame(height: UI.heatmapHeight)
       .offset(x: .zero, y: -UI.seekBarFrameHeight / 2 + UI.inactiveBarHeight)
+      .environment(\.videoPlayerTheme, theme)
   }
 }
 

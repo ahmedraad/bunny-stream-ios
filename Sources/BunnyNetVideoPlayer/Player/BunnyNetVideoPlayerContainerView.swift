@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct BunnyNetVideoPlayerContainerView: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
+  @Environment(\.videoPlayerConfig) var videoPlayerConfig: VideoPlayerConfig
   @State var player: MediaPlayer
   @StateObject var controlsViewModel: VideoPlayerControlsViewModel
   @StateObject var videoPlayerViewModel: VideoPlayerViewModel
@@ -39,5 +41,7 @@ private extension BunnyNetVideoPlayerContainerView {
                     viewModel: videoPlayerViewModel,
                     adComponent: adComponent,
                     video: video)
+    .environment(\.videoPlayerTheme, theme)
+    .environment(\.videoPlayerConfig, videoPlayerConfig)
   }
 }

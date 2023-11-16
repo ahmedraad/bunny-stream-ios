@@ -1,13 +1,11 @@
 import SwiftUI
 
 struct HeatmapGraphView: View {
+  @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
   let heatmap: Heatmap
   
   /// A value between 0.0 and 1.0
   let playedPercentage: CGFloat
-  let blueGradient = LinearGradient(gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.1)]),
-                                    startPoint: .top,
-                                    endPoint: .bottom)
   
   init(heatmap: Heatmap, playedPercentage: CGFloat) {
     self.heatmap = heatmap
@@ -21,7 +19,9 @@ struct HeatmapGraphView: View {
           .fill(Color.gray.opacity(0.3))
         
         curvePath(in: geometry)
-          .fill(blueGradient)
+          .fill(LinearGradient(gradient: Gradient(colors: [theme.tintColor, theme.tintColor.opacity(0.1)]),
+                               startPoint: .top,
+                               endPoint: .bottom))
           .frame(width: max(0, min(geometry.size.width, geometry.size.width * playedPercentage)))
           .clipped()
       }

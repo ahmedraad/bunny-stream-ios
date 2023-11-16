@@ -1,6 +1,7 @@
 import SwiftUI
 
 public struct BunnyNetVideoPlayer: View {
+  let videoPlayerConfigLoader = VideoPlayerConfigLoader()
   let videoLoader: VideoLoader
   let accessKey: String
   let videoId: String
@@ -8,6 +9,8 @@ public struct BunnyNetVideoPlayer: View {
   let cdn: String
   @State var player: MediaPlayer?
   @State private var loadingState: VideoLoadingState = .loading
+  @State var theme: VideoPlayerTheme = .defaultTheme
+  @State var videoConfig = VideoPlayerConfig()
   
   enum VideoLoadingState {
     case loading, loaded(MediaPlayer, Video), failed, loaderFailed(VideoLoader.VideoLoaderError)
@@ -32,13 +35,15 @@ public struct BunnyNetVideoPlayer: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       case .loaded(let mediaPlayer, let video):
         BunnyNetVideoPlayerContainerView(player: mediaPlayer, video: video)
+          .environment(\.videoPlayerTheme, theme)
+          .environment(\.videoPlayerConfig, videoConfig)
       case .failed:
         reloadButton()
       case .loaderFailed(let error):
         switch error {
         case .notFound:
           VStack(spacing: 8) {
-            Image(systemName: "play.slash.fill")
+            theme.images.videoNotFound
               .resizable()
               .scaledToFill()
               .frame(width: 40, height: 40)
@@ -63,8 +68,11 @@ public struct BunnyNetVideoPlayer: View {
     loadingState = .loading
     do {
       let video = try await videoLoader.loadVideo(videoId: videoId, libraryId: libraryId, cdn: cdn)
+      let videoConfigResponse = try? await videoPlayerConfigLoader.load(libraryId: libraryId)
+      VideoPlayerConfig(response: videoConfigResponse).map { self.videoConfig = $0 }
       let player = MediaPlayer.make(video: video)
       self.player = player
+      self.theme = VideoPlayerTheme(config: videoConfigResponse) ?? VideoPlayerTheme.defaultTheme
       loadingState = .loaded(player, video)
     } catch let error as VideoLoader.VideoLoaderError {
       loadingState = .loaderFailed(error)
@@ -79,7 +87,7 @@ private extension BunnyNetVideoPlayer {
     Button {
       Task { await loadVideo() }
     } label: {
-      Image(systemName: "arrow.counterclockwise.circle")
+      theme.images.reload
         .resizable()
         .scaledToFill()
         .frame(width: 40, height: 40)

@@ -28,7 +28,8 @@ struct VideoPlayerDemoView: View {
                             videoId: videoInfo.id,
                             libraryId: libraryId,
                             cdn: cdn)
-        .frame(width: geometry.size.width, height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
+        .frame(width: geometry.size.width,
+               height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
         
         if geometry.size.width < geometry.size.height {
           videoInformationView()
