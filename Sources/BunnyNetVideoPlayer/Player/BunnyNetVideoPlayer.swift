@@ -7,10 +7,11 @@ public struct BunnyNetVideoPlayer: View {
   let videoId: String
   let libraryId: Int
   let cdn: String
-  @State var player: MediaPlayer?
   @State private var loadingState: VideoLoadingState = .loading
+  @State var player: MediaPlayer?
   @State var theme: VideoPlayerTheme = .defaultTheme
   @State var videoConfig = VideoPlayerConfig()
+  private var playerIcons: PlayerIcons?
   
   enum VideoLoadingState {
     case loading, loaded(MediaPlayer, Video), failed, loaderFailed(VideoLoader.VideoLoaderError)
@@ -19,12 +20,17 @@ public struct BunnyNetVideoPlayer: View {
   public init(accessKey: String,
               videoId: String,
               libraryId: Int,
-              cdn: String) {
+              cdn: String,
+              playerIcons: PlayerIcons? = nil) {
     self.accessKey = accessKey
     self.videoId = videoId
     self.libraryId = libraryId
     self.cdn = cdn
-    videoLoader = VideoLoader(bunnyNetClient: .init(accessKey: accessKey))
+    self.videoLoader = VideoLoader(bunnyNetClient: .init(accessKey: accessKey))
+    if let playerIcons {
+      self.playerIcons = playerIcons
+      self.theme.images = playerIcons
+    }
     FontManager.registerFonts()
   }
   
@@ -73,7 +79,10 @@ public struct BunnyNetVideoPlayer: View {
       VideoPlayerConfig(response: videoConfigResponse).map { self.videoConfig = $0 }
       let player = MediaPlayer.make(video: video)
       self.player = player
-      self.theme = VideoPlayerTheme(config: videoConfigResponse) ?? VideoPlayerTheme.defaultTheme
+      self.theme = VideoPlayerTheme(config: videoConfigResponse) ?? theme
+      if let playerIcons {
+        self.theme.images = playerIcons
+      }
       loadingState = .loaded(player, video)
     } catch let error as VideoLoader.VideoLoaderError {
       loadingState = .loaderFailed(error)

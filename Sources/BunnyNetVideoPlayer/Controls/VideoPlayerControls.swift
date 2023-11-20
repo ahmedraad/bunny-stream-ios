@@ -121,11 +121,14 @@ extension VideoPlayerControls {
   @ViewBuilder
   func optionsButton() -> some View {
     Menu {
-      PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
-        .environment(\.videoPlayerTheme, theme)
       CaptionsMenuView(viewModel: viewModel.captionsMenuViewModel)
         .shouldAddView(!viewModel.captionsMenuViewModel.captions.isEmpty)
         .shouldAddView(controlsToCheck: .captions, in: videoPlayerConfig.controls)
+        .environment(\.videoPlayerTheme, theme)
+      ResolutionsView(viewModel: viewModel.resolutionsViewModel)
+        .shouldAddView(!viewModel.resolutionsViewModel.availableResolutions.isEmpty)
+        .environment(\.videoPlayerTheme, theme)
+      PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
         .environment(\.videoPlayerTheme, theme)
     } label: {
       theme.images.settings

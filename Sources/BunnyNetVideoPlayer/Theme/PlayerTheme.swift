@@ -5,29 +5,13 @@ struct VideoPlayerTheme {
   var caption: Caption
   var font: Fonts
   var tintColor: Color
-  var images: Images
+  var images: PlayerIcons
   
   struct Caption {
     var backgroundColor: Color
     var fontColor: Color
     var fontSize: CGFloat
     var image: Image
-  }
-  
-  struct Images {
-    var play: Image
-    var pause: Image
-    var settings: Image
-    var volumeOn: Image
-    var volumeOff: Image
-    var fullscreenExpanded: Image
-    var fullscreenCollapsed: Image
-    var seekForward: Image
-    var seekBackward: Image
-    var playbackSpeed: Image
-    var videoNotFound: Image
-    var reload: Image
-    var captions: Image
   }
 }
 
@@ -40,19 +24,7 @@ extension VideoPlayerTheme {
                    image: .init(systemName: "captions.bubble")),
     font: .system,
     tintColor: .accentColor,
-    images: VideoPlayerTheme.Images(play: Image(systemName: "play.fill"),
-                                    pause: Image(systemName: "pause.fill"),
-                                    settings: Image(systemName: "ellipsis.circle"),
-                                    volumeOn: Image(systemName: "speaker.wave.2.fill"),
-                                    volumeOff: Image(systemName: "speaker.slash.fill"),
-                                    fullscreenExpanded: Image(systemName: "arrow.down.forward.and.arrow.up.backward"),
-                                    fullscreenCollapsed: Image(systemName: "arrow.up.left.and.arrow.down.right"),
-                                    seekForward: Image(systemName: "goforward.10"),
-                                    seekBackward: Image(systemName: "gobackward.10"),
-                                    playbackSpeed: Image(systemName: "timer"), 
-                                    videoNotFound: Image(systemName: "play.slash.fill"),
-                                    reload: Image(systemName: "arrow.counterclockwise.circle"),
-                                    captions: Image(systemName: "captions.bubble"))
+    images: PlayerIcons()
   )
 }
 

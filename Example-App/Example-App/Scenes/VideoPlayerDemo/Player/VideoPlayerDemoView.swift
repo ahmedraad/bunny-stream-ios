@@ -9,27 +9,21 @@ import SwiftUI
 import BunnyNetVideoPlayer
 
 struct VideoPlayerDemoView: View {
-  var accessKey: String
-  var cdn: String
-  var libraryId: Int
+  var dependenciesManager: DependenciesManager
   var videoInfo: VideoResponseInfo
   
-  init(accessKey: String, cdn: String, libraryId: Int, videoInfo: VideoResponseInfo) {
-    self.accessKey = accessKey
-    self.cdn = cdn
-    self.libraryId = libraryId
+  init(dependenciesManager: DependenciesManager,
+       videoInfo: VideoResponseInfo) {
+    self.dependenciesManager = dependenciesManager
     self.videoInfo = videoInfo
   }
   
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        BunnyNetVideoPlayer(accessKey: accessKey,
-                            videoId: videoInfo.id,
-                            libraryId: libraryId,
-                            cdn: cdn)
-        .frame(width: geometry.size.width,
-               height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
+        BunnyNetVideoPlayer.make(dependenciesManager: dependenciesManager, videoId: videoInfo.id)
+          .frame(width: geometry.size.width,
+                 height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
         
         if geometry.size.width < geometry.size.height {
           videoInformationView()

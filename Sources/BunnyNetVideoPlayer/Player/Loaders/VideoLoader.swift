@@ -30,7 +30,8 @@ struct VideoLoader {
                      length: Double(viewModel.length),
                      cdn: cdn,
                      captions: captions ?? [],
-                     libraryId: Int(viewModel.videoLibraryId))
+                     libraryId: Int(viewModel.videoLibraryId),
+                     resolutions: mapAvailableResolutions(viewModel.availableResolutions))
       default:
         throw VideoLoaderError.notFound
       }
@@ -46,5 +47,21 @@ extension VideoLoader {
   enum VideoLoaderError: Error {
     case notFound
     case loadError
+  }
+  
+  private func mapAvailableResolutions(_ availableResolutions: String?) -> [Video.Resolution] {
+    var computedResolutions = [Video.Resolution.auto]
+    
+    if let resolutionStrings = availableResolutions?.split(separator: ",") {
+      for resolutionLabel in resolutionStrings {
+        if let resolution = Video.Resolution(rawValue: String(resolutionLabel)) {
+          computedResolutions.append(resolution)
+        }
+      }
+      
+      computedResolutions.sort { $0.bitrate < $1.bitrate }
+    }
+    
+    return computedResolutions
   }
 }

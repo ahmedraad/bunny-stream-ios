@@ -267,6 +267,12 @@ class MediaPlayer: AVPlayer {
       setPlaybackPosition(to: max(startAt, min(endAt, currentTimeSeconds)))
     }
   }
+  
+  /// The desired limit, in bits per second, of network bandwidth consumption for this item.
+  /// - Parameter bitrate: A value that represents a bitrat
+  func setPlayerBitrate(_ bitrate: Double) {
+    currentItem?.preferredPeakBitRate = bitrate
+  }
 }
 
 // MARK: - Private Methods
@@ -380,7 +386,7 @@ private extension MediaPlayer {
   }
   
   func setPlaybackPosition(to value: Double) {
-    let seekTime = CMTimeMakeWithSeconds(ceil(value), preferredTimescale: 6_000)
+    let seekTime = CMTimeMakeWithSeconds(floor(value), preferredTimescale: 6_000)
     seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
     Task { await updateSubtitles(time: seekTime) }
   }

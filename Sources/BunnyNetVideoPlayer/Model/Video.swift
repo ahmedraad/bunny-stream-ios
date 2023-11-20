@@ -11,6 +11,7 @@ struct Video {
   var cdn: String
   var captions: [Caption]
   var libraryId: Int
+  let resolutions: [Resolution]
 }
 
 extension Video {

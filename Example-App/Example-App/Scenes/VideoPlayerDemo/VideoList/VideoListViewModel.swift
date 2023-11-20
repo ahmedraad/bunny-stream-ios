@@ -11,20 +11,24 @@ import BunnyNetClient
 @MainActor
 class VideoListViewModel: ObservableObject {
   let bunnyNetClient: BunnyNetClient
-  @Published var description: String?
   @Published var videoInfos: [VideoResponseInfo] = []
+  @Published var loadingState: LoadingState = .loading
   
-  init(bunnyNetClient: BunnyNetClient, description: String? = nil) {
+  enum LoadingState {
+    case loading, loaded, failed(String)
+  }
+  
+  init(bunnyNetClient: BunnyNetClient) {
     self.bunnyNetClient = bunnyNetClient
-    self.description = description
   }
   
   func loadVideos(libraryId: Int64) async {
     do {
+      loadingState = .loading
       let output = try await bunnyNetClient.streamAPI.Video_List(path: .init(libraryId: libraryId))
       handle(output: output)
     } catch {
-      description = error.localizedDescription
+      loadingState = .failed(error.localizedDescription)
     }
   }
   
@@ -48,16 +52,16 @@ class VideoListViewModel: ObservableObject {
                             averageWatchTime: $0.averageWatchTime,
                             views: Int($0.views))
         }
+        loadingState = .loaded
       default:
-        break
+        loadingState = .failed("No items!")
       }
-      description = nil
     case .undocumented(statusCode: let statusCode, _):
-      description = "🥺 undocumented response: \(statusCode)"
+      loadingState = .failed("🥺 undocumented response: \(statusCode)")
     case .unauthorized:
-      description = "Unauthorized"
+      loadingState = .failed("Unauthorized")
     case .internalServerError(_):
-      description = "Internal Server Error"
+      loadingState = .failed("Internal Server Error")
     }
   }
 }

@@ -18,5 +18,13 @@ extension PlaybackSpeed {
 }
 
 extension [PlaybackSpeed] {
-  static var playbackSpeeds: [PlaybackSpeed] = [.init(speed: 0.5), .init(speed: 0.75), .default, .init(speed: 1.25)]
+  static var playbackSpeeds: [PlaybackSpeed] {
+    let startSpeed: Float = 0.5
+    let endSpeed: Float = 2.0
+    let step: Float = 0.25
+    
+    return stride(from: startSpeed, through: endSpeed, by: step).map {
+      $0 == 1.0 ? .default : PlaybackSpeed(speed: $0)
+    }
+  }
 }

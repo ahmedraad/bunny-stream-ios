@@ -18,16 +18,24 @@ struct VideoListView: View {
   
   var body: some View {
     NavigationStack {
-      List(viewModel.videoInfos, id: \.self) { videoInfo in
-        if videoInfo.encodeProgress == 100 {
-          NavigationLink(destination: VideoPlayerDemoView(accessKey: dependenciesManager.accessKey,
-                                                          cdn: dependenciesManager.cdnHostname,
-                                                          libraryId: dependenciesManager.libraryId,
-                                                          videoInfo: videoInfo)) {
-            VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+      ZStack {
+        switch viewModel.loadingState {
+        case .loading:
+          ProgressView()
+            .frame(maxWidth: .infinity)
+        case .loaded:
+          List(viewModel.videoInfos, id: \.self) { videoInfo in
+            if videoInfo.encodeProgress == 100 {
+              NavigationLink(destination: VideoPlayerDemoView(dependenciesManager: dependenciesManager,
+                                                              videoInfo: videoInfo)) {
+                VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+              }
+            } else {
+              VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+            }
           }
-        } else {
-          VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+        case .failed(let string):
+          Text(string)
         }
       }
       .navigationTitle("Video List")
