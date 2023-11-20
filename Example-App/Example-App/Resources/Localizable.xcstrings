@@ -1,0 +1,92 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "(%lld / %lld) bytes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(%1$lld / %2$lld) bytes"
+          }
+        }
+      }
+    },
+    "%lld views" : {
+
+    },
+    "Bunny Stream Videos Demo" : {
+
+    },
+    "Bunny Video Uploader Demo" : {
+
+    },
+    "BunnyNet Configuration" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Enter BunnyNet config data" : {
+
+    },
+    "Error: %@" : {
+
+    },
+    "Examples" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beispiele"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Examples"
+          }
+        }
+      }
+    },
+    "No videos!" : {
+
+    },
+    "Non Resumable Uploads" : {
+
+    },
+    "Pause" : {
+
+    },
+    "Pick Videos" : {
+
+    },
+    "Resume" : {
+
+    },
+    "Save" : {
+
+    },
+    "Settings" : {
+
+    },
+    "TUS Resumable Uploads" : {
+
+    },
+    "Uploaded link" : {
+
+    },
+    "Video List" : {
+
+    },
+    "Video Player" : {
+
+    },
+    "Video: %@" : {
+
+    },
+    "VideoID: %@" : {
+
+    }
+  },
+  "version" : "1.0"
+}

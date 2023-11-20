@@ -16,7 +16,7 @@ extension CaptionsMenuView {
         viewModel.disableCaptions()
       } label: {
         HStack {
-          Text("Disabled")
+          Text(Lingua.Settings.captionDisabled)
             .font(theme.font.size(14))
         }
       }
@@ -42,7 +42,7 @@ extension CaptionsMenuView {
   
   func sectionView() -> some View {
     HStack {
-      Text("Captions")
+      Text(Lingua.Settings.captionMenuTitle)
       
       Spacer()
       

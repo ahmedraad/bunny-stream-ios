@@ -33,7 +33,7 @@ extension PlaybackSpeedView {
   
   func sectionView() -> some View {
     HStack {
-      Text("Playback Speed")
+      Text(Lingua.Settings.playbackSpeedMenuTitle)
         .font(theme.font.size(14))
       
       Spacer()

@@ -48,7 +48,7 @@ public struct BunnyNetVideoPlayer: View {
               .resizable()
               .scaledToFill()
               .frame(width: 40, height: 40)
-            Text("Video not found!")
+            Text(Lingua.Player.videoNotFound)
               .font(theme.font.size(11))
           }
         case .loadError:

@@ -4,7 +4,7 @@ struct PlaybackSpeed: Hashable {
   let speed: Float
   
   var title: String {
-    guard speed != 1.0 else { return "Normal" }
+    guard speed != 1.0 else { return Lingua.Settings.playbackSpeedNormal }
     let formattedString = String(format: "%.2f", speed)
     if formattedString.hasSuffix("0") {
       return String(format: "%.1fx", speed)
