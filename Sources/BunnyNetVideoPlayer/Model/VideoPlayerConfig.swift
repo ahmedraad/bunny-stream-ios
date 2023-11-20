@@ -15,7 +15,7 @@ extension VideoPlayerConfig {
     guard let response else { return nil }
     self.vastTagUrl = response.vastTagUrl
     self.showHeatmap = response.showHeatmap
-    self.controls = response.controls.compactMap { VideoPlayerConfig.Control(rawValue: $0.rawValue) }
+    self.controls = response.controls.controlList.compactMap { VideoPlayerConfig.Control(rawValue: $0.rawValue) }
   }
 }
 

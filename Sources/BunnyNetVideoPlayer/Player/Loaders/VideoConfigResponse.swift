@@ -8,22 +8,7 @@ struct VideoConfigResponse: Decodable {
   var fontFamily: String
   var vastTagUrl: String
   var showHeatmap: Bool
-  var controls: [Control]
-  
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    captionsFontSize = try container.decode(Int.self, forKey: .captionsFontSize)
-    captionsFontColor = try container.decode(String.self, forKey: .captionsFontColor)
-    captionsBackground = try container.decode(String.self, forKey: .captionsBackground)
-    playerKeyColor = try container.decode(String.self, forKey: .playerKeyColor)
-    fontFamily = try container.decode(String.self, forKey: .fontFamily)
-    vastTagUrl = try container.decode(String.self, forKey: .vastTagUrl)
-    showHeatmap = try container.decode(Bool.self, forKey: .showHeatmap)
-    
-    let controlsString = try container.decode(String.self, forKey: .controls)
-    let controlNames = controlsString.split(separator: ",").map(String.init)
-    controls = controlNames.compactMap { Control(rawValue: $0) }
-  }
+  var controls: Controls
   
   enum CodingKeys: String, CodingKey {
     case captionsFontSize = "CaptionsFontSize"
@@ -52,5 +37,15 @@ extension VideoConfigResponse {
     case progress
     case settings
     case volume
+  }
+  
+  struct Controls: Decodable {
+    var controlList: [Control]
+    
+    init(from decoder: Decoder) throws {
+      let container = try decoder.singleValueContainer()
+      let controlsString = try container.decode(String.self)
+      self.controlList = controlsString.split(separator: ",").compactMap { Control(rawValue: String($0)) }
+    }
   }
 }
