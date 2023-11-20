@@ -89,7 +89,6 @@ Task {
         print("Error uploading videos: \(error)")
     }
 }
-
 ```
 
 #### Pause, Resume, and Remove Uploads
@@ -122,10 +121,63 @@ func application(_ application: UIApplication,
                  completionHandler: @escaping () -> Void) {
     videoUploader.registerBackgroundHandler(completionHandler, forSession: identifier)
 }
-
 ```
 
 Checkout the [Example-App](./Example-App) for more details.
+
+### 3. BunnyNetVideoPlayer
+
+BunnyNetVideoPlayer is a component designed for seamless integration of video playback in your iOS applications. Customization can be done via the Bunny dashboard, and through the code, you can pass different icons for the player controls.
+
+Usage
+To use BunnyNetVideoPlayer in your SwiftUI project, follow these steps:
+
+1. **Import BunnyNetVideoPlayer**: First, import the module into your SwiftUI view.
+
+2. **Initialize BunnyNetVideoPlayer**: Create an instance of `BunnyNetVideoPlayer` with necessary parameters:
+
+```swift
+import BunnyNetVideoPlayer
+
+BunnyNetVideoPlayer(
+  accessKey: accessKey,
+  videoId: videoId,
+  libraryId: libraryId,
+  cdn: cdnHostname
+)
+```
+
+Parameters:
+
+- `accessKey`: Your Bunny.net access key.
+- `videoId`: The unique identifier for the video.
+- `libraryId`: The ID of your Bunny.net video library.
+- `cdnHostname`: The hostname of your Bunny.net CDN.
+3. **Customizing Player**: You can customize the BunnyNetVideoPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
+   
+   ```swift
+   extension BunnyNetVideoPlayer {
+     static func make(videoId: String) -> BunnyNetVideoPlayer {
+       let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
+       
+       return BunnyNetVideoPlayer(
+         accessKey: accessKey,
+         videoId: videoId,
+         libraryId: libraryId,
+         cdn: cdnHostname,
+         playerIcons: playerIcons
+       )
+     }
+   }
+   
+   // Example view
+   struct VideoPlayerDemoView: View {
+       var body: some View {
+          BunnyNetVideoPlayer.make(videoId: videoInfo.id)
+          .navigationBarTitle(Text("Video Player"), displayMode: .inline)
+       }
+   }
+   ```
 
 ## License
 
