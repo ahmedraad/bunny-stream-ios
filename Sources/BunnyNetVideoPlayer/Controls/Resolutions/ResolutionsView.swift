@@ -12,7 +12,7 @@ struct ResolutionsView: View {
 extension ResolutionsView {
   func itemsMenuView() -> some View {
     Menu {
-      ForEach(viewModel.availableResolutions, id: \.self) { resolution in
+      ForEach(viewModel.availableResolutions) { resolution in
         Button {
           viewModel.resolutionAction(resolution)
         } label: {

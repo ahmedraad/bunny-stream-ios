@@ -1,7 +1,11 @@
 import Foundation
 
 extension Video {
-  enum Resolution: String {
+  enum Resolution: String, Identifiable {
+    var id: Self {
+      self
+    }
+    
     case auto = "0"
     case res240p = "240p"
     case res360p = "360p"

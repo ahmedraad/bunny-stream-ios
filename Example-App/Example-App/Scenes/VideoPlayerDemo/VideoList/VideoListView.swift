@@ -11,36 +11,34 @@ struct VideoListView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
   @ObservedObject private var viewModel: VideoListViewModel
   @State private var selection: VideoResponseInfo? = nil
-
+  
   init(viewModel: VideoListViewModel) {
     self.viewModel = viewModel
   }
   
   var body: some View {
     NavigationStack {
-      ZStack {
-        switch viewModel.loadingState {
-        case .loading:
-          ProgressView()
-            .frame(maxWidth: .infinity)
-        case .loaded:
-          List(viewModel.videoInfos, id: \.self) { videoInfo in
-            if videoInfo.encodeProgress == 100 {
-              NavigationLink(destination: VideoPlayerDemoView(dependenciesManager: dependenciesManager,
-                                                              videoInfo: videoInfo)) {
-                VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
-              }
-            } else {
+      switch viewModel.loadingState {
+      case .loading:
+        ProgressView()
+          .frame(maxWidth: .infinity)
+      case .loaded:
+        List(viewModel.videoInfos, id: \.self) { videoInfo in
+          if videoInfo.encodeProgress == 100 {
+            NavigationLink(destination: VideoPlayerDemoView(dependenciesManager: dependenciesManager,
+                                                            videoInfo: videoInfo)) {
               VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
             }
+          } else {
+            VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
           }
-        case .failed(let string):
-          Text(string)
         }
+      case .failed(let string):
+        Text(string)
       }
-      .navigationTitle("Video List")
-      .listStyle(.plain)
     }
+    .navigationTitle("Video List")
+    .listStyle(.plain)
     .task {
       await viewModel.loadVideos(libraryId: Int64(dependenciesManager.libraryId))
     }

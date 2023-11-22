@@ -23,8 +23,6 @@ extension [PlaybackSpeed] {
     let endSpeed: Float = 2.0
     let step: Float = 0.25
     
-    return stride(from: startSpeed, through: endSpeed, by: step).map {
-      $0 == 1.0 ? .default : PlaybackSpeed(speed: $0)
-    }
+    return stride(from: startSpeed, through: endSpeed, by: step).map(PlaybackSpeed.init)
   }
 }
