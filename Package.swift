@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-  name: "BunnyNet",
+  name: "Bunny",
   defaultLocalization: "en",
   platforms: [.iOS(.v15), .macOS(.v13)],
   products: [
-    .library(name: "BunnyNetClient", targets: ["BunnyNetClient"]),
-    .library(name: "BunnyNetVideoUploader", targets: ["BunnyNetVideoUploader"]),
-    .library(name: "BunnyNetVideoPlayer", targets: ["BunnyNetVideoPlayer"])
+    .library(name: "BunnyStreamSDK", targets: ["BunnyStreamSDK"]),
+    .library(name: "BunnyVideoUploader", targets: ["BunnyVideoUploader"]),
+    .library(name: "BunnyVideoPlayer", targets: ["BunnyVideoPlayer"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-openapi-generator", branch: "main"),
@@ -23,7 +23,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "BunnyNetClient",
+      name: "BunnyStreamSDK",
       dependencies: [
         .product(
           name: "OpenAPIRuntime",
@@ -34,38 +34,38 @@ let package = Package(
           package: "swift-openapi-urlsession"
         ),
       ],
-      path: "Sources/BunnyNetClient",
+      path: "Sources/BunnyStreamSDK",
       plugins: [
         .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
       ]
     ),
     .target(
-      name: "BunnyNetVideoUploader",
+      name: "BunnyVideoUploader",
       dependencies: [
-        .byName(name: "BunnyNetClient"),
+        .byName(name: "BunnyStreamSDK"),
         .product(name: "TUSKit", package: "TUSKit")
       ],
-      path: "Sources/BunnyNetVideoUploader"),
+      path: "Sources/BunnyVideoUploader"),
     .target(
-      name: "BunnyNetVideoPlayer",
+      name: "BunnyVideoPlayer",
       dependencies: [
         .byName(name: "Kingfisher"),
         .byName(name: "SwiftSubtitles"),
-        .byName(name: "BunnyNetClient"),
+        .byName(name: "BunnyStreamSDK"),
         .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
       ],
-      path: "Sources/BunnyNetVideoPlayer",
+      path: "Sources/BunnyVideoPlayer",
       resources: [.process("Resources")]
     ),
     .testTarget(
-      name: "BunnyNetClientTests",
-      dependencies: ["BunnyNetClient"],
-      path: "Tests/BunnyNetClientTests"
+      name: "BunnyStreamSDKTests",
+      dependencies: ["BunnyStreamSDK"],
+      path: "Tests/BunnyStreamSDKTests"
     ),
     .testTarget(
-      name: "BunnyNetVideoUploaderTests",
-      dependencies: ["BunnyNetVideoUploader"],
-      path: "Tests/BunnyNetVideoUploaderTests"
+      name: "BunnyVideoUploaderTests",
+      dependencies: ["BunnyVideoUploader"],
+      path: "Tests/BunnyVideoUploaderTests"
     ),
   ]
 )

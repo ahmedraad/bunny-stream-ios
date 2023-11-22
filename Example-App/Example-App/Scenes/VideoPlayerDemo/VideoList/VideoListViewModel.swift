@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import BunnyNetClient
+import BunnyStreamSDK
 
 @MainActor
 class VideoListViewModel: ObservableObject {
-  let bunnyNetClient: BunnyNetClient
+  let bunnyStreamSDK: BunnyStreamSDK
   @Published var videoInfos: [VideoResponseInfo] = []
   @Published var loadingState: LoadingState = .loading
   
@@ -18,14 +18,14 @@ class VideoListViewModel: ObservableObject {
     case loading, loaded, failed(String)
   }
   
-  init(bunnyNetClient: BunnyNetClient) {
-    self.bunnyNetClient = bunnyNetClient
+  init(bunnyStreamSDK: BunnyStreamSDK) {
+    self.bunnyStreamSDK = bunnyStreamSDK
   }
   
   func loadVideos(libraryId: Int64) async {
     do {
       loadingState = .loading
-      let output = try await bunnyNetClient.streamAPI.Video_List(path: .init(libraryId: libraryId))
+      let output = try await bunnyStreamSDK.Api.Video_List(path: .init(libraryId: libraryId))
       handle(output: output)
     } catch {
       loadingState = .failed(error.localizedDescription)

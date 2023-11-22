@@ -1,5 +1,5 @@
 import XCTest
-@testable import BunnyNetVideoUploader
+@testable import BunnyVideoUploader
 
 final class VideoSHA256SignerTests: XCTestCase {
   var videoSHA256Signer: VideoSHA256Signer!

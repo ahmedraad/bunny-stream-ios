@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct BunnyNetVideoPlayer: View {
+public struct BunnyVideoPlayer: View {
   let videoPlayerConfigLoader = VideoPlayerConfigLoader()
   let videoLoader: VideoLoader
   let accessKey: String
@@ -26,7 +26,7 @@ public struct BunnyNetVideoPlayer: View {
     self.videoId = videoId
     self.libraryId = libraryId
     self.cdn = cdn
-    self.videoLoader = VideoLoader(bunnyNetClient: .init(accessKey: accessKey))
+    self.videoLoader = VideoLoader(bunnyStreamSDK: .init(accessKey: accessKey))
     if let playerIcons {
       self.playerIcons = playerIcons
       self.theme.images = playerIcons
@@ -41,7 +41,7 @@ public struct BunnyNetVideoPlayer: View {
         ProgressView()
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       case .loaded(let mediaPlayer, let video):
-        BunnyNetVideoPlayerContainerView(player: mediaPlayer, video: video)
+        BunnyVideoPlayerContainerView(player: mediaPlayer, video: video)
           .environment(\.videoPlayerTheme, theme)
           .environment(\.videoPlayerConfig, videoConfig)
       case .failed:
@@ -92,7 +92,7 @@ public struct BunnyNetVideoPlayer: View {
   }
 }
 
-private extension BunnyNetVideoPlayer {
+private extension BunnyVideoPlayer {
   func reloadButton() -> some View {
     Button {
       Task { await loadVideo() }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct BunnyNetVideoPlayerContainerView: View {
+struct BunnyVideoPlayerContainerView: View {
   @Environment(\.videoPlayerTheme) var theme: VideoPlayerTheme
   @Environment(\.videoPlayerConfig) var videoPlayerConfig: VideoPlayerConfig
   @State var player: MediaPlayer
@@ -35,7 +35,7 @@ struct BunnyNetVideoPlayerContainerView: View {
   }
 }
 
-private extension BunnyNetVideoPlayerContainerView {
+private extension BunnyVideoPlayerContainerView {
   func videoPlayerView() -> some View {
     VideoPlayerView(controlsViewModel: controlsViewModel,
                     viewModel: videoPlayerViewModel,

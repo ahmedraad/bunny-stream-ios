@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import BunnyNetVideoUploader
-import BunnyNetClient
+import BunnyVideoUploader
+import BunnyStreamSDK
 
 class VideoUploaderViewModel: ObservableObject {
   private let bunnyNetService: BunnyNetService

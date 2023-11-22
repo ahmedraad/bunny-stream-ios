@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 struct VideoUploaderView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager

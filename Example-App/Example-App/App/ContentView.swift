@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 struct ContentView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
@@ -19,7 +19,7 @@ struct ContentView: View {
     NavigationStack {
       List {
         NavigationLink("Bunny Stream Videos Demo") {
-          VideoListView(viewModel: .init(bunnyNetClient: dependenciesManager.bunnyNetClient))
+          VideoListView(viewModel: .init(bunnyStreamSDK: dependenciesManager.bunnyStreamSDK))
             .environmentObject(dependenciesManager)
         }
         NavigationLink("Bunny Video Uploader Demo") {

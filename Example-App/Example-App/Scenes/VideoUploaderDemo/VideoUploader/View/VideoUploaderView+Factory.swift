@@ -9,14 +9,14 @@ import Foundation
 
 extension VideoUploaderView {
   static func makeTUSVideoUploaderView(_ dependenciesManager: DependenciesManager) -> VideoUploaderView {
-    let bunnyNetService = BunnyNetService(bunnyNetClient: dependenciesManager.bunnyNetClient)
+    let bunnyNetService = BunnyNetService(bunnyStreamSDK: dependenciesManager.bunnyStreamSDK)
     let viewModel = VideoUploaderViewModel(bunnyNetService: bunnyNetService,
                                            videoUploader: dependenciesManager.tusVideoUploader)
     return VideoUploaderView(videoUploader: dependenciesManager.tusVideoUploader, viewModel: viewModel)
   }
   
   static func makeURLSessionVideoUploaderView(_ dependenciesManager: DependenciesManager) -> VideoUploaderView {
-    let bunnyNetService = BunnyNetService(bunnyNetClient: dependenciesManager.bunnyNetClient)
+    let bunnyNetService = BunnyNetService(bunnyStreamSDK: dependenciesManager.bunnyStreamSDK)
     let viewModel = VideoUploaderViewModel(bunnyNetService: bunnyNetService,
                                            videoUploader: dependenciesManager.urlSessionVideoUploader)
     return VideoUploaderView(videoUploader: dependenciesManager.urlSessionVideoUploader, viewModel: viewModel)

@@ -1,5 +1,5 @@
 import XCTest
-@testable import BunnyNetVideoUploader
+@testable import BunnyVideoUploader
 
 final class VideoRequestHeaderBuilderTests: XCTestCase {
   var headerBuilder: VideoRequestHeaderBuilder!

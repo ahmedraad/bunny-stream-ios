@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BunnyNetVideoPlayer
+import BunnyVideoPlayer
 
 struct VideoPlayerDemoView: View {
   var dependenciesManager: DependenciesManager
@@ -21,7 +21,7 @@ struct VideoPlayerDemoView: View {
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        BunnyNetVideoPlayer.make(dependenciesManager: dependenciesManager, videoId: videoInfo.id)
+        BunnyVideoPlayer.make(dependenciesManager: dependenciesManager, videoId: videoInfo.id)
           .frame(width: geometry.size.width,
                  height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
         

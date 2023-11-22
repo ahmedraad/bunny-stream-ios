@@ -1,15 +1,15 @@
 import Foundation
-import BunnyNetClient
+import BunnyStreamSDK
 
 struct VideoLoader {
-  let bunnyNetClient: BunnyNetClient
+  let bunnyStreamSDK: BunnyStreamSDK
   
-  init(bunnyNetClient: BunnyNetClient) {
-    self.bunnyNetClient = bunnyNetClient
+  init(bunnyStreamSDK: BunnyStreamSDK) {
+    self.bunnyStreamSDK = bunnyStreamSDK
   }
   
   func loadVideo(videoId: String, libraryId: Int, cdn: String) async throws -> Video {
-    let output = try await bunnyNetClient.streamAPI.Video_GetVideo(path: .init(libraryId: Int64(libraryId), videoId: videoId))
+    let output = try await bunnyStreamSDK.Api.Video_GetVideo(path: .init(libraryId: Int64(libraryId), videoId: videoId))
     switch output {
     case .ok(let okResponse):
       switch okResponse.body {

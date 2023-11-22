@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 enum UploadListCategory: CaseIterable {
   case all

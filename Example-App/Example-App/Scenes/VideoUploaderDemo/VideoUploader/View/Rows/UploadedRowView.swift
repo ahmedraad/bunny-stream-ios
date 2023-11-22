@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 struct UploadedRowView: View {
   let info: UploadVideoInfo

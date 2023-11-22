@@ -3,7 +3,7 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 import HTTPTypes
 
-@testable import BunnyNetClient
+@testable import BunnyStreamSDK
 
 class AuthenticationMiddlewareTests: XCTestCase {
   var middleware: AuthenticationMiddleware!

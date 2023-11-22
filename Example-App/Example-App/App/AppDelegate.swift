@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   let dependenciesManager = DependenciesManager()

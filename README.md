@@ -49,22 +49,22 @@ dependencies: [
 
 ## Getting Started
 
-### 1. BunnyNetClient
+### 1. BunnyStreamSDK
 
-In order to use the **BunnyNetClient**, it is just needed to import it and use all the endpoint specified in Stream API
+In order to use the **BunnyStreamSDK**, it is just needed to import it and use all the endpoint specified in Stream API
 
 ```swift
-import BunnyNetClient
+import BunnyStreamSDK
 
-let bunnyNetClient = BunnyNetClient(accessKey: "your_access_key")
+let bunnyStreamSDK = BunnyStreamSDK(accessKey: "your_access_key")
 
 // Example endpoint
-let output = try await bunnyNetClient.streamAPI.Video_GetVideo(path: .init(libraryId: 312321, videoId: "dwaddaw-e9bb-4b96-dwdw-c17bc6a5292b"))
+let output = try await bunnyStreamSDK.Api.Video_GetVideo(path: .init(libraryId: 312321, videoId: "dwaddaw-e9bb-4b96-dwdw-c17bc6a5292b"))
 ```
 
 Find all the endpoints in [StreamAPI](https://docs.bunny.net/reference/api-overview)
 
-### 2. BunnyNetVideoUploader
+### 2. BunnyVideoUploader
 
 The `TUSVideoUploader` has a `make` function that provides a streamlined way to create an instance of the uploader.
 
@@ -73,7 +73,7 @@ To upload videos, you'll be using the `uploadVideos` method from the `VideoUploa
 #### Usage:
 
 ```swift
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 
 let videoUploader = TUSVideoUploader.make(accessKey: "your_access_key")
@@ -125,21 +125,21 @@ func application(_ application: UIApplication,
 
 Checkout the [Example-App](./Example-App) for more details.
 
-### 3. BunnyNetVideoPlayer
+### 3. BunnyVideoPlayer
 
-BunnyNetVideoPlayer is a component designed for seamless integration of video playback in your iOS applications. Customization can be done via the Bunny dashboard, and through the code, you can pass different icons for the player controls.
+BunnyVideoPlayer is a component designed for seamless integration of video playback in your iOS applications. Customization can be done via the Bunny dashboard, and through the code, you can pass different icons for the player controls.
 
 Usage
-To use BunnyNetVideoPlayer in your SwiftUI project, follow these steps:
+To use BunnyVideoPlayer in your SwiftUI project, follow these steps:
 
-1. **Import BunnyNetVideoPlayer**: First, import the module into your SwiftUI view.
+1. **Import BunnyVideoPlayer**: First, import the module into your SwiftUI view.
 
-2. **Initialize BunnyNetVideoPlayer**: Create an instance of `BunnyNetVideoPlayer` with necessary parameters:
+2. **Initialize BunnyVideoPlayer**: Create an instance of `BunnyVideoPlayer` with necessary parameters:
 
 ```swift
-import BunnyNetVideoPlayer
+import BunnyVideoPlayer
 
-BunnyNetVideoPlayer(
+BunnyVideoPlayer(
   accessKey: accessKey,
   videoId: videoId,
   libraryId: libraryId,
@@ -153,14 +153,15 @@ Parameters:
 - `videoId`: The unique identifier for the video.
 - `libraryId`: The ID of your Bunny.net video library.
 - `cdnHostname`: The hostname of your Bunny.net CDN.
-3. **Customizing Player**: You can customize the BunnyNetVideoPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
+
+3. **Customizing Player**: You can customize the BunnyVideoPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
    
    ```swift
-   extension BunnyNetVideoPlayer {
-     static func make(videoId: String) -> BunnyNetVideoPlayer {
+   extension BunnyVideoPlayer {
+     static func make(videoId: String) -> BunnyVideoPlayer {
        let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
        
-       return BunnyNetVideoPlayer(
+       return BunnyVideoPlayer(
          accessKey: accessKey,
          videoId: videoId,
          libraryId: libraryId,
@@ -173,7 +174,7 @@ Parameters:
    // Example view
    struct VideoPlayerDemoView: View {
        var body: some View {
-          BunnyNetVideoPlayer.make(videoId: videoInfo.id)
+          BunnyVideoPlayer.make(videoId: videoInfo.id)
           .navigationBarTitle(Text("Video Player"), displayMode: .inline)
        }
    }

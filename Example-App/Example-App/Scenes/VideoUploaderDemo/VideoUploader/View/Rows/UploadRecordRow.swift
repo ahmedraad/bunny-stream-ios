@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BunnyNetVideoUploader
+import BunnyVideoUploader
 
 struct UploadRecordRow: View {
   let uploadStatus: UploadStatus
