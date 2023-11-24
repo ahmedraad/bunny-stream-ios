@@ -1,8 +1,8 @@
 import SwiftUI
 import CoreText
 
-public class FontManager {
-  public static func registerFonts() {
+class FontManager {
+  static func registerFonts() {
     let bundle = Bundle.module
     let fontURLs = bundle.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? []
     

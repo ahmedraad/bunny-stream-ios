@@ -1,6 +1,6 @@
 import Foundation
 
-public class URLSessionTaskManager {
+class URLSessionTaskManager {
   private var uploadTasks: [UUID: UploadTaskProtocol] = [:]
   
   func addTask(for uuid: UUID, task: UploadTaskProtocol) {
@@ -26,7 +26,7 @@ public class URLSessionTaskManager {
   }
 }
 
-public protocol UploadTaskProtocol {
+protocol UploadTaskProtocol {
   func resume()
   func suspend()
   func cancel()

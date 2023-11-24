@@ -1,5 +1,5 @@
 import Foundation
-import BunnyVideoUploader
+@testable import BunnyVideoUploader
 
 class MockUploadTask: UploadTaskProtocol {
   var taskDescription: String?

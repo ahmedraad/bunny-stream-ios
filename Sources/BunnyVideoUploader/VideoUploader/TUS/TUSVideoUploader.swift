@@ -1,6 +1,7 @@
 import Foundation
 import TUSKit
 
+/// VideoUploader concrete implementation using TUSKit
 public final class TUSVideoUploader {
   public let uploadTracker: UploadTracker
   private let tusClient: TUSClient

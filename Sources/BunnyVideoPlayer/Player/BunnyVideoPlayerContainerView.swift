@@ -19,7 +19,7 @@ struct BunnyVideoPlayerContainerView: View {
     self.adComponent = MediaPlayerAdComponent(player: player)
   }
   
-  public var body: some View {
+  var body: some View {
 #if os(iOS)
     videoPlayerView()
       .fullScreenCover(isPresented: $controlsViewModel.isFullScreen) {

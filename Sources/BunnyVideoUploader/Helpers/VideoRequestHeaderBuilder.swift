@@ -1,7 +1,7 @@
 import Foundation
 
-public struct VideoRequestHeaderBuilder {
-  public func buildHeaders(for info: VideoInfo, signature: String) -> Headers {
+struct VideoRequestHeaderBuilder {
+  func buildHeaders(for info: VideoInfo, signature: String) -> Headers {
     let filenameBase64 = info.title.data(using: .utf8)?.base64EncodedString() ?? ""
     let filetypeBase64 = info.fileType.data(using: .utf8)?.base64EncodedString() ?? ""
     

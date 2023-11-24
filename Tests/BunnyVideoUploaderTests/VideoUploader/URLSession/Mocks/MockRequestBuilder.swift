@@ -1,5 +1,5 @@
 import Foundation
-import BunnyVideoUploader
+@testable import BunnyVideoUploader
 
 class MockRequestBuilder: RequestBuilder {
   var nextRequest: URLRequest?

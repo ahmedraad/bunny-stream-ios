@@ -2,7 +2,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
-public struct CustomISO8601DateTranscoder: DateTranscoder {
+struct CustomISO8601DateTranscoder: DateTranscoder {
   private let formatters: [DateFormatter] = {
     let commonAttributes: (DateFormatter) -> Void = { formatter in
       formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -20,11 +20,11 @@ public struct CustomISO8601DateTranscoder: DateTranscoder {
     return [standardFormatter, extendedFormatter]
   }()
   
-  public func encode(_ date: Date) throws -> String {
+  func encode(_ date: Date) throws -> String {
     formatters.first!.string(from: date)
   }
   
-  public func decode(_ dateString: String) throws -> Date {
+  func decode(_ dateString: String) throws -> Date {
     for formatter in formatters {
       if let date = formatter.date(from: dateString) {
         return date

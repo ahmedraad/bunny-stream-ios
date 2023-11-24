@@ -1,5 +1,6 @@
 import Foundation
 
+/// VideoUploader concrete implementation using URLSession
 public class URLSessionVideoUploader: NSObject {
   public let uploadTracker: UploadTracker
   private let requestBuilder: RequestBuilder
@@ -39,7 +40,7 @@ extension URLSessionVideoUploader: VideoUploadable {
     }
   }
   
-  public func setURLSession(_ session: URLSessionProtocol) {
+  func setURLSession(_ session: URLSessionProtocol) {
     self.session = session
   }
 }

@@ -1,8 +1,8 @@
 import Foundation
 import CommonCrypto
 
-public struct VideoSHA256Signer {
-  public func sign(info: VideoInfo, apiKey: String) -> String {
+struct VideoSHA256Signer {
+  func sign(info: VideoInfo, apiKey: String) -> String {
     let payload = "\(info.libraryId)" + apiKey + info.expirationTimeString + info.videoId
     return sha256(payload)
   }

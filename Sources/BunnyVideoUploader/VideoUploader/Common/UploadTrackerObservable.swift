@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+/// ObservableObject SwiftUI helper class
 public final class UploadTrackerObservable: ObservableObject {
   private var tracker: UploadTracker
   
