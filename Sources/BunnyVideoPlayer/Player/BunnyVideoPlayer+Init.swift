@@ -35,7 +35,6 @@ public extension BunnyVideoPlayer {
     self.videoId = videoId
     self.libraryId = libraryId
     self.cdn = cdn
-    self.videoLoader = VideoLoader(bunnyStreamSDK: .init(accessKey: accessKey))
     if let playerIcons {
       self.playerIcons = playerIcons
       self.theme.images = playerIcons

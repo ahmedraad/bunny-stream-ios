@@ -35,3 +35,32 @@ extension Video {
     }
   }
 }
+
+extension Video {
+  init(videoConfigResponse: VideoConfigResponse.Video, cdn: String) {
+    let chapters = videoConfigResponse.chapters.map { Chapter(start: Double($0.start), end: Double($0.end), type: .regular(title: $0.title)) }
+    let moments = videoConfigResponse.moments.map { Moment(label: $0.label, second: $0.timestamp)}
+    let captions = videoConfigResponse.captions.map { Caption(languageCode: $0.srclang, label: $0.label) }
+    
+    var computedResolutions = [Video.Resolution.auto]
+    let resolutionStrings = videoConfigResponse.availableResolutions.split(separator: ",")
+    for resolutionLabel in resolutionStrings {
+      if let resolution = Video.Resolution(rawValue: String(resolutionLabel)) {
+        computedResolutions.append(resolution)
+      }
+    }
+    computedResolutions.sort { $0.bitrate < $1.bitrate }
+     
+    self.init(guid: videoConfigResponse.guid,
+              chaptersList: ValidatedChapterList(originalChapters: chapters, duration: videoConfigResponse.length),
+              moments: moments,
+              thumbnailCount: videoConfigResponse.thumbnailCount,
+              width: CGFloat(videoConfigResponse.width),
+              height: CGFloat(videoConfigResponse.height),
+              length: videoConfigResponse.length,
+              cdn: cdn,
+              captions: captions,
+              libraryId: videoConfigResponse.videoLibraryId,
+              resolutions: computedResolutions)
+  }
+}

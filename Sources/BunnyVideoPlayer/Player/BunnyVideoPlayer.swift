@@ -2,7 +2,6 @@ import SwiftUI
 
 public struct BunnyVideoPlayer: View {
   let videoPlayerConfigLoader = VideoPlayerConfigLoader()
-  let videoLoader: VideoLoader
   let accessKey: String
   let videoId: String
   let libraryId: Int
@@ -14,7 +13,7 @@ public struct BunnyVideoPlayer: View {
   internal var playerIcons: PlayerIcons?
   
   enum VideoLoadingState {
-    case loading, loaded(MediaPlayer, Video), failed, loaderFailed(VideoLoader.VideoLoaderError)
+    case loading, loaded(MediaPlayer, Video), failed, loaderFailed(VideoPlayerConfigLoader.VideoPlayerError)
   }
   
   public var body: some View {
@@ -40,7 +39,7 @@ public struct BunnyVideoPlayer: View {
             Text(Lingua.Player.videoNotFound)
               .font(theme.font.size(11))
           }
-        case .loadError:
+        default:
           reloadButton()
         }
       }
@@ -57,8 +56,8 @@ public struct BunnyVideoPlayer: View {
   func loadVideo() async {
     loadingState = .loading
     do {
-      let video = try await videoLoader.loadVideo(videoId: videoId, libraryId: libraryId, cdn: cdn)
-      let videoConfigResponse = try? await videoPlayerConfigLoader.load(libraryId: libraryId)
+      let videoConfigResponse = try await videoPlayerConfigLoader.load(libraryId: libraryId, videoId: videoId)
+      let video = Video(videoConfigResponse: videoConfigResponse.video, cdn: cdn)
       VideoPlayerConfig(response: videoConfigResponse).map { self.videoConfig = $0 }
       let player = MediaPlayer.make(video: video)
       self.player = player
@@ -67,7 +66,7 @@ public struct BunnyVideoPlayer: View {
         self.theme.images = playerIcons
       }
       loadingState = .loaded(player, video)
-    } catch let error as VideoLoader.VideoLoaderError {
+    } catch let error as VideoPlayerConfigLoader.VideoPlayerError {
       loadingState = .loaderFailed(error)
     } catch {
       loadingState = .failed

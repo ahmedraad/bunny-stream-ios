@@ -1,6 +1,7 @@
 import Foundation
 
 struct VideoConfigResponse: Decodable {
+  let video: Video
   var captionsFontSize: Int
   var captionsFontColor: String
   var captionsBackground: String
@@ -9,20 +10,38 @@ struct VideoConfigResponse: Decodable {
   var vastTagUrl: String
   var showHeatmap: Bool
   var controls: Controls
-  
-  enum CodingKeys: String, CodingKey {
-    case captionsFontSize = "CaptionsFontSize"
-    case captionsFontColor = "CaptionsFontColor"
-    case captionsBackground = "CaptionsBackground"
-    case playerKeyColor = "PlayerKeyColor"
-    case fontFamily = "FontFamily"
-    case vastTagUrl = "VastTagUrl"
-    case showHeatmap = "ShowHeatmap"
-    case controls = "Controls"
-  }
 }
 
 extension VideoConfigResponse {
+  struct Video: Decodable {
+    var guid: String
+    var videoLibraryId: Int
+    var chapters: [Chapter]
+    var moments: [Moment]
+    var thumbnailCount: Int
+    var width: Float
+    var height: Float
+    var length: Double
+    var captions: [Caption]
+    let availableResolutions: String
+  }
+  
+  struct Caption: Decodable {
+    var srclang: String
+    var label: String
+  }
+  
+  struct Chapter: Decodable {
+    var title: String
+    var start: Double
+    var end: Double
+  }
+  
+  struct Moment: Decodable {
+    var label: String
+    var timestamp: UInt
+  }
+  
   enum Control: String, Decodable, CaseIterable, Equatable {
     case rewind
     case fastForward = "fast-forward"
