@@ -10,7 +10,8 @@ let package = Package(
   products: [
     .library(name: "BunnyStreamSDK", targets: ["BunnyStreamSDK"]),
     .library(name: "BunnyVideoUploader", targets: ["BunnyVideoUploader"]),
-    .library(name: "BunnyVideoPlayer", targets: ["BunnyVideoPlayer"])
+    .library(name: "BunnyVideoPlayer", targets: ["BunnyVideoPlayer"]),
+    .library(name: "BunnyLiveStream", targets: ["BunnyLiveStream"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-openapi-generator", branch: "main"),
@@ -19,7 +20,8 @@ let package = Package(
     .package(url: "https://github.com/tus/TUSKit.git", branch: "main"),
     .package(url: "https://github.com/onevcat/Kingfisher.git", branch: "master"),
     .package(url: "https://github.com/dagronf/SwiftSubtitles.git", branch: "main"),
-    .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", exact: "3.18.4")
+    .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", exact: "3.18.4"),
+    .package(url: "https://github.com/shogo4405/HaishinKit.swift", branch: "main")
   ],
   targets: [
     .target(
@@ -57,6 +59,12 @@ let package = Package(
       path: "Sources/BunnyVideoPlayer",
       resources: [.process("Resources")]
     ),
+    .target(
+      name: "BunnyLiveStream",
+      dependencies: [
+        .product(name: "HaishinKit", package: "HaishinKit.swift")
+      ],
+      path: "Sources/BunnyLiveStream"),
     .testTarget(
       name: "BunnyStreamSDKTests",
       dependencies: ["BunnyStreamSDK"],
