@@ -11,27 +11,10 @@ public struct BunnyVideoPlayer: View {
   @State var player: MediaPlayer?
   @State var theme: VideoPlayerTheme = .defaultTheme
   @State var videoConfig = VideoPlayerConfig()
-  private var playerIcons: PlayerIcons?
+  internal var playerIcons: PlayerIcons?
   
   enum VideoLoadingState {
     case loading, loaded(MediaPlayer, Video), failed, loaderFailed(VideoLoader.VideoLoaderError)
-  }
-  
-  public init(accessKey: String,
-              videoId: String,
-              libraryId: Int,
-              cdn: String,
-              playerIcons: PlayerIcons? = nil) {
-    self.accessKey = accessKey
-    self.videoId = videoId
-    self.libraryId = libraryId
-    self.cdn = cdn
-    self.videoLoader = VideoLoader(bunnyStreamSDK: .init(accessKey: accessKey))
-    if let playerIcons {
-      self.playerIcons = playerIcons
-      self.theme.images = playerIcons
-    }
-    FontManager.registerFonts()
   }
   
   public var body: some View {

@@ -4,9 +4,11 @@ import CoreGraphics
 #if os(iOS)
 import UIKit
 typealias PlatformImage = UIImage
+typealias ViewController = UIViewController
 #elseif os(macOS)
 import AppKit
 typealias PlatformImage = NSImage
+typealias ViewController = NSViewController
 #endif
 
 extension Image {

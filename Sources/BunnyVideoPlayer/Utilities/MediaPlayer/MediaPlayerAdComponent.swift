@@ -1,4 +1,6 @@
 import Foundation
+
+#if os(iOS)
 import GoogleInteractiveMediaAds
 
 class MediaPlayerAdComponent: NSObject {
@@ -80,3 +82,18 @@ extension MediaPlayerAdComponent: IMAAdsManagerDelegate {
     player.play()
   }
 }
+#elseif os(macOS)
+
+class MediaPlayerAdComponent: NSObject {
+  var onAdPlaybackChanged: ((_ isPlaying: Bool) -> Void)?
+  
+  init(player: MediaPlayer) {}
+  
+  func setupAdsInController(_ controller: ViewController) {}
+  
+  func requestAds(adTagUrl: String) {}
+  
+  func destroy() {}
+}
+
+#endif

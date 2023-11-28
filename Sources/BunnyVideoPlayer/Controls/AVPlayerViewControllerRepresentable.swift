@@ -4,7 +4,7 @@ import SwiftUI
 
 struct AVPlayerViewControllerRepresentable: UIViewControllerRepresentable {
   var player: AVPlayer
-  var setupAds: ((AVPlayerViewController) -> Void)?
+  var setupAds: ((ViewController) -> Void)?
   
   func makeUIViewController(context: Context) -> AVPlayerViewController {
     let controller = AVPlayerViewController()
@@ -44,6 +44,7 @@ import SwiftUI
 
 struct AVPlayerViewControllerRepresentable: NSViewRepresentable {
   var player: AVPlayer
+  var setupAds: ((ViewController) -> Void)?
   
   func makeNSView(context: Context) -> AVPlayerView {
     let playerView = AVPlayerView()
