@@ -64,7 +64,9 @@ let package = Package(
       dependencies: [
         .product(name: "HaishinKit", package: "HaishinKit.swift")
       ],
-      path: "Sources/BunnyLiveStream"),
+      path: "Sources/BunnyLiveStream",
+      resources: [.process("Resources")]
+    ),
     .testTarget(
       name: "BunnyStreamSDKTests",
       dependencies: ["BunnyStreamSDK"],
