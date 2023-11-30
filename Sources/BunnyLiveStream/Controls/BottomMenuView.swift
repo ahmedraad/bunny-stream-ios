@@ -3,12 +3,23 @@ import SwiftUI
 struct BottomMenuView: View {
   @Environment(\.theme) var theme: Theme
   @ObservedObject var viewModel: BunnyLiveStreamViewModel
+  @State private var showEndStreamingAlert: Bool = false
   
   var body: some View {
     HStack(spacing: 50) {
       micButton
       streamButton
       flipCameraButton
+    }
+    .alert(isPresented: $showEndStreamingAlert) {
+      Alert(
+        title: Text(Lingua.LiveStream.endStreamAlertTitle),
+        message: Text(Lingua.LiveStream.endStreamAlertMessage),
+        primaryButton: .destructive(Text(Lingua.LiveStream.endStreamAlertConfirmAction)) {
+          // TODO: viewModel.stopPublish()
+        },
+        secondaryButton: .cancel()
+      )
     }
   }
 }
@@ -23,17 +34,22 @@ private extension BottomMenuView {
   
   var streamButton: some View {
     Button(action: toggleStream) {
-      buttonContent(icon: viewModel.isLiveStreaming ? theme.icons.stopStream : theme.icons.stream,
-                    background: .white,
-                    iconPadding: viewModel.isLiveStreaming ? 20 : 12,
-                    foregroundColor: .black)
+      buttonContent(icon: viewModel.state == .notStreaming ? theme.icons.stream : theme.icons.stopStream,
+                    background: viewModel.state == .liveStreaming ? Color.red : Color.white,
+                    iconPadding: viewModel.state == .notStreaming ? 12 : 20,
+                    foregroundColor: viewModel.state == .liveStreaming ? .white : .black)
+      .overlay {
+        if viewModel.state == .preparing {
+          CircularProgressView(progress: viewModel.countdownProgress)
+            .frame(width: 65, height: 65)
+        }
+      }
     }
-    .foregroundColor(.black)
     .frame(width: 65, height: 65)
   }
   
   var flipCameraButton: some View {
-    Button(action: flipCamera) {
+    Button(action: rotateCamera) {
       buttonContent(icon: theme.icons.flipCamera)
     }
     .frame(width: 50, height: 50)
@@ -58,7 +74,20 @@ private extension BottomMenuView {
   
   func toggleMic() {}
   
-  func toggleStream() {}
+  func toggleStream() {
+    switch viewModel.state {
+    case .preparing, .retrying:
+      // TODO: viewModel.stopCountdownStreamingTimer()
+      break
+    case .liveStreaming:
+      showEndStreamingAlert = true
+    case .notStreaming:
+      // TODO: viewModel.startStreamingCountdown()
+      break
+    }
+  }
   
-  func flipCamera() {}
+  func rotateCamera() {
+    // TODO: viewModel.rotateCamera()
+  }
 }
