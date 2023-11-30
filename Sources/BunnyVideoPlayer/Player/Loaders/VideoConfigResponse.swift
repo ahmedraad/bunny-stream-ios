@@ -7,7 +7,7 @@ struct VideoConfigResponse: Decodable {
   var captionsBackground: String
   var playerKeyColor: String
   var fontFamily: String
-  var vastTagUrl: String
+  var vastTagUrl: String?
   var showHeatmap: Bool
   var controls: Controls
 }

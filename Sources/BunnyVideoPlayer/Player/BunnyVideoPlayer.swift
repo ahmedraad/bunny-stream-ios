@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct BunnyVideoPlayer: View {
   let videoPlayerConfigLoader = VideoPlayerConfigLoader()
+  let heatmapLoader: HeatmapLoader
   let accessKey: String
   let videoId: String
   let libraryId: Int
@@ -13,7 +14,7 @@ public struct BunnyVideoPlayer: View {
   internal var playerIcons: PlayerIcons?
   
   enum VideoLoadingState {
-    case loading, loaded(MediaPlayer, Video), failed, loaderFailed(VideoPlayerConfigLoader.VideoPlayerError)
+    case loading, loaded(MediaPlayer, Video, Heatmap), failed, loaderFailed(VideoPlayerConfigLoader.VideoPlayerError)
   }
   
   public var body: some View {
@@ -22,8 +23,8 @@ public struct BunnyVideoPlayer: View {
       case .loading:
         ProgressView()
           .frame(maxWidth: .infinity, maxHeight: .infinity)
-      case .loaded(let mediaPlayer, let video):
-        BunnyVideoPlayerContainerView(player: mediaPlayer, video: video)
+      case .loaded(let mediaPlayer, let video, let heatmap):
+        BunnyVideoPlayerContainerView(player: mediaPlayer, video: video, heatmap: heatmap)
           .environment(\.videoPlayerTheme, theme)
           .environment(\.videoPlayerConfig, videoConfig)
       case .failed:
@@ -58,6 +59,7 @@ public struct BunnyVideoPlayer: View {
     do {
       let videoConfigResponse = try await videoPlayerConfigLoader.load(libraryId: libraryId, videoId: videoId)
       let video = Video(videoConfigResponse: videoConfigResponse.video, cdn: cdn)
+      let heatmap = try? await heatmapLoader.loadHeatmap(videoId: videoId, libraryId: libraryId, cdn: cdn)
       VideoPlayerConfig(response: videoConfigResponse).map { self.videoConfig = $0 }
       let player = MediaPlayer.make(video: video)
       self.player = player
@@ -65,7 +67,7 @@ public struct BunnyVideoPlayer: View {
       if let playerIcons {
         self.theme.images = playerIcons
       }
-      loadingState = .loaded(player, video)
+      loadingState = .loaded(player, video, heatmap ?? Heatmap(data: [:]))
     } catch let error as VideoPlayerConfigLoader.VideoPlayerError {
       loadingState = .loaderFailed(error)
     } catch {

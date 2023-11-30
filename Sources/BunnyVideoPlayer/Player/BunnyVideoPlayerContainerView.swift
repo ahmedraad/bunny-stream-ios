@@ -9,12 +9,12 @@ struct BunnyVideoPlayerContainerView: View {
   private var adComponent: MediaPlayerAdComponent
   private let video: Video
 
-  init(player: MediaPlayer, video: Video) {
+  init(player: MediaPlayer, video: Video, heatmap: Heatmap) {
     self.player = player
     self.video = video
     self._controlsViewModel = StateObject(wrappedValue: VideoPlayerControlsViewModel(player: player,
                                                                                      video: video,
-                                                                                     heatmap: .init(data: [:], for: .zero)))
+                                                                                     heatmap: heatmap))
     self._videoPlayerViewModel = StateObject(wrappedValue: VideoPlayerViewModel())
     self.adComponent = MediaPlayerAdComponent(player: player)
   }

@@ -1,15 +1,15 @@
 openapi: 3.0.0
-x-generator: NSwag v13.10.8.0 (NJsonSchema v10.3.11.0 (Newtonsoft.Json v13.0.0.0))
+x-generator: NSwag v13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))
 info:
   title: Stream API
-  termsOfService: https://bunny.net/tos
+  termsOfService: 'https://bunny.net/tos'
   contact:
     name: bunny.net
-    url: https://docs.bunny.net
+    url: 'https://docs.bunny.net'
     email: support@bunny.net
   version: 1.0.0
 paths:
-  /library/{libraryId}/collections/{collectionId}:
+  '/library/{libraryId}/collections/{collectionId}':
     get:
       tags:
         - Manage Collections
@@ -26,7 +26,7 @@ paths:
         - name: collectionId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -64,7 +64,7 @@ paths:
         - name: collectionId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       requestBody:
@@ -104,7 +104,7 @@ paths:
         - name: collectionId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -126,7 +126,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/collections:
+  '/library/{libraryId}/collections':
     get:
       tags:
         - Manage Collections
@@ -215,7 +215,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos/{videoId}:
+  '/library/{libraryId}/videos/{videoId}':
     get:
       tags:
         - Manage Videos
@@ -232,7 +232,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -270,7 +270,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       requestBody:
@@ -321,7 +321,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -359,7 +359,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
         - name: enabledResolutions
@@ -379,6 +379,8 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/StatusModel'
+        '400':
+          description: The requested video was already uploaded
         '401':
           description: The request authorization failed
         '404':
@@ -387,7 +389,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos/{videoId}/heatmap:
+  '/library/{libraryId}/videos/{videoId}/heatmap':
     get:
       tags:
         - Manage Videos
@@ -404,7 +406,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -414,10 +416,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VideoModel'
+                $ref: '#/components/schemas/VideoHeatmapModel'
             application/xml:
               schema:
-                $ref: '#/components/schemas/VideoModel'
+                $ref: '#/components/schemas/VideoHeatmapModel'
         '401':
           description: The request authorization failed
         '404':
@@ -426,7 +428,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/statistics:
+  '/library/{libraryId}/statistics':
     get:
       tags:
         - Manage Videos
@@ -494,7 +496,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos/{videoId}/reencode:
+  '/library/{libraryId}/videos/{videoId}/reencode':
     post:
       tags:
         - Manage Videos
@@ -511,7 +513,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -525,6 +527,8 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/VideoModel'
+        '400':
+          description: Original file is missing
         '401':
           description: The request authorization failed
         '404':
@@ -533,7 +537,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos:
+  '/library/{libraryId}/videos':
     get:
       tags:
         - Manage Videos
@@ -639,7 +643,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos/{videoId}/thumbnail:
+  '/library/{libraryId}/videos/{videoId}/thumbnail':
     post:
       tags:
         - Manage Videos
@@ -656,7 +660,7 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
         - name: thumbnailUrl
@@ -683,7 +687,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos/fetch:
+  '/library/{libraryId}/videos/fetch':
     post:
       tags:
         - Manage Videos
@@ -743,7 +747,7 @@ paths:
           description: Internal Server Error
       security:
         - AccessKey: []
-  /library/{libraryId}/videos/{videoId}/captions/{srclang}:
+  '/library/{libraryId}/videos/{videoId}/captions/{srclang}':
     post:
       tags:
         - Manage Videos
@@ -760,13 +764,13 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
         - name: srclang
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       requestBody:
@@ -819,13 +823,13 @@ paths:
         - name: videoId
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
         - name: srclang
           in: path
           required: true
-          x-nullable: true
+          x-nullable: false
           schema:
             type: string
       responses:
@@ -853,7 +857,7 @@ tags:
   - name: Manage Collections
   - name: Manage Videos
 servers:
-  - url: https://video.bunnycdn.com
+  - url: 'https://video.bunnycdn.com'
 components:
   requestBodies:
     UpdateCollectionModel:
@@ -1004,6 +1008,9 @@ components:
           type: number
           description: The framerate of the video
           format: double
+        rotation:
+          type: integer
+          description: The rotation of the video
         width:
           type: integer
           description: The width of the original video file
@@ -1076,7 +1083,14 @@ components:
             $ref: '#/components/schemas/TranscodingMessageModel'
     VideoModelStatus:
       type: integer
-      description: ''
+      description: |-
+        0 = Created
+        1 = Uploaded
+        2 = Processing
+        3 = Transcoding
+        4 = Finished
+        5 = Error
+        6 = UploadFailed
       x-enumNames:
         - Created
         - Uploaded
@@ -1162,7 +1176,11 @@ components:
           type: string
     Severity:
       type: integer
-      description: ''
+      description: |-
+        0 = Undefined
+        1 = Information
+        2 = Warning
+        3 = Error
       x-enumNames:
         - Undefined
         - Information
@@ -1175,13 +1193,44 @@ components:
         - 3
     IssueCodes:
       type: integer
-      description: ''
+      description: |-
+        0 = Undefined
+        1 = StreamLengthsDifference
+        2 = TranscodingWarnings
+        3 = IncompatibleResolution
+        4 = InvalidFramerate
+        5 = VideoExceededMaxDuration
+        6 = AudioExceededMaxDuration
+        7 = OriginalCorrupted
       x-enumNames:
         - Undefined
         - StreamLengthsDifference
+        - TranscodingWarnings
+        - IncompatibleResolution
+        - InvalidFramerate
+        - VideoExceededMaxDuration
+        - AudioExceededMaxDuration
+        - OriginalCorrupted
       enum:
         - 0
         - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+    VideoHeatmapModel:
+      type: object
+      properties:
+        heatmap:
+          type: object
+          description: >-
+            The heatmap of the video. 100 is the highest percentage of watch
+            time.
+          additionalProperties:
+            type: integer
+            format: int32
     VideoStatisticsModel:
       type: object
       required:
@@ -1285,13 +1334,16 @@ components:
       properties:
         url:
           type: string
-          description: The URL where the video will be fetched
+          description: The URL from which the video will be fetched from.
           minLength: 1
         headers:
           type: object
-          description: The headers that will be sent together with the fetch request
+          description: The headers that will be sent along with the fetch request.
           additionalProperties:
             type: string
+        title:
+          type: string
+          description: The title that will be set to video.
     CaptionModelAdd:
       type: object
       properties:
