@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BunnyVideoUploader
+import BunnyLiveStream
 
 struct ContentView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
@@ -14,23 +15,48 @@ struct ContentView: View {
   @State private var tempAccessKey: String = ""
   @State private var cdnHostname: String = ""
   @State private var libraryId: String = ""
+  @State private var isStreamingPresented: Bool = false
+  @State private var videoId: String = ""
   
   var body: some View {
     NavigationStack {
       List {
-        NavigationLink("Bunny Stream Videos Demo") {
+        NavigationLink("Video Player") {
           VideoListView(viewModel: .init(bunnyStreamSDK: dependenciesManager.bunnyStreamSDK))
             .environmentObject(dependenciesManager)
         }
-        NavigationLink("Bunny Video Uploader Demo") {
+        NavigationLink("Video Uploader") {
           VideoUploaderTypesView()
             .environmentObject(dependenciesManager)
         }
+        NavigationLink("Live Streaming") {
+          VStack(spacing: 40) {
+            TextField("Enter your VideoId", text: $videoId)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+              .padding(.vertical, 8)
+              .defaultStyle()
+            Button {
+              isStreamingPresented.toggle()
+            } label: {
+              Image(systemName: "dot.radiowaves.left.and.right")
+              Text("Start streaming")
+            }
+          }
+        }
       }
-      .navigationTitle("Examples")
+      .navigationTitle("BunnySDK Demo")
       
       accessKeyView()
     }
+    .fullScreenCover(isPresented: $isStreamingPresented,
+                     content: {
+      BunnyLiveStreamView(
+        videoId: videoId,
+        accessKey: dependenciesManager.accessKey,
+        libraryId: dependenciesManager.libraryId
+      )
+    })
     .onAppear {
       tempAccessKey = dependenciesManager.accessKey
       cdnHostname = dependenciesManager.cdnHostname

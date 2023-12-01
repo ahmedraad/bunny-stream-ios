@@ -12,6 +12,7 @@
 		77116BD92AFE6774000BB64C /* VideoResponseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77116BD82AFE6774000BB64C /* VideoResponseInfo.swift */; };
 		77116BDB2AFEBFA8000BB64C /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77116BDA2AFEBFA8000BB64C /* DefaultTextField.swift */; };
 		7742EC8E2AD93E6A0043D2BF /* DependenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7742EC8D2AD93E6A0043D2BF /* DependenciesManager.swift */; };
+		777792022B1109A9008481AC /* BunnyLiveStream in Frameworks */ = {isa = PBXBuildFile; productRef = 777792012B1109A9008481AC /* BunnyLiveStream */; };
 		7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473B2ACFFEFD00DAF8DB /* ExampleApp.swift */; };
 		7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7789473D2ACFFEFD00DAF8DB /* ContentView.swift */; };
 		778947402ACFFEFF00DAF8DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7789473F2ACFFEFF00DAF8DB /* Assets.xcassets */; };
@@ -86,6 +87,7 @@
 				77AC55B72B0CEF390089C0B4 /* BunnyVideoPlayer in Frameworks */,
 				77AC55B52B0CEF390089C0B4 /* BunnyStreamSDK in Frameworks */,
 				77AC55B92B0CEF390089C0B4 /* BunnyVideoUploader in Frameworks */,
+				777792022B1109A9008481AC /* BunnyLiveStream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +305,7 @@
 				77AC55B42B0CEF390089C0B4 /* BunnyStreamSDK */,
 				77AC55B62B0CEF390089C0B4 /* BunnyVideoPlayer */,
 				77AC55B82B0CEF390089C0B4 /* BunnyVideoUploader */,
+				777792012B1109A9008481AC /* BunnyLiveStream */,
 			);
 			productName = "Example-App";
 			productReference = 778947382ACFFEFD00DAF8DB /* Example-App.app */;
@@ -529,6 +532,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Example-App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = BunnyStreamSDK;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Video Streaming";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Video Streaming";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -566,6 +571,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Example-App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = BunnyStreamSDK;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Video Streaming";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Video Streaming";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -612,6 +619,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		777792012B1109A9008481AC /* BunnyLiveStream */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BunnyLiveStream;
+		};
 		77AC55B42B0CEF390089C0B4 /* BunnyStreamSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BunnyStreamSDK;

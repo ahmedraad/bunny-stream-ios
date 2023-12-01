@@ -14,13 +14,10 @@
     "%lld views" : {
 
     },
-    "Bunny Stream Videos Demo" : {
-
-    },
-    "Bunny Video Uploader Demo" : {
-
-    },
     "BunnyNet Configuration" : {
+
+    },
+    "BunnySDK Demo" : {
 
     },
     "Cancel" : {
@@ -29,10 +26,14 @@
     "Enter BunnyNet config data" : {
 
     },
+    "Enter your VideoId" : {
+
+    },
     "Error: %@" : {
 
     },
     "Examples" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -47,6 +48,9 @@
           }
         }
       }
+    },
+    "Live Streaming" : {
+
     },
     "No videos!" : {
 
@@ -69,6 +73,9 @@
     "Settings" : {
 
     },
+    "Start streaming" : {
+
+    },
     "TUS Resumable Uploads" : {
 
     },
@@ -79,6 +86,9 @@
 
     },
     "Video Player" : {
+
+    },
+    "Video Uploader" : {
 
     },
     "Video: %@" : {
