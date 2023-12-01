@@ -14,8 +14,8 @@ struct TopMenuView: View {
         LiveIndicatorView(streamState: viewModel.state)
           .frame(maxHeight: 30)
         
-        if viewModel.state == .liveStreaming {
-          Text(viewModel.elapsedTime)
+        if let elapsedTime = viewModel.elapsedTime {
+          Text(elapsedTime)
             .font(.caption)
             .fontWeight(.bold)
             .foregroundColor(.white)

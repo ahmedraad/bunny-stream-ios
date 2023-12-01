@@ -23,8 +23,6 @@ private extension StreamState {
       return Lingua.LiveStream.indicatorLive
     case .notStreaming, .preparing:
       return Lingua.LiveStream.indicatorOffline
-    case .retrying:
-      return Lingua.LiveStream.indicatorRetrying
     }
   }
 }

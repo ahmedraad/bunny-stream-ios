@@ -16,7 +16,7 @@ struct BottomMenuView: View {
         title: Text(Lingua.LiveStream.endStreamAlertTitle),
         message: Text(Lingua.LiveStream.endStreamAlertMessage),
         primaryButton: .destructive(Text(Lingua.LiveStream.endStreamAlertConfirmAction)) {
-          // TODO: viewModel.stopPublish()
+          viewModel.stopPublish()
         },
         secondaryButton: .cancel()
       )
@@ -72,22 +72,22 @@ private extension BottomMenuView {
       }
   }
   
-  func toggleMic() {}
+  func toggleMic() {
+    viewModel.toggleMute()
+  }
   
   func toggleStream() {
     switch viewModel.state {
-    case .preparing, .retrying:
-      // TODO: viewModel.stopCountdownStreamingTimer()
-      break
+    case .preparing:
+      viewModel.stopCountdownStreamingTimer()
     case .liveStreaming:
       showEndStreamingAlert = true
     case .notStreaming:
-      // TODO: viewModel.startStreamingCountdown()
-      break
+      viewModel.startStreamingCountdown()
     }
   }
   
   func rotateCamera() {
-    // TODO: viewModel.rotateCamera()
+    viewModel.rotateCamera()
   }
 }

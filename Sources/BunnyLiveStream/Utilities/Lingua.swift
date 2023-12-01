@@ -6,6 +6,8 @@ import Foundation
 
 enum Lingua {
 	enum LiveStream {
+		/// There was a problem setting up the audio. Please check your settings and try again.
+		static let audioError = tr("LiveStream", "audio_error")
 		/// Camera and Microphone access is required.
 		static let cameraMicPermissionsError = tr("LiveStream", "camera_mic_permissions_error")
 		/// End Stream
@@ -18,8 +20,6 @@ enum Lingua {
 		static let indicatorLive = tr("LiveStream", "indicator_live")
 		/// OFFLINE
 		static let indicatorOffline = tr("LiveStream", "indicator_offline")
-		/// RETRYING
-		static let indicatorRetrying = tr("LiveStream", "indicator_retrying")
 		/// Open Settings
 		static let openSettingsButton = tr("LiveStream", "open_settings_button")
 		/// Failed to stream!
