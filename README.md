@@ -15,27 +15,20 @@
     </a>
 </p>
 
-BunnyNet Stream SDK is a powerful and easy-to-use Swift Package Manager (SPM) package that provides Swift API client capabilities for the BunnyNet REST Stream API, along with a video player for smooth content playback.
+BunnyNet Stream SDK is a powerful and easy-to-use Swift Package Manager (SPM) package that provides Swift API client capabilities for the BunnyNet REST Stream API, a video player for smooth content playback, video uploader and live streaming.
 
-## Architecture
 
-### 1. Swift API Client for BunnyNet REST API
 
-Generated directly from the BunnyNet OpenAPI specification using Apple's [swift-openapi-generator](https://github.com/apple/swift-openapi-generator). This ensures the SDK is always up-to-date with the latest API endpoints and definitions.
+## Packages
 
-**Structure**:
+| Name                                                                 | Description                                                                                                                                                                           |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[BunnyStreamSDK](Documentation/Reference/BunnyStreamSDK)**         | It allows you to upload, manage and process videos with a few lines of code.                                                                                                          |
+| **[BunnyVideoUploader](Documentation/Reference/BunnyVideoUploader)** | A reliable video uploading solution leveraging the TUS protocol to ensure video uploads are resilient against network failures and can be paused, resumed, or canceled at any moment. |
+| **[BunnyVideoPlayer](Documentation/Reference/BunnyVideoPlayer)**     | A custom video player built to provide seamless streaming and playback of BunnyNet content.                                                                                           |
+| **[BunnyLiveStream](Documentation/Reference/BunnyLiveStream)**       | A live stream componentt built to provide seamless streaming.                                                                                                                         |
 
-- **Models**: Data structures representing BunnyNet Stream entities.
-- **APIs**: Endpoints as Swift functions to interact with the BunnyNet Stream REST API.
-- **Configuration**: Manage API keys, endpoints, and other configurations.
 
-### 2. Video Uploader
-
-A reliable video uploading solution leveraging the TUS protocol to ensure video uploads are resilient against network failures and can be paused, resumed, or canceled at any moment.
-
-### 3. Video Player
-
-A custom video player built to provide seamless streaming and playback of BunnyNet content.
 
 ## Installation
 
@@ -46,6 +39,8 @@ dependencies: [
     .package(url: "https://github.com/poviolabs/bunny-stream-ios.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
+
+
 
 ## Getting Started
 
@@ -150,35 +145,78 @@ BunnyVideoPlayer(
 Parameters:
 
 - `accessKey`: Your Bunny.net access key.
+
 - `videoId`: The unique identifier for the video.
+
 - `libraryId`: The ID of your Bunny.net video library.
+
 - `cdnHostname`: The hostname of your Bunny.net CDN.
 
-3. **Customizing Player**: You can customize the BunnyVideoPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
-   
-   ```swift
-   extension BunnyVideoPlayer {
-     static func make(videoId: String) -> BunnyVideoPlayer {
-       let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
-       
-       return BunnyVideoPlayer(
-         accessKey: accessKey,
-         videoId: videoId,
-         libraryId: libraryId,
-         cdn: cdnHostname,
-         playerIcons: playerIcons
-       )
-     }
-   }
-   
-   // Example view
-   struct VideoPlayerDemoView: View {
-       var body: some View {
-          BunnyVideoPlayer.make(videoId: videoInfo.id)
-          .navigationBarTitle(Text("Video Player"), displayMode: .inline)
-       }
-   }
-   ```
+
+
+**Customizing Player:**
+
+You can customize the BunnyVideoPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
+
+```swift
+extension BunnyVideoPlayer {
+  static func make(videoId: String) -> BunnyVideoPlayer {
+    let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
+
+    return BunnyVideoPlayer(
+      accessKey: accessKey,
+      videoId: videoId,
+      libraryId: libraryId,
+      cdn: cdnHostname,
+      playerIcons: playerIcons
+    )
+  }
+}
+
+// Example view
+struct VideoPlayerDemoView: View {
+    var body: some View {
+       BunnyVideoPlayer.make(videoId: videoInfo.id)
+       .navigationBarTitle(Text("Video Player"), displayMode: .inline)
+    }
+}
+```
+
+### 4. BunnyLiveStream
+
+We provide `BunnyLiveStreamView`, initialize a new instance by providing the necessary configurations such as the access key, video ID, and library ID. Below is an example showcasing how to integrate it within a SwiftUI view.
+
+```swift
+import BunnyLiveStream
+
+struct VideoStreamDemoView: View {
+  @State private var isStreamingPresented = false
+
+  var body: some View {
+    Group { }
+      .fullScreenCover(isPresented: $isStreamingPresented,
+                       content: {
+        BunnyLiveStreamView(
+          videoId: "<video_id>",
+          accessKey: "<access_key>",
+          libraryId: <library_id>
+        )
+      })
+  }
+}
+```
+
+In this example, BunnyLiveStreamView is presented as a full-screen cover when isStreamingPresented is true. Replace <video_id>, <access_key>, and <library_id> with your specific stream's details.
+
+Parameters:
+
+- `videoId:` Your unique key for authentication.
+
+- `accessKey:` The ID of the specific video you want to stream.
+
+- `libraryId:` The ID of your video library.    
+
+**Note:** Camera and Microphone permissions are needed, add `Privacy - Camera Usage Description` and `Privacy - Microphone Usage Description` to your Info.plist.
 
 ## License
 
