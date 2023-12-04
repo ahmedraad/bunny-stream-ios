@@ -19,6 +19,18 @@ The details of the requested video
 
 HTTP response code: `200 ok`.
 
+### `badRequest(_:)`
+
+```swift
+case badRequest(Operations.Video_ReencodeVideo.Output.BadRequest)
+```
+
+Original file is missing
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/reencode/post(Video_ReencodeVideo)/responses/400`.
+
+HTTP response code: `400 badRequest`.
+
 ### `unauthorized(_:)`
 
 ```swift
@@ -76,6 +88,17 @@ The associated value of the enum case if `self` is `.ok`.
 
 - Throws: An error if `self` is not `.ok`.
 - SeeAlso: `.ok`.
+
+### `badRequest`
+
+```swift
+public var badRequest: Operations.Video_ReencodeVideo.Output.BadRequest
+```
+
+The associated value of the enum case if `self` is `.badRequest`.
+
+- Throws: An error if `self` is not `.badRequest`.
+- SeeAlso: `.badRequest`.
 
 ### `unauthorized`
 

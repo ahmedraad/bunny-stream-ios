@@ -99,6 +99,16 @@ The framerate of the video
 
 - Remark: Generated from `#/components/schemas/VideoModel/framerate`.
 
+### `rotation`
+
+```swift
+public var rotation: Swift.Int?
+```
+
+The rotation of the video
+
+- Remark: Generated from `#/components/schemas/VideoModel/rotation`.
+
 ### `width`
 
 ```swift
@@ -270,7 +280,7 @@ The list of transcoding messages that describe potential issues while the video 
 - Remark: Generated from `#/components/schemas/VideoModel/transcodingMessages`.
 
 ## Methods
-### `init(videoLibraryId:guid:title:dateUploaded:views:isPublic:length:status:framerate:width:height:availableResolutions:thumbnailCount:encodeProgress:storageSize:captions:hasMP4Fallback:collectionId:thumbnailFileName:averageWatchTime:totalWatchTime:category:chapters:moments:metaTags:transcodingMessages:)`
+### `init(videoLibraryId:guid:title:dateUploaded:views:isPublic:length:status:framerate:rotation:width:height:availableResolutions:thumbnailCount:encodeProgress:storageSize:captions:hasMP4Fallback:collectionId:thumbnailFileName:averageWatchTime:totalWatchTime:category:chapters:moments:metaTags:transcodingMessages:)`
 
 ```swift
 public init(
@@ -283,6 +293,7 @@ public init(
     length: Swift.Int32,
     status: Components.Schemas.VideoModel.statusPayload,
     framerate: Swift.Double,
+    rotation: Swift.Int? = nil,
     width: Swift.Int32,
     height: Swift.Int32,
     availableResolutions: Swift.String? = nil,
@@ -315,6 +326,7 @@ Creates a new `VideoModel`.
   - length: The duration of the video in seconds
   - status: The status of the video. Created = 0, Uploaded = 1, Processing = 2, Transcoding = 3, Finished = 4, Error = 5, UploadFailed = 6
   - framerate: The framerate of the video
+  - rotation: The rotation of the video
   - width: The width of the original video file
   - height: The height of the original video file
   - availableResolutions: The available resolutions of the video
@@ -346,6 +358,7 @@ Creates a new `VideoModel`.
 | length | The duration of the video in seconds |
 | status | The status of the video. Created = 0, Uploaded = 1, Processing = 2, Transcoding = 3, Finished = 4, Error = 5, UploadFailed = 6 |
 | framerate | The framerate of the video |
+| rotation | The rotation of the video |
 | width | The width of the original video file |
 | height | The height of the original video file |
 | availableResolutions | The available resolutions of the video |

@@ -18,3 +18,9 @@ case url
 ```swift
 case headers
 ```
+
+### `title`
+
+```swift
+case title
+```

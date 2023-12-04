@@ -44,9 +44,3 @@ public static var allCases: [Self]
 ```swift
 public init?(rawValue: String)
 ```
-
-#### Parameters
-
-| Name | Description |
-| ---- | ----------- |
-| rawValue | The raw value to use for the new instance. |

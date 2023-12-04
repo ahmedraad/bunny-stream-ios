@@ -6,6 +6,14 @@
 @frozen public enum VideoModelStatus: Int, Codable, Hashable, Sendable
 ```
 
+0 = Created
+1 = Uploaded
+2 = Processing
+3 = Transcoding
+4 = Finished
+5 = Error
+6 = UploadFailed
+
 - Remark: Generated from `#/components/schemas/VideoModelStatus`.
 
 ## Cases

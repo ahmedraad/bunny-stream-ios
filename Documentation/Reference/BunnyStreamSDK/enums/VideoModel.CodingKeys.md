@@ -61,6 +61,12 @@ case status
 case framerate
 ```
 
+### `rotation`
+
+```swift
+case rotation
+```
+
 ### `width`
 
 ```swift

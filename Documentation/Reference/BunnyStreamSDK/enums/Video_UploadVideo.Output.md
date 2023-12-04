@@ -19,6 +19,18 @@ The video was successfuly uploaded
 
 HTTP response code: `200 ok`.
 
+### `badRequest(_:)`
+
+```swift
+case badRequest(Operations.Video_UploadVideo.Output.BadRequest)
+```
+
+The requested video was already uploaded
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/put(Video_UploadVideo)/responses/400`.
+
+HTTP response code: `400 badRequest`.
+
 ### `unauthorized(_:)`
 
 ```swift
@@ -76,6 +88,17 @@ The associated value of the enum case if `self` is `.ok`.
 
 - Throws: An error if `self` is not `.ok`.
 - SeeAlso: `.ok`.
+
+### `badRequest`
+
+```swift
+public var badRequest: Operations.Video_UploadVideo.Output.BadRequest
+```
+
+The associated value of the enum case if `self` is `.badRequest`.
+
+- Throws: An error if `self` is not `.badRequest`.
+- SeeAlso: `.badRequest`.
 
 ### `unauthorized`
 

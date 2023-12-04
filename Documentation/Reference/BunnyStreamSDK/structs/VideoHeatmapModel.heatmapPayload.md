@@ -1,20 +1,20 @@
 **STRUCT**
 
-# `FetchVideoRequest.headersPayload`
+# `VideoHeatmapModel.heatmapPayload`
 
 ```swift
-public struct headersPayload: Codable, Hashable, Sendable
+public struct heatmapPayload: Codable, Hashable, Sendable
 ```
 
-The headers that will be sent along with the fetch request.
+The heatmap of the video. 100 is the highest percentage of watch time.
 
-- Remark: Generated from `#/components/schemas/FetchVideoRequest/headers`.
+- Remark: Generated from `#/components/schemas/VideoHeatmapModel/heatmap`.
 
 ## Properties
 ### `additionalProperties`
 
 ```swift
-public var additionalProperties: [String: Swift.String]
+public var additionalProperties: [String: Swift.Int32]
 ```
 
 A container of undocumented properties.
@@ -23,10 +23,10 @@ A container of undocumented properties.
 ### `init(additionalProperties:)`
 
 ```swift
-public init(additionalProperties: [String: Swift.String] = .init())
+public init(additionalProperties: [String: Swift.Int32] = .init())
 ```
 
-Creates a new `headersPayload`.
+Creates a new `heatmapPayload`.
 
 - Parameters:
   - additionalProperties: A container of undocumented properties.

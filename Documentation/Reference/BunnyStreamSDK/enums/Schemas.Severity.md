@@ -6,6 +6,11 @@
 @frozen public enum Severity: Int, Codable, Hashable, Sendable
 ```
 
+0 = Undefined
+1 = Information
+2 = Warning
+3 = Error
+
 - Remark: Generated from `#/components/schemas/Severity`.
 
 ## Cases
