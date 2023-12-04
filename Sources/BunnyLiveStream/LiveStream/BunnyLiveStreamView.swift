@@ -73,12 +73,14 @@ private extension BunnyLiveStreamView {
       Text(Lingua.LiveStream.cameraMicPermissionsError)
       
       Button(Lingua.LiveStream.openSettingsButton) {
+#if os(iOS)
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
               UIApplication.shared.canOpenURL(settingsUrl) else {
           return
         }
         
         UIApplication.shared.open(settingsUrl)
+#endif
       }
       
       Spacer()

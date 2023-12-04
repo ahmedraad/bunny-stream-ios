@@ -34,6 +34,7 @@ extension BunnyLiveStreamViewModel {
   func configureStream() {
     setupAudioSession()
     
+#if os(iOS)
     if let orientation = DeviceUtil.videoOrientation(by: UIDevice.current.orientation) {
       rtmpStream.videoOrientation = orientation
     }
@@ -47,6 +48,7 @@ extension BunnyLiveStreamViewModel {
         rtmpStream.videoOrientation = orientation
       }
       .store(in: &subscriptions)
+#endif
   }
   
   func registerForPublishEvent() {
@@ -59,7 +61,7 @@ extension BunnyLiveStreamViewModel {
   }
   
   func startPublish() {
-    UIApplication.shared.isIdleTimerDisabled = true
+    setIsIdleTimerDisabled(true)
     retryCount = 0
     startStreamingTimer()
     rtmpConnection.addEventListener(.rtmpStatus, selector: #selector(rtmpStatusHandler), observer: self)
@@ -68,7 +70,7 @@ extension BunnyLiveStreamViewModel {
   }
   
   func stopPublish() {
-    UIApplication.shared.isIdleTimerDisabled = false
+    setIsIdleTimerDisabled(false)
     state = .notStreaming
     stopStreamingTimer()
     rtmpConnection.close()
@@ -96,6 +98,7 @@ extension BunnyLiveStreamViewModel {
   }
   
   func tapScreen(touchPoint: CGPoint) {
+#if os(iOS)
     guard let device = rtmpStream.videoCapture(for: 0)?.device,
           device.isFocusPointOfInterestSupported else { return }
     
@@ -105,6 +108,7 @@ extension BunnyLiveStreamViewModel {
     device.focusPointOfInterest = pointOfInterest
     device.focusMode = .continuousAutoFocus
     device.unlockForConfiguration()
+#endif
   }
   
   func rotateCamera() {
@@ -126,6 +130,7 @@ extension BunnyLiveStreamViewModel {
 // MARK: - Audio session
 private extension BunnyLiveStreamViewModel {
   func setupAudioSession() {
+    #if os(iOS)
     do {
       let session = AVAudioSession.sharedInstance()
       try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker, .allowBluetooth])
@@ -133,6 +138,7 @@ private extension BunnyLiveStreamViewModel {
     } catch {
       snackbarMessage = Lingua.LiveStream.audioError
     }
+    #endif
   }
 }
 
@@ -170,6 +176,12 @@ private extension BunnyLiveStreamViewModel {
     default:
       break
     }
+  }
+  
+  func setIsIdleTimerDisabled(_ disabled: Bool) {
+#if os(iOS)
+    UIApplication.shared.isIdleTimerDisabled = disabled
+#endif
   }
 }
 

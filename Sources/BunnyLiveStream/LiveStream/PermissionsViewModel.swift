@@ -1,10 +1,11 @@
-import AVFoundation
 import Combine
 import SwiftUI
 
+#if os(iOS)
+import AVFoundation
 class PermissionsViewModel: ObservableObject {
-  @Published var cameraAccess: AVAuthorizationStatus
-  @Published var microphoneAccess: AVAudioSession.RecordPermission
+  @Published private var cameraAccess: AVAuthorizationStatus
+  @Published private var microphoneAccess: AVAudioSession.RecordPermission
   
   private var appStateSubscriber: AnyCancellable?
   
@@ -30,3 +31,10 @@ class PermissionsViewModel: ObservableObject {
     microphoneAccess = AVAudioSession.sharedInstance().recordPermission
   }
 }
+
+#elseif os(macOS)
+class PermissionsViewModel: ObservableObject {
+  var arePermissionsGranted: Bool { false }
+  var arePermissionsNotDetermined: Bool { false }
+}
+#endif
