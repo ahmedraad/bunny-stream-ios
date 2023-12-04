@@ -9,4 +9,3 @@
 "end_stream_alert_confirm_action" = "End Stream";
 "indicator_live" = "LIVE";
 "indicator_offline" = "OFFLINE";
-"audio_error" = "There was a problem setting up the audio. Please check your settings and try again.";

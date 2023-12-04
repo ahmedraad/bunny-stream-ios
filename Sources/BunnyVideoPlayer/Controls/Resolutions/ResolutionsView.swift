@@ -11,37 +11,15 @@ struct ResolutionsView: View {
 
 extension ResolutionsView {
   func itemsMenuView() -> some View {
-    Menu {
+    Group {
       ForEach(viewModel.availableResolutions) { resolution in
         Button {
           viewModel.resolutionAction(resolution)
         } label: {
-          HStack {
-            Text(resolution.label)
-              .font(theme.font.size(14))
-            if resolution == viewModel.resolution {
-              Image(systemName: "checkmark")
-              Spacer()
-            }
-          }
+          Text(resolution.label.addCheckmark(resolution == viewModel.resolution))
+            .font(theme.font.size(14))
         }
       }
-    } label: {
-      sectionView()
-    }
-  }
-  
-  func sectionView() -> some View {
-    HStack {
-      Text(Lingua.Settings.qualityMenuTitle)
-        .font(theme.font.size(14))
-      
-      Spacer()
-      
-      theme.images.quality
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 30, height: 30)
-        .foregroundColor(.white)
     }
   }
 }

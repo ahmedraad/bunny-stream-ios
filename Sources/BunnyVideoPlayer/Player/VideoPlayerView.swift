@@ -52,7 +52,6 @@ struct VideoPlayerView: View {
       .onChange(of: controlsViewModel.isDraggingSeekBar, perform: viewModel.isDraggingSeekBarChange)
       .onChange(of: controlsViewModel.isFullScreen, perform: viewModel.resetControlsHideTimer)
       .onChange(of: controlsViewModel.playbackState, perform: viewModel.playBackStateChange)
-      .onChange(of: controlsViewModel.isOptionsMenuActive, perform: viewModel.isPlayingChange)
       .onAppear {
         viewModel.resetControlsHideTimer()
       }

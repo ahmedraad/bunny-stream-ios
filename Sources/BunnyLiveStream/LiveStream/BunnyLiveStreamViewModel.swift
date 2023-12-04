@@ -136,7 +136,7 @@ private extension BunnyLiveStreamViewModel {
       try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker, .allowBluetooth])
       try session.setActive(true)
     } catch {
-      snackbarMessage = Lingua.LiveStream.audioError
+      snackbarMessage = Lingua.Error.audioError
     }
     #endif
   }

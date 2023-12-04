@@ -25,14 +25,7 @@ public struct BunnyLiveStreamView: View {
       } else if permissionsViewModel.arePermissionsGranted {
         permissionsView()
       } else {
-        lfView
-          .ignoresSafeArea()
-          .onTapGesture { location in
-            self.streamViewModel.tapScreen(touchPoint: location)
-          }
-        
-        controlsView
-          .environment(\.theme, theme)
+        liveStreamView()
       }
     }
     .overlay(alignment: .bottom) {
@@ -53,6 +46,19 @@ public struct BunnyLiveStreamView: View {
 }
 
 private extension BunnyLiveStreamView {
+  func liveStreamView() -> some View {
+    ZStack {
+      lfView
+        .ignoresSafeArea()
+        .onTapGesture { location in
+          self.streamViewModel.tapScreen(touchPoint: location)
+        }
+      
+      controlsView
+        .environment(\.theme, theme)
+    }
+  }
+  
   func permissionsView() -> some View {
     VStack {
       HStack {

@@ -10,7 +10,7 @@ import SwiftUI
 struct VideoListView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
   @ObservedObject private var viewModel: VideoListViewModel
-  @State private var selection: VideoResponseInfo? = nil
+  @State private var selectedVideoInfo: VideoResponseInfo? = nil
   
   init(viewModel: VideoListViewModel) {
     self.viewModel = viewModel
@@ -25,8 +25,9 @@ struct VideoListView: View {
       case .loaded:
         List(viewModel.videoInfos, id: \.self) { videoInfo in
           if videoInfo.encodeProgress == 100 {
-            NavigationLink(destination: VideoPlayerDemoView(dependenciesManager: dependenciesManager,
-                                                            videoInfo: videoInfo)) {
+            Button(action: {
+              selectedVideoInfo = videoInfo
+            }) {
               VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
             }
           } else {
@@ -41,6 +42,9 @@ struct VideoListView: View {
     .listStyle(.plain)
     .task {
       await viewModel.loadVideos(libraryId: Int64(dependenciesManager.libraryId))
+    }
+    .sheet(item: $selectedVideoInfo) { videoInfo in
+      VideoPlayerDemoView(dependenciesManager: dependenciesManager, videoInfo: videoInfo)
     }
   }
 }

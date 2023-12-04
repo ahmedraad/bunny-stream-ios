@@ -5,9 +5,12 @@
 import Foundation
 
 enum Lingua {
-	enum LiveStream {
+	enum Error {
 		/// There was a problem setting up the audio. Please check your settings and try again.
-		static let audioError = tr("LiveStream", "audio_error")
+		static let audioError = tr("Error", "audio_error")
+	}
+
+	enum LiveStream {
 		/// Camera and Microphone access is required.
 		static let cameraMicPermissionsError = tr("LiveStream", "camera_mic_permissions_error")
 		/// End Stream

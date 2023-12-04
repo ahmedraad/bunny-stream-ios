@@ -7,3 +7,5 @@
 "playback_speed_normal" = "Normal";
 "quality_menu_title" = "Quality";
 "quality_auto" = "Auto";
+"cancel_action" = "Cancel";
+"actions_title" = "Settings";

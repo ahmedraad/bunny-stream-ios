@@ -4,6 +4,7 @@ class CaptionsMenuViewModel: ObservableObject {
   private let player: MediaPlayer
   let captions: [Caption]
   @Published var caption: Caption? = nil
+  @Published var showCaptions = false
   
   init(player: MediaPlayer, captions: [Caption]) {
     self.player = player

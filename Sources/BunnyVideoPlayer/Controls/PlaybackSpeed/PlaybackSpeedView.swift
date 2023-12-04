@@ -11,43 +11,16 @@ struct PlaybackSpeedView: View {
 
 extension PlaybackSpeedView {
   func itemsMenuView() -> some View {
-    Menu {
+    Group {
       ForEach(viewModel.playbackSpeeds, id: \.self) { speed in
         Button {
           viewModel.playbackSpeedAction(speed)
         } label: {
-          HStack {
-            Text(speed.title)
-              .font(theme.font.size(14))
-            if speed == viewModel.playbackSpeed {
-              Image(systemName: "checkmark")
-              Spacer()
-            }
-          }
+          Text(speed.title.addCheckmark(speed == viewModel.playbackSpeed))
+            .font(theme.font.size(14))
+            .foregroundColor(theme.tintColor)
         }
       }
-    } label: {
-      sectionView()
     }
-  }
-  
-  func sectionView() -> some View {
-    HStack {
-      Text(Lingua.Settings.playbackSpeedMenuTitle)
-        .font(theme.font.size(14))
-      
-      Spacer()
-      
-      theme.images.playbackSpeed
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 30, height: 30)
-        .foregroundColor(.white)
-    }
-  }
-}
-
-extension PlaybackSpeedView: Equatable {
-  static func ==(lhs: PlaybackSpeedView, rhs: PlaybackSpeedView) -> Bool {
-    return lhs.viewModel.playbackSpeed == rhs.viewModel.playbackSpeed
   }
 }

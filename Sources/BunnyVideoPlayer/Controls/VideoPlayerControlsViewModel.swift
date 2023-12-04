@@ -4,9 +4,9 @@ import SwiftUI
 
 class VideoPlayerControlsViewModel: ObservableObject {
   let player: MediaPlayer
-  let playbackSpeedViewModel: PlaybackSpeedViewModel
-  let captionsMenuViewModel: CaptionsMenuViewModel
-  let resolutionsViewModel: ResolutionsViewModel
+  var playbackSpeedViewModel: PlaybackSpeedViewModel
+  var captionsMenuViewModel: CaptionsMenuViewModel
+  var resolutionsViewModel: ResolutionsViewModel
   @Published var seekBarViewModel: SeekBarViewModel
   @Published var isFullScreen: Bool = false
   @Published var isMuted: Bool = false

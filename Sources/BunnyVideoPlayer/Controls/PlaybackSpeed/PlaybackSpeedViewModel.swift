@@ -3,6 +3,7 @@ import SwiftUI
 class PlaybackSpeedViewModel: ObservableObject {
   private let player: MediaPlayer
   @Published var playbackSpeed: PlaybackSpeed = .default
+  @Published var showPlaybackSpeed = false
   let playbackSpeeds: [PlaybackSpeed] = .playbackSpeeds
   
   init(player: MediaPlayer) {

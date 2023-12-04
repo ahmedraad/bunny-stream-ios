@@ -5,12 +5,21 @@
 import Foundation
 
 enum Lingua {
+	enum Error {
+		/// There was a problem setting up the audio. Please check your settings and try again.
+		static let audioError = tr("Error", "audio_error")
+	}
+
 	enum Player {
 		/// Video not found!
 		static let videoNotFound = tr("Player", "video_not_found")
 	}
 
 	enum Settings {
+		/// Settings
+		static let actionsTitle = tr("Settings", "actions_title")
+		/// Cancel
+		static let cancelAction = tr("Settings", "cancel_action")
 		/// Disabled
 		static let captionDisabled = tr("Settings", "caption_disabled")
 		/// Captions

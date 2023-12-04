@@ -13,23 +13,43 @@ struct VideoPlayerControls: View {
   }
   
   var body: some View {
-    ZStack {
-      VStack {
-        topControlsView()
-          .padding(.vertical, 4)
-          .padding(.horizontal, 8)
-          .opacity(viewModel.isDraggingSeekBar ? 0 : 1)
-        
-        Spacer()
-        
-        centerControlsView()
-          .opacity(viewModel.isDraggingSeekBar ? 0 : 1)
-        
-        Spacer()
-        
-        bottomControlsView()
-      }
+    VStack {
+      topControlsView()
+        .padding(.vertical, 4)
+        .padding(.horizontal, 8)
+        .opacity(viewModel.isDraggingSeekBar ? 0 : 1)
+      
+      Spacer()
+      
+      centerControlsView()
+        .opacity(viewModel.isDraggingSeekBar ? 0 : 1)
+      
+      Spacer()
+      
+      bottomControlsView()
     }
+    .confirmationDialog(Lingua.Settings.actionsTitle, isPresented: $viewModel.isOptionsMenuActive) {
+      mainOptionsDialog()
+    }
+    .confirmationDialog(Lingua.Settings.captionMenuTitle,
+                        isPresented: $viewModel.captionsMenuViewModel.showCaptions,
+                        titleVisibility: .visible) {
+      CaptionsMenuView(viewModel: viewModel.captionsMenuViewModel)
+        .environment(\.videoPlayerTheme, theme)
+    }
+    .confirmationDialog(Lingua.Settings.playbackSpeedMenuTitle,
+                        isPresented: $viewModel.playbackSpeedViewModel.showPlaybackSpeed,
+                        titleVisibility: .visible) {
+      PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
+        .environment(\.videoPlayerTheme, theme)
+    }
+    .confirmationDialog(Lingua.Settings.qualityMenuTitle,
+                        isPresented: $viewModel.resolutionsViewModel.showResolutions,
+                        titleVisibility: .visible) {
+      ResolutionsView(viewModel: viewModel.resolutionsViewModel)
+        .environment(\.videoPlayerTheme, theme)
+    }
+    .foregroundColor(theme.tintColor)
   }
 }
 
@@ -120,26 +140,43 @@ extension VideoPlayerControls {
   
   @ViewBuilder
   func optionsButton() -> some View {
-    Menu {
-      CaptionsMenuView(viewModel: viewModel.captionsMenuViewModel)
-        .shouldAddView(!viewModel.captionsMenuViewModel.captions.isEmpty)
-        .shouldAddView(controlsToCheck: .captions, in: videoPlayerConfig.controls)
-        .environment(\.videoPlayerTheme, theme)
-      ResolutionsView(viewModel: viewModel.resolutionsViewModel)
-        .shouldAddView(!viewModel.resolutionsViewModel.availableResolutions.isEmpty)
-        .environment(\.videoPlayerTheme, theme)
-      PlaybackSpeedView(viewModel: viewModel.playbackSpeedViewModel)
-        .environment(\.videoPlayerTheme, theme)
+    Button {
+      viewModel.isOptionsMenuActive = true
     } label: {
       theme.images.settings
         .aspectRatio(contentMode: .fit)
         .frame(width: 30, height: 30)
         .foregroundColor(.white)
     }
-    .contentShape(Rectangle())
-    .simultaneousGesture(TapGesture().onEnded {
-      viewModel.isOptionsMenuActive = true
-    })
+  }
+  
+  @ViewBuilder
+  private func mainOptionsDialog() -> some View {
+    Button(Lingua.Settings.captionMenuTitle) {
+      viewModel.isOptionsMenuActive = false
+      viewModel.captionsMenuViewModel.showCaptions = true
+    }
+    .shouldAddView(!viewModel.captionsMenuViewModel.captions.isEmpty)
+    .shouldAddView(controlsToCheck: .captions, in: videoPlayerConfig.controls)
+    .foregroundColor(theme.tintColor)
+    
+    Button(Lingua.Settings.qualityMenuTitle) {
+      viewModel.isOptionsMenuActive = false
+      viewModel.resolutionsViewModel.showResolutions = true
+    }
+    .shouldAddView(!viewModel.resolutionsViewModel.availableResolutions.isEmpty)
+    .foregroundColor(theme.tintColor)
+    
+    Button(Lingua.Settings.playbackSpeedMenuTitle) {
+      viewModel.isOptionsMenuActive = false
+      viewModel.playbackSpeedViewModel.showPlaybackSpeed = true
+    }
+    .foregroundColor(theme.tintColor)
+    
+    Button(Lingua.Settings.cancelAction, role: .cancel) {
+      viewModel.isOptionsMenuActive = false
+    }
+    .foregroundColor(theme.tintColor)
   }
   
   func airplayButton() -> some View {
@@ -168,7 +205,7 @@ extension VideoPlayerControls {
       Text(" / ")
         .font(.caption)
         .foregroundColor(.white)
-        .shouldAddView(controlsToCheck: .captions, .duration, in: videoPlayerConfig.controls)
+        .shouldAddView(controlsToCheck: .currentTime, .duration, in: videoPlayerConfig.controls)
       
       Text(viewModel.totalFormattedTime)
         .font(theme.font.size(11))

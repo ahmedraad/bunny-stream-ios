@@ -11,12 +11,12 @@ struct CaptionsMenuView: View {
 
 extension CaptionsMenuView {
   func itemsMenuView() -> some View {
-    Menu {
+    Group {
       Button {
         viewModel.disableCaptions()
       } label: {
         HStack {
-          Text(Lingua.Settings.captionDisabled)
+          Text(Lingua.Settings.captionDisabled.addCheckmark(viewModel.caption == nil))
             .font(theme.font.size(14))
         }
       }
@@ -24,32 +24,10 @@ extension CaptionsMenuView {
         Button {
           viewModel.captionAction(caption)
         } label: {
-          HStack {
-            Text("\(caption.label) (\(caption.languageCode))")
-              .font(theme.font.size(14))
-            if caption == viewModel.caption {
-              Image(systemName: "checkmark")
-              Spacer()
-            }
-          }
+          Text("\(caption.label) (\(caption.languageCode))".addCheckmark(caption == viewModel.caption))
+            .font(theme.font.size(14))
         }
       }
-    } label: {
-      sectionView()
-    }
-    .font(theme.font.size(14))
-  }
-  
-  func sectionView() -> some View {
-    HStack {
-      Text(Lingua.Settings.captionMenuTitle)
-      
-      Spacer()
-      
-      theme.images.captions
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 30, height: 30)
-        .foregroundColor(.white)
     }
   }
 }
