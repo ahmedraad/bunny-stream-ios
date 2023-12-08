@@ -238,7 +238,7 @@ private extension SeekBarView {
     let xOffset = dragPosition
     let potentialOffset = xOffset - activeLabelTextSize.width / 2
     let offsetFromLeft = max(potentialOffset, .zero)
-    return min(offsetFromLeft, adjustedWidth - viewModel.scaledThumbnailSize.width)
+    return min(offsetFromLeft, adjustedWidth - activeLabelTextSize.width)
   }
   
   var safeDragPosition: CGFloat {

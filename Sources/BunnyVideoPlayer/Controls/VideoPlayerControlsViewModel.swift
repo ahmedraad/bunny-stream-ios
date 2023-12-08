@@ -60,7 +60,6 @@ extension VideoPlayerControlsViewModel {
   }
   
   func skipForward() {
-    guard playbackState != .ended else { return }
     let elapsedTime = min(seekBarViewModel.elapsedTime + 10, player.duration)
     seekBarViewModel.elapsedTime = elapsedTime
     player.jump(to: ceil(elapsedTime))

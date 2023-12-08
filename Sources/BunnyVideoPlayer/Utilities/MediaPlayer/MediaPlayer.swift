@@ -196,8 +196,9 @@ class MediaPlayer: AVPlayer {
   /// Jumps to a specified time in the media.
   ///
   /// - Parameters:
-  ///   - time: The time to which to jump. This does not start playing the media if not yet playing.
+  ///   - time: The time to which to jump. This starts playing the media if not yet playing.
   func jump(to time: Double) {
+    if state != .playing { play() }
     setPlaybackPosition(to: time)
   }
   
