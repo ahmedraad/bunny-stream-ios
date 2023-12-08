@@ -133,7 +133,7 @@ private extension BunnyLiveStreamViewModel {
     #if os(iOS)
     do {
       let session = AVAudioSession.sharedInstance()
-      try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker, .allowBluetooth])
+      try session.setCategory(.playAndRecord, mode: .voiceChat, options: [])
       try session.setActive(true)
     } catch {
       snackbarMessage = Lingua.Error.audioError

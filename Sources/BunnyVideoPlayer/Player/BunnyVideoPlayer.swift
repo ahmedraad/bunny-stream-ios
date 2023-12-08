@@ -1,3 +1,4 @@
+import AVFoundation
 import SwiftUI
 
 public struct BunnyVideoPlayer: View {
@@ -14,7 +15,7 @@ public struct BunnyVideoPlayer: View {
   internal var playerIcons: PlayerIcons?
   
   enum VideoLoadingState {
-    case loading, loaded(MediaPlayer, Video, Heatmap), failed, loaderFailed(VideoPlayerConfigLoader.VideoPlayerError)
+    case loading, loaded(MediaPlayer, Video, Heatmap), failed, loaderFailed(VideoPlayerError)
   }
   
   public var body: some View {
@@ -27,6 +28,10 @@ public struct BunnyVideoPlayer: View {
         BunnyVideoPlayerContainerView(player: mediaPlayer, video: video, heatmap: heatmap)
           .environment(\.videoPlayerTheme, theme)
           .environment(\.videoPlayerConfig, videoConfig)
+          .onAppear {
+            setupAudioSession()
+            mediaPlayer.play()
+          }
       case .failed:
         reloadButton()
       case .loaderFailed(let error):
@@ -39,6 +44,12 @@ public struct BunnyVideoPlayer: View {
               .frame(width: 40, height: 40)
             Text(Lingua.Player.videoNotFound)
               .font(theme.font.size(11))
+          }
+        case .audioError:
+          VStack(spacing: 8) {
+            Text(Lingua.Error.audioError)
+              .font(theme.font.size(13))
+            reloadButton()
           }
         default:
           reloadButton()
@@ -68,7 +79,7 @@ public struct BunnyVideoPlayer: View {
         self.theme.images = playerIcons
       }
       loadingState = .loaded(player, video, heatmap ?? Heatmap(data: [:]))
-    } catch let error as VideoPlayerConfigLoader.VideoPlayerError {
+    } catch let error as VideoPlayerError {
       loadingState = .loaderFailed(error)
     } catch {
       loadingState = .failed
@@ -87,5 +98,19 @@ private extension BunnyVideoPlayer {
         .frame(width: 40, height: 40)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
+  }
+  
+  
+  func setupAudioSession() {
+#if os(iOS)
+    do {
+      let session = AVAudioSession.sharedInstance()
+      try session.setCategory(.playback, mode: .moviePlayback, options: [])
+      try session.setActive(true)
+    } catch {
+      player?.stop()
+      loadingState = .loaderFailed(.audioError)
+    }
+#endif
   }
 }
