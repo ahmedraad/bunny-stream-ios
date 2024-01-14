@@ -5,7 +5,7 @@
 </p>
 <p align="center">
     <a href="https://www.swift.org" alt="Swift">
-        <img src="https://img.shields.io/badge/Swift-5.8-orange.svg" />
+        <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" />
     </a>
     <a href="./LICENSE" alt="License">
         <img src="https://img.shields.io/badge/Licence-MIT-green.svg" />

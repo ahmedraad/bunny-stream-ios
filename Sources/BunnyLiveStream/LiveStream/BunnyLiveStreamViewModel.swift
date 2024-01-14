@@ -90,11 +90,11 @@ extension BunnyLiveStreamViewModel {
   func startStreamingCountdown() {
     Task {
       do {
-        isCreatingVideo = true
+        await MainActor.run { isCreatingVideo = true }
         if videoId == nil {
           videoId = try await videoCreator.createVideo()
         }
-        isCreatingVideo = false
+        await MainActor.run { isCreatingVideo = false }
         streamConfig.videoId = videoId
         await startTimer()
       } catch let error as VideoCreator.VideoCreatorError {

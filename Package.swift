@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -21,7 +21,7 @@ let package = Package(
     .package(url: "https://github.com/onevcat/Kingfisher.git", branch: "master"),
     .package(url: "https://github.com/dagronf/SwiftSubtitles.git", branch: "main"),
     .package(url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios.git", exact: "3.18.4"),
-    .package(url: "https://github.com/shogo4405/HaishinKit.swift", branch: "main")
+    .package(url: "https://github.com/shogo4405/HaishinKit.swift", exact: "1.7.3")
   ],
   targets: [
     .target(
