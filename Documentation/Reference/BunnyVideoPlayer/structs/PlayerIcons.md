@@ -7,7 +7,7 @@ public struct PlayerIcons
 ```
 
 ## Methods
-### `init(play:pause:settings:volumeOn:volumeOff:fullscreenExpanded:fullscreenCollapsed:seekForward:seekBackward:playbackSpeed:quality:videoNotFound:reload:captions:)`
+### `init(play:pause:settings:volumeOn:volumeOff:fullscreenExpanded:fullscreenCollapsed:seekForward:seekBackward:playbackSpeed:quality:videoNotFound:reload:captions:captionsEnabled:)`
 
 ```swift
 public init(
@@ -24,7 +24,8 @@ public init(
   quality: Image = Image(systemName: "4k.tv"),
   videoNotFound: Image = Image(systemName: "play.slash.fill"),
   reload: Image = Image(systemName: "arrow.counterclockwise.circle"),
-  captions: Image = Image(systemName: "captions.bubble")
+  captions: Image = Image(systemName: "captions.bubble"),
+  captionsEnabled: Image = Image(systemName: "captions.bubble.fill")
 )
 ```
 
@@ -47,6 +48,7 @@ enhancing the user interface and experience.
   - videoNotFound: Icon displayed when a video is not found or unavailable. Defaults to a system-provided unavailable video icon.
   - reload: Icon for reloading the video. Defaults to a system-provided reload icon.
   - captions: Icon for toggling captions or subtitles. Defaults to a system-provided captions icon.
+  - captionsEnabled: Icon for captions or subtitles enabled. Defaults to a system-provided captions icon.
 
 #### Parameters
 
@@ -66,3 +68,4 @@ enhancing the user interface and experience.
 | videoNotFound | Icon displayed when a video is not found or unavailable. Defaults to a system-provided unavailable video icon. |
 | reload | Icon for reloading the video. Defaults to a system-provided reload icon. |
 | captions | Icon for toggling captions or subtitles. Defaults to a system-provided captions icon. |
+| captionsEnabled | Icon for captions or subtitles enabled. Defaults to a system-provided captions icon. |
