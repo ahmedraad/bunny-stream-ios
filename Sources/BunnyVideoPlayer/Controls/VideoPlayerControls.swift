@@ -110,6 +110,9 @@ extension VideoPlayerControls {
       HStack {
         timeView()
         Spacer()
+        captionsButton()
+          .shouldAddView(!viewModel.captionsMenuViewModel.captions.isEmpty)
+        
         optionsButton()
           .shouldAddView(controlsToCheck: .settings, in: videoPlayerConfig.controls)
         airplayButton()
@@ -187,6 +190,17 @@ extension VideoPlayerControls {
     }
     .buttonStyle(PlainButtonStyle())
     .frame(width: 40, height: 40)
+  }
+  
+  func captionsButton() -> some View {
+    Button {
+      viewModel.captionsMenuViewModel.toggleCaptions()
+    } label: {
+      (viewModel.captionsMenuViewModel.enableCaptions ? theme.images.captionsEnabled : theme.images.captions)
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 30, height: 30)
+        .foregroundColor(.white)
+    }
   }
   
   func seekBarView() -> some View {

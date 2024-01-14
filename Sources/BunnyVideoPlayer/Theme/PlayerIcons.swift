@@ -15,6 +15,7 @@ public struct PlayerIcons {
   var videoNotFound: Image
   var reload: Image
   var captions: Image
+  var captionsEnabled: Image
   
   /// `PlayerIcons` structure provides customizable image icons for video player controls.
   /// It allows to specify different icons for various player functionalities,
@@ -35,6 +36,7 @@ public struct PlayerIcons {
   ///   - videoNotFound: Icon displayed when a video is not found or unavailable. Defaults to a system-provided unavailable video icon.
   ///   - reload: Icon for reloading the video. Defaults to a system-provided reload icon.
   ///   - captions: Icon for toggling captions or subtitles. Defaults to a system-provided captions icon.
+  ///   - captionsEnabled: Icon for captions or subtitles enabled. Defaults to a system-provided captions icon.
   public init(
     play: Image = Image(systemName: "play.fill"),
     pause: Image = Image(systemName: "pause.fill"),
@@ -49,7 +51,8 @@ public struct PlayerIcons {
     quality: Image = Image(systemName: "4k.tv"),
     videoNotFound: Image = Image(systemName: "play.slash.fill"),
     reload: Image = Image(systemName: "arrow.counterclockwise.circle"),
-    captions: Image = Image(systemName: "captions.bubble")
+    captions: Image = Image(systemName: "captions.bubble"),
+    captionsEnabled: Image = Image(systemName: "captions.bubble.fill")
   ) {
     self.play = play
     self.pause = pause
@@ -65,5 +68,6 @@ public struct PlayerIcons {
     self.videoNotFound = videoNotFound
     self.reload = reload
     self.captions = captions
+    self.captionsEnabled = captionsEnabled
   }
 }

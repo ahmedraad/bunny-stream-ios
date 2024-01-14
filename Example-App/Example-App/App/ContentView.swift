@@ -16,7 +16,6 @@ struct ContentView: View {
   @State private var cdnHostname: String = ""
   @State private var libraryId: String = ""
   @State private var isStreamingPresented: Bool = false
-  @State private var videoId: String = ""
   
   var body: some View {
     NavigationStack {
@@ -30,18 +29,11 @@ struct ContentView: View {
             .environmentObject(dependenciesManager)
         }
         NavigationLink("Live Streaming") {
-          VStack(spacing: 40) {
-            TextField("Enter your VideoId", text: $videoId)
-              .autocapitalization(.none)
-              .disableAutocorrection(true)
-              .padding(.vertical, 8)
-              .defaultStyle()
-            Button {
-              isStreamingPresented.toggle()
-            } label: {
-              Image(systemName: "dot.radiowaves.left.and.right")
-              Text("Start streaming")
-            }
+          Button {
+            isStreamingPresented.toggle()
+          } label: {
+            Image(systemName: "dot.radiowaves.left.and.right")
+            Text("Start streaming")
           }
         }
       }
@@ -52,7 +44,6 @@ struct ContentView: View {
     .fullScreenCover(isPresented: $isStreamingPresented,
                      content: {
       BunnyLiveStreamView(
-        videoId: videoId,
         accessKey: dependenciesManager.accessKey,
         libraryId: dependenciesManager.libraryId
       )

@@ -37,9 +37,9 @@ class VideoUploaderViewModel: ObservableObject {
         }
         
         try await videoUploader.uploadVideos(with: infos)
-        errorMessage = nil
+        await updateErrorMessage(nil)
       } catch {
-        errorMessage = error.localizedDescription
+        await updateErrorMessage(error.localizedDescription)
       }
     }
   }
@@ -66,8 +66,13 @@ class VideoUploaderViewModel: ObservableObject {
         try await bunnyNetService.deleteVideo(info.videoUUID.uuidString, libraryId: info.info.libraryId)
         try videoUploader.removeUpload(for: info)
       } catch {
-        errorMessage = error.localizedDescription
+        await updateErrorMessage(error.localizedDescription)
       }
     }
+  }
+  
+  @MainActor
+  func updateErrorMessage(_ error: String?) {
+    errorMessage = error
   }
 }

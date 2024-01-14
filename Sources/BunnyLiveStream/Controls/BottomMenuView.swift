@@ -45,6 +45,7 @@ private extension BottomMenuView {
         }
       }
     }
+    .disabled(viewModel.isCreatingVideo)
     .frame(width: 65, height: 65)
   }
   

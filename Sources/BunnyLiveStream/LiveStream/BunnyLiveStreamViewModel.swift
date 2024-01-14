@@ -4,7 +4,7 @@ import SwiftUI
 import HaishinKit
 
 final class BunnyLiveStreamViewModel: ObservableObject {
-  private let streamConfig: StreamConfig
+  private var streamConfig: StreamConfig
   private var retryCount: Int = 0
   private let maxRetryCount: Int = 5
   private var notifications = NotificationCenter.default
@@ -14,18 +14,23 @@ final class BunnyLiveStreamViewModel: ObservableObject {
   private var countdownTimerPublisher: AnyCancellable?
   private var startStreamingTime: Date?
   private var totalCountdownDuration: Int = 4
+  private var videoId: String?
+  private let videoCreator: VideoCreator
   
   @Published var snackbarMessage: String? = nil
   @Published var countdownProgress: CGFloat = 1.0
   @Published var state: StreamState = .notStreaming
   @Published var isMuted = false
+  @Published var isCreatingVideo = false
   @Published var rtmpStream: RTMPStream
   @Published var currentPosition: AVCaptureDevice.Position = .back
   @Published var elapsedTime: String?
   
-  init(streamConfig: StreamConfig) {
+  init(streamConfig: StreamConfig,
+       videoCreator: VideoCreator) {
     self.streamConfig = streamConfig
     self.rtmpStream = RTMPStream(connection: rtmpConnection)
+    self.videoCreator = videoCreator
   }
 }
 
@@ -70,6 +75,7 @@ extension BunnyLiveStreamViewModel {
   }
   
   func stopPublish() {
+    videoId = nil
     setIsIdleTimerDisabled(false)
     state = .notStreaming
     stopStreamingTimer()
@@ -82,6 +88,35 @@ extension BunnyLiveStreamViewModel {
 // MARK: - Controls
 extension BunnyLiveStreamViewModel {
   func startStreamingCountdown() {
+    Task {
+      do {
+        isCreatingVideo = true
+        if videoId == nil {
+          videoId = try await videoCreator.createVideo()
+        }
+        isCreatingVideo = false
+        streamConfig.videoId = videoId
+        await startTimer()
+      } catch let error as VideoCreator.VideoCreatorError {
+        await MainActor.run {
+          snackbarMessage = error.errorDescription
+        }
+      } catch {
+        await MainActor.run {
+          snackbarMessage = "Failed to start streaming!"
+        }
+      }
+    }
+  }
+  
+  func stopCountdownStreamingTimer() {
+    countdownTimerPublisher?.cancel()
+    countdownTimerPublisher = nil
+    state = .notStreaming
+  }
+  
+  @MainActor
+  private func startTimer() {
     state = .preparing
     countdownProgress = 1.0
     countdownTimerPublisher = Timer.publish(every: 0.05, on: .main, in: .common)
@@ -89,12 +124,7 @@ extension BunnyLiveStreamViewModel {
       .sink { [weak self] _ in
         self?.updateStreamingCountdown()
       }
-  }
-  
-  func stopCountdownStreamingTimer() {
-    countdownTimerPublisher?.cancel()
-    countdownTimerPublisher = nil
-    state = .notStreaming
+
   }
   
   func tapScreen(touchPoint: CGPoint) {

@@ -20,6 +20,11 @@ private extension ValidatedChapterList {
   static func withGapsAndRests(for chapters: [Chapter], duration: Double) -> [Chapter] {
     var all: [Chapter] = []
     
+    // Check if the first chapter starts after time 0 and insert a 'Gap' chapter if necessary
+    if !chapters.isEmpty, let firstChapter = chapters.first, firstChapter.start > 0 {
+      all.append(Chapter(start: 0, end: firstChapter.start, type: .gap))
+    }
+    
     for i in chapters.indices {
       let chapter = chapters[i]
       

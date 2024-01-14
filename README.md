@@ -184,7 +184,7 @@ struct VideoPlayerDemoView: View {
 
 ### 4. BunnyLiveStream
 
-We provide `BunnyLiveStreamView`, initialize a new instance by providing the necessary configurations such as the access key, video ID, and library ID. Below is an example showcasing how to integrate it within a SwiftUI view.
+We provide `BunnyLiveStreamView`, initialize a new instance by providing the necessary configurations such as the access key, and library ID. Below is an example showcasing how to integrate it within a SwiftUI view.
 
 ```swift
 import BunnyLiveStream
@@ -197,7 +197,6 @@ struct VideoStreamDemoView: View {
       .fullScreenCover(isPresented: $isStreamingPresented,
                        content: {
         BunnyLiveStreamView(
-          videoId: "<video_id>",
           accessKey: "<access_key>",
           libraryId: <library_id>
         )
@@ -206,11 +205,9 @@ struct VideoStreamDemoView: View {
 }
 ```
 
-In this example, BunnyLiveStreamView is presented as a full-screen cover when isStreamingPresented is true. Replace <video_id>, <access_key>, and <library_id> with your specific stream's details.
+In this example, BunnyLiveStreamView is presented as a full-screen cover when isStreamingPresented is true. Replace <access_key>, and <library_id> with your specific stream's details.
 
 Parameters:
-
-- `videoId:` Your unique key for authentication.
 
 - `accessKey:` The ID of the specific video you want to stream.
 

@@ -3,7 +3,7 @@ import SwiftUI
 
 struct VideoPlayerConfigLoader {
   func load(libraryId: Int, videoId: String) async throws -> VideoConfigResponse {
-    guard let url = URL(string: "https://api.bunny.net/library/\(libraryId)/videos/\(videoId)/play") else {
+    guard let url = URL(string: "https://video.bunnycdn.com/library/\(libraryId)/videos/\(videoId)/play") else {
       throw VideoPlayerError.unknownError
     }
     

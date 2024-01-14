@@ -62,6 +62,7 @@ let package = Package(
     .target(
       name: "BunnyLiveStream",
       dependencies: [
+        .byName(name: "BunnyStreamSDK"),
         .product(name: "HaishinKit", package: "HaishinKit.swift")
       ],
       path: "Sources/BunnyLiveStream",

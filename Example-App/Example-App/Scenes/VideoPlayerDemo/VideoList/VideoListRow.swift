@@ -67,7 +67,7 @@ extension VideoListRow {
     HStack {
       Spacer()
       if video.encodeProgress != 100 {
-        capsuleText(string: "Uploading", foregroundColor: .purple)
+        capsuleText(string: "Processing", foregroundColor: .purple)
       } else {
         capsuleText(string: "\(video.views) views")
       }

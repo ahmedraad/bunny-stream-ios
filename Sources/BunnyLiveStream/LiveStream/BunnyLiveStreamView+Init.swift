@@ -4,11 +4,10 @@ public extension BunnyLiveStreamView {
   /// Initializes a new instance of the BunnyLiveStreamView.
   ///
   /// This initializer sets up the video stream view with the necessary configurations
-  /// such as access key, video ID, library ID
+  /// such as access key,  library ID
   ///
   /// - Parameters:
   ///   - accessKey: The access key for authentication.
-  ///   - videoId: The unique ID of the video to be played.
   ///   - libraryId: The ID of the video library.
   ///
   /// Usage Example:
@@ -19,7 +18,6 @@ public extension BunnyLiveStreamView {
   ///     .fullScreenCover(isPresented: $isStreamingPresented,
   ///                      content: {
   ///      BunnyLiveStreamView(
-  ///       videoId: "<video_id>",
   ///       accessKey: "<access_key>",
   ///       libraryId: <library_id>
   ///      )
@@ -28,12 +26,12 @@ public extension BunnyLiveStreamView {
   /// }
   /// ```
   init(
-    videoId: String,
     accessKey: String,
     libraryId: Int
   ) {
-    let config = StreamConfig(videoId: videoId, accessKey: accessKey, libraryId: libraryId)
-    let streamViewModel = BunnyLiveStreamViewModel(streamConfig: config)
+    let config = StreamConfig(accessKey: accessKey, libraryId: libraryId)
+    let videoCreator = VideoCreator(bunnyStreamSDK: .init(accessKey: accessKey), libraryId: libraryId)
+    let streamViewModel = BunnyLiveStreamViewModel(streamConfig: config, videoCreator: videoCreator)
     self.init(streamViewModel: streamViewModel)
   }
 }
