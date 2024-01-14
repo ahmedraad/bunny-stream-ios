@@ -1,0 +1,11 @@
+// This file was generated with Lingua command line tool. Please do not change it!
+// Source: https://github.com/poviolabs/Lingua
+
+"caption_menu_title" = "Captions";
+"caption_disabled" = "Disabled";
+"playback_speed_menu_title" = "Speed";
+"playback_speed_normal" = "Normal";
+"quality_menu_title" = "Quality";
+"quality_auto" = "Auto";
+"cancel_action" = "Cancel";
+"actions_title" = "Settings";

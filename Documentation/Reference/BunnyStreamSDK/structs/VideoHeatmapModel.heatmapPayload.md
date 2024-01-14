@@ -1,0 +1,62 @@
+**STRUCT**
+
+# `VideoHeatmapModel.heatmapPayload`
+
+```swift
+public struct heatmapPayload: Codable, Hashable, Sendable
+```
+
+The heatmap of the video. 100 is the highest percentage of watch time.
+
+- Remark: Generated from `#/components/schemas/VideoHeatmapModel/heatmap`.
+
+## Properties
+### `additionalProperties`
+
+```swift
+public var additionalProperties: [String: Swift.Int32]
+```
+
+A container of undocumented properties.
+
+## Methods
+### `init(additionalProperties:)`
+
+```swift
+public init(additionalProperties: [String: Swift.Int32] = .init())
+```
+
+Creates a new `heatmapPayload`.
+
+- Parameters:
+  - additionalProperties: A container of undocumented properties.
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| additionalProperties | A container of undocumented properties. |
+
+### `init(from:)`
+
+```swift
+public init(from decoder: any Decoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| decoder | The decoder to read data from. |
+
+### `encode(to:)`
+
+```swift
+public func encode(to encoder: any Encoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| encoder | The encoder to write data to. |
