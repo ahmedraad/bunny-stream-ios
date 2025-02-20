@@ -15,5 +15,5 @@ Get Video Heatmap
 ### `id`
 
 ```swift
-public static let id: String = "Video_GetVideoHeatmap"
+public static let id: Swift.String = "Video_GetVideoHeatmap"
 ```

@@ -33,7 +33,10 @@ The text description label for the caption
 ### `init(srclang:label:)`
 
 ```swift
-public init(srclang: Swift.String? = nil, label: Swift.String? = nil)
+public init(
+    srclang: Swift.String? = nil,
+    label: Swift.String? = nil
+)
 ```
 
 Creates a new `CaptionModel`.

@@ -43,7 +43,11 @@ The response status code
 ### `init(success:message:statusCode:)`
 
 ```swift
-public init(success: Swift.Bool, message: Swift.String? = nil, statusCode: Swift.Int32)
+public init(
+    success: Swift.Bool,
+    message: Swift.String? = nil,
+    statusCode: Swift.Int32
+)
 ```
 
 Creates a new `StatusModel`.

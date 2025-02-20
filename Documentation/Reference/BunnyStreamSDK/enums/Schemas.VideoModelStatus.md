@@ -3,7 +3,7 @@
 # `Schemas.VideoModelStatus`
 
 ```swift
-@frozen public enum VideoModelStatus: Int, Codable, Hashable, Sendable
+@frozen public enum VideoModelStatus: Int, Codable, Hashable, Sendable, CaseIterable
 ```
 
 0 = Created

@@ -3,7 +3,7 @@
 # `Schemas.Severity`
 
 ```swift
-@frozen public enum Severity: Int, Codable, Hashable, Sendable
+@frozen public enum Severity: Int, Codable, Hashable, Sendable, CaseIterable
 ```
 
 0 = Undefined

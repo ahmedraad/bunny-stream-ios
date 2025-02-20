@@ -43,7 +43,11 @@ Video time in ms to extract the main video thumbnail.
 ### `init(title:collectionId:thumbnailTime:)`
 
 ```swift
-public init(title: Swift.String, collectionId: Swift.String? = nil, thumbnailTime: Swift.Int32? = nil)
+public init(
+    title: Swift.String,
+    collectionId: Swift.String? = nil,
+    thumbnailTime: Swift.Int32? = nil
+)
 ```
 
 Creates a new `CreateVideoModel`.

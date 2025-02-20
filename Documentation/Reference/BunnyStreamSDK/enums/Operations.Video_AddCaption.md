@@ -15,5 +15,5 @@ Add Caption
 ### `id`
 
 ```swift
-public static let id: String = "Video_AddCaption"
+public static let id: Swift.String = "Video_AddCaption"
 ```

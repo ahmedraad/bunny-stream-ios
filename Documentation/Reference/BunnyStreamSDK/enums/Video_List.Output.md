@@ -46,7 +46,7 @@ HTTP response code: `500 internalServerError`.
 ### `undocumented(statusCode:_:)`
 
 ```swift
-case undocumented(statusCode: Int, OpenAPIRuntime.UndocumentedPayload)
+case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
 ```
 
 Undocumented response.
@@ -68,6 +68,18 @@ The associated value of the enum case if `self` is `.ok`.
 ### `unauthorized`
 
 ```swift
+public static var unauthorized: Self
+```
+
+The request authorization failed
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/get(Video_List)/responses/401`.
+
+HTTP response code: `401 unauthorized`.
+
+### `unauthorized`
+
+```swift
 public var unauthorized: Operations.Video_List.Output.Unauthorized
 ```
 
@@ -75,6 +87,18 @@ The associated value of the enum case if `self` is `.unauthorized`.
 
 - Throws: An error if `self` is not `.unauthorized`.
 - SeeAlso: `.unauthorized`.
+
+### `internalServerError`
+
+```swift
+public static var internalServerError: Self
+```
+
+Internal Server Error
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/get(Video_List)/responses/500`.
+
+HTTP response code: `500 internalServerError`.
 
 ### `internalServerError`
 

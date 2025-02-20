@@ -11,7 +11,7 @@ public struct Client: APIProtocol
 
 ```swift
 public init(
-    serverURL: URL,
+    serverURL: Foundation.URL,
     configuration: Configuration = .init(),
     transport: any ClientTransport,
     middlewares: [any ClientMiddleware] = []
@@ -39,8 +39,7 @@ Creates a new client.
 ### `Collection_GetCollection(_:)`
 
 ```swift
-public func Collection_GetCollection(_ input: Operations.Collection_GetCollection.Input) async throws
-    -> Operations.Collection_GetCollection.Output
+public func Collection_GetCollection(_ input: Operations.Collection_GetCollection.Input) async throws -> Operations.Collection_GetCollection.Output
 ```
 
 Get Collection
@@ -51,8 +50,7 @@ Get Collection
 ### `Collection_UpdateCollection(_:)`
 
 ```swift
-public func Collection_UpdateCollection(_ input: Operations.Collection_UpdateCollection.Input) async throws
-    -> Operations.Collection_UpdateCollection.Output
+public func Collection_UpdateCollection(_ input: Operations.Collection_UpdateCollection.Input) async throws -> Operations.Collection_UpdateCollection.Output
 ```
 
 Update Collection
@@ -63,8 +61,7 @@ Update Collection
 ### `Collection_DeleteCollection(_:)`
 
 ```swift
-public func Collection_DeleteCollection(_ input: Operations.Collection_DeleteCollection.Input) async throws
-    -> Operations.Collection_DeleteCollection.Output
+public func Collection_DeleteCollection(_ input: Operations.Collection_DeleteCollection.Input) async throws -> Operations.Collection_DeleteCollection.Output
 ```
 
 Delete Collection
@@ -75,8 +72,7 @@ Delete Collection
 ### `Collection_List(_:)`
 
 ```swift
-public func Collection_List(_ input: Operations.Collection_List.Input) async throws
-    -> Operations.Collection_List.Output
+public func Collection_List(_ input: Operations.Collection_List.Input) async throws -> Operations.Collection_List.Output
 ```
 
 Get Collection List
@@ -87,8 +83,7 @@ Get Collection List
 ### `Collection_CreateCollection(_:)`
 
 ```swift
-public func Collection_CreateCollection(_ input: Operations.Collection_CreateCollection.Input) async throws
-    -> Operations.Collection_CreateCollection.Output
+public func Collection_CreateCollection(_ input: Operations.Collection_CreateCollection.Input) async throws -> Operations.Collection_CreateCollection.Output
 ```
 
 Create Collection
@@ -99,8 +94,7 @@ Create Collection
 ### `Video_GetVideo(_:)`
 
 ```swift
-public func Video_GetVideo(_ input: Operations.Video_GetVideo.Input) async throws
-    -> Operations.Video_GetVideo.Output
+public func Video_GetVideo(_ input: Operations.Video_GetVideo.Input) async throws -> Operations.Video_GetVideo.Output
 ```
 
 Get Video
@@ -111,8 +105,7 @@ Get Video
 ### `Video_UpdateVideo(_:)`
 
 ```swift
-public func Video_UpdateVideo(_ input: Operations.Video_UpdateVideo.Input) async throws
-    -> Operations.Video_UpdateVideo.Output
+public func Video_UpdateVideo(_ input: Operations.Video_UpdateVideo.Input) async throws -> Operations.Video_UpdateVideo.Output
 ```
 
 Update Video
@@ -123,8 +116,7 @@ Update Video
 ### `Video_UploadVideo(_:)`
 
 ```swift
-public func Video_UploadVideo(_ input: Operations.Video_UploadVideo.Input) async throws
-    -> Operations.Video_UploadVideo.Output
+public func Video_UploadVideo(_ input: Operations.Video_UploadVideo.Input) async throws -> Operations.Video_UploadVideo.Output
 ```
 
 Upload Video
@@ -135,8 +127,7 @@ Upload Video
 ### `Video_DeleteVideo(_:)`
 
 ```swift
-public func Video_DeleteVideo(_ input: Operations.Video_DeleteVideo.Input) async throws
-    -> Operations.Video_DeleteVideo.Output
+public func Video_DeleteVideo(_ input: Operations.Video_DeleteVideo.Input) async throws -> Operations.Video_DeleteVideo.Output
 ```
 
 Delete Video
@@ -147,8 +138,7 @@ Delete Video
 ### `Video_GetVideoHeatmap(_:)`
 
 ```swift
-public func Video_GetVideoHeatmap(_ input: Operations.Video_GetVideoHeatmap.Input) async throws
-    -> Operations.Video_GetVideoHeatmap.Output
+public func Video_GetVideoHeatmap(_ input: Operations.Video_GetVideoHeatmap.Input) async throws -> Operations.Video_GetVideoHeatmap.Output
 ```
 
 Get Video Heatmap
@@ -159,8 +149,7 @@ Get Video Heatmap
 ### `Video_GetVideoStatistics(_:)`
 
 ```swift
-public func Video_GetVideoStatistics(_ input: Operations.Video_GetVideoStatistics.Input) async throws
-    -> Operations.Video_GetVideoStatistics.Output
+public func Video_GetVideoStatistics(_ input: Operations.Video_GetVideoStatistics.Input) async throws -> Operations.Video_GetVideoStatistics.Output
 ```
 
 Get Video Statistics
@@ -171,8 +160,7 @@ Get Video Statistics
 ### `Video_ReencodeVideo(_:)`
 
 ```swift
-public func Video_ReencodeVideo(_ input: Operations.Video_ReencodeVideo.Input) async throws
-    -> Operations.Video_ReencodeVideo.Output
+public func Video_ReencodeVideo(_ input: Operations.Video_ReencodeVideo.Input) async throws -> Operations.Video_ReencodeVideo.Output
 ```
 
 Reencode Video
@@ -194,8 +182,7 @@ List Videos
 ### `Video_CreateVideo(_:)`
 
 ```swift
-public func Video_CreateVideo(_ input: Operations.Video_CreateVideo.Input) async throws
-    -> Operations.Video_CreateVideo.Output
+public func Video_CreateVideo(_ input: Operations.Video_CreateVideo.Input) async throws -> Operations.Video_CreateVideo.Output
 ```
 
 Create Video
@@ -206,8 +193,7 @@ Create Video
 ### `Video_SetThumbnail(_:)`
 
 ```swift
-public func Video_SetThumbnail(_ input: Operations.Video_SetThumbnail.Input) async throws
-    -> Operations.Video_SetThumbnail.Output
+public func Video_SetThumbnail(_ input: Operations.Video_SetThumbnail.Input) async throws -> Operations.Video_SetThumbnail.Output
 ```
 
 Set Thumbnail
@@ -218,8 +204,7 @@ Set Thumbnail
 ### `Video_FetchNewVideo(_:)`
 
 ```swift
-public func Video_FetchNewVideo(_ input: Operations.Video_FetchNewVideo.Input) async throws
-    -> Operations.Video_FetchNewVideo.Output
+public func Video_FetchNewVideo(_ input: Operations.Video_FetchNewVideo.Input) async throws -> Operations.Video_FetchNewVideo.Output
 ```
 
 Fetch Video
@@ -230,8 +215,7 @@ Fetch Video
 ### `Video_AddCaption(_:)`
 
 ```swift
-public func Video_AddCaption(_ input: Operations.Video_AddCaption.Input) async throws
-    -> Operations.Video_AddCaption.Output
+public func Video_AddCaption(_ input: Operations.Video_AddCaption.Input) async throws -> Operations.Video_AddCaption.Output
 ```
 
 Add Caption
@@ -242,8 +226,7 @@ Add Caption
 ### `Video_DeleteCaption(_:)`
 
 ```swift
-public func Video_DeleteCaption(_ input: Operations.Video_DeleteCaption.Input) async throws
-    -> Operations.Video_DeleteCaption.Output
+public func Video_DeleteCaption(_ input: Operations.Video_DeleteCaption.Input) async throws -> Operations.Video_DeleteCaption.Output
 ```
 
 Delete Caption

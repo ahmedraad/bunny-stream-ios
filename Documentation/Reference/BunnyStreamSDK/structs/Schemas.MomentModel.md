@@ -33,7 +33,10 @@ The timestamp of the moment in seconds
 ### `init(label:timestamp:)`
 
 ```swift
-public init(label: Swift.String, timestamp: Swift.Int32)
+public init(
+    label: Swift.String,
+    timestamp: Swift.Int32
+)
 ```
 
 Creates a new `MomentModel`.

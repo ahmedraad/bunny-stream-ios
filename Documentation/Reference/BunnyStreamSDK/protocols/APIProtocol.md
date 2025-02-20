@@ -12,8 +12,7 @@ A type that performs HTTP operations defined by the OpenAPI document.
 ### `Collection_GetCollection(_:)`
 
 ```swift
-func Collection_GetCollection(_ input: Operations.Collection_GetCollection.Input) async throws
-    -> Operations.Collection_GetCollection.Output
+func Collection_GetCollection(_ input: Operations.Collection_GetCollection.Input) async throws -> Operations.Collection_GetCollection.Output
 ```
 
 Get Collection
@@ -24,8 +23,7 @@ Get Collection
 ### `Collection_UpdateCollection(_:)`
 
 ```swift
-func Collection_UpdateCollection(_ input: Operations.Collection_UpdateCollection.Input) async throws
-    -> Operations.Collection_UpdateCollection.Output
+func Collection_UpdateCollection(_ input: Operations.Collection_UpdateCollection.Input) async throws -> Operations.Collection_UpdateCollection.Output
 ```
 
 Update Collection
@@ -36,8 +34,7 @@ Update Collection
 ### `Collection_DeleteCollection(_:)`
 
 ```swift
-func Collection_DeleteCollection(_ input: Operations.Collection_DeleteCollection.Input) async throws
-    -> Operations.Collection_DeleteCollection.Output
+func Collection_DeleteCollection(_ input: Operations.Collection_DeleteCollection.Input) async throws -> Operations.Collection_DeleteCollection.Output
 ```
 
 Delete Collection
@@ -59,8 +56,7 @@ Get Collection List
 ### `Collection_CreateCollection(_:)`
 
 ```swift
-func Collection_CreateCollection(_ input: Operations.Collection_CreateCollection.Input) async throws
-    -> Operations.Collection_CreateCollection.Output
+func Collection_CreateCollection(_ input: Operations.Collection_CreateCollection.Input) async throws -> Operations.Collection_CreateCollection.Output
 ```
 
 Create Collection
@@ -82,8 +78,7 @@ Get Video
 ### `Video_UpdateVideo(_:)`
 
 ```swift
-func Video_UpdateVideo(_ input: Operations.Video_UpdateVideo.Input) async throws
-    -> Operations.Video_UpdateVideo.Output
+func Video_UpdateVideo(_ input: Operations.Video_UpdateVideo.Input) async throws -> Operations.Video_UpdateVideo.Output
 ```
 
 Update Video
@@ -94,8 +89,7 @@ Update Video
 ### `Video_UploadVideo(_:)`
 
 ```swift
-func Video_UploadVideo(_ input: Operations.Video_UploadVideo.Input) async throws
-    -> Operations.Video_UploadVideo.Output
+func Video_UploadVideo(_ input: Operations.Video_UploadVideo.Input) async throws -> Operations.Video_UploadVideo.Output
 ```
 
 Upload Video
@@ -106,8 +100,7 @@ Upload Video
 ### `Video_DeleteVideo(_:)`
 
 ```swift
-func Video_DeleteVideo(_ input: Operations.Video_DeleteVideo.Input) async throws
-    -> Operations.Video_DeleteVideo.Output
+func Video_DeleteVideo(_ input: Operations.Video_DeleteVideo.Input) async throws -> Operations.Video_DeleteVideo.Output
 ```
 
 Delete Video
@@ -118,8 +111,7 @@ Delete Video
 ### `Video_GetVideoHeatmap(_:)`
 
 ```swift
-func Video_GetVideoHeatmap(_ input: Operations.Video_GetVideoHeatmap.Input) async throws
-    -> Operations.Video_GetVideoHeatmap.Output
+func Video_GetVideoHeatmap(_ input: Operations.Video_GetVideoHeatmap.Input) async throws -> Operations.Video_GetVideoHeatmap.Output
 ```
 
 Get Video Heatmap
@@ -130,8 +122,7 @@ Get Video Heatmap
 ### `Video_GetVideoStatistics(_:)`
 
 ```swift
-func Video_GetVideoStatistics(_ input: Operations.Video_GetVideoStatistics.Input) async throws
-    -> Operations.Video_GetVideoStatistics.Output
+func Video_GetVideoStatistics(_ input: Operations.Video_GetVideoStatistics.Input) async throws -> Operations.Video_GetVideoStatistics.Output
 ```
 
 Get Video Statistics
@@ -142,8 +133,7 @@ Get Video Statistics
 ### `Video_ReencodeVideo(_:)`
 
 ```swift
-func Video_ReencodeVideo(_ input: Operations.Video_ReencodeVideo.Input) async throws
-    -> Operations.Video_ReencodeVideo.Output
+func Video_ReencodeVideo(_ input: Operations.Video_ReencodeVideo.Input) async throws -> Operations.Video_ReencodeVideo.Output
 ```
 
 Reencode Video
@@ -165,8 +155,7 @@ List Videos
 ### `Video_CreateVideo(_:)`
 
 ```swift
-func Video_CreateVideo(_ input: Operations.Video_CreateVideo.Input) async throws
-    -> Operations.Video_CreateVideo.Output
+func Video_CreateVideo(_ input: Operations.Video_CreateVideo.Input) async throws -> Operations.Video_CreateVideo.Output
 ```
 
 Create Video
@@ -177,8 +166,7 @@ Create Video
 ### `Video_SetThumbnail(_:)`
 
 ```swift
-func Video_SetThumbnail(_ input: Operations.Video_SetThumbnail.Input) async throws
-    -> Operations.Video_SetThumbnail.Output
+func Video_SetThumbnail(_ input: Operations.Video_SetThumbnail.Input) async throws -> Operations.Video_SetThumbnail.Output
 ```
 
 Set Thumbnail
@@ -189,8 +177,7 @@ Set Thumbnail
 ### `Video_FetchNewVideo(_:)`
 
 ```swift
-func Video_FetchNewVideo(_ input: Operations.Video_FetchNewVideo.Input) async throws
-    -> Operations.Video_FetchNewVideo.Output
+func Video_FetchNewVideo(_ input: Operations.Video_FetchNewVideo.Input) async throws -> Operations.Video_FetchNewVideo.Output
 ```
 
 Fetch Video
@@ -212,8 +199,7 @@ Add Caption
 ### `Video_DeleteCaption(_:)`
 
 ```swift
-func Video_DeleteCaption(_ input: Operations.Video_DeleteCaption.Input) async throws
-    -> Operations.Video_DeleteCaption.Output
+func Video_DeleteCaption(_ input: Operations.Video_DeleteCaption.Input) async throws -> Operations.Video_DeleteCaption.Output
 ```
 
 Delete Caption

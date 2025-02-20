@@ -10,5 +10,5 @@ public enum CodingKeys: String, CodingKey
 ### `name`
 
 ```swift
-public enum CodingKeys: String, CodingKey { case name
+case name
 ```

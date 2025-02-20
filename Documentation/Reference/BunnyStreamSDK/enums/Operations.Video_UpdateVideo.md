@@ -15,5 +15,5 @@ Update Video
 ### `id`
 
 ```swift
-public static let id: String = "Video_UpdateVideo"
+public static let id: Swift.String = "Video_UpdateVideo"
 ```

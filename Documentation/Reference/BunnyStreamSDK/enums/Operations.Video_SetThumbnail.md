@@ -15,5 +15,5 @@ Set Thumbnail
 ### `id`
 
 ```swift
-public static let id: String = "Video_SetThumbnail"
+public static let id: Swift.String = "Video_SetThumbnail"
 ```

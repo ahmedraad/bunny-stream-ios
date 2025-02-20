@@ -37,7 +37,11 @@ public var srclang: Swift.String
 ### `init(libraryId:videoId:srclang:)`
 
 ```swift
-public init(libraryId: Swift.Int64, videoId: Swift.String, srclang: Swift.String)
+public init(
+    libraryId: Swift.Int64,
+    videoId: Swift.String,
+    srclang: Swift.String
+)
 ```
 
 Creates a new `Path`.

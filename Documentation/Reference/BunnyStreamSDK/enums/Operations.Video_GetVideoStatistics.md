@@ -15,5 +15,5 @@ Get Video Statistics
 ### `id`
 
 ```swift
-public static let id: String = "Video_GetVideoStatistics"
+public static let id: Swift.String = "Video_GetVideoStatistics"
 ```

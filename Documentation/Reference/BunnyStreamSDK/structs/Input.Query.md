@@ -31,7 +31,10 @@ public var thumbnailTime: Swift.Int32?
 ### `init(collectionId:thumbnailTime:)`
 
 ```swift
-public init(collectionId: Swift.String? = nil, thumbnailTime: Swift.Int32? = nil)
+public init(
+    collectionId: Swift.String? = nil,
+    thumbnailTime: Swift.Int32? = nil
+)
 ```
 
 Creates a new `Query`.

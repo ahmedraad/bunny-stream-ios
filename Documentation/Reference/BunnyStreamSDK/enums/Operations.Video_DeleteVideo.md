@@ -15,5 +15,5 @@ Delete Video
 ### `id`
 
 ```swift
-public static let id: String = "Video_DeleteVideo"
+public static let id: Swift.String = "Video_DeleteVideo"
 ```

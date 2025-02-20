@@ -15,5 +15,5 @@ Delete Collection
 ### `id`
 
 ```swift
-public static let id: String = "Collection_DeleteCollection"
+public static let id: Swift.String = "Collection_DeleteCollection"
 ```

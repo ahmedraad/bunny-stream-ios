@@ -12,5 +12,5 @@ Server URLs defined in the OpenAPI document.
 ### `server1()`
 
 ```swift
-public static func server1() throws -> URL
+public static func server1() throws -> Foundation.URL
 ```

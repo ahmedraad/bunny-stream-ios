@@ -43,7 +43,11 @@ The end time of the chapter in seconds
 ### `init(title:start:end:)`
 
 ```swift
-public init(title: Swift.String, start: Swift.Int32, end: Swift.Int32)
+public init(
+    title: Swift.String,
+    start: Swift.Int32,
+    end: Swift.Int32
+)
 ```
 
 Creates a new `ChapterModel`.

@@ -15,5 +15,5 @@ Create Video
 ### `id`
 
 ```swift
-public static let id: String = "Video_CreateVideo"
+public static let id: Swift.String = "Video_CreateVideo"
 ```

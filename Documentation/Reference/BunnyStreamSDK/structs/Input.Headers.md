@@ -12,19 +12,14 @@ public struct Headers: Sendable, Hashable
 ### `accept`
 
 ```swift
-public var accept:
-    [OpenAPIRuntime.AcceptHeaderContentType<Operations.Video_DeleteCaption.AcceptableContentType>]
+public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.Video_DeleteCaption.AcceptableContentType>]
 ```
 
 ## Methods
 ### `init(accept:)`
 
 ```swift
-public init(
-    accept: [OpenAPIRuntime.AcceptHeaderContentType<
-        Operations.Video_DeleteCaption.AcceptableContentType
-    >] = .defaultValues()
-)
+public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.Video_DeleteCaption.AcceptableContentType>] = .defaultValues())
 ```
 
 Creates a new `Headers`.

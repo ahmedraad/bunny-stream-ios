@@ -70,7 +70,7 @@ HTTP response code: `500 internalServerError`.
 ### `undocumented(statusCode:_:)`
 
 ```swift
-case undocumented(statusCode: Int, OpenAPIRuntime.UndocumentedPayload)
+case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
 ```
 
 Undocumented response.
@@ -92,6 +92,18 @@ The associated value of the enum case if `self` is `.ok`.
 ### `badRequest`
 
 ```swift
+public static var badRequest: Self
+```
+
+Failed deleting the captions
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/captions/{srclang}/delete(Video_DeleteCaption)/responses/400`.
+
+HTTP response code: `400 badRequest`.
+
+### `badRequest`
+
+```swift
 public var badRequest: Operations.Video_DeleteCaption.Output.BadRequest
 ```
 
@@ -99,6 +111,18 @@ The associated value of the enum case if `self` is `.badRequest`.
 
 - Throws: An error if `self` is not `.badRequest`.
 - SeeAlso: `.badRequest`.
+
+### `unauthorized`
+
+```swift
+public static var unauthorized: Self
+```
+
+The request authorization failed
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/captions/{srclang}/delete(Video_DeleteCaption)/responses/401`.
+
+HTTP response code: `401 unauthorized`.
 
 ### `unauthorized`
 
@@ -114,6 +138,18 @@ The associated value of the enum case if `self` is `.unauthorized`.
 ### `notFound`
 
 ```swift
+public static var notFound: Self
+```
+
+The requested video was not found
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/captions/{srclang}/delete(Video_DeleteCaption)/responses/404`.
+
+HTTP response code: `404 notFound`.
+
+### `notFound`
+
+```swift
 public var notFound: Operations.Video_DeleteCaption.Output.NotFound
 ```
 
@@ -121,6 +157,18 @@ The associated value of the enum case if `self` is `.notFound`.
 
 - Throws: An error if `self` is not `.notFound`.
 - SeeAlso: `.notFound`.
+
+### `internalServerError`
+
+```swift
+public static var internalServerError: Self
+```
+
+Internal Server Error
+
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/captions/{srclang}/delete(Video_DeleteCaption)/responses/500`.
+
+HTTP response code: `500 internalServerError`.
 
 ### `internalServerError`
 

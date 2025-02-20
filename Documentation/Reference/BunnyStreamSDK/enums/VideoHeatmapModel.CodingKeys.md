@@ -10,5 +10,5 @@ public enum CodingKeys: String, CodingKey
 ### `heatmap`
 
 ```swift
-public enum CodingKeys: String, CodingKey { case heatmap
+case heatmap
 ```

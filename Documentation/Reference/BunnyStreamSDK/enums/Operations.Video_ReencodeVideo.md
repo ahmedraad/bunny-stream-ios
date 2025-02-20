@@ -15,5 +15,5 @@ Reencode Video
 ### `id`
 
 ```swift
-public static let id: String = "Video_ReencodeVideo"
+public static let id: Swift.String = "Video_ReencodeVideo"
 ```

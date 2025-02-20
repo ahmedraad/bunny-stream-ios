@@ -22,14 +22,14 @@ case xml
 ### `other(_:)`
 
 ```swift
-case other(String)
+case other(Swift.String)
 ```
 
 ## Properties
 ### `rawValue`
 
 ```swift
-public var rawValue: String
+public var rawValue: Swift.String
 ```
 
 ### `allCases`
@@ -42,7 +42,7 @@ public static var allCases: [Self]
 ### `init(rawValue:)`
 
 ```swift
-public init?(rawValue: String)
+public init?(rawValue: Swift.String)
 ```
 
 #### Parameters

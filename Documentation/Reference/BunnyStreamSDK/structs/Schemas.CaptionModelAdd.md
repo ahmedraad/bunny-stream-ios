@@ -43,7 +43,11 @@ Base64 encoded captions file
 ### `init(srclang:label:captionsFile:)`
 
 ```swift
-public init(srclang: Swift.String? = nil, label: Swift.String? = nil, captionsFile: Swift.String? = nil)
+public init(
+    srclang: Swift.String? = nil,
+    label: Swift.String? = nil,
+    captionsFile: Swift.String? = nil
+)
 ```
 
 Creates a new `CaptionModelAdd`.

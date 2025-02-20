@@ -15,5 +15,5 @@ Create Collection
 ### `id`
 
 ```swift
-public static let id: String = "Collection_CreateCollection"
+public static let id: Swift.String = "Collection_CreateCollection"
 ```

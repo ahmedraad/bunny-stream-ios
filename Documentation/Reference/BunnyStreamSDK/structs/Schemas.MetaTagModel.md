@@ -29,7 +29,10 @@ public var value: Swift.String?
 ### `init(property:value:)`
 
 ```swift
-public init(property: Swift.String? = nil, value: Swift.String? = nil)
+public init(
+    property: Swift.String? = nil,
+    value: Swift.String? = nil
+)
 ```
 
 Creates a new `MetaTagModel`.

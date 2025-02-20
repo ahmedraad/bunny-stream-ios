@@ -15,5 +15,5 @@ Upload Video
 ### `id`
 
 ```swift
-public static let id: String = "Video_UploadVideo"
+public static let id: Swift.String = "Video_UploadVideo"
 ```

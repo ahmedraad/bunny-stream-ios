@@ -15,5 +15,5 @@ Fetch Video
 ### `id`
 
 ```swift
-public static let id: String = "Video_FetchNewVideo"
+public static let id: Swift.String = "Video_FetchNewVideo"
 ```

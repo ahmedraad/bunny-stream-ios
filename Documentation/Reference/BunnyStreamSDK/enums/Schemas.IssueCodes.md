@@ -3,7 +3,7 @@
 # `Schemas.IssueCodes`
 
 ```swift
-@frozen public enum IssueCodes: Int, Codable, Hashable, Sendable
+@frozen public enum IssueCodes: Int, Codable, Hashable, Sendable, CaseIterable
 ```
 
 0 = Undefined
