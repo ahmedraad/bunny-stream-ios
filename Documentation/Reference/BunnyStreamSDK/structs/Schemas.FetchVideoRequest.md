@@ -39,14 +39,23 @@ The title that will be set to video.
 
 - Remark: Generated from `#/components/schemas/FetchVideoRequest/title`.
 
+### `additionalProperties`
+
+```swift
+public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+```
+
+A container of undocumented properties.
+
 ## Methods
-### `init(url:headers:title:)`
+### `init(url:headers:title:additionalProperties:)`
 
 ```swift
 public init(
     url: Swift.String,
     headers: Components.Schemas.FetchVideoRequest.headersPayload? = nil,
-    title: Swift.String? = nil
+    title: Swift.String? = nil,
+    additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()
 )
 ```
 
@@ -56,6 +65,7 @@ Creates a new `FetchVideoRequest`.
   - url: The URL from which the video will be fetched from.
   - headers: The headers that will be sent along with the fetch request.
   - title: The title that will be set to video.
+  - additionalProperties: A container of undocumented properties.
 
 #### Parameters
 
@@ -64,3 +74,28 @@ Creates a new `FetchVideoRequest`.
 | url | The URL from which the video will be fetched from. |
 | headers | The headers that will be sent along with the fetch request. |
 | title | The title that will be set to video. |
+| additionalProperties | A container of undocumented properties. |
+
+### `init(from:)`
+
+```swift
+public init(from decoder: any Decoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| decoder | The decoder to read data from. |
+
+### `encode(to:)`
+
+```swift
+public func encode(to encoder: any Encoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| encoder | The encoder to write data to. |

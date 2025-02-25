@@ -13,12 +13,6 @@
 case json
 ```
 
-### `xml`
-
-```swift
-case xml
-```
-
 ### `other(_:)`
 
 ```swift

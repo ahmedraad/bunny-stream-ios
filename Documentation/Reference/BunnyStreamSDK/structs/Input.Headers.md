@@ -6,20 +6,20 @@
 public struct Headers: Sendable, Hashable
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/DELETE/header`.
+- Remark: Generated from `#/paths/OEmbed/GET/header`.
 
 ## Properties
 ### `accept`
 
 ```swift
-public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.Video_DeleteCaption.AcceptableContentType>]
+public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OEmbed_GetOEmbed.AcceptableContentType>]
 ```
 
 ## Methods
 ### `init(accept:)`
 
 ```swift
-public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.Video_DeleteCaption.AcceptableContentType>] = .defaultValues())
+public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OEmbed_GetOEmbed.AcceptableContentType>] = .defaultValues())
 ```
 
 Creates a new `Headers`.

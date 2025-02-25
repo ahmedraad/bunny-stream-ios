@@ -12,7 +12,7 @@ public struct CollectionModel: Codable, Hashable, Sendable
 ### `videoLibraryId`
 
 ```swift
-public var videoLibraryId: Swift.Int64
+public var videoLibraryId: Swift.Int64?
 ```
 
 The video library ID that contains the collection
@@ -42,7 +42,7 @@ The name of the collection
 ### `videoCount`
 
 ```swift
-public var videoCount: Swift.Int64
+public var videoCount: Swift.Int64?
 ```
 
 The number of videos that the collection contains
@@ -52,7 +52,7 @@ The number of videos that the collection contains
 ### `totalSize`
 
 ```swift
-public var totalSize: Swift.Int64
+public var totalSize: Swift.Int64?
 ```
 
 The total storage size of the collection
@@ -69,17 +69,37 @@ The IDs of videos to be used as preview icons
 
 - Remark: Generated from `#/components/schemas/CollectionModel/previewVideoIds`.
 
+### `previewImageUrls`
+
+```swift
+public var previewImageUrls: [Swift.String]?
+```
+
+The URLs of preview images of videos in the collection
+
+- Remark: Generated from `#/components/schemas/CollectionModel/previewImageUrls`.
+
+### `additionalProperties`
+
+```swift
+public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+```
+
+A container of undocumented properties.
+
 ## Methods
-### `init(videoLibraryId:guid:name:videoCount:totalSize:previewVideoIds:)`
+### `init(videoLibraryId:guid:name:videoCount:totalSize:previewVideoIds:previewImageUrls:additionalProperties:)`
 
 ```swift
 public init(
-    videoLibraryId: Swift.Int64,
+    videoLibraryId: Swift.Int64? = nil,
     guid: Swift.String? = nil,
     name: Swift.String? = nil,
-    videoCount: Swift.Int64,
-    totalSize: Swift.Int64,
-    previewVideoIds: Swift.String? = nil
+    videoCount: Swift.Int64? = nil,
+    totalSize: Swift.Int64? = nil,
+    previewVideoIds: Swift.String? = nil,
+    previewImageUrls: [Swift.String]? = nil,
+    additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()
 )
 ```
 
@@ -92,6 +112,8 @@ Creates a new `CollectionModel`.
   - videoCount: The number of videos that the collection contains
   - totalSize: The total storage size of the collection
   - previewVideoIds: The IDs of videos to be used as preview icons
+  - previewImageUrls: The URLs of preview images of videos in the collection
+  - additionalProperties: A container of undocumented properties.
 
 #### Parameters
 
@@ -103,3 +125,29 @@ Creates a new `CollectionModel`.
 | videoCount | The number of videos that the collection contains |
 | totalSize | The total storage size of the collection |
 | previewVideoIds | The IDs of videos to be used as preview icons |
+| previewImageUrls | The URLs of preview images of videos in the collection |
+| additionalProperties | A container of undocumented properties. |
+
+### `init(from:)`
+
+```swift
+public init(from decoder: any Decoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| decoder | The decoder to read data from. |
+
+### `encode(to:)`
+
+```swift
+public func encode(to encoder: any Encoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| encoder | The encoder to write data to. |

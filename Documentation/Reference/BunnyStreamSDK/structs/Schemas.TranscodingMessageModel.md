@@ -12,7 +12,7 @@ public struct TranscodingMessageModel: Codable, Hashable, Sendable
 ### `timeStamp`
 
 ```swift
-public var timeStamp: Foundation.Date
+public var timeStamp: Foundation.Date?
 ```
 
 - Remark: Generated from `#/components/schemas/TranscodingMessageModel/timeStamp`.
@@ -20,7 +20,7 @@ public var timeStamp: Foundation.Date
 ### `level`
 
 ```swift
-public var level: Components.Schemas.Severity
+public var level: Components.Schemas.Severity?
 ```
 
 - Remark: Generated from `#/components/schemas/TranscodingMessageModel/level`.
@@ -28,7 +28,7 @@ public var level: Components.Schemas.Severity
 ### `issueCode`
 
 ```swift
-public var issueCode: Components.Schemas.IssueCodes
+public var issueCode: Components.Schemas.IssueCodes?
 ```
 
 - Remark: Generated from `#/components/schemas/TranscodingMessageModel/issueCode`.
@@ -49,16 +49,25 @@ public var value: Swift.String?
 
 - Remark: Generated from `#/components/schemas/TranscodingMessageModel/value`.
 
+### `additionalProperties`
+
+```swift
+public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+```
+
+A container of undocumented properties.
+
 ## Methods
-### `init(timeStamp:level:issueCode:message:value:)`
+### `init(timeStamp:level:issueCode:message:value:additionalProperties:)`
 
 ```swift
 public init(
-    timeStamp: Foundation.Date,
-    level: Components.Schemas.Severity,
-    issueCode: Components.Schemas.IssueCodes,
+    timeStamp: Foundation.Date? = nil,
+    level: Components.Schemas.Severity? = nil,
+    issueCode: Components.Schemas.IssueCodes? = nil,
     message: Swift.String? = nil,
-    value: Swift.String? = nil
+    value: Swift.String? = nil,
+    additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()
 )
 ```
 
@@ -70,6 +79,7 @@ Creates a new `TranscodingMessageModel`.
   - issueCode:
   - message:
   - value:
+  - additionalProperties: A container of undocumented properties.
 
 #### Parameters
 
@@ -80,3 +90,28 @@ Creates a new `TranscodingMessageModel`.
 | issueCode |  |
 | message |  |
 | value |  |
+| additionalProperties | A container of undocumented properties. |
+
+### `init(from:)`
+
+```swift
+public init(from decoder: any Decoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| decoder | The decoder to read data from. |
+
+### `encode(to:)`
+
+```swift
+public func encode(to encoder: any Encoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| encoder | The encoder to write data to. |

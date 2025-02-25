@@ -6,29 +6,13 @@
 @frozen public enum Body: Sendable, Hashable
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/POST/requestBody`.
+- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/transcribe/POST/requestBody`.
 
 ## Cases
 ### `json(_:)`
 
 ```swift
-case json(Components.Schemas.CaptionModelAdd)
+case json(Operations.Video_TranscribeVideo.Input.Body.jsonPayload)
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/POST/requestBody/content/application\/json`.
-
-### `text_json(_:)`
-
-```swift
-case text_json(OpenAPIRuntime.HTTPBody)
-```
-
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/POST/requestBody/content/text\/json`.
-
-### `application__ast__plus_json(_:)`
-
-```swift
-case application__ast__plus_json(Components.Schemas.CaptionModelAdd)
-```
-
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/POST/requestBody/content/application\/*+json`.
+- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/transcribe/POST/requestBody/content/application\/json`.

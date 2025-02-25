@@ -6,7 +6,7 @@
 public struct Path: Sendable, Hashable
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/DELETE/path`.
+- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/resolutions/cleanup/POST/path`.
 
 ## Properties
 ### `libraryId`
@@ -15,7 +15,7 @@ public struct Path: Sendable, Hashable
 public var libraryId: Swift.Int64
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/DELETE/path/libraryId`.
+- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/resolutions/cleanup/POST/path/libraryId`.
 
 ### `videoId`
 
@@ -23,24 +23,15 @@ public var libraryId: Swift.Int64
 public var videoId: Swift.String
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/DELETE/path/videoId`.
-
-### `srclang`
-
-```swift
-public var srclang: Swift.String
-```
-
-- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/captions/{srclang}/DELETE/path/srclang`.
+- Remark: Generated from `#/paths/library/{libraryId}/videos/{videoId}/resolutions/cleanup/POST/path/videoId`.
 
 ## Methods
-### `init(libraryId:videoId:srclang:)`
+### `init(libraryId:videoId:)`
 
 ```swift
 public init(
     libraryId: Swift.Int64,
-    videoId: Swift.String,
-    srclang: Swift.String
+    videoId: Swift.String
 )
 ```
 
@@ -49,7 +40,6 @@ Creates a new `Path`.
 - Parameters:
   - libraryId:
   - videoId:
-  - srclang:
 
 #### Parameters
 
@@ -57,4 +47,3 @@ Creates a new `Path`.
 | ---- | ----------- |
 | libraryId |  |
 | videoId |  |
-| srclang |  |

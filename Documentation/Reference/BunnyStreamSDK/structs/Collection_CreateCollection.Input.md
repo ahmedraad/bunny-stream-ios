@@ -22,7 +22,7 @@ public var headers: Operations.Collection_CreateCollection.Input.Headers
 ### `body`
 
 ```swift
-public var body: Components.RequestBodies.UpdateCollectionModel
+public var body: Operations.Collection_CreateCollection.Input.Body
 ```
 
 ## Methods
@@ -32,7 +32,7 @@ public var body: Components.RequestBodies.UpdateCollectionModel
 public init(
     path: Operations.Collection_CreateCollection.Input.Path,
     headers: Operations.Collection_CreateCollection.Input.Headers = .init(),
-    body: Components.RequestBodies.UpdateCollectionModel
+    body: Operations.Collection_CreateCollection.Input.Body
 )
 ```
 

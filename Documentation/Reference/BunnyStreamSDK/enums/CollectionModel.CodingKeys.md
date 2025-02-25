@@ -42,3 +42,9 @@ case totalSize
 ```swift
 case previewVideoIds
 ```
+
+### `previewImageUrls`
+
+```swift
+case previewImageUrls
+```

@@ -52,13 +52,21 @@ The country watch time constructed chart
 ### `engagementScore`
 
 ```swift
-public var engagementScore: Swift.Int32
+public var engagementScore: Swift.Int32?
 ```
 
 - Remark: Generated from `#/components/schemas/VideoStatisticsModel/engagementScore`.
 
+### `additionalProperties`
+
+```swift
+public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+```
+
+A container of undocumented properties.
+
 ## Methods
-### `init(viewsChart:watchTimeChart:countryViewCounts:countryWatchTime:engagementScore:)`
+### `init(viewsChart:watchTimeChart:countryViewCounts:countryWatchTime:engagementScore:additionalProperties:)`
 
 ```swift
 public init(
@@ -66,7 +74,8 @@ public init(
     watchTimeChart: Components.Schemas.VideoStatisticsModel.watchTimeChartPayload? = nil,
     countryViewCounts: Components.Schemas.VideoStatisticsModel.countryViewCountsPayload? = nil,
     countryWatchTime: Components.Schemas.VideoStatisticsModel.countryWatchTimePayload? = nil,
-    engagementScore: Swift.Int32
+    engagementScore: Swift.Int32? = nil,
+    additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()
 )
 ```
 
@@ -78,6 +87,7 @@ Creates a new `VideoStatisticsModel`.
   - countryViewCounts: The country view count constructed chart
   - countryWatchTime: The country watch time constructed chart
   - engagementScore:
+  - additionalProperties: A container of undocumented properties.
 
 #### Parameters
 
@@ -88,3 +98,28 @@ Creates a new `VideoStatisticsModel`.
 | countryViewCounts | The country view count constructed chart |
 | countryWatchTime | The country watch time constructed chart |
 | engagementScore |  |
+| additionalProperties | A container of undocumented properties. |
+
+### `init(from:)`
+
+```swift
+public init(from decoder: any Decoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| decoder | The decoder to read data from. |
+
+### `encode(to:)`
+
+```swift
+public func encode(to encoder: any Encoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| encoder | The encoder to write data to. |

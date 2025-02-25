@@ -6,46 +6,77 @@
 public struct Query: Sendable, Hashable
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/fetch/POST/query`.
+- Remark: Generated from `#/paths/OEmbed/GET/query`.
 
 ## Properties
-### `collectionId`
+### `url`
 
 ```swift
-public var collectionId: Swift.String?
+public var url: Swift.String?
 ```
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/fetch/POST/query/collectionId`.
+- Remark: Generated from `#/paths/OEmbed/GET/query/url`.
 
-### `thumbnailTime`
+### `maxWidth`
 
 ```swift
-public var thumbnailTime: Swift.Int32?
+public var maxWidth: Swift.Int32?
 ```
 
-(Optional) Video time in ms to extract the main video thumbnail.
+- Remark: Generated from `#/paths/OEmbed/GET/query/maxWidth`.
 
-- Remark: Generated from `#/paths/library/{libraryId}/videos/fetch/POST/query/thumbnailTime`.
+### `maxHeight`
+
+```swift
+public var maxHeight: Swift.Int32?
+```
+
+- Remark: Generated from `#/paths/OEmbed/GET/query/maxHeight`.
+
+### `token`
+
+```swift
+public var token: Swift.String?
+```
+
+- Remark: Generated from `#/paths/OEmbed/GET/query/token`.
+
+### `expires`
+
+```swift
+public var expires: Swift.Int64?
+```
+
+- Remark: Generated from `#/paths/OEmbed/GET/query/expires`.
 
 ## Methods
-### `init(collectionId:thumbnailTime:)`
+### `init(url:maxWidth:maxHeight:token:expires:)`
 
 ```swift
 public init(
-    collectionId: Swift.String? = nil,
-    thumbnailTime: Swift.Int32? = nil
+    url: Swift.String? = nil,
+    maxWidth: Swift.Int32? = nil,
+    maxHeight: Swift.Int32? = nil,
+    token: Swift.String? = nil,
+    expires: Swift.Int64? = nil
 )
 ```
 
 Creates a new `Query`.
 
 - Parameters:
-  - collectionId:
-  - thumbnailTime: (Optional) Video time in ms to extract the main video thumbnail.
+  - url:
+  - maxWidth:
+  - maxHeight:
+  - token:
+  - expires:
 
 #### Parameters
 
 | Name | Description |
 | ---- | ----------- |
-| collectionId |  |
-| thumbnailTime | (Optional) Video time in ms to extract the main video thumbnail. |
+| url |  |
+| maxWidth |  |
+| maxHeight |  |
+| token |  |
+| expires |  |

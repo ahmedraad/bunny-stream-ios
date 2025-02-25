@@ -13,6 +13,8 @@
 4 = Finished
 5 = Error
 6 = UploadFailed
+7 = JitSegmenting
+8 = JitPlaylistsCreated
 
 - Remark: Generated from `#/components/schemas/VideoModelStatus`.
 
@@ -57,4 +59,16 @@ case _5 = 5
 
 ```swift
 case _6 = 6
+```
+
+### `_7`
+
+```swift
+case _7 = 7
+```
+
+### `_8`
+
+```swift
+case _8 = 8
 ```

@@ -14,6 +14,9 @@
 5 = VideoExceededMaxDuration
 6 = AudioExceededMaxDuration
 7 = OriginalCorrupted
+8 = TranscriptionFailed
+9 = JitIncompatible
+10 = JitFailed
 
 - Remark: Generated from `#/components/schemas/IssueCodes`.
 
@@ -64,4 +67,22 @@ case _6 = 6
 
 ```swift
 case _7 = 7
+```
+
+### `_8`
+
+```swift
+case _8 = 8
+```
+
+### `_9`
+
+```swift
+case _9 = 9
+```
+
+### `_10`
+
+```swift
+case _10 = 10
 ```

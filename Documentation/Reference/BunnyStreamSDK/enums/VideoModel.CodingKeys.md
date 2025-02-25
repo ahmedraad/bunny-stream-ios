@@ -85,6 +85,12 @@ case height
 case availableResolutions
 ```
 
+### `outputCodecs`
+
+```swift
+case outputCodecs
+```
+
 ### `thumbnailCount`
 
 ```swift

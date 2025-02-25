@@ -119,6 +119,17 @@ Get Video Heatmap
 - Remark: HTTP `GET /library/{libraryId}/videos/{videoId}/heatmap`.
 - Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/heatmap/get(Video_GetVideoHeatmap)`.
 
+### `Video_GetVideoPlayData(_:)`
+
+```swift
+func Video_GetVideoPlayData(_ input: Operations.Video_GetVideoPlayData.Input) async throws -> Operations.Video_GetVideoPlayData.Output
+```
+
+Get Video play data
+
+- Remark: HTTP `GET /library/{libraryId}/videos/{videoId}/play`.
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/play/get(Video_GetVideoPlayData)`.
+
 ### `Video_GetVideoStatistics(_:)`
 
 ```swift
@@ -140,6 +151,28 @@ Reencode Video
 
 - Remark: HTTP `POST /library/{libraryId}/videos/{videoId}/reencode`.
 - Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/reencode/post(Video_ReencodeVideo)`.
+
+### `Video_ReencodeUsingCodec(_:)`
+
+```swift
+func Video_ReencodeUsingCodec(_ input: Operations.Video_ReencodeUsingCodec.Input) async throws -> Operations.Video_ReencodeUsingCodec.Output
+```
+
+Add output codec to video
+
+- Remark: HTTP `PUT /library/{libraryId}/videos/{videoId}/outputs/{outputCodecId}`.
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/outputs/{outputCodecId}/put(Video_ReencodeUsingCodec)`.
+
+### `Video_Repackage(_:)`
+
+```swift
+func Video_Repackage(_ input: Operations.Video_Repackage.Input) async throws -> Operations.Video_Repackage.Output
+```
+
+Repackage Video
+
+- Remark: HTTP `POST /library/{libraryId}/videos/{videoId}/repackage`.
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/repackage/post(Video_Repackage)`.
 
 ### `Video_List(_:)`
 
@@ -206,3 +239,45 @@ Delete Caption
 
 - Remark: HTTP `DELETE /library/{libraryId}/videos/{videoId}/captions/{srclang}`.
 - Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/captions/{srclang}/delete(Video_DeleteCaption)`.
+
+### `Video_TranscribeVideo(_:)`
+
+```swift
+func Video_TranscribeVideo(_ input: Operations.Video_TranscribeVideo.Input) async throws -> Operations.Video_TranscribeVideo.Output
+```
+
+Transcribe video
+
+- Remark: HTTP `POST /library/{libraryId}/videos/{videoId}/transcribe`.
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/transcribe/post(Video_TranscribeVideo)`.
+
+### `Video_GetVideoResolutions(_:)`
+
+```swift
+func Video_GetVideoResolutions(_ input: Operations.Video_GetVideoResolutions.Input) async throws -> Operations.Video_GetVideoResolutions.Output
+```
+
+Video resolutions info
+
+- Remark: HTTP `GET /library/{libraryId}/videos/{videoId}/resolutions`.
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/resolutions/get(Video_GetVideoResolutions)`.
+
+### `Video_DeleteResolutions(_:)`
+
+```swift
+func Video_DeleteResolutions(_ input: Operations.Video_DeleteResolutions.Input) async throws -> Operations.Video_DeleteResolutions.Output
+```
+
+Cleanup unconfigured resolutions
+
+- Remark: HTTP `POST /library/{libraryId}/videos/{videoId}/resolutions/cleanup`.
+- Remark: Generated from `#/paths//library/{libraryId}/videos/{videoId}/resolutions/cleanup/post(Video_DeleteResolutions)`.
+
+### `OEmbed_GetOEmbed(_:)`
+
+```swift
+func OEmbed_GetOEmbed(_ input: Operations.OEmbed_GetOEmbed.Input) async throws -> Operations.OEmbed_GetOEmbed.Output
+```
+
+- Remark: HTTP `GET /OEmbed`.
+- Remark: Generated from `#/paths//OEmbed/get(OEmbed_GetOEmbed)`.

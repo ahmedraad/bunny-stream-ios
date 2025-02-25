@@ -10,7 +10,7 @@ public struct Ok: Sendable, Hashable
 ### `body`
 
 ```swift
-public var body: Operations.Video_DeleteCaption.Output.Ok.Body
+public var body: Operations.OEmbed_GetOEmbed.Output.Ok.Body
 ```
 
 Received HTTP response body
@@ -19,7 +19,7 @@ Received HTTP response body
 ### `init(body:)`
 
 ```swift
-public init(body: Operations.Video_DeleteCaption.Output.Ok.Body)
+public init(body: Operations.OEmbed_GetOEmbed.Output.Ok.Body)
 ```
 
 Creates a new `Ok`.

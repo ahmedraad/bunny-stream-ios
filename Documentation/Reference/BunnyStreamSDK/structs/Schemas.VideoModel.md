@@ -12,7 +12,7 @@ public struct VideoModel: Codable, Hashable, Sendable
 ### `videoLibraryId`
 
 ```swift
-public var videoLibraryId: Swift.Int64
+public var videoLibraryId: Swift.Int64?
 ```
 
 The ID of the video library that the video belongs to
@@ -42,7 +42,7 @@ The title of the video
 ### `dateUploaded`
 
 ```swift
-public var dateUploaded: Foundation.Date
+public var dateUploaded: Foundation.Date?
 ```
 
 The date when the video was uploaded
@@ -52,7 +52,7 @@ The date when the video was uploaded
 ### `views`
 
 ```swift
-public var views: Swift.Int64
+public var views: Swift.Int64?
 ```
 
 The number of views the video received
@@ -62,7 +62,7 @@ The number of views the video received
 ### `isPublic`
 
 ```swift
-public var isPublic: Swift.Bool
+public var isPublic: Swift.Bool?
 ```
 
 Determines if the video is publically accessible
@@ -72,7 +72,7 @@ Determines if the video is publically accessible
 ### `length`
 
 ```swift
-public var length: Swift.Int32
+public var length: Swift.Int32?
 ```
 
 The duration of the video in seconds
@@ -82,17 +82,17 @@ The duration of the video in seconds
 ### `status`
 
 ```swift
-public var status: Components.Schemas.VideoModel.statusPayload
+public var status: Components.Schemas.VideoModel.statusPayload?
 ```
 
-The status of the video. Created = 0, Uploaded = 1, Processing = 2, Transcoding = 3, Finished = 4, Error = 5, UploadFailed = 6
+The status of the video. See VideoModelStatus.
 
 - Remark: Generated from `#/components/schemas/VideoModel/status`.
 
 ### `framerate`
 
 ```swift
-public var framerate: Swift.Double
+public var framerate: Swift.Double?
 ```
 
 The framerate of the video
@@ -112,7 +112,7 @@ The rotation of the video
 ### `width`
 
 ```swift
-public var width: Swift.Int32
+public var width: Swift.Int32?
 ```
 
 The width of the original video file
@@ -122,7 +122,7 @@ The width of the original video file
 ### `height`
 
 ```swift
-public var height: Swift.Int32
+public var height: Swift.Int32?
 ```
 
 The height of the original video file
@@ -139,10 +139,20 @@ The available resolutions of the video
 
 - Remark: Generated from `#/components/schemas/VideoModel/availableResolutions`.
 
+### `outputCodecs`
+
+```swift
+public var outputCodecs: Swift.String?
+```
+
+Encoded output codecs of the video
+
+- Remark: Generated from `#/components/schemas/VideoModel/outputCodecs`.
+
 ### `thumbnailCount`
 
 ```swift
-public var thumbnailCount: Swift.Int32
+public var thumbnailCount: Swift.Int32?
 ```
 
 The number of thumbnails generated for this video
@@ -152,7 +162,7 @@ The number of thumbnails generated for this video
 ### `encodeProgress`
 
 ```swift
-public var encodeProgress: Swift.Int32
+public var encodeProgress: Swift.Int32?
 ```
 
 The current encode progress of the video
@@ -162,7 +172,7 @@ The current encode progress of the video
 ### `storageSize`
 
 ```swift
-public var storageSize: Swift.Int64
+public var storageSize: Swift.Int64?
 ```
 
 The amount of storage used by this video
@@ -182,7 +192,7 @@ The list of captions available for the video
 ### `hasMP4Fallback`
 
 ```swift
-public var hasMP4Fallback: Swift.Bool
+public var hasMP4Fallback: Swift.Bool?
 ```
 
 Determines if the video has MP4 fallback files generated
@@ -212,7 +222,7 @@ The file name of the thumbnail inside of the storage
 ### `averageWatchTime`
 
 ```swift
-public var averageWatchTime: Swift.Int64
+public var averageWatchTime: Swift.Int64?
 ```
 
 The average watch time of the video in seconds
@@ -222,7 +232,7 @@ The average watch time of the video in seconds
 ### `totalWatchTime`
 
 ```swift
-public var totalWatchTime: Swift.Int64
+public var totalWatchTime: Swift.Int64?
 ```
 
 The total video watch time in seconds
@@ -279,38 +289,48 @@ The list of transcoding messages that describe potential issues while the video 
 
 - Remark: Generated from `#/components/schemas/VideoModel/transcodingMessages`.
 
+### `additionalProperties`
+
+```swift
+public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+```
+
+A container of undocumented properties.
+
 ## Methods
-### `init(videoLibraryId:guid:title:dateUploaded:views:isPublic:length:status:framerate:rotation:width:height:availableResolutions:thumbnailCount:encodeProgress:storageSize:captions:hasMP4Fallback:collectionId:thumbnailFileName:averageWatchTime:totalWatchTime:category:chapters:moments:metaTags:transcodingMessages:)`
+### `init(videoLibraryId:guid:title:dateUploaded:views:isPublic:length:status:framerate:rotation:width:height:availableResolutions:outputCodecs:thumbnailCount:encodeProgress:storageSize:captions:hasMP4Fallback:collectionId:thumbnailFileName:averageWatchTime:totalWatchTime:category:chapters:moments:metaTags:transcodingMessages:additionalProperties:)`
 
 ```swift
 public init(
-    videoLibraryId: Swift.Int64,
+    videoLibraryId: Swift.Int64? = nil,
     guid: Swift.String? = nil,
     title: Swift.String? = nil,
-    dateUploaded: Foundation.Date,
-    views: Swift.Int64,
-    isPublic: Swift.Bool,
-    length: Swift.Int32,
-    status: Components.Schemas.VideoModel.statusPayload,
-    framerate: Swift.Double,
+    dateUploaded: Foundation.Date? = nil,
+    views: Swift.Int64? = nil,
+    isPublic: Swift.Bool? = nil,
+    length: Swift.Int32? = nil,
+    status: Components.Schemas.VideoModel.statusPayload? = nil,
+    framerate: Swift.Double? = nil,
     rotation: Swift.Int? = nil,
-    width: Swift.Int32,
-    height: Swift.Int32,
+    width: Swift.Int32? = nil,
+    height: Swift.Int32? = nil,
     availableResolutions: Swift.String? = nil,
-    thumbnailCount: Swift.Int32,
-    encodeProgress: Swift.Int32,
-    storageSize: Swift.Int64,
+    outputCodecs: Swift.String? = nil,
+    thumbnailCount: Swift.Int32? = nil,
+    encodeProgress: Swift.Int32? = nil,
+    storageSize: Swift.Int64? = nil,
     captions: [Components.Schemas.CaptionModel]? = nil,
-    hasMP4Fallback: Swift.Bool,
+    hasMP4Fallback: Swift.Bool? = nil,
     collectionId: Swift.String? = nil,
     thumbnailFileName: Swift.String? = nil,
-    averageWatchTime: Swift.Int64,
-    totalWatchTime: Swift.Int64,
+    averageWatchTime: Swift.Int64? = nil,
+    totalWatchTime: Swift.Int64? = nil,
     category: Swift.String? = nil,
     chapters: [Components.Schemas.ChapterModel]? = nil,
     moments: [Components.Schemas.MomentModel]? = nil,
     metaTags: [Components.Schemas.MetaTagModel]? = nil,
-    transcodingMessages: [Components.Schemas.TranscodingMessageModel]? = nil
+    transcodingMessages: [Components.Schemas.TranscodingMessageModel]? = nil,
+    additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()
 )
 ```
 
@@ -324,12 +344,13 @@ Creates a new `VideoModel`.
   - views: The number of views the video received
   - isPublic: Determines if the video is publically accessible
   - length: The duration of the video in seconds
-  - status: The status of the video. Created = 0, Uploaded = 1, Processing = 2, Transcoding = 3, Finished = 4, Error = 5, UploadFailed = 6
+  - status: The status of the video. See VideoModelStatus.
   - framerate: The framerate of the video
   - rotation: The rotation of the video
   - width: The width of the original video file
   - height: The height of the original video file
   - availableResolutions: The available resolutions of the video
+  - outputCodecs: Encoded output codecs of the video
   - thumbnailCount: The number of thumbnails generated for this video
   - encodeProgress: The current encode progress of the video
   - storageSize: The amount of storage used by this video
@@ -344,6 +365,7 @@ Creates a new `VideoModel`.
   - moments: The list of moments available for the video
   - metaTags: The list of meta tags that have been added to the video
   - transcodingMessages: The list of transcoding messages that describe potential issues while the video was transcoding
+  - additionalProperties: A container of undocumented properties.
 
 #### Parameters
 
@@ -356,12 +378,13 @@ Creates a new `VideoModel`.
 | views | The number of views the video received |
 | isPublic | Determines if the video is publically accessible |
 | length | The duration of the video in seconds |
-| status | The status of the video. Created = 0, Uploaded = 1, Processing = 2, Transcoding = 3, Finished = 4, Error = 5, UploadFailed = 6 |
+| status | The status of the video. See VideoModelStatus. |
 | framerate | The framerate of the video |
 | rotation | The rotation of the video |
 | width | The width of the original video file |
 | height | The height of the original video file |
 | availableResolutions | The available resolutions of the video |
+| outputCodecs | Encoded output codecs of the video |
 | thumbnailCount | The number of thumbnails generated for this video |
 | encodeProgress | The current encode progress of the video |
 | storageSize | The amount of storage used by this video |
@@ -376,3 +399,28 @@ Creates a new `VideoModel`.
 | moments | The list of moments available for the video |
 | metaTags | The list of meta tags that have been added to the video |
 | transcodingMessages | The list of transcoding messages that describe potential issues while the video was transcoding |
+| additionalProperties | A container of undocumented properties. |
+
+### `init(from:)`
+
+```swift
+public init(from decoder: any Decoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| decoder | The decoder to read data from. |
+
+### `encode(to:)`
+
+```swift
+public func encode(to encoder: any Encoder) throws
+```
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| encoder | The encoder to write data to. |
