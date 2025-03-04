@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-import BunnyVideoPlayer
+import BunnyStreamPlayer
 
-extension BunnyVideoPlayer {
-  static func make(dependenciesManager: DependenciesManager, videoId: String) -> BunnyVideoPlayer {
+extension BunnyStreamPlayer {
+  static func make(dependenciesManager: DependenciesManager, videoId: String) -> BunnyStreamPlayer {
     let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
     
-    return BunnyVideoPlayer(
+    return BunnyStreamPlayer(
       accessKey: dependenciesManager.accessKey,
       videoId: videoId,
       libraryId: dependenciesManager.libraryId,

@@ -14,16 +14,19 @@
     "%lld views" : {
 
     },
-    "BunnyNet Configuration" : {
+    "BunnyStream Configuration" : {
 
     },
-    "BunnySDK Demo" : {
+    "BunnyStream Demo" : {
+
+    },
+    "Camera Upload" : {
 
     },
     "Cancel" : {
 
     },
-    "Enter BunnyNet config data" : {
+    "Enter BunnyStream config data" : {
 
     },
     "Error: %@" : {
@@ -46,9 +49,6 @@
         }
       }
     },
-    "Live Streaming" : {
-
-    },
     "No videos!" : {
 
     },
@@ -70,7 +70,7 @@
     "Settings" : {
 
     },
-    "Start streaming" : {
+    "Start uploading" : {
 
     },
     "TUS Resumable Uploads" : {

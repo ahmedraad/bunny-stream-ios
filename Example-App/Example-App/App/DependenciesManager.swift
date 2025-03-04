@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import BunnyVideoUploader
+import BunnyStreamUploader
 import BunnyStreamSDK
 
 class DependenciesManager: ObservableObject {

@@ -9,9 +9,9 @@ let package = Package(
   platforms: [.iOS(.v15), .macOS(.v13)],
   products: [
     .library(name: "BunnyStreamSDK", targets: ["BunnyStreamSDK"]),
-    .library(name: "BunnyVideoUploader", targets: ["BunnyVideoUploader"]),
-    .library(name: "BunnyVideoPlayer", targets: ["BunnyVideoPlayer"]),
-    .library(name: "BunnyLiveStream", targets: ["BunnyLiveStream"])
+    .library(name: "BunnyStreamUploader", targets: ["BunnyStreamUploader"]),
+    .library(name: "BunnyStreamPlayer", targets: ["BunnyStreamPlayer"]),
+    .library(name: "BunnyStreamCameraUpload", targets: ["BunnyStreamCameraUpload"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-openapi-generator", exact: "1.7.0"),
@@ -42,30 +42,30 @@ let package = Package(
       ]
     ),
     .target(
-      name: "BunnyVideoUploader",
+      name: "BunnyStreamUploader",
       dependencies: [
         .byName(name: "BunnyStreamSDK"),
         .product(name: "TUSKit", package: "TUSKit")
       ],
-      path: "Sources/BunnyVideoUploader"),
+      path: "Sources/BunnyStreamUploader"),
     .target(
-      name: "BunnyVideoPlayer",
+      name: "BunnyStreamPlayer",
       dependencies: [
         .byName(name: "Kingfisher"),
         .byName(name: "SwiftSubtitles"),
         .byName(name: "BunnyStreamSDK"),
         .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
       ],
-      path: "Sources/BunnyVideoPlayer",
+      path: "Sources/BunnyStreamPlayer",
       resources: [.process("Resources")]
     ),
     .target(
-      name: "BunnyLiveStream",
+      name: "BunnyStreamCameraUpload",
       dependencies: [
         .byName(name: "BunnyStreamSDK"),
         .product(name: "HaishinKit", package: "HaishinKit.swift")
       ],
-      path: "Sources/BunnyLiveStream",
+      path: "Sources/BunnyStreamCameraUpload",
       resources: [.process("Resources")]
     ),
     .testTarget(
@@ -74,9 +74,9 @@ let package = Package(
       path: "Tests/BunnyStreamSDKTests"
     ),
     .testTarget(
-      name: "BunnyVideoUploaderTests",
-      dependencies: ["BunnyVideoUploader"],
-      path: "Tests/BunnyVideoUploaderTests"
+      name: "BunnyStreamUploaderTests",
+      dependencies: ["BunnyStreamUploader"],
+      path: "Tests/BunnyStreamUploaderTests"
     ),
   ]
 )

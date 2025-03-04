@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import BunnyVideoUploader
-import BunnyLiveStream
+import BunnyStreamUploader
+import BunnyStreamCameraUpload
 
 struct ContentView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
@@ -28,22 +28,22 @@ struct ContentView: View {
           VideoUploaderTypesView()
             .environmentObject(dependenciesManager)
         }
-        NavigationLink("Live Streaming") {
+        NavigationLink("Camera Upload") {
           Button {
             isStreamingPresented.toggle()
           } label: {
             Image(systemName: "dot.radiowaves.left.and.right")
-            Text("Start streaming")
+            Text("Start uploading")
           }
         }
       }
-      .navigationTitle("BunnySDK Demo")
-      
+      .navigationTitle("BunnyStream Demo")
+
       accessKeyView()
     }
     .fullScreenCover(isPresented: $isStreamingPresented,
                      content: {
-      BunnyLiveStreamView(
+      BunnyStreamCameraUploadView(
         accessKey: dependenciesManager.accessKey,
         libraryId: dependenciesManager.libraryId
       )
@@ -59,12 +59,12 @@ struct ContentView: View {
 private extension ContentView {
   @ViewBuilder
   func accessKeyView() -> some View {
-    Button("BunnyNet Configuration") {
+    Button("BunnyStream Configuration") {
       isShowingSheet = true
     }
     .sheet(isPresented: $isShowingSheet) {
       Form {
-        Section(header: Text("Enter BunnyNet config data").font(.subheadline)) {
+        Section(header: Text("Enter BunnyStream config data").font(.subheadline)) {
           DefaultTextField(label: "Access Key", text: $tempAccessKey, placeholder: "Enter your access key")
           DefaultTextField(label: "CDN hostname", text: $cdnHostname, placeholder: "Enter CDN hostname")
           DefaultTextField(label: "Library ID", text: $libraryId, placeholder: "Enter Library ID", keyboardType: .numberPad)

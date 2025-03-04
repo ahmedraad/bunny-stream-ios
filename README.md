@@ -36,9 +36,9 @@ The BunnyNet Stream SDK is organized into several specialized packages, each foc
 | Package                                                              | Description                                                                                                                                                                                                                                                                                                                                                                        |
 | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[BunnyStreamSDK](Documentation/Reference/BunnyStreamSDK)**         | The core package that provides a comprehensive Swift interface to BunnyNet's REST Stream API. It handles all API communication, request authentication, and response parsing, allowing you to easily manage your video content, retrieve analytics, and control CDN settings. Features include video management, collection organization, and thumbnail generation.                |
-| **[BunnyVideoUploader](Documentation/Reference/BunnyVideoUploader)** | A sophisticated video upload solution built on the TUS (Tus Upload Server) protocol. This package ensures reliable file uploads even in challenging network conditions, with support for pause/resume functionality, upload progress tracking, and background upload capabilities. It handles chunked uploads, automatic retries, and provides detailed upload status information. |
-| **[BunnyVideoPlayer](Documentation/Reference/BunnyVideoPlayer)**     | A feature-rich video player specifically optimized for BunnyNet's CDN. It provides smooth playback with adaptive bitrate streaming, customizable controls, support for multiple video formats, and integration with BunnyNet's analytics. The player includes features like airplay support and customizable UI elements.                                                          |
-| **[BunnyLiveStream](Documentation/Reference/BunnyLiveStream)**       | A comprehensive live streaming solution that enables real-time video broadcasting. It provides easy-to-use APIs for managing live streams.                                                                                                                                                                                                                                         |
+| **[BunnyStreamUploader](Documentation/Reference/BunnyStreamUploader)** | A sophisticated video upload solution built on the TUS (Tus Upload Server) protocol. This package ensures reliable file uploads even in challenging network conditions, with support for pause/resume functionality, upload progress tracking, and background upload capabilities. It handles chunked uploads, automatic retries, and provides detailed upload status information. |
+| **[BunnyStreamPlayer](Documentation/Reference/BunnyStreamPlayer)**     | A feature-rich video player specifically optimized for BunnyNet's CDN. It provides smooth playback with adaptive bitrate streaming, customizable controls, support for multiple video formats, and integration with BunnyNet's analytics. The player includes features like airplay support and customizable UI elements.                                                          |
+| **[BunnyStreamCameraUpload](Documentation/Reference/BunnyStreamCameraUpload)**       | A comprehensive live streaming solution that enables real-time video broadcasting. It provides easy-to-use APIs for managing live streams.                                                                                                                                                                                                                                         |
 
 ## System Requirements
 
@@ -126,10 +126,10 @@ let videoInfo = try await bunnyStreamSDK.Api.Video_GetVideo(
 )
 ```
 
-### 2. BunnyVideoUploader - File Upload
+### 2. BunnyStreamUploader - File Upload
 
 ```swift
-import BunnyVideoUploader
+import BunnyStreamUploader
 
 // Create uploader instance
 let videoUploader = TUSVideoUploader.make(accessKey: "your_access_key")
@@ -185,12 +185,12 @@ func application(_ application: UIApplication,
 }
 ```
 
-### 3. BunnyVideoPlayer - Video Playback
+### 3. BunnyStreamPlayer - Video Playback
 
 ```swift
-import BunnyVideoPlayer
+import BunnyStreamPlayer
 
-BunnyVideoPlayer(
+BunnyStreamPlayer(
   accessKey: accessKey,
   videoId: videoId,
   libraryId: libraryId,
@@ -200,14 +200,14 @@ BunnyVideoPlayer(
 
 **Customizing Player:**
 
-You can customize the BunnyVideoPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
+You can customize the BunnyStreamPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
 
 ```swift
-extension BunnyVideoPlayer {
-  static func make(videoId: String) -> BunnyVideoPlayer {
+extension BunnyStreamPlayer {
+  static func make(videoId: String) -> BunnyStreamPlayer {
     let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
 
-    return BunnyVideoPlayer(
+    return BunnyStreamPlayer(
       accessKey: accessKey,
       videoId: videoId,
       libraryId: libraryId,
@@ -220,16 +220,16 @@ extension BunnyVideoPlayer {
 // Example view
 struct VideoPlayerDemoView: View {
     var body: some View {
-       BunnyVideoPlayer.make(videoId: videoInfo.id)
+       BunnyStreamPlayer.make(videoId: videoInfo.id)
        .navigationBarTitle(Text("Video Player"), displayMode: .inline)
     }
 }
 ```
 
-### 4. BunnyLiveStream
+### 4. BunnyStreamCameraUpload
 
 ```swift
-import BunnyLiveStream
+import BunnyStreamCameraUpload
 
 struct VideoStreamDemoView: View {
   @State private var isStreamingPresented = false
@@ -238,7 +238,7 @@ struct VideoStreamDemoView: View {
     Group { }
       .fullScreenCover(isPresented: $isStreamingPresented,
                        content: {
-        BunnyLiveStreamView(
+        BunnyStreamCameraUploadView(
           accessKey: "<access_key>",
           libraryId: <library_id>
         )
