@@ -1,23 +1,51 @@
 import AVFoundation
 import SwiftUI
 
+/// A SwiftUI view that provides an integrated video player experience
+/// using BunnyStream.
+///
+/// `BunnyStreamPlayer` handles video loading, configuration, and playback.
+/// It supports customizable themes and icons, as well as automatic
+/// error handling and retry mechanisms.
 public struct BunnyStreamPlayer: View {
+
+  /// The video configuration loader.
   let videoPlayerConfigLoader = VideoPlayerConfigLoader()
+  /// The heatmap data loader.
   let heatmapLoader: HeatmapLoader
+  /// The access key for authentication.
   let accessKey: String
+  /// The unique ID of the video to be played.
   let videoId: String
+  /// The ID of the video library.
   let libraryId: Int
+  /// The URL of the content delivery network.
   let cdn: String
+
+  /// The loading state of the video player.
   @State private var loadingState: VideoLoadingState = .loading
+  /// The media player instance.
   @State var player: MediaPlayer?
+  /// The theme configuration for the video player.
   @State var theme: VideoPlayerTheme = .defaultTheme
+  /// The video player configuration.
   @State var videoConfig = VideoPlayerConfig()
+  /// The set of custom player icons.
   internal var playerIcons: PlayerIcons?
-  
+
+  /// The different states of video loading.
   enum VideoLoadingState {
-    case loading, loaded(MediaPlayer, Video, Heatmap), failed, loaderFailed(VideoPlayerError)
+    /// Indicates that the video is currently loading.
+    case loading
+    /// Indicates that the video has loaded successfully with its metadata.
+    case loaded(MediaPlayer, Video, Heatmap)
+    /// Indicates that video loading has failed.
+    case failed
+    /// Indicates that loading has failed due to a specific error.
+    case loaderFailed(VideoPlayerError)
   }
-  
+
+  /// The main body of the `BunnyStreamPlayer`.
   public var body: some View {
     VStack(alignment: .center) {
       switch loadingState {
@@ -35,25 +63,7 @@ public struct BunnyStreamPlayer: View {
       case .failed:
         reloadButton()
       case .loaderFailed(let error):
-        switch error {
-        case .notFound:
-          VStack(spacing: 8) {
-            theme.images.videoNotFound
-              .resizable()
-              .scaledToFill()
-              .frame(width: 40, height: 40)
-            Text(Lingua.Player.videoNotFound)
-              .font(theme.font.size(11))
-          }
-        case .audioError:
-          VStack(spacing: 8) {
-            Text(Lingua.Error.audioError)
-              .font(theme.font.size(13))
-            reloadButton()
-          }
-        default:
-          reloadButton()
-        }
+        errorView(for: error)
       }
     }
     .task {
@@ -63,7 +73,8 @@ public struct BunnyStreamPlayer: View {
       player?.pause()
     }
   }
-  
+
+  /// Loads the video and its configuration asynchronously.
   @MainActor
   func loadVideo() async {
     loadingState = .loading
@@ -86,10 +97,9 @@ public struct BunnyStreamPlayer: View {
       loadingState = .failed
     }
   }
-}
 
-private extension BunnyStreamPlayer {
-  func reloadButton() -> some View {
+  /// Returns a reload button view for retrying video loading.
+  private func reloadButton() -> some View {
     Button {
       Task { await loadVideo() }
     } label: {
@@ -100,9 +110,30 @@ private extension BunnyStreamPlayer {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
-  
-  
-  func setupAudioSession() {
+
+  /// Returns an error view based on the specific `VideoPlayerError` encountered.
+  private func errorView(for error: VideoPlayerError) -> some View {
+    VStack(spacing: 8) {
+      switch error {
+      case .notFound:
+        theme.images.videoNotFound
+          .resizable()
+          .scaledToFill()
+          .frame(width: 40, height: 40)
+        Text(Lingua.Player.videoNotFound)
+          .font(theme.font.size(11))
+      case .audioError:
+        Text(Lingua.Error.audioError)
+          .font(theme.font.size(13))
+        reloadButton()
+      default:
+        reloadButton()
+      }
+    }
+  }
+
+  /// Configures the audio session for video playback.
+  private func setupAudioSession() {
 #if os(iOS)
     do {
       let session = AVAudioSession.sharedInstance()

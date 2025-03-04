@@ -2,7 +2,7 @@ import AVFoundation
 import SwiftUI
 
 public extension BunnyStreamPlayer {
-  /// Initializes a new instance of the BunnyStreamPlayer.
+  /// Initializes a new instance of the `BunnyStreamPlayer`.
   ///
   /// This initializer sets up the video player with the necessary configurations
   /// such as access key, video ID, library ID, and CDN. Optionally, custom player
@@ -15,16 +15,16 @@ public extension BunnyStreamPlayer {
   ///   - cdn: The URL of the content delivery network.
   ///   - playerIcons: Optional custom icons for the video player.
   ///
-  /// Usage Example:
-  /// ```
+  /// ### Usage Example:
+  /// ```swift
   /// struct VideoPlayerDemoView: View {
-  ///  var body: some View {
-  ///   BunnyStreamPlayer(accessKey: "your_access_key",
-  ///                    videoId: "your_video_id",
-  ///                    libraryId: 123,
-  ///                    cdn: "your_cdn")
-  ///   .navigationBarTitle(Text("Video Player"), displayMode: .inline)
-  ///  }
+  ///     var body: some View {
+  ///         BunnyStreamPlayer(accessKey: "your_access_key",
+  ///                          videoId: "your_video_id",
+  ///                          libraryId: 123,
+  ///                          cdn: "your_cdn")
+  ///         .navigationBarTitle(Text("Video Player"), displayMode: .inline)
+  ///     }
   /// }
   /// ```
   init(accessKey: String,

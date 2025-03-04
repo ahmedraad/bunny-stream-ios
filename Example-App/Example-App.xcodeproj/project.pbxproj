@@ -41,6 +41,7 @@
 		972F244B2D77353B00D716F5 /* BunnyStreamCameraUpload in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244A2D77353B00D716F5 /* BunnyStreamCameraUpload */; };
 		972F244D2D77353B00D716F5 /* BunnyStreamPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244C2D77353B00D716F5 /* BunnyStreamPlayer */; };
 		972F244F2D77353B00D716F5 /* BunnyStreamUploader in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244E2D77353B00D716F5 /* BunnyStreamUploader */; };
+		972F24512D77448C00D716F5 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F24502D77448C00D716F5 /* Double+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploaderViewModel.swift; sourceTree = "<group>"; };
 		77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnyNetService.swift; sourceTree = "<group>"; };
+		972F24502D77448C00D716F5 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		77116BDC2AFEC3D9000BB64C /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				972F24502D77448C00D716F5 /* Double+Ext.swift */,
 				77950FAF2AE2D3340091A498 /* VideoPlayerDemoView.swift */,
 				779D61EE2B0778B80073E47D /* BunnyVideoPlayer+Default.swift */,
 			);
@@ -374,6 +377,7 @@
 				7789CFA72AD6C86E00CC8BCE /* UploadedRowView.swift in Sources */,
 				7703757B2AD877040034C47F /* DefaultTextFieldStyle.swift in Sources */,
 				770375792AD832B40034C47F /* VideoPicker.swift in Sources */,
+				972F24512D77448C00D716F5 /* Double+Ext.swift in Sources */,
 				7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */,
 				7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */,
 				7789474E2AD0032900DAF8DB /* VideoListView.swift in Sources */,
