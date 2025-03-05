@@ -152,6 +152,7 @@ Task {
         print("Upload error: \(error)")
     }
 }
+```
 
 #### Pause, Resume, and Remove Uploads
 
@@ -245,6 +246,7 @@ struct VideoStreamDemoView: View {
       })
   }
 }
+```
 
 ## Error Handling
 
