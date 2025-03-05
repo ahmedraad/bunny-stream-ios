@@ -12,13 +12,12 @@ BunnyStreamPlayer is a feature-rich video player specifically optimized for Bunn
 - Adaptive bitrate streaming
 - Custom controls and UI elements
 - Multiple video format support
+- Multiple audio tracks support
 - BunnyNet CDN integration
-- Analytics integration
 - AirPlay support
 - Customizable player appearance
 - Caption support
 - Heatmap integration
-- Picture-in-Picture support
 
 ### Requirements
 
@@ -28,14 +27,13 @@ BunnyStreamPlayer is a feature-rich video player specifically optimized for Bunn
 
 ### Customization
 
-The player supports various customization options:
+The player supports various customization options via BunnyStream's dashboard:
 - Custom player icons
 - Primary color theming
 - Font customization
 - Control visibility
 - Caption settings
 - Heatmap visualization
-
 
 ---
 

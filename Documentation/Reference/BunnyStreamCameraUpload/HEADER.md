@@ -15,8 +15,6 @@ BunnyStreamCameraUpload is a comprehensive camera integration solution that enab
 - Recording management
 - SwiftUI integration
 - Background upload support
-- Progress tracking
-- Error handling
 
 ### Requirements
 
