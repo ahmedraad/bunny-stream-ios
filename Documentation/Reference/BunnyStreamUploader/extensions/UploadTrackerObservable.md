@@ -14,10 +14,20 @@ public func uploadTracker(_ tracker: UploadTracker,
                           toStatus status: UploadStatus)
 ```
 
+Updates the published uploads dictionary when the tracker reports changes.
+
+This method ensures that all updates happen on the main thread and are
+animated appropriately in the UI.
+
+- Parameters:
+  - tracker: The tracker reporting the update.
+  - info: The upload information that was updated.
+  - status: The new status of the upload.
+
 #### Parameters
 
 | Name | Description |
 | ---- | ----------- |
-| tracker | The `UploadTracker` instance reporting the update. |
-| info | The `UploadVideoInfo` that identifies the upload. |
-| status | The new `UploadStatus` of the upload. |
+| tracker | The tracker reporting the update. |
+| info | The upload information that was updated. |
+| status | The new status of the upload. |

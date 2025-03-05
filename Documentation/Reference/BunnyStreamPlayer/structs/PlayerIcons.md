@@ -6,6 +6,132 @@
 public struct PlayerIcons
 ```
 
+A structure that provides customizable image icons for video player controls.
+
+`PlayerIcons` allows developers to specify different icons for various player functionalities,
+enhancing the user interface and user experience.
+
+## Properties
+### `play`
+
+```swift
+public var play: Image
+```
+
+Icon for the play action.
+
+### `pause`
+
+```swift
+public var pause: Image
+```
+
+Icon for the pause action.
+
+### `settings`
+
+```swift
+public var settings: Image
+```
+
+Icon for accessing settings.
+
+### `volumeOn`
+
+```swift
+public var volumeOn: Image
+```
+
+Icon indicating the volume is on.
+
+### `volumeOff`
+
+```swift
+public var volumeOff: Image
+```
+
+Icon indicating the volume is off or muted.
+
+### `fullscreenExpanded`
+
+```swift
+public var fullscreenExpanded: Image
+```
+
+Icon for expanding the video to fullscreen mode.
+
+### `fullscreenCollapsed`
+
+```swift
+public var fullscreenCollapsed: Image
+```
+
+Icon for exiting fullscreen mode.
+
+### `seekForward`
+
+```swift
+public var seekForward: Image
+```
+
+Icon for seeking the video forward.
+
+### `seekBackward`
+
+```swift
+public var seekBackward: Image
+```
+
+Icon for seeking the video backward.
+
+### `playbackSpeed`
+
+```swift
+public var playbackSpeed: Image
+```
+
+Icon for adjusting playback speed.
+
+### `quality`
+
+```swift
+public var quality: Image
+```
+
+Icon for adjusting video quality.
+
+### `videoNotFound`
+
+```swift
+public var videoNotFound: Image
+```
+
+Icon displayed when a video is not found or unavailable.
+
+### `reload`
+
+```swift
+public var reload: Image
+```
+
+Icon for reloading the video.
+
+### `captions`
+
+```swift
+public var captions: Image
+```
+
+Icon for toggling captions or subtitles.
+
+### `captionsEnabled`
+
+```swift
+public var captionsEnabled: Image
+```
+
+Icon indicating captions or subtitles are enabled.
+
 ## Methods
 ### `init(play:pause:settings:volumeOn:volumeOff:fullscreenExpanded:fullscreenCollapsed:seekForward:seekBackward:playbackSpeed:quality:videoNotFound:reload:captions:captionsEnabled:)`
 
@@ -29,9 +155,7 @@ public init(
 )
 ```
 
-`PlayerIcons` structure provides customizable image icons for video player controls.
-It allows to specify different icons for various player functionalities,
-enhancing the user interface and experience.
+Initializes a new `PlayerIcons` instance with customizable icons for video player controls.
 
 - Parameters:
   - play: Icon for the play action. Defaults to a system-provided play icon.
@@ -44,11 +168,11 @@ enhancing the user interface and experience.
   - seekForward: Icon for seeking the video forward. Defaults to a system-provided seek forward icon.
   - seekBackward: Icon for seeking the video backward. Defaults to a system-provided seek backward icon.
   - playbackSpeed: Icon for adjusting playback speed. Defaults to a system-provided playback speed icon.
-  - quality: Icon for adjusting video quality. Defaults to a system-provided playback speed icon.
+  - quality: Icon for adjusting video quality. Defaults to a system-provided 4K TV icon.
   - videoNotFound: Icon displayed when a video is not found or unavailable. Defaults to a system-provided unavailable video icon.
   - reload: Icon for reloading the video. Defaults to a system-provided reload icon.
   - captions: Icon for toggling captions or subtitles. Defaults to a system-provided captions icon.
-  - captionsEnabled: Icon for captions or subtitles enabled. Defaults to a system-provided captions icon.
+  - captionsEnabled: Icon indicating captions or subtitles are enabled. Defaults to a system-provided captions enabled icon.
 
 #### Parameters
 
@@ -64,8 +188,8 @@ enhancing the user interface and experience.
 | seekForward | Icon for seeking the video forward. Defaults to a system-provided seek forward icon. |
 | seekBackward | Icon for seeking the video backward. Defaults to a system-provided seek backward icon. |
 | playbackSpeed | Icon for adjusting playback speed. Defaults to a system-provided playback speed icon. |
-| quality | Icon for adjusting video quality. Defaults to a system-provided playback speed icon. |
+| quality | Icon for adjusting video quality. Defaults to a system-provided 4K TV icon. |
 | videoNotFound | Icon displayed when a video is not found or unavailable. Defaults to a system-provided unavailable video icon. |
 | reload | Icon for reloading the video. Defaults to a system-provided reload icon. |
 | captions | Icon for toggling captions or subtitles. Defaults to a system-provided captions icon. |
-| captionsEnabled | Icon for captions or subtitles enabled. Defaults to a system-provided captions icon. |
+| captionsEnabled | Icon indicating captions or subtitles are enabled. Defaults to a system-provided captions enabled icon. |
