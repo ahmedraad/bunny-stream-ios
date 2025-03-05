@@ -35,7 +35,14 @@ jobs:
     
     - name: Generate Documentation
       run: sourcedocs generate --all-modules
-    
+
+    - name: Process Documentation
+      run: |
+        # Make the script executable
+        chmod +x ./fix_readme.sh
+        # Run the script
+        ./fix_readme.sh
+
     - name: Commit Documentation
       run: |
         git config --local user.email "action@github.com"
