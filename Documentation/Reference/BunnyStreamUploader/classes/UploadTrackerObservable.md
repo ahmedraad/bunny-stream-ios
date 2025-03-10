@@ -3,7 +3,7 @@
 # `UploadTrackerObservable`
 
 ```swift
-public final class UploadTrackerObservable: ObservableObject
+public final class UploadTrackerObservable: ObservableObject, UploadTrackerDelegate
 ```
 
 A SwiftUI-compatible wrapper for `UploadTracker` that provides observable upload status updates.
@@ -57,3 +57,29 @@ and initializing the published uploads property with the current state.
 | Name | Description |
 | ---- | ----------- |
 | tracker | The upload tracker to observe. |
+
+### `uploadTracker(_:didUpdateUploadWithInfo:toStatus:)`
+
+```swift
+public func uploadTracker(_ tracker: UploadTracker,
+                          didUpdateUploadWithInfo info: UploadVideoInfo,
+                          toStatus status: UploadStatus)
+```
+
+Updates the published uploads dictionary when the tracker reports changes.
+
+This method ensures that all updates happen on the main thread and are
+animated appropriately in the UI.
+
+- Parameters:
+  - tracker: The tracker reporting the update.
+  - info: The upload information that was updated.
+  - status: The new status of the upload.
+
+#### Parameters
+
+| Name | Description |
+| ---- | ----------- |
+| tracker | The tracker reporting the update. |
+| info | The upload information that was updated. |
+| status | The new status of the upload. |

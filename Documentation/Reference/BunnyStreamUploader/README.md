@@ -64,9 +64,6 @@ BunnyStreamUploader is a sophisticated video upload solution built on the TUS (T
 -   [VideoContent](enums/VideoContent.md)
 -   [VideoUploaderError](enums/VideoUploaderError.md)
 ## Extensions
--   [TUSVideoUploader](extensions/TUSVideoUploader.md)
--   [URLSessionVideoUploader](extensions/URLSessionVideoUploader.md)
--   [UploadTrackerObservable](extensions/UploadTrackerObservable.md)
 -   [VideoUploadable](extensions/VideoUploadable.md)
 ## Typealiases
 -   [Headers](typealiases/Headers.md)
