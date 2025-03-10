@@ -19,7 +19,7 @@ import SwiftUI
 ///     }
 /// }
 /// ```
-public final class UploadTrackerObservable: ObservableObject {
+public final class UploadTrackerObservable: ObservableObject, UploadTrackerDelegate {
   /// The underlying upload tracker being observed.
   private var tracker: UploadTracker
 
@@ -41,10 +41,7 @@ public final class UploadTrackerObservable: ObservableObject {
     self.uploads = tracker.uploads
     self.tracker.delegate = self
   }
-}
 
-/// Conformance to UploadTrackerDelegate to receive upload status updates.
-extension UploadTrackerObservable: UploadTrackerDelegate {
   /// Updates the published uploads dictionary when the tracker reports changes.
   ///
   /// This method ensures that all updates happen on the main thread and are

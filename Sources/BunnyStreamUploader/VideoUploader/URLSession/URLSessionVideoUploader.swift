@@ -12,7 +12,7 @@ import Foundation
 ///
 /// The uploader uses a task manager to keep track of ongoing upload tasks and
 /// provides status updates through its upload tracker.
-public class URLSessionVideoUploader: NSObject {
+public class URLSessionVideoUploader: NSObject, VideoUploadable, VideoUploaderActions, URLSessionDataDelegate {
   /// The tracker that monitors the status of all uploads.
   public let uploadTracker: UploadTracker
 
@@ -47,10 +47,42 @@ public class URLSessionVideoUploader: NSObject {
     self.session = session
     self.taskManager = taskManager
   }
-}
 
-/// Conformance to VideoUploadable protocol.
-extension URLSessionVideoUploader: VideoUploadable {
+  /// Creates a preconfigured instance of URLSessionVideoUploader for use with BunnyCDN.
+  ///
+  /// This factory method sets up a complete video uploader with:
+  /// - A default URLSession configuration
+  /// - Progress tracking through delegate callbacks
+  /// - Task management for upload control
+  /// - Request building for BunnyCDN's API
+  ///
+  /// Example usage:
+  /// ```swift
+  /// let uploader = URLSessionVideoUploader.make(accessKey: "your-bunny-cdn-key")
+  /// try await uploader.uploadVideo(with: myVideoInfo)
+  /// ```
+  ///
+  /// - Parameter accessKey: Your BunnyCDN API access key for authentication.
+  /// - Returns: A fully configured URLSessionVideoUploader instance ready for use.
+  /// - Note: The uploader uses the default URLSession configuration. For background
+  ///         uploads or custom configurations, create the uploader manually with
+  ///         the appropriate configuration.
+  public static func make(accessKey: String) -> URLSessionVideoUploader {
+    let uploadTracker = UploadTracker()
+
+    let videoUploader = URLSessionVideoUploader(uploadTracker: uploadTracker,
+                                                requestBuilder: URLSessionRequestBuilder(),
+                                                accessKey: accessKey,
+                                                session: nil,
+                                                taskManager: URLSessionTaskManager())
+
+    let session = URLSession(configuration: .default, delegate: videoUploader, delegateQueue: nil)
+    videoUploader.setURLSession(session)
+
+    return videoUploader
+  }
+
+  // MARK: - Video Uploadable
   /// Uploads multiple videos using URLSession.
   ///
   /// This method processes each video sequentially:
@@ -84,11 +116,8 @@ extension URLSessionVideoUploader: VideoUploadable {
   func setURLSession(_ session: URLSessionProtocol) {
     self.session = session
   }
-}
 
-// MARK: - VideoUploaderActions
-/// Conformance to VideoUploaderActions protocol.
-extension URLSessionVideoUploader: VideoUploaderActions {
+  // MARK: - VideoUploaderActions
   /// Pauses an ongoing upload.
   ///
   /// This method suspends the URLSession task and updates the tracker
@@ -124,6 +153,32 @@ extension URLSessionVideoUploader: VideoUploaderActions {
     let uuid = info.uuid
     taskManager.removeTask(for: uuid)
     uploadTracker.removeUpload(id: uuid)
+  }
+
+  // MARK: - URLSessionDataDelegate
+  /// Handles upload progress updates from URLSession.
+  ///
+  /// This delegate method is called periodically during the upload to report progress.
+  /// It updates the tracker with the current progress on the main thread.
+  ///
+  /// - Parameters:
+  ///   - session: The session reporting the progress.
+  ///   - task: The upload task.
+  ///   - bytesSent: The number of bytes sent in the latest write operation.
+  ///   - totalBytesSent: The total number of bytes sent so far.
+  ///   - totalBytesExpectedToSend: The expected length of the body data.
+  public func urlSession(_ session: URLSession,
+                         task: URLSessionTask,
+                         didSendBodyData bytesSent: Int64,
+                         totalBytesSent: Int64,
+                         totalBytesExpectedToSend: Int64) {
+    guard let uuid = task.taskDescription.flatMap({ UUID(uuidString: $0) }) else { return }
+
+    DispatchQueue.main.async {
+      let progress = UploadProgress(bytesUploaded: Int(totalBytesSent), totalBytes: Int(totalBytesExpectedToSend))
+      let status = UploadStatus.uploading(progress: progress)
+      self.uploadTracker.addOrUpdateUpload(id: uuid, status: status)
+    }
   }
 }
 
@@ -189,34 +244,6 @@ private extension URLSessionVideoUploader {
       guard let url = response?.url else { return }
       let status = UploadStatus.uploaded(url: url)
       self?.uploadTracker.addOrUpdateUpload(id: uuid, status: status)
-    }
-  }
-}
-
-/// Conformance to URLSessionDataDelegate for upload progress tracking.
-extension URLSessionVideoUploader: URLSessionDataDelegate {
-  /// Handles upload progress updates from URLSession.
-  ///
-  /// This delegate method is called periodically during the upload to report progress.
-  /// It updates the tracker with the current progress on the main thread.
-  ///
-  /// - Parameters:
-  ///   - session: The session reporting the progress.
-  ///   - task: The upload task.
-  ///   - bytesSent: The number of bytes sent in the latest write operation.
-  ///   - totalBytesSent: The total number of bytes sent so far.
-  ///   - totalBytesExpectedToSend: The expected length of the body data.
-  public func urlSession(_ session: URLSession,
-                         task: URLSessionTask,
-                         didSendBodyData bytesSent: Int64,
-                         totalBytesSent: Int64,
-                         totalBytesExpectedToSend: Int64) {
-    guard let uuid = task.taskDescription.flatMap({ UUID(uuidString: $0) }) else { return }
-    
-    DispatchQueue.main.async {
-      let progress = UploadProgress(bytesUploaded: Int(totalBytesSent), totalBytes: Int(totalBytesExpectedToSend))
-      let status = UploadStatus.uploading(progress: progress)
-      self.uploadTracker.addOrUpdateUpload(id: uuid, status: status)
     }
   }
 }

@@ -13,7 +13,7 @@ import TUSKit
 ///
 /// The uploader integrates with the TUSKit framework to handle the low-level TUS protocol
 /// implementation while providing a high-level interface for video uploads.
-public final class TUSVideoUploader {
+public final class TUSVideoUploader: VideoUploadable, VideoUploaderActions, TUSClientDelegate {
   /// The tracker that monitors the status of all uploads.
   public let uploadTracker: UploadTracker
 
@@ -48,10 +48,50 @@ public final class TUSVideoUploader {
     self.videoRequestHeaderBuilder = videoRequestHeaderBuilder
     self.accessKey = accessKey
   }
-}
 
-// MARK: - VideoUploader
-extension TUSVideoUploader: VideoUploadable {
+  /// Creates a preconfigured instance of TUSVideoUploader for use with BunnyCDN.
+  ///
+  /// This factory method sets up a complete video uploader with:
+  /// - A configured TUS client for BunnyCDN's upload endpoint
+  /// - Background upload support
+  /// - Automatic upload resumption
+  /// - Progress tracking
+  ///
+  /// Example usage:
+  /// ```swift
+  /// let uploader = TUSVideoUploader.make(
+  ///     accessKey: "your-bunny-cdn-key",
+  ///     chunkSize: 1024 * 1024 // 1MB chunks
+  /// )
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - accessKey: Your BunnyCDN API access key for authentication.
+  ///   - chunkSize: The size of upload chunks in bytes. Larger chunks may upload faster
+  ///                but use more memory. Defaults to 500KB (500 * 1024 bytes).
+  /// - Returns: A fully configured TUSVideoUploader instance ready for use.
+  /// - Note: The uploader is automatically started after creation and will attempt to
+  ///         resume any previously interrupted uploads.
+  public static func make(accessKey: String, chunkSize: Int = 500 * 1024) -> TUSVideoUploader {
+    let tusClient = try! TUSClient(server: URL(string: "https://video.bunnycdn.com/tusupload")!,
+                                   sessionIdentifier: "TUSBunny",
+                                   sessionConfiguration: .background(withIdentifier: "com.bunny.tus"),
+                                   storageDirectory: URL(string: "/tusupload")!,
+                                   chunkSize: chunkSize)
+
+    let uploadTracker = UploadTracker()
+    let videoUploader = TUSVideoUploader(uploadTracker: uploadTracker,
+                                         tusClient: tusClient,
+                                         videoSigner: VideoSHA256Signer(),
+                                         videoRequestHeaderBuilder: VideoRequestHeaderBuilder(),
+                                         accessKey: accessKey)
+    tusClient.delegate = videoUploader
+
+    try? videoUploader.start()
+    return videoUploader
+  }
+
+  // MARK: - VideoUploadable
   /// Uploads multiple videos using the TUS protocol.
   ///
   /// This method processes each video sequentially, preparing the necessary headers
@@ -75,10 +115,8 @@ extension TUSVideoUploader: VideoUploadable {
       uploadTracker.addUpload(info: uploadVideoInfo, status: .uploading(progress: .zero))
     }
   }
-}
 
-// MARK: - VideoUploaderActions
-extension TUSVideoUploader: VideoUploaderActions {
+  // MARK: - VideoUploaderActions
   /// Pauses an ongoing upload.
   ///
   /// This method cancels the TUS upload operation and updates the tracker to reflect
@@ -103,6 +141,7 @@ extension TUSVideoUploader: VideoUploaderActions {
     uploadTracker.resumeUpload(id: info.uuid)
   }
 
+  // MARK: - Public methods
   /// Permanently removes an upload.
   ///
   /// This method:
@@ -117,10 +156,7 @@ extension TUSVideoUploader: VideoUploaderActions {
     _ = try tusClient.removeCacheFor(id: info.uuid)
     uploadTracker.removeUpload(id: info.uuid)
   }
-}
 
-// MARK: - Public methods
-public extension TUSVideoUploader {
   /// Starts the TUS client and processes any existing uploads.
   ///
   /// This method:
@@ -130,7 +166,7 @@ public extension TUSVideoUploader {
   /// 4. Performs cleanup of the TUS client
   ///
   /// - Throws: An error if the TUS client fails to start.
-  func start() throws {
+  public func start() throws {
     _ = tusClient.start()
 
     try? handleFailedUploads()
@@ -147,14 +183,12 @@ public extension TUSVideoUploader {
   /// - Parameters:
   ///   - handler: A closure to be called when background operations occur.
   ///   - sessionIdentifier: The identifier for the background session.
-  func registerBackgroundHandler(_ handler: @escaping () -> Void,
+  public func registerBackgroundHandler(_ handler: @escaping () -> Void,
                                  forSession sessionIdentifier: String) {
     tusClient.registerBackgroundHandler(handler, forSession: sessionIdentifier)
   }
-}
 
-// MARK: - TUSClientDelegate
-extension TUSVideoUploader: TUSClientDelegate {
+  // MARK: - TUSClientDelegate
   /// Updates the upload progress for a specific upload.
   ///
   /// - Parameters:
