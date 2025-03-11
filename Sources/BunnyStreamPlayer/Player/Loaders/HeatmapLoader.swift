@@ -1,15 +1,15 @@
 import Foundation
-import BunnyStreamSDK
+import BunnyStreamAPI
 
 struct HeatmapLoader {
-  let bunnyStreamSDK: BunnyStreamSDK
-  
-  init(bunnyStreamSDK: BunnyStreamSDK) {
-    self.bunnyStreamSDK = bunnyStreamSDK
+  let bunnyStreamAPI: BunnyStreamAPI
+
+  init(bunnyStreamAPI: BunnyStreamAPI) {
+    self.bunnyStreamAPI = bunnyStreamAPI
   }
   
   func loadHeatmap(videoId: String, libraryId: Int, cdn: String) async throws -> Heatmap {
-    let output = try await bunnyStreamSDK.Api.Video_GetVideoHeatmap(path: .init(libraryId: Int64(libraryId), videoId: videoId))
+    let output = try await bunnyStreamAPI.client.Video_GetVideoHeatmap(path: .init(libraryId: Int64(libraryId), videoId: videoId))
     switch output {
     case .ok(let okResponse):
       switch okResponse.body {

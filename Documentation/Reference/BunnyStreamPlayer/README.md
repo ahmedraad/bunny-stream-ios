@@ -5,7 +5,7 @@
 
 ## Overview
 
-BunnyStreamPlayer is a feature-rich video player specifically optimized for BunnyNet's CDN. It provides smooth playback with adaptive bitrate streaming and a fully customizable interface built with SwiftUI.
+BunnyStreamPlayer is a feature-rich video player specifically optimized for Bunny's CDN. It provides smooth playback with adaptive bitrate streaming and a fully customizable interface built with SwiftUI.
 
 ### Features
 
@@ -13,7 +13,7 @@ BunnyStreamPlayer is a feature-rich video player specifically optimized for Bunn
 - Custom controls and UI elements
 - Multiple video format support
 - Multiple audio tracks support
-- BunnyNet CDN integration
+- Bunny CDN integration
 - AirPlay support
 - Customizable player appearance
 - Caption support

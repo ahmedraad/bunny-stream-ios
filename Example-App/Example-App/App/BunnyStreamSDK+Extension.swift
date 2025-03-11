@@ -1,15 +1,15 @@
 //
-//  BunnyStreamSDK+Extension.swift
+//  BunnyStreamAPI+Extension.swift
 //  Example-App
 //
 //  Created by Egzon Arifi on 06/10/2023.
 //
 
 import Foundation
-import BunnyStreamSDK
+import BunnyStreamAPI
 
-extension BunnyStreamSDK {
-  static func make(accessKey: String) -> BunnyStreamSDK {
-    BunnyStreamSDK(accessKey: accessKey)
+extension BunnyStreamAPI {
+  static func make(accessKey: String) -> BunnyStreamAPI {
+    BunnyStreamAPI(accessKey: accessKey)
   }
 }

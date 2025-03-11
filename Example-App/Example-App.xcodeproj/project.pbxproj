@@ -34,14 +34,14 @@
 		77950FB02AE2D3340091A498 /* VideoPlayerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77950FAF2AE2D3340091A498 /* VideoPlayerDemoView.swift */; };
 		779D61ED2B0669EE0073E47D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 779D61EC2B0669EE0073E47D /* Localizable.xcstrings */; };
 		779D61EF2B0778B80073E47D /* BunnyVideoPlayer+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779D61EE2B0778B80073E47D /* BunnyVideoPlayer+Default.swift */; };
-		77AC55B52B0CEF390089C0B4 /* BunnyStreamSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 77AC55B42B0CEF390089C0B4 /* BunnyStreamSDK */; };
 		77FB975D2AD9AD0B004CED84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */; };
 		77FB976B2ADD339C004CED84 /* VideoUploaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */; };
-		77FB976D2ADD5E0C004CED84 /* BunnyNetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */; };
 		972F244B2D77353B00D716F5 /* BunnyStreamCameraUpload in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244A2D77353B00D716F5 /* BunnyStreamCameraUpload */; };
 		972F244D2D77353B00D716F5 /* BunnyStreamPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244C2D77353B00D716F5 /* BunnyStreamPlayer */; };
 		972F244F2D77353B00D716F5 /* BunnyStreamUploader in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244E2D77353B00D716F5 /* BunnyStreamUploader */; };
 		972F24512D77448C00D716F5 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F24502D77448C00D716F5 /* Double+Ext.swift */; };
+		97A123882D805E5E00EB3B71 /* BunnyStreamAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 97A123872D805E5E00EB3B71 /* BunnyStreamAPI */; };
+		97EEEB4C2D805F64008C3289 /* BunnyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EEEB4B2D805F64008C3289 /* BunnyService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,8 +77,8 @@
 		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploaderViewModel.swift; sourceTree = "<group>"; };
-		77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnyNetService.swift; sourceTree = "<group>"; };
 		972F24502D77448C00D716F5 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		97EEEB4B2D805F64008C3289 /* BunnyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunnyService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77AC55B52B0CEF390089C0B4 /* BunnyStreamSDK in Frameworks */,
+				97A123882D805E5E00EB3B71 /* BunnyStreamAPI in Frameworks */,
 				972F244D2D77353B00D716F5 /* BunnyStreamPlayer in Frameworks */,
 				972F244B2D77353B00D716F5 /* BunnyStreamCameraUpload in Frameworks */,
 				972F244F2D77353B00D716F5 /* BunnyStreamUploader in Frameworks */,
@@ -255,7 +255,7 @@
 		77950FA32ADDA7420091A498 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				77FB976C2ADD5E0C004CED84 /* BunnyNetService.swift */,
+				97EEEB4B2D805F64008C3289 /* BunnyService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -305,10 +305,10 @@
 			);
 			name = "Example-App";
 			packageProductDependencies = (
-				77AC55B42B0CEF390089C0B4 /* BunnyStreamSDK */,
 				972F244A2D77353B00D716F5 /* BunnyStreamCameraUpload */,
 				972F244C2D77353B00D716F5 /* BunnyStreamPlayer */,
 				972F244E2D77353B00D716F5 /* BunnyStreamUploader */,
+				97A123872D805E5E00EB3B71 /* BunnyStreamAPI */,
 			);
 			productName = "Example-App";
 			productReference = 778947382ACFFEFD00DAF8DB /* Example-App.app */;
@@ -378,6 +378,7 @@
 				7703757B2AD877040034C47F /* DefaultTextFieldStyle.swift in Sources */,
 				770375792AD832B40034C47F /* VideoPicker.swift in Sources */,
 				972F24512D77448C00D716F5 /* Double+Ext.swift in Sources */,
+				97EEEB4C2D805F64008C3289 /* BunnyService.swift in Sources */,
 				7789CFB62AD6DD0700CC8BCE /* DestructiveButton.swift in Sources */,
 				7789473E2ACFFEFD00DAF8DB /* ContentView.swift in Sources */,
 				7789474E2AD0032900DAF8DB /* VideoListView.swift in Sources */,
@@ -388,7 +389,6 @@
 				7789CFB02AD6CA6200CC8BCE /* ProgressRowView.swift in Sources */,
 				778947502AD0033800DAF8DB /* VideoListViewModel.swift in Sources */,
 				7742EC8E2AD93E6A0043D2BF /* DependenciesManager.swift in Sources */,
-				77FB976D2ADD5E0C004CED84 /* BunnyNetService.swift in Sources */,
 				7789CFB22AD6CB5B00CC8BCE /* UploadRecordRow.swift in Sources */,
 				77FB976B2ADD339C004CED84 /* VideoUploaderViewModel.swift in Sources */,
 				7789CF9F2AD6ABEC00CC8BCE /* VideoUploaderView.swift in Sources */,
@@ -623,10 +623,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		77AC55B42B0CEF390089C0B4 /* BunnyStreamSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BunnyStreamSDK;
-		};
 		972F244A2D77353B00D716F5 /* BunnyStreamCameraUpload */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BunnyStreamCameraUpload;
@@ -638,6 +634,10 @@
 		972F244E2D77353B00D716F5 /* BunnyStreamUploader */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BunnyStreamUploader;
+		};
+		97A123872D805E5E00EB3B71 /* BunnyStreamAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BunnyStreamAPI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -4,18 +4,18 @@ import OpenAPIURLSession
 
 /// A client SDK for interacting with the Bunny Stream API.
 ///
-/// The `BunnyStreamSDK` class provides a convenient interface for accessing Bunny Stream's
+/// The `BunnyStreamAPI` class provides a convenient interface for accessing Bunny Stream's
 /// content delivery and streaming services. It handles authentication, request management,
 /// and provides access to all available API endpoints.
 ///
 /// Example usage:
 /// ```swift
-/// let sdk = BunnyStreamSDK(accessKey: "your-access-key")
-/// // Use the sdk.Api to make API calls
+/// let api = BunnyStreamAPI(accessKey: "your-access-key")
+/// // Use the api.client to make API calls
 /// ```
 ///
 /// - Important: Make sure to keep your access key secure and never expose it in client-side code.
-public class BunnyStreamSDK {
+public class BunnyStreamAPI {
   /// The authentication key used for accessing the Bunny Stream API.
   ///
   /// This key is required for all API operations and should be obtained from your
@@ -32,7 +32,7 @@ public class BunnyStreamSDK {
   ///
   /// Use this property to access all available API endpoints and operations.
   /// The client is configured with proper authentication and date handling.
-  public let Api: Client
+  public let client: Client
 
   /// Creates a new instance of the Bunny Stream SDK.
   ///
@@ -45,7 +45,7 @@ public class BunnyStreamSDK {
     self.accessKey = accessKey
     self.transport = transport
 
-    self.Api = Client(
+    self.client = Client(
       serverURL: try! Servers.Server1.url(),
       configuration: Configuration(dateTranscoder: CustomISO8601DateTranscoder()),
       transport: transport,

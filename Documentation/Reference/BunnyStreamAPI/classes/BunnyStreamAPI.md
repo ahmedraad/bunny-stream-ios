@@ -1,21 +1,21 @@
 **CLASS**
 
-# `BunnyStreamSDK`
+# `BunnyStreamAPI`
 
 ```swift
-public class BunnyStreamSDK
+public class BunnyStreamAPI
 ```
 
 A client SDK for interacting with the Bunny Stream API.
 
-The `BunnyStreamSDK` class provides a convenient interface for accessing Bunny Stream's
+The `BunnyStreamAPI` class provides a convenient interface for accessing Bunny Stream's
 content delivery and streaming services. It handles authentication, request management,
 and provides access to all available API endpoints.
 
 Example usage:
 ```swift
-let sdk = BunnyStreamSDK(accessKey: "your-access-key")
-// Use the sdk.Api to make API calls
+let api = BunnyStreamAPI(accessKey: "your-access-key")
+// Use the api.client to make API calls
 ```
 
 - Important: Make sure to keep your access key secure and never expose it in client-side code.

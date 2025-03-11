@@ -9,7 +9,7 @@ import HTTPTypes
 /// API requests. It implements the `ClientMiddleware` protocol to intercept and modify
 /// requests before they are sent to the server.
 ///
-/// - Note: This middleware is automatically configured when you initialize the `BunnyStreamSDK`.
+/// - Note: This middleware is automatically configured when you initialize the `BunnyStreamAPI`.
 struct AuthenticationMiddleware: ClientMiddleware {
   /// The API access key used for request authentication.
   let accessKey: String

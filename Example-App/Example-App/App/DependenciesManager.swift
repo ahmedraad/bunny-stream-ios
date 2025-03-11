@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import BunnyStreamUploader
-import BunnyStreamSDK
+import BunnyStreamAPI
 
 class DependenciesManager: ObservableObject {
   @AppStorage("accessKey") var storedAccessKey: String? {
@@ -21,20 +21,20 @@ class DependenciesManager: ObservableObject {
   
   var tusVideoUploader: TUSVideoUploader
   var urlSessionVideoUploader: URLSessionVideoUploader
-  var bunnyStreamSDK: BunnyStreamSDK
+  var bunnyStreamAPI: BunnyStreamAPI
   
   init() {
     let initialKey: String = UserDefaults.standard.string(forKey: "accessKey") ?? ""
     self.accessKey = initialKey
     self.tusVideoUploader = TUSVideoUploader.make(accessKey: initialKey)
     self.urlSessionVideoUploader = URLSessionVideoUploader.make(accessKey: initialKey)
-    self.bunnyStreamSDK = BunnyStreamSDK.make(accessKey: initialKey)
+    self.bunnyStreamAPI = BunnyStreamAPI.make(accessKey: initialKey)
   }
   
   private func updateAccessKey() {
     self.accessKey = storedAccessKey ?? ""
     self.tusVideoUploader = TUSVideoUploader.make(accessKey: accessKey)
     self.urlSessionVideoUploader = URLSessionVideoUploader.make(accessKey: accessKey)
-    self.bunnyStreamSDK = BunnyStreamSDK.make(accessKey: accessKey)
+    self.bunnyStreamAPI = BunnyStreamAPI.make(accessKey: accessKey)
   }
 }

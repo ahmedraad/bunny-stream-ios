@@ -1,15 +1,15 @@
-# BunnyStreamSDK
+# BunnyStreamAPI
 
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://www.swift.org)
 [![License](https://img.shields.io/badge/Licence-MIT-green.svg)](LICENSE)
 
 ## Overview
 
-BunnyStreamSDK is the core package of the BunnyNet Stream iOS SDK, providing a comprehensive Swift interface to BunnyNet's REST Stream API. This package handles all API communication, request authentication, and response parsing, enabling seamless video content management.
+BunnyStreamAPI is the core package of the Bunny Stream iOS package, providing a comprehensive Swift interface to Bunny's REST Stream API. This package handles all API communication, request authentication, and response parsing, enabling seamless video content management.
 
 ### Features
 
-- Complete BunnyNet REST Stream API integration
+- Complete Bunny REST Stream API integration
 - Comprehensive video management capabilities
 - Collection organization and management
 - Thumbnail generation and management
@@ -105,7 +105,7 @@ dependencies: [
 -   [Video_UpdateVideo.Input](structs/Video_UpdateVideo.Input.md)
 -   [Video_UploadVideo.Input](structs/Video_UploadVideo.Input.md)
 ## Classes
--   [BunnyStreamSDK](classes/BunnyStreamSDK.md)
+-   [BunnyStreamAPI](classes/BunnyStreamAPI.md)
 ## Enums
 -   [BadRequest.Body](enums/BadRequest.Body.md)
 -   [Body.jsonPayload](enums/Body.jsonPayload.md)

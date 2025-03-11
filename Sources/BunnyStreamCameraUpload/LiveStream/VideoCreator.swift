@@ -1,18 +1,18 @@
 import Foundation
-import BunnyStreamSDK
+import BunnyStreamAPI
 
 final class VideoCreator {
-  private let bunnyStreamSDK: BunnyStreamSDK
+  private let bunnyStreamAPI: BunnyStreamAPI
   private let libraryId: Int
   
-  init(bunnyStreamSDK: BunnyStreamSDK,
+  init(bunnyStreamAPI: BunnyStreamAPI,
        libraryId: Int) {
-    self.bunnyStreamSDK = bunnyStreamSDK
+    self.bunnyStreamAPI = bunnyStreamAPI
     self.libraryId = libraryId
   }
   
   func createVideo() async throws -> String? {
-    let output = try await bunnyStreamSDK.Api.Video_CreateVideo(path: .init(libraryId: Int64(libraryId)),
+    let output = try await bunnyStreamAPI.client.Video_CreateVideo(path: .init(libraryId: Int64(libraryId)),
                                                                 body: .json(.CreateVideoModel(.init(title: "streaming_title"))))
     switch output {
     case .ok(let okResponse):
@@ -28,7 +28,7 @@ final class VideoCreator {
   }
   
   func deleteVideo(_ videoId: String) async throws {
-    _ = try await bunnyStreamSDK.Api.Video_DeleteVideo(path: .init(libraryId: Int64(libraryId),
+    _ = try await bunnyStreamAPI.client.Video_DeleteVideo(path: .init(libraryId: Int64(libraryId),
                                                                    videoId: videoId.lowercased()))
   }
 }

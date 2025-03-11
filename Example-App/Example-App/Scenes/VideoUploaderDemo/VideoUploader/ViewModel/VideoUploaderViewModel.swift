@@ -8,15 +8,15 @@
 import Foundation
 import SwiftUI
 import BunnyStreamUploader
-import BunnyStreamSDK
+import BunnyStreamAPI
 
 class VideoUploaderViewModel: ObservableObject {
-  private let bunnyNetService: BunnyNetService
+  private let bunnyService: BunnyService
   private let videoUploader: VideoUploader
   @Published var errorMessage: String?
   
-  init(bunnyNetService: BunnyNetService, videoUploader: VideoUploader) {
-    self.bunnyNetService = bunnyNetService
+  init(bunnyService: BunnyService, videoUploader: VideoUploader) {
+    self.bunnyService = bunnyService
     self.videoUploader = videoUploader
   }
   
@@ -26,7 +26,7 @@ class VideoUploaderViewModel: ObservableObject {
         var infos: [VideoInfo] = []
         
         for video in videos {
-          if let videoId = try await bunnyNetService.createVideo(title: video.name, libraryId: libraryId) {
+          if let videoId = try await bunnyService.createVideo(title: video.name, libraryId: libraryId) {
             let info = VideoInfo(content: .data(video.data),
                                  title: video.name,
                                  fileType: video.type,
@@ -63,7 +63,7 @@ class VideoUploaderViewModel: ObservableObject {
   func deleteAction(_ info: UploadVideoInfo) {
     Task {
       do {
-        try await bunnyNetService.deleteVideo(info.videoUUID.uuidString, libraryId: info.info.libraryId)
+        try await bunnyService.deleteVideo(info.videoUUID.uuidString, libraryId: info.info.libraryId)
         try videoUploader.removeUpload(for: info)
       } catch {
         await updateErrorMessage(error.localizedDescription)

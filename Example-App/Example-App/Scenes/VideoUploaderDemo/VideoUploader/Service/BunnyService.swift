@@ -1,22 +1,22 @@
 //
-//  BunnyNetService.swift
+//  BunnyService.swift
 //  Example-App
 //
 //  Created by Egzon Arifi on 16/10/2023.
 //
 
 import Foundation
-import BunnyStreamSDK
+import BunnyStreamAPI
 
-final class BunnyNetService {
-  private let bunnyStreamSDK: BunnyStreamSDK
-  
-  init(bunnyStreamSDK: BunnyStreamSDK) {
-    self.bunnyStreamSDK = bunnyStreamSDK
+final class BunnyService {
+  private let bunnyStreamAPI: BunnyStreamAPI
+
+  init(bunnyStreamAPI: BunnyStreamAPI) {
+    self.bunnyStreamAPI = bunnyStreamAPI
   }
   
   func createVideo(title: String, libraryId: Int) async throws -> String? {
-    let output = try await bunnyStreamSDK.Api.Video_CreateVideo(path: .init(libraryId: Int64(libraryId)),
+    let output = try await bunnyStreamAPI.client.Video_CreateVideo(path: .init(libraryId: Int64(libraryId)),
                                                                 body: .json(.CreateVideoModel(.init(title: title))))
     switch output {
     case .ok(let okResponse):
@@ -32,12 +32,12 @@ final class BunnyNetService {
   }
   
   func deleteVideo(_ videoId: String, libraryId: Int) async throws {
-    _ = try await bunnyStreamSDK.Api.Video_DeleteVideo(path: .init(libraryId: Int64(libraryId),
+    _ = try await bunnyStreamAPI.client.Video_DeleteVideo(path: .init(libraryId: Int64(libraryId),
                                                                    videoId: videoId.lowercased()))
   }
 }
 
-extension BunnyNetService {
+extension BunnyService {
   enum VideoUploaderError: LocalizedError {
     case failedToCreateVideoWithReason(message: String)
     case failedToCreateVideo

@@ -1,5 +1,5 @@
 import XCTest
-@testable import BunnyStreamSDK
+@testable import BunnyStreamAPI
 
 class CustomISO8601DateTranscoderTests: XCTestCase {
   var dateTranscoder: CustomISO8601DateTranscoder!

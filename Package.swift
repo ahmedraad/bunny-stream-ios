@@ -8,7 +8,7 @@ let package = Package(
   defaultLocalization: "en",
   platforms: [.iOS(.v15), .macOS(.v13)],
   products: [
-    .library(name: "BunnyStreamSDK", targets: ["BunnyStreamSDK"]),
+    .library(name: "BunnyStreamAPI", targets: ["BunnyStreamAPI"]),
     .library(name: "BunnyStreamUploader", targets: ["BunnyStreamUploader"]),
     .library(name: "BunnyStreamPlayer", targets: ["BunnyStreamPlayer"]),
     .library(name: "BunnyStreamCameraUpload", targets: ["BunnyStreamCameraUpload"])
@@ -25,7 +25,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "BunnyStreamSDK",
+      name: "BunnyStreamAPI",
       dependencies: [
         .product(
           name: "OpenAPIRuntime",
@@ -36,7 +36,7 @@ let package = Package(
           package: "swift-openapi-urlsession"
         ),
       ],
-      path: "Sources/BunnyStreamSDK",
+      path: "Sources/BunnyStreamAPI",
       plugins: [
         .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
       ]
@@ -44,7 +44,7 @@ let package = Package(
     .target(
       name: "BunnyStreamUploader",
       dependencies: [
-        .byName(name: "BunnyStreamSDK"),
+        .byName(name: "BunnyStreamAPI"),
         .product(name: "TUSKit", package: "TUSKit")
       ],
       path: "Sources/BunnyStreamUploader"),
@@ -53,7 +53,7 @@ let package = Package(
       dependencies: [
         .byName(name: "Kingfisher"),
         .byName(name: "SwiftSubtitles"),
-        .byName(name: "BunnyStreamSDK"),
+        .byName(name: "BunnyStreamAPI"),
         .product(name: "GoogleInteractiveMediaAds", package: "swift-package-manager-google-interactive-media-ads-ios")
       ],
       path: "Sources/BunnyStreamPlayer",
@@ -62,16 +62,16 @@ let package = Package(
     .target(
       name: "BunnyStreamCameraUpload",
       dependencies: [
-        .byName(name: "BunnyStreamSDK"),
+        .byName(name: "BunnyStreamAPI"),
         .product(name: "HaishinKit", package: "HaishinKit.swift")
       ],
       path: "Sources/BunnyStreamCameraUpload",
       resources: [.process("Resources")]
     ),
     .testTarget(
-      name: "BunnyStreamSDKTests",
-      dependencies: ["BunnyStreamSDK"],
-      path: "Tests/BunnyStreamSDKTests"
+      name: "BunnyStreamAPITests",
+      dependencies: ["BunnyStreamAPI"],
+      path: "Tests/BunnyStreamAPITests"
     ),
     .testTarget(
       name: "BunnyStreamUploaderTests",

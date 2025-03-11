@@ -71,7 +71,7 @@ public struct BunnyStreamCameraUploadView: View {
     libraryId: Int
   ) {
     let config = StreamConfig(accessKey: accessKey, libraryId: libraryId)
-    let videoCreator = VideoCreator(bunnyStreamSDK: .init(accessKey: accessKey), libraryId: libraryId)
+    let videoCreator = VideoCreator(bunnyStreamAPI: .init(accessKey: accessKey), libraryId: libraryId)
     let streamViewModel = BunnyStreamCameraUploadViewModel(streamConfig: config, videoCreator: videoCreator)
     self.init(streamViewModel: streamViewModel)
   }

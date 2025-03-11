@@ -21,7 +21,7 @@ struct ContentView: View {
     NavigationStack {
       List {
         NavigationLink("Video Player") {
-          VideoListView(viewModel: .init(bunnyStreamSDK: dependenciesManager.bunnyStreamSDK))
+          VideoListView(viewModel: .init(bunnyStreamAPI: dependenciesManager.bunnyStreamAPI))
             .environmentObject(dependenciesManager)
         }
         NavigationLink("Video Uploader") {

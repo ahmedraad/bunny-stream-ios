@@ -1,4 +1,4 @@
-# BunnyNet Stream iOS SDK
+# Bunny Stream iOS
 
 <p align="center">
   <img src="Resources/Images/bunnynet.svg" width="70%" alt="BunnyNet" />
@@ -15,15 +15,15 @@
     </a>
 </p>
 
-## What is BunnyNet Stream SDK?
+## What is Bunny Stream?
 
-BunnyNet Stream SDK is a comprehensive Swift Package Manager (SPM) package designed to seamlessly integrate BunnyNet's powerful video streaming capabilities into your iOS applications. The SDK provides a robust set of tools for video management, playback, uploading, and camera-based video uploads, all through an intuitive Swift API.
+Bunny Stream is a comprehensive Swift Package Manager (SPM) package designed to seamlessly integrate Bunny's powerful video streaming capabilities into your iOS applications. The package provides a robust set of tools for video management, playback, uploading, and camera-based video uploads, all through an intuitive Swift API.
 
 ### Key Features
 
-- **Complete API Integration**: Full support for BunnyNet REST Stream API
+- **Complete API Integration**: Full support for Bunny REST Stream API
 - **Efficient Video Upload**: TUS protocol implementation for reliable, resumable uploads
-- **Advanced Video Player**: Custom-built player with full BunnyNet CDN integration
+- **Advanced Video Player**: Custom-built player with full Bunny CDN integration
 - **Camera Upload Support**: Built-in capabilities for recording and uploading videos directly from device camera
 - **Type-Safe API**: Fully typed Swift API for compile-time safety
 - **Background Processing**: Support for background uploads and downloads
@@ -31,13 +31,13 @@ BunnyNet Stream SDK is a comprehensive Swift Package Manager (SPM) package desig
 
 ## Packages
 
-The BunnyNet Stream SDK is organized into several specialized packages, each focusing on specific functionality:
+The Bunny Stream package is organized into several specialized packages, each focusing on specific functionality:
 
 | Package | Description |
 |---------|-------------|
-| **[BunnyStreamSDK](Documentation/Reference/BunnyStreamSDK)** | The core package that provides a comprehensive Swift interface to BunnyNet's REST Stream API. It handles all API communication, request authentication, and response parsing, allowing you to easily manage your video content, retrieve analytics, and control CDN settings. Features include video management, collection organization, and thumbnail generation. |
+| **[BunnyStreamAPI](Documentation/Reference/BunnyStreamAPI)** | The core package that provides a comprehensive Swift interface to Bunny's REST Stream API. It handles all API communication, request authentication, and response parsing, allowing you to easily manage your video content, retrieve analytics, and control CDN settings. Features include video management, collection organization, and thumbnail generation. |
 | **[BunnyStreamUploader](Documentation/Reference/BunnyStreamUploader)** | A sophisticated video upload solution built on the TUS (Tus Upload Server) protocol. This package ensures reliable file uploads even in challenging network conditions, with support for pause/resume functionality, upload progress tracking, and background upload capabilities. It handles chunked uploads, automatic retries, and provides detailed upload status information. |
-| **[BunnyStreamPlayer](Documentation/Reference/BunnyStreamPlayer)** | A feature-rich video player specifically optimized for BunnyNet's CDN. It provides smooth playback with adaptive bitrate streaming, customizable controls, support for multiple video formats, and integration with BunnyNet's analytics. The player includes features like airplay support and customizable UI elements. |
+| **[BunnyStreamPlayer](Documentation/Reference/BunnyStreamPlayer)** | A feature-rich video player specifically optimized for Bunny's CDN. It provides smooth playback with adaptive bitrate streaming, customizable controls, support for multiple video formats, and integration with Bunny's analytics. The player includes features like airplay support and customizable UI elements. |
 | **[BunnyStreamCameraUpload](Documentation/Reference/BunnyStreamCameraUpload)** | A comprehensive camera integration solution that enables recording and direct upload of videos from the device camera. It provides easy-to-use APIs for managing video recording, camera controls, and seamless upload integration. |
 
 ## System Requirements
@@ -50,7 +50,7 @@ The BunnyNet Stream SDK is organized into several specialized packages, each foc
 
 ## Installation
 
-BunnyNet Stream SDK can be integrated into your project using Swift Package Manager (SPM). Here's how to add it to your project:
+Bunny Stream can be integrated into your project using Swift Package Manager (SPM). Here's how to add it to your project:
 
 ### Swift Package Manager
 
@@ -96,29 +96,29 @@ Add the following entries to your Info.plist file:
 
 ### Initialization
 
-After installation, you'll need to configure the SDK with your BunnyNet credentials:
+After installation, you'll need to configure the package with your Bunny credentials:
 
 ```swift
-import BunnyStreamSDK
+import BunnyStreamAPI
 
-// Initialize the SDK with your access key
-let bunnyStreamSDK = BunnyStreamSDK(accessKey: "your_access_key")
+// Initialize with your access key
+let BunnyStreamAPI = BunnyStreamAPI(accessKey: "your_access_key")
 ```
 
 ## Getting Started
 
 This section provides quick examples for each package. For detailed guides, check out our [Documentation](./Documentation).
 
-### 1. BunnyStreamSDK - Video Management
+### 1. BunnyStreamAPI - Video Management
 
 ```swift
-import BunnyStreamSDK
+import BunnyStreamAPI
 
-// Initialize the SDK
-let bunnyStreamSDK = BunnyStreamSDK(accessKey: "your_access_key")
+// Initialization
+let bunnyStreamAPI = BunnyStreamAPI(accessKey: "your_access_key")
 
 // Example: Get video details
-let videoInfo = try await bunnyStreamSDK.Api.Video_GetVideo(
+let videoInfo = try await bunnyStreamAPI.client.Video_GetVideo(
     path: .init(
         libraryId: 12345,
         videoId: "abcd-e9bb-4b96-wxyz-c17bc6a5292b"
@@ -201,7 +201,7 @@ BunnyStreamPlayer(
 
 **Customizing Player:**
 
-You can customize the BunnyStreamPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the BunnyNet dashboard.
+You can customize the BunnyStreamPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the Bunny dashboard.
 
 ```swift
 extension BunnyStreamPlayer {
@@ -250,11 +250,11 @@ struct VideoStreamDemoView: View {
 
 ## Error Handling
 
-The SDK provides detailed error information through custom error types:
+The package provides detailed error information through custom error types:
 
 ```swift
 do {
-    try await bunnyStreamSDK.Api.Video_DeleteVideo(/* ... */)
+    try await bunnyStreamAPI.client.Video_DeleteVideo(/* ... */)
 } catch let error as BunnyStreamError {
     switch error {
     case .unauthorized:
@@ -271,4 +271,4 @@ do {
 
 ## License
 
-BunnyNet iOS SDK is licensed under the [MIT License](LICENSE). See the LICENSE file for more details.
+Bunny Stream iOS is licensed under the [MIT License](LICENSE). See the LICENSE file for more details.
