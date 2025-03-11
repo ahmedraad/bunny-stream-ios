@@ -21,10 +21,10 @@ let api = BunnyStreamAPI(accessKey: "your-access-key")
 - Important: Make sure to keep your access key secure and never expose it in client-side code.
 
 ## Properties
-### `Api`
+### `client`
 
 ```swift
-public let Api: Client
+public let client: Client
 ```
 
 The main API client interface for accessing Bunny Stream services.

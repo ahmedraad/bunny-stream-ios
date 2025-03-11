@@ -5,7 +5,7 @@
 
 ## Overview
 
-BunnyStreamAPI is the core package of the Bunny Stream iOS package, providing a comprehensive Swift interface to Bunny's REST Stream API. This package handles all API communication, request authentication, and response parsing, enabling seamless video content management.
+BunnyStreamAPI is the core package of the Bunny Stream iOS SDK, providing a comprehensive Swift interface to Bunny's REST Stream API. This package handles all API communication, request authentication, and response parsing, enabling seamless video content management.
 
 ### Features
 
@@ -56,7 +56,7 @@ BunnyStreamAPI provides detailed error information via custom error types. The e
 
 ```swift
 do {
-    try await bunnyStreamAPI.client.Video_DeleteVideo(/* parameters */)
+    try await bunnyStreamAPI.client.Video_DeleteVideo("videoId", libraryId: 123)
 } catch let error as BunnyStreamError {
     switch error {
     case .unauthorized:

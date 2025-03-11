@@ -16,8 +16,10 @@ This view handles:
 
 Example usage:
 ```swift
-let viewModel = BunnyStreamCameraUploadViewModel()
-let streamView = BunnyStreamCameraUploadView(streamViewModel: viewModel)
+BunnyStreamCameraUploadView(
+  accessKey: "<access_key>",
+  libraryId: <library_id>
+ )
 ```
 
 ## Properties
