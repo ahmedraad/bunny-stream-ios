@@ -11,8 +11,10 @@ import SwiftUI
 ///
 /// Example usage:
 /// ```swift
-/// let viewModel = BunnyStreamCameraUploadViewModel()
-/// let streamView = BunnyStreamCameraUploadView(streamViewModel: viewModel)
+/// BunnyStreamCameraUploadView(
+///   accessKey: "<access_key>",
+///   libraryId: <library_id>
+///  )
 /// ```
 public struct BunnyStreamCameraUploadView: View {
   /// The visual theme applied to the view.

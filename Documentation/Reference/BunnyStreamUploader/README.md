@@ -5,7 +5,7 @@
 
 ## Overview
 
-BunnyStreamUploader is a sophisticated video upload solution built on the TUS (Tus Upload Server) protocol. This package ensures reliable file uploads even in challenging network conditions, with comprehensive support for pause/resume functionality and background uploads.
+BunnyStreamUploader is a sophisticated video upload solution that offers two distinct methods for integrating video uploads into your iOS applications. You can choose between a TUS-based implementation and a plain URLSession-based uploader. The TUS option ensures reliable file uploads even in challenging network conditions, with comprehensive support for pause/resume functionality, background uploads, automatic retries, and chunked upload handling. Alternatively, the URLSession-based uploader provides a straightforward, lightweight solution ideal for scenarios where the advanced features of TUS are not necessary. Both approaches include robust upload progress tracking and detailed status information, allowing you to select the best method for your specific needs.
 
 ### Features
 
@@ -41,6 +41,56 @@ BunnyStreamUploader is a sophisticated video upload solution built on the TUS (T
 </array>
 ```
 
+### Usage Example
+
+1. TUS-based Uploader
+
+```swift
+import BunnyStreamUploader
+
+// Create uploader instance
+let videoUploader = TUSVideoUploader.make(accessKey: "your_access_key")
+
+// Prepare video info
+let videoInfo = VideoInfo(
+    content: .data(video.data),
+    title: video.name,
+    fileType: video.type,
+    videoId: videoId,
+    libraryId: libraryId
+)
+
+// Start upload with progress tracking
+Task {
+    do {
+        try await videoUploader.uploadVideos(with: [videoInfo]) { progress in
+            print("Upload progress: \(progress.fractionCompleted)")
+        }
+        print("Upload completed successfully!")
+    } catch {
+        print("Upload error: \(error)")
+    }
+}
+```
+
+2. URLSession-based Uploader
+
+```swift
+import BunnyStreamUploader
+
+// Create uploader instance using URLSession-based implementation
+let uploader = URLSessionVideoUploader.make(accessKey: "your-bunny-cdn-key")
+
+// Start upload using URLSession uploader with video info
+Task {
+    do {
+        try await uploader.uploadVideos(with: [myVideoInfo])
+        print("Upload completed successfully using URLSession!")
+    } catch {
+        print("Upload error using URLSession: \(error)")
+    }
+}
+```
 
 ---
 

@@ -33,7 +33,7 @@
 		77950FA72ADEBB0D0091A498 /* VideoListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77950FA62ADEBB0D0091A498 /* VideoListRow.swift */; };
 		77950FB02AE2D3340091A498 /* VideoPlayerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77950FAF2AE2D3340091A498 /* VideoPlayerDemoView.swift */; };
 		779D61ED2B0669EE0073E47D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 779D61EC2B0669EE0073E47D /* Localizable.xcstrings */; };
-		779D61EF2B0778B80073E47D /* BunnyVideoPlayer+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779D61EE2B0778B80073E47D /* BunnyVideoPlayer+Default.swift */; };
+		779D61EF2B0778B80073E47D /* BunnyStreamPlayer+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779D61EE2B0778B80073E47D /* BunnyStreamPlayer+Default.swift */; };
 		77FB975D2AD9AD0B004CED84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */; };
 		77FB976B2ADD339C004CED84 /* VideoUploaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */; };
 		972F244B2D77353B00D716F5 /* BunnyStreamCameraUpload in Frameworks */ = {isa = PBXBuildFile; productRef = 972F244A2D77353B00D716F5 /* BunnyStreamCameraUpload */; };
@@ -73,7 +73,7 @@
 		77950FA62ADEBB0D0091A498 /* VideoListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListRow.swift; sourceTree = "<group>"; };
 		77950FAF2AE2D3340091A498 /* VideoPlayerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerDemoView.swift; sourceTree = "<group>"; };
 		779D61EC2B0669EE0073E47D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		779D61EE2B0778B80073E47D /* BunnyVideoPlayer+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BunnyVideoPlayer+Default.swift"; sourceTree = "<group>"; };
+		779D61EE2B0778B80073E47D /* BunnyStreamPlayer+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BunnyStreamPlayer+Default.swift"; sourceTree = "<group>"; };
 		77C1421F2AD02EF100B419FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		77FB975C2AD9AD0B004CED84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77FB976A2ADD339C004CED84 /* VideoUploaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploaderViewModel.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 			children = (
 				972F24502D77448C00D716F5 /* Double+Ext.swift */,
 				77950FAF2AE2D3340091A498 /* VideoPlayerDemoView.swift */,
-				779D61EE2B0778B80073E47D /* BunnyVideoPlayer+Default.swift */,
+				779D61EE2B0778B80073E47D /* BunnyStreamPlayer+Default.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -395,7 +395,7 @@
 				77116BD92AFE6774000BB64C /* VideoResponseInfo.swift in Sources */,
 				7789473C2ACFFEFD00DAF8DB /* ExampleApp.swift in Sources */,
 				77950FA72ADEBB0D0091A498 /* VideoListRow.swift in Sources */,
-				779D61EF2B0778B80073E47D /* BunnyVideoPlayer+Default.swift in Sources */,
+				779D61EF2B0778B80073E47D /* BunnyStreamPlayer+Default.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

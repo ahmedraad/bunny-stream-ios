@@ -107,8 +107,6 @@ let BunnyStreamAPI = BunnyStreamAPI(accessKey: "your_access_key")
 
 ## Getting Started
 
-This section provides quick examples for each package. For detailed guides, check out our [Documentation](./Documentation).
-
 ### 1. BunnyStreamAPI - Video Management
 
 ```swift
@@ -254,7 +252,7 @@ The package provides detailed error information through custom error types:
 
 ```swift
 do {
-    try await bunnyStreamAPI.client.Video_DeleteVideo(/* ... */)
+    try await bunnyStreamAPI.client.Video_DeleteVideo("videoId", libraryId: 123)
 } catch let error as BunnyStreamError {
     switch error {
     case .unauthorized:

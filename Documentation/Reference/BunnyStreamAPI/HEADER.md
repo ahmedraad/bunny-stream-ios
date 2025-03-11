@@ -31,3 +31,42 @@ dependencies: [
 ]
 ```
 
+### Usage example
+
+The example below demonstrates how to initialize the API client and retrieve video details:
+
+```swift
+import BunnyStreamAPI
+
+// Initialize the BunnyStreamAPI client with your access key
+let bunnyStreamAPI = BunnyStreamAPI(accessKey: "your_access_key")
+
+// Fetch video details using the client
+let videoInfo = try await bunnyStreamAPI.client.Video_GetVideo(
+    path: .init(
+        libraryId: 12345,
+        videoId: "abcd-e9bb-4b96-wxyz-c17bc6a5292b"
+    )
+)
+```
+
+### Error Handling
+
+BunnyStreamAPI provides detailed error information via custom error types. The example below shows how to handle errors gracefully:
+
+```swift
+do {
+    try await bunnyStreamAPI.client.Video_DeleteVideo("videoId", libraryId: 123)
+} catch let error as BunnyStreamError {
+    switch error {
+    case .unauthorized:
+        print("Invalid access key")
+    case .notFound:
+        print("Video not found")
+    case .networkError(let underlying):
+        print("Network error: \(underlying)")
+    case .apiError(let status, let message):
+        print("API error (\(status)): \(message)")
+    }
+}
+```

@@ -40,6 +40,28 @@ BunnyStreamCameraUpload is a comprehensive camera integration solution that enab
 </array>
 ```
 
+### Usage example
+
+To integrate the camera upload feature into your app, simply present the BunnyStreamCameraUploadView using SwiftUI’s full-screen cover. This view provides a seamless interface for recording and uploading videos directly from the device camera.
+
+```swift
+import BunnyStreamCameraUpload
+
+struct VideoStreamDemoView: View {
+  @State private var isStreamingPresented = false
+
+  var body: some View {
+    Group { }
+      .fullScreenCover(isPresented: $isStreamingPresented,
+                       content: {
+        BunnyStreamCameraUploadView(
+          accessKey: "<access_key>",
+          libraryId: <library_id>
+        )
+      })
+  }
+}
+```
 
 ---
 

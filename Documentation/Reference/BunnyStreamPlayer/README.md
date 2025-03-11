@@ -35,6 +35,49 @@ The player supports various customization options via BunnyStream's dashboard:
 - Caption settings
 - Heatmap visualization
 
+### Usage example
+
+To integrate BunnyStreamPlayer into your SwiftUI view, simply instantiate it as shown below:
+
+```swift
+import BunnyStreamPlayer
+
+BunnyStreamPlayer(
+  accessKey: accessKey,
+  videoId: videoId,
+  libraryId: libraryId,
+  cdn: cdnHostname
+)
+```
+
+**Customizing Player:**
+
+You can customize the BunnyStreamPlayer by passing custom icons. Other costumizations like primary color, font, handling control visibilty, captions, heatmap can be controlled from the Bunny dashboard.
+
+```swift
+extension BunnyStreamPlayer {
+  static func make(videoId: String) -> BunnyStreamPlayer {
+    let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
+
+    return BunnyStreamPlayer(
+      accessKey: accessKey,
+      videoId: videoId,
+      libraryId: libraryId,
+      cdn: cdnHostname,
+      playerIcons: playerIcons
+    )
+  }
+}
+
+// Example view
+struct VideoPlayerDemoView: View {
+    var body: some View {
+       BunnyStreamPlayer.make(videoId: videoInfo.id)
+       .navigationBarTitle(Text("Video Player"), displayMode: .inline)
+    }
+}
+```
+
 ---
 
 # Reference Documentation

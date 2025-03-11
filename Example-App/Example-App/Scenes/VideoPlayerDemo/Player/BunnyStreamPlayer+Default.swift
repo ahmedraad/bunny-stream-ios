@@ -1,5 +1,5 @@
 //
-//  BunnyVideoPlayer+Default.swift
+//  BunnyStreamPlayer+Default.swift
 //  Example-App
 //
 //  Created by Egzon Arifi on 17/11/2023.
