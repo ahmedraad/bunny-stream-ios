@@ -396,13 +396,13 @@ private extension MediaPlayer {
     // Check if the subtitle language is set and get the subtitle cue
     guard let language = currentSubtitleLanguage,
           let subtitleCue = await subtitlesProvider?.subtitle(for: time, currentLanguage: language) else {
-      resetSubtitleCueIfNeeded()
+      await resetSubtitleCueIfNeeded()
       return
     }
     
     // Update the subtitle cue if it has changed
     if subtitleCue != currentSubtitleCue {
-      updateCurrentSubtitleCue(subtitleCue)
+      await updateCurrentSubtitleCue(subtitleCue)
     }
     
     @MainActor func resetSubtitleCueIfNeeded() {
