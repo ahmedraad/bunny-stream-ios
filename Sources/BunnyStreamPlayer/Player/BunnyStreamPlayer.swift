@@ -11,10 +11,10 @@ public struct BunnyStreamPlayer: View {
 
   /// The video configuration loader.
   let videoPlayerConfigLoader = VideoPlayerConfigLoader()
-  /// The heatmap data loader.
-  let heatmapLoader: HeatmapLoader
-  /// The access key for authentication.
-  let accessKey: String
+  /// The access key for authentication. Can be `nil` for public videos.
+  var accessKey: String?
+  /// The heatmap data loader. Will be `nil` if no `accessKey` is provided.
+  var heatmapLoader: HeatmapLoader?
   /// The unique ID of the video to be played.
   let videoId: String
   /// The ID of the video library.
@@ -49,10 +49,10 @@ public struct BunnyStreamPlayer: View {
   ///
   /// This initializer sets up the video player with the necessary configurations
   /// such as access key, video ID, library ID, and CDN. Optionally, custom player
-  /// icons can be provided.
+  /// icons can be provided. If no accessKey is provided, only Public videos will be playable.
   ///
   /// - Parameters:
-  ///   - accessKey: The access key for authentication.
+  ///   - accessKey: The access key for authentication. Can be `nil` for public videos.
   ///   - videoId: The unique ID of the video to be played.
   ///   - libraryId: The ID of the video library.
   ///   - cdn: The URL of the content delivery network.
@@ -70,16 +70,20 @@ public struct BunnyStreamPlayer: View {
   ///     }
   /// }
   /// ```
-  public init(accessKey: String,
-       videoId: String,
-       libraryId: Int,
-       cdn: String,
-       playerIcons: PlayerIcons? = nil) {
+  public init(
+    accessKey: String?,
+    videoId: String,
+    libraryId: Int,
+    cdn: String,
+    playerIcons: PlayerIcons? = nil
+  ) {
     self.accessKey = accessKey
     self.videoId = videoId
     self.libraryId = libraryId
     self.cdn = cdn
-    self.heatmapLoader = HeatmapLoader(bunnyStreamAPI: .init(accessKey: accessKey))
+    if let accessKey {
+      self.heatmapLoader = HeatmapLoader(bunnyStreamAPI: .init(accessKey: accessKey))
+    }
     if let playerIcons {
       self.playerIcons = playerIcons
       self.theme.images = playerIcons
@@ -123,7 +127,10 @@ public struct BunnyStreamPlayer: View {
     do {
       let videoConfigResponse = try await videoPlayerConfigLoader.load(libraryId: libraryId, videoId: videoId)
       var video = Video(videoConfigResponse: videoConfigResponse.video, cdn: cdn)
-      let heatmap = try? await heatmapLoader.loadHeatmap(videoId: videoId, libraryId: libraryId, cdn: cdn)
+      
+      // If Public Video (no access key), heatmap is not loaded - heatmapLoader is nil
+      let heatmap = try? await heatmapLoader?.loadHeatmap(videoId: videoId, libraryId: libraryId, cdn: cdn)
+      
       VideoPlayerConfig(response: videoConfigResponse).map { self.videoConfig = $0 }
       let player = MediaPlayer.make(video: video)
       self.player = player
