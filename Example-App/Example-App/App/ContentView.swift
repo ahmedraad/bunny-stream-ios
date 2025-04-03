@@ -23,27 +23,33 @@ struct ContentView: View {
   var body: some View {
     NavigationStack {
       List {
-        NavigationLink("Video Player") {
-          VideoListView(viewModel: .init(bunnyStreamAPI: dependenciesManager.bunnyStreamAPI))
-            .environmentObject(dependenciesManager)
-        }
-        NavigationLink("Video Uploader") {
-          VideoUploaderTypesView()
-            .environmentObject(dependenciesManager)
-        }
-        NavigationLink("Camera Upload") {
+        Section("Actions") {
+          NavigationLink("Video Player") {
+            VideoListView(viewModel: .init(bunnyStreamAPI: dependenciesManager.bunnyStreamAPI))
+              .environmentObject(dependenciesManager)
+          }
+          NavigationLink("Video Uploader") {
+            VideoUploaderTypesView()
+              .environmentObject(dependenciesManager)
+          }
+          NavigationLink("Camera Upload") {
+            Button {
+              isStreamingPresented.toggle()
+            } label: {
+              Image(systemName: "dot.radiowaves.left.and.right")
+              Text("Start uploading")
+            }
+          }
           Button {
-            isStreamingPresented.toggle()
+            videoId = ""
+            isShowingVideoIdAlert = true
           } label: {
-            Image(systemName: "dot.radiowaves.left.and.right")
-            Text("Start uploading")
+            Text("Direct Video Play")
           }
         }
-        Button {
-          videoId = ""
-          isShowingVideoIdAlert = true
-        } label: {
-          Text("Direct Video Play")
+        
+        Section("Configuration") {
+          configurationVIew
         }
       }
       .navigationTitle("BunnyStream Demo")
@@ -63,7 +69,6 @@ struct ContentView: View {
         PublicVideoDemoView(dependenciesManager: dependenciesManager, videoId: videoId)
       }
 
-      accessKeyView()
     }
     .fullScreenCover(isPresented: $isStreamingPresented,
                      content: {
@@ -81,8 +86,7 @@ struct ContentView: View {
 }
 
 private extension ContentView {
-  @ViewBuilder
-  func accessKeyView() -> some View {
+  var configurationVIew: some View {
     Button("BunnyStream Configuration") {
       isShowingSheet = true
     }

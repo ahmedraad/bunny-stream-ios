@@ -23,23 +23,27 @@ struct VideoListView: View {
         ProgressView()
           .frame(maxWidth: .infinity)
       case .loaded:
-        List(viewModel.videoInfos, id: \.self) { videoInfo in
-          if videoInfo.encodeProgress == 100 {
-            Button(action: {
-              selectedVideoInfo = videoInfo
-            }) {
-              VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+        ScrollView {
+          LazyVStack {
+            ForEach(viewModel.videoInfos) { videoInfo in
+              if videoInfo.encodeProgress == 100 {
+                Button(action: {
+                  selectedVideoInfo = videoInfo
+                }) {
+                  VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+                }
+              } else {
+                VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+              }
             }
-          } else {
-            VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
           }
+          .padding(.vertical, 12)
         }
       case .failed(let string):
         Text(string)
       }
     }
     .navigationTitle("Video List")
-    .listStyle(.plain)
     .task {
       await viewModel.loadVideos(libraryId: Int64(dependenciesManager.libraryId))
     }

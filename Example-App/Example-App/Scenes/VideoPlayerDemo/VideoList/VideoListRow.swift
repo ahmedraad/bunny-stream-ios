@@ -14,45 +14,61 @@ struct VideoListRow: View {
   
   var body: some View {
     ZStack {
-      imageView()
-      
+      RoundedRectangle(cornerRadius: 16)
+        .foregroundStyle(Color.gray)
+        .overlay {
+          imageView
+            .transition(.opacity)
+            .cornerRadius(16)
+        }
+        .clipped()
+        .shadow(radius: 10)
       VStack {
         topView()
-        
         Spacer()
-        
         videoInfoView()
       }
-      .background(
-        LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
-                       startPoint: .center, endPoint: .bottom)
-      )
     }
     .frame(height: 230)
-    .cornerRadius(10)
-    .shadow(radius: 5)
-    .padding(.all, 8)
+    .padding(.horizontal, 16)
+    .padding(.vertical, 8)
   }
 }
 
 extension VideoListRow {
-  func imageView() -> some View {
+  var imageView: some View {
     GeometryReader { geometry in
       VStack {
         AsyncImage(url: video.thumbnailFileURL(cdn: cdn)) { phase in
           switch phase {
           case .empty:
             ProgressView()
-              .frame(width: geometry.size.width, height: geometry.size.height)
-              .background(Color(.systemBackground))
+              .transition(.opacity)
           case .success(let image):
-            image.resizable()
+            image
+              .resizable()
+              .transition(.opacity)
               .aspectRatio(contentMode: .fill)
+              .overlay {
+                LinearGradient(
+                  gradient: Gradient(
+                    colors: [
+                      .clear,
+                      .black.opacity(
+                        0.7
+                      )]
+                  ),
+                  startPoint: .center,
+                  endPoint: .bottom
+                )
+              }
           case .failure:
             Image(systemName: "photo")
-              .foregroundColor(.gray)
+              .resizable()
+              .foregroundColor(.black.opacity(0.2))
               .scaledToFit()
-              .frame(width: geometry.size.width, height: geometry.size.height)
+              .frame(width: 50)
+              .transition(.opacity)
           @unknown default:
             EmptyView()
           }
@@ -75,15 +91,16 @@ extension VideoListRow {
     .padding()
   }
   
-  func capsuleText(string: String, foregroundColor: Color = .gray) -> some View {
+  func capsuleText(string: String, foregroundColor: Color = .black.opacity(0.6)) -> some View {
     Text(string)
       .foregroundColor(foregroundColor)
       .font(.caption)
       .padding()
-      .frame(height: 25)
+      .frame(height: 24)
       .background(Capsule().fill(Color.white))
       .overlay(
         Capsule().stroke(Color.gray.opacity(0.4), lineWidth: 0.3)
+          .shadow(color: .black.opacity(0.2), radius: 5)
       )
   }
   
