@@ -11,9 +11,10 @@ import BunnyStreamPlayer
 extension BunnyStreamPlayer {
   static func make(dependenciesManager: DependenciesManager, videoId: String) -> BunnyStreamPlayer {
     let playerIcons = PlayerIcons(play: Image(systemName: "play.fill"))
+    let accessKey = dependenciesManager.accessKey.isEmpty ? nil : dependenciesManager.accessKey
     
     return BunnyStreamPlayer(
-      accessKey: dependenciesManager.accessKey,
+      accessKey: accessKey,
       videoId: videoId,
       libraryId: dependenciesManager.libraryId,
       cdn: dependenciesManager.cdnHostname,

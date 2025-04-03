@@ -26,7 +26,13 @@
     "Cancel" : {
 
     },
+    "Direct Video Play" : {
+
+    },
     "Enter BunnyStream config data" : {
+
+    },
+    "Enter Video ID" : {
 
     },
     "Error: %@" : {
@@ -61,6 +67,15 @@
     "Pick Videos" : {
 
     },
+    "Play" : {
+
+    },
+    "Please enter the ID of the video you want to play." : {
+
+    },
+    "Public Video Player" : {
+
+    },
     "Resume" : {
 
     },
@@ -77,6 +92,9 @@
 
     },
     "Uploaded link" : {
+
+    },
+    "Video ID" : {
 
     },
     "Video List" : {

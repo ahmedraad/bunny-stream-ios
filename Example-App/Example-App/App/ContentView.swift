@@ -16,6 +16,9 @@ struct ContentView: View {
   @State private var cdnHostname: String = ""
   @State private var libraryId: String = ""
   @State private var isStreamingPresented: Bool = false
+  @State private var isShowingVideoIdAlert = false
+  @State private var videoId: String = ""
+  @State private var showPublicVideoPlayer = false
   
   var body: some View {
     NavigationStack {
@@ -36,8 +39,29 @@ struct ContentView: View {
             Text("Start uploading")
           }
         }
+        Button {
+          videoId = ""
+          isShowingVideoIdAlert = true
+        } label: {
+          Text("Direct Video Play")
+        }
       }
       .navigationTitle("BunnyStream Demo")
+      .alert("Enter Video ID", isPresented: $isShowingVideoIdAlert) {
+        TextField("Video ID", text: $videoId)
+        Button("Cancel", role: .cancel) {
+          videoId = ""
+        }
+        Button("Play") {
+          showPublicVideoPlayer = true
+        }
+        .disabled(videoId.isEmpty)
+      } message: {
+        Text("Please enter the ID of the video you want to play.")
+      }
+      .sheet(isPresented: $showPublicVideoPlayer) {
+        PublicVideoDemoView(dependenciesManager: dependenciesManager, videoId: videoId)
+      }
 
       accessKeyView()
     }

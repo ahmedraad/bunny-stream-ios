@@ -25,8 +25,6 @@ struct HeatmapLoader {
         }
         
         return Heatmap(data: convertedDict)
-      default:
-        throw HeatmapLoaderError.notFound
       }
     case .notFound:
       throw HeatmapLoaderError.notFound
