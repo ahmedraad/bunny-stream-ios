@@ -6,4 +6,5 @@ enum VideoPlayerError: Error {
   case internalServerError
   case unknownError
   case audioError
+  case drmNotSupported
 }

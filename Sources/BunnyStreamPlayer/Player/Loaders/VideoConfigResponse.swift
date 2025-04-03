@@ -10,6 +10,7 @@ struct VideoConfigResponse: Decodable {
   var vastTagUrl: String?
   var showHeatmap: Bool
   var controls: Controls
+  var enableDRM: Bool
 }
 
 extension VideoConfigResponse {

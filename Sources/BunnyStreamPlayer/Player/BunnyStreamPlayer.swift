@@ -126,6 +126,10 @@ public struct BunnyStreamPlayer: View {
     loadingState = .loading
     do {
       let videoConfigResponse = try await videoPlayerConfigLoader.load(libraryId: libraryId, videoId: videoId)
+      guard videoConfigResponse.enableDRM == false else {
+        throw VideoPlayerError.drmNotSupported
+      }
+      
       var video = Video(videoConfigResponse: videoConfigResponse.video, cdn: cdn)
       
       // If Public Video (no access key), heatmap is not loaded - heatmapLoader is nil
@@ -141,8 +145,10 @@ public struct BunnyStreamPlayer: View {
       }
       loadingState = .loaded(player, video, heatmap ?? Heatmap(data: [:]))
     } catch let error as VideoPlayerError {
+      print("[BunnyStreamPlayer Error]: \(error)")
       loadingState = .loaderFailed(error)
     } catch {
+      print("[BunnyStreamPlayer Error]: \(error)")
       loadingState = .failed
     }
   }
