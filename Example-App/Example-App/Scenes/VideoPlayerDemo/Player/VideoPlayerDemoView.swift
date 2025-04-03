@@ -27,11 +27,7 @@ struct VideoPlayerDemoView: View {
         
         if geometry.size.width < geometry.size.height {
           videoInformationView()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
         }
-        
-        Spacer()
       }
     }
     .navigationBarTitle(Text("Video Player"), displayMode: .inline)
@@ -40,25 +36,39 @@ struct VideoPlayerDemoView: View {
 
 extension VideoPlayerDemoView {
   func videoInformationView() -> some View {
-    VStack(alignment: .leading, spacing: 16) {
-      Text(videoInfo.title ?? "")
-        .font(.headline)
-        .padding(.bottom)
-      
-      HStack {
-        Image(systemName: "stopwatch")
-        Text(Double(videoInfo.length).toFormattedTime())
-      }
-      
-      HStack {
-        Image(systemName: "eye")
-        Text("\(videoInfo.views) views")
-      }
-      
-      HStack {
-        Image(systemName: "server.rack")
-        Text(videoInfo.formattedFileSize)
+    List {
+      Section {
+        Text(videoInfo.title ?? "")
+          .font(.headline)
+        
+        HStack(spacing: 12) {
+          Image(systemName: "stopwatch.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+            .foregroundStyle(.gray)
+          Text(Double(videoInfo.length).toFormattedTime())
+        }
+        
+        HStack(spacing: 12) {
+          Image(systemName: "eye.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+            .foregroundStyle(.gray)
+          Text("\(videoInfo.views) views")
+        }
+        
+        HStack(spacing: 12) {
+          Image(systemName: "server.rack")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+            .foregroundStyle(.gray)
+          Text(videoInfo.formattedFileSize)
+        }
       }
     }
+    .ignoresSafeArea()
   }
 }
