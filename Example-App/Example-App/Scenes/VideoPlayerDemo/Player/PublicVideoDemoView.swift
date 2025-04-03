@@ -22,7 +22,7 @@ struct PublicVideoDemoView: View {
   
   var body: some View {
     GeometryReader { geometry in
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 0) {
         BunnyStreamPlayer.make(dependenciesManager: dependenciesManager, videoId: videoId)
           .frame(
             width: geometry.size.width,

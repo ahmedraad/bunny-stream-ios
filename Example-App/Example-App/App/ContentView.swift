@@ -49,7 +49,7 @@ struct ContentView: View {
         }
         
         Section("Configuration") {
-          configurationVIew
+          configurationView
         }
       }
       .navigationTitle("BunnyStream Demo")
@@ -86,23 +86,46 @@ struct ContentView: View {
 }
 
 private extension ContentView {
-  var configurationVIew: some View {
+  var configurationView: some View {
     Button("BunnyStream Configuration") {
       isShowingSheet = true
     }
     .sheet(isPresented: $isShowingSheet) {
-      Form {
-        Section(header: Text("Enter BunnyStream config data").font(.subheadline)) {
-          DefaultTextField(label: "Access Key", text: $tempAccessKey, placeholder: "Enter your access key")
-          DefaultTextField(label: "CDN hostname", text: $cdnHostname, placeholder: "Enter CDN hostname")
-          DefaultTextField(label: "Library ID", text: $libraryId, placeholder: "Enter Library ID", keyboardType: .numberPad)
+      NavigationStack {
+        Form {
+          Section("Access Key") {
+            TextField("Access your Key", text: $tempAccessKey)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+            
+          }
+          Section("CDN Hostname") {
+            TextField("Enter CDN Gostname", text: $cdnHostname)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+          }
+          Section("Library ID") {
+            TextField("Enter Library ID", text: $libraryId)
+              .keyboardType(.numberPad)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+          }
         }
-        
-        Button("Save", action: saveConfig)
+        .formStyle(.grouped)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("Save") {
+              saveConfig()
+            }
+            .bold()
+          }
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("Cancel") {
+              isShowingSheet = false
+            }
+          }
+        }
       }
-      .formStyle(.grouped)
-      .navigationTitle("Settings")
-      .navigationBarItems(trailing: Button("Cancel") { isShowingSheet = false })
     }
   }
 

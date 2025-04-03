@@ -14,6 +14,12 @@
     "%lld views" : {
 
     },
+    "Access Key" : {
+
+    },
+    "Access your Key" : {
+
+    },
     "Actions" : {
 
     },
@@ -29,13 +35,19 @@
     "Cancel" : {
 
     },
+    "CDN Hostname" : {
+
+    },
     "Configuration" : {
 
     },
     "Direct Video Play" : {
 
     },
-    "Enter BunnyStream config data" : {
+    "Enter CDN Gostname" : {
+
+    },
+    "Enter Library ID" : {
 
     },
     "Enter Video ID" : {
@@ -61,6 +73,9 @@
         }
       }
     },
+    "Library ID" : {
+
+    },
     "No videos!" : {
 
     },
@@ -79,16 +94,10 @@
     "Please enter the ID of the video you want to play." : {
 
     },
-    "Public Video Player" : {
-
-    },
     "Resume" : {
 
     },
     "Save" : {
-
-    },
-    "Settings" : {
 
     },
     "Start uploading" : {

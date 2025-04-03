@@ -20,7 +20,7 @@ struct VideoPlayerDemoView: View {
   
   var body: some View {
     GeometryReader { geometry in
-      VStack {
+      VStack(spacing: 0) {
         BunnyStreamPlayer.make(dependenciesManager: dependenciesManager, videoId: videoInfo.id)
           .frame(width: geometry.size.width,
                  height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
@@ -30,7 +30,6 @@ struct VideoPlayerDemoView: View {
         }
       }
     }
-    .navigationBarTitle(Text("Video Player"), displayMode: .inline)
   }
 }
 

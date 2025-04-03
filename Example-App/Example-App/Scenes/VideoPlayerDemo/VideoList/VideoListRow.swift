@@ -106,11 +106,12 @@ extension VideoListRow {
   
   func videoInfoView() -> some View {
     VStack {
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 12) {
         Text(video.title ?? "")
           .font(.headline)
           .foregroundColor(.white)
           .padding(.horizontal)
+          .multilineTextAlignment(.leading)
         HStack {
           Image(systemName: "stopwatch")
             .foregroundColor(.white)
