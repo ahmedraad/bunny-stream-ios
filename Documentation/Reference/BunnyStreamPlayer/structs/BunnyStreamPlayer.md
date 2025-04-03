@@ -26,21 +26,23 @@ The main body of the `BunnyStreamPlayer`.
 ### `init(accessKey:videoId:libraryId:cdn:playerIcons:)`
 
 ```swift
-public init(accessKey: String,
-     videoId: String,
-     libraryId: Int,
-     cdn: String,
-     playerIcons: PlayerIcons? = nil)
+public init(
+  accessKey: String?,
+  videoId: String,
+  libraryId: Int,
+  cdn: String,
+  playerIcons: PlayerIcons? = nil
+)
 ```
 
 Initializes a new instance of the `BunnyStreamPlayer`.
 
 This initializer sets up the video player with the necessary configurations
 such as access key, video ID, library ID, and CDN. Optionally, custom player
-icons can be provided.
+icons can be provided. If no accessKey is provided, only Public videos will be playable.
 
 - Parameters:
-  - accessKey: The access key for authentication.
+  - accessKey: The access key for authentication. Can be `nil` for public videos.
   - videoId: The unique ID of the video to be played.
   - libraryId: The ID of the video library.
   - cdn: The URL of the content delivery network.
@@ -63,7 +65,7 @@ struct VideoPlayerDemoView: View {
 
 | Name | Description |
 | ---- | ----------- |
-| accessKey | The access key for authentication. |
+| accessKey | The access key for authentication. Can be `nil` for public videos. |
 | videoId | The unique ID of the video to be played. |
 | libraryId | The ID of the video library. |
 | cdn | The URL of the content delivery network. |
