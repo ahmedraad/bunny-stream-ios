@@ -7,6 +7,7 @@
 
 import Foundation
 import BunnyStreamAPI
+import SwiftUI
 
 @MainActor
 class VideoListViewModel: ObservableObject {
@@ -52,7 +53,9 @@ class VideoListViewModel: ObservableObject {
                             averageWatchTime: $0.averageWatchTime ?? .zero,
                             views: Int($0.views ?? .zero))
         }
-        loadingState = .loaded
+        withAnimation {
+          loadingState = .loaded
+        }
       }
     case .undocumented(statusCode: let statusCode, _):
       loadingState = .failed("🥺 undocumented response: \(statusCode)")

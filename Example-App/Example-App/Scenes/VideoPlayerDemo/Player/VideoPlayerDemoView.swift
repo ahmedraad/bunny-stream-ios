@@ -20,45 +20,54 @@ struct VideoPlayerDemoView: View {
   
   var body: some View {
     GeometryReader { geometry in
-      VStack {
+      VStack(spacing: 0) {
         BunnyStreamPlayer.make(dependenciesManager: dependenciesManager, videoId: videoInfo.id)
           .frame(width: geometry.size.width,
                  height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height)
         
         if geometry.size.width < geometry.size.height {
           videoInformationView()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
         }
-        
-        Spacer()
       }
     }
-    .navigationBarTitle(Text("Video Player"), displayMode: .inline)
   }
 }
 
 extension VideoPlayerDemoView {
   func videoInformationView() -> some View {
-    VStack(alignment: .leading, spacing: 16) {
-      Text(videoInfo.title ?? "")
-        .font(.headline)
-        .padding(.bottom)
-      
-      HStack {
-        Image(systemName: "stopwatch")
-        Text(Double(videoInfo.length).toFormattedTime())
-      }
-      
-      HStack {
-        Image(systemName: "eye")
-        Text("\(videoInfo.views) views")
-      }
-      
-      HStack {
-        Image(systemName: "server.rack")
-        Text(videoInfo.formattedFileSize)
+    List {
+      Section {
+        Text(videoInfo.title ?? "")
+          .font(.headline)
+        
+        HStack(spacing: 12) {
+          Image(systemName: "stopwatch.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+            .foregroundStyle(.gray)
+          Text(Double(videoInfo.length).toFormattedTime())
+        }
+        
+        HStack(spacing: 12) {
+          Image(systemName: "eye.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+            .foregroundStyle(.gray)
+          Text("\(videoInfo.views) views")
+        }
+        
+        HStack(spacing: 12) {
+          Image(systemName: "server.rack")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 20, height: 20)
+            .foregroundStyle(.gray)
+          Text(videoInfo.formattedFileSize)
+        }
       }
     }
+    .ignoresSafeArea()
   }
 }

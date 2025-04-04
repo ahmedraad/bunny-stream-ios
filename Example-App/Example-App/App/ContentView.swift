@@ -23,27 +23,33 @@ struct ContentView: View {
   var body: some View {
     NavigationStack {
       List {
-        NavigationLink("Video Player") {
-          VideoListView(viewModel: .init(bunnyStreamAPI: dependenciesManager.bunnyStreamAPI))
-            .environmentObject(dependenciesManager)
-        }
-        NavigationLink("Video Uploader") {
-          VideoUploaderTypesView()
-            .environmentObject(dependenciesManager)
-        }
-        NavigationLink("Camera Upload") {
+        Section("Actions") {
+          NavigationLink("Video Player") {
+            VideoListView(viewModel: .init(bunnyStreamAPI: dependenciesManager.bunnyStreamAPI))
+              .environmentObject(dependenciesManager)
+          }
+          NavigationLink("Video Uploader") {
+            VideoUploaderTypesView()
+              .environmentObject(dependenciesManager)
+          }
+          NavigationLink("Camera Upload") {
+            Button {
+              isStreamingPresented.toggle()
+            } label: {
+              Image(systemName: "dot.radiowaves.left.and.right")
+              Text("Start uploading")
+            }
+          }
           Button {
-            isStreamingPresented.toggle()
+            videoId = ""
+            isShowingVideoIdAlert = true
           } label: {
-            Image(systemName: "dot.radiowaves.left.and.right")
-            Text("Start uploading")
+            Text("Direct Video Play")
           }
         }
-        Button {
-          videoId = ""
-          isShowingVideoIdAlert = true
-        } label: {
-          Text("Direct Video Play")
+        
+        Section("Configuration") {
+          configurationView
         }
       }
       .navigationTitle("BunnyStream Demo")
@@ -63,7 +69,6 @@ struct ContentView: View {
         PublicVideoDemoView(dependenciesManager: dependenciesManager, videoId: videoId)
       }
 
-      accessKeyView()
     }
     .fullScreenCover(isPresented: $isStreamingPresented,
                      content: {
@@ -81,24 +86,46 @@ struct ContentView: View {
 }
 
 private extension ContentView {
-  @ViewBuilder
-  func accessKeyView() -> some View {
+  var configurationView: some View {
     Button("BunnyStream Configuration") {
       isShowingSheet = true
     }
     .sheet(isPresented: $isShowingSheet) {
-      Form {
-        Section(header: Text("Enter BunnyStream config data").font(.subheadline)) {
-          DefaultTextField(label: "Access Key", text: $tempAccessKey, placeholder: "Enter your access key")
-          DefaultTextField(label: "CDN hostname", text: $cdnHostname, placeholder: "Enter CDN hostname")
-          DefaultTextField(label: "Library ID", text: $libraryId, placeholder: "Enter Library ID", keyboardType: .numberPad)
+      NavigationStack {
+        Form {
+          Section("Access Key") {
+            TextField("Access your Key", text: $tempAccessKey)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+            
+          }
+          Section("CDN Hostname") {
+            TextField("Enter CDN Gostname", text: $cdnHostname)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+          }
+          Section("Library ID") {
+            TextField("Enter Library ID", text: $libraryId)
+              .keyboardType(.numberPad)
+              .autocapitalization(.none)
+              .disableAutocorrection(true)
+          }
         }
-        
-        Button("Save", action: saveConfig)
+        .formStyle(.grouped)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("Save") {
+              saveConfig()
+            }
+            .bold()
+          }
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("Cancel") {
+              isShowingSheet = false
+            }
+          }
+        }
       }
-      .formStyle(.grouped)
-      .navigationTitle("Settings")
-      .navigationBarItems(trailing: Button("Cancel") { isShowingSheet = false })
     }
   }
 

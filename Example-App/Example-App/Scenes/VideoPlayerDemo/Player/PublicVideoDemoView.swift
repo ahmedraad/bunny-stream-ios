@@ -22,20 +22,21 @@ struct PublicVideoDemoView: View {
   
   var body: some View {
     GeometryReader { geometry in
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 0) {
         BunnyStreamPlayer.make(dependenciesManager: dependenciesManager, videoId: videoId)
           .frame(
             width: geometry.size.width,
             height: geometry.size.width < geometry.size.height ? geometry.size.width * (9 / 16) : geometry.size.height
           )
         
-        Text("Direct Video Play")
-          .font(.headline)
-          .padding()
-        
-        Spacer()
+        List {
+          Section {
+            Text("Direct Video Play")
+              .font(.headline)
+          }
+        }
+        .ignoresSafeArea()
       }
     }
-    .navigationBarTitle(Text("Public Video Player"), displayMode: .inline)
   }
 }
