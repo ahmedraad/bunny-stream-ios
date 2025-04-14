@@ -93,19 +93,19 @@ private extension ContentView {
     .sheet(isPresented: $isShowingSheet) {
       NavigationStack {
         Form {
-          Section("Access Key") {
-            TextField("Access your Key", text: $tempAccessKey)
+          Section("API Key") {
+            TextField("Enter your API Key", text: $tempAccessKey)
               .autocapitalization(.none)
               .disableAutocorrection(true)
             
           }
           Section("CDN Hostname") {
-            TextField("Enter CDN Gostname", text: $cdnHostname)
+            TextField("Enter CDN Hostname", text: $cdnHostname)
               .autocapitalization(.none)
               .disableAutocorrection(true)
           }
-          Section("Library ID") {
-            TextField("Enter Library ID", text: $libraryId)
+          Section("Video Library ID") {
+            TextField("Enter your Library ID", text: $libraryId)
               .keyboardType(.numberPad)
               .autocapitalization(.none)
               .disableAutocorrection(true)
