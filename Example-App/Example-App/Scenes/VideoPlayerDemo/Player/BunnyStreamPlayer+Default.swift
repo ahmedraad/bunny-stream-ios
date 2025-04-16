@@ -17,7 +17,6 @@ extension BunnyStreamPlayer {
       accessKey: accessKey,
       videoId: videoId,
       libraryId: dependenciesManager.libraryId,
-      cdn: dependenciesManager.cdnHostname,
       playerIcons: playerIcons
     )
   }

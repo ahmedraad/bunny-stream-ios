@@ -21,9 +21,9 @@ struct VideoResponseInfo: Hashable, Identifiable {
   var averageWatchTime: Int64
   var views: Int
   
-  func thumbnailFileURL(cdn: String) -> URL? {
-    guard let fileName = thumbnailFileName else { return nil }
-    return URL(string: "https://\(cdn)/\(id)/\(fileName)")
+  func thumbnailFileURL() -> URL? {
+    // No thumbnail URL available here
+    return nil
   }
   
   var formattedFileSize: String {

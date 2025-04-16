@@ -30,10 +30,10 @@ struct VideoListView: View {
                 Button(action: {
                   selectedVideoInfo = videoInfo
                 }) {
-                  VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+                  VideoListRow(video: videoInfo)
                 }
               } else {
-                VideoListRow(video: videoInfo, cdn: dependenciesManager.cdnHostname)
+                VideoListRow(video: videoInfo)
               }
             }
           }

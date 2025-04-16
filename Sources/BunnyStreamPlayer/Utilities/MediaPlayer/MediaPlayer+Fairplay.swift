@@ -8,22 +8,23 @@ extension MediaPlayer {
   /// with the `MediaPlayer`. If any step of the process fails, it returns `nil`.
   ///
   /// - Parameters:
-  ///   - video: A `Video`  for the video to be played.
+  ///   - video: A `Video` for the video to be played.
   ///
-  /// - Returns: An optional `MediaPlayer` instance. If the URL cannot be constructed or any other
-  ///   initialization step fails, the result is `nil`.
+  /// - Returns: A `MediaPlayer` instance.
   ///
   /// Example Usage:
   /// ```
   /// let player = MediaPlayer.make(video: video)
   /// ```
   static func make(video: Video) -> MediaPlayer {
-    let url = URL(string: "https://\(video.cdn)/\(video.guid)/playlist.m3u8")!
+    let url = URL(string: video.playlistUrl ?? "")!
     let fairPlayHandler = FairPlayStreamHandler(videoId: video.guid, libraryId: video.libraryId)
     let subtitlesProvider = MediaPlayerSubtitlesProvider(video: video)
-    let mediaPlayer = MediaPlayer(url: url,
-                                  fairPlayHandler: fairPlayHandler,
-                                  subtitlesProvider: subtitlesProvider)
+    let mediaPlayer = MediaPlayer(
+      url: url,
+      fairPlayHandler: fairPlayHandler,
+      subtitlesProvider: subtitlesProvider
+    )
     
     Task { try? await subtitlesProvider.loadSubtitles() }
     

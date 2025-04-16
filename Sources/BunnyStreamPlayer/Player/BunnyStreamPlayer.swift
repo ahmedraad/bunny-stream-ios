@@ -19,8 +19,6 @@ public struct BunnyStreamPlayer: View {
   let videoId: String
   /// The ID of the video library.
   let libraryId: Int
-  /// The URL of the content delivery network.
-  let cdn: String
 
   /// The loading state of the video player.
   @State private var loadingState: VideoLoadingState = .loading
@@ -48,14 +46,13 @@ public struct BunnyStreamPlayer: View {
   /// Initializes a new instance of the `BunnyStreamPlayer`.
   ///
   /// This initializer sets up the video player with the necessary configurations
-  /// such as access key, video ID, library ID, and CDN. Optionally, custom player
+  /// such as access key, video ID, library ID. Optionally, custom player
   /// icons can be provided. If no accessKey is provided, only Public videos will be playable.
   ///
   /// - Parameters:
   ///   - accessKey: The access key for authentication. Can be `nil` for public videos.
   ///   - videoId: The unique ID of the video to be played.
   ///   - libraryId: The ID of the video library.
-  ///   - cdn: The URL of the content delivery network.
   ///   - playerIcons: Optional custom icons for the video player.
   ///
   /// ### Usage Example:
@@ -64,8 +61,7 @@ public struct BunnyStreamPlayer: View {
   ///     var body: some View {
   ///         BunnyStreamPlayer(accessKey: "your_access_key",
   ///                          videoId: "your_video_id",
-  ///                          libraryId: 123,
-  ///                          cdn: "your_cdn")
+  ///                          libraryId: 123)
   ///         .navigationBarTitle(Text("Video Player"), displayMode: .inline)
   ///     }
   /// }
@@ -74,13 +70,11 @@ public struct BunnyStreamPlayer: View {
     accessKey: String?,
     videoId: String,
     libraryId: Int,
-    cdn: String,
     playerIcons: PlayerIcons? = nil
   ) {
     self.accessKey = accessKey
     self.videoId = videoId
     self.libraryId = libraryId
-    self.cdn = cdn
     if let accessKey {
       self.heatmapLoader = HeatmapLoader(bunnyStreamAPI: .init(accessKey: accessKey))
     }
@@ -130,10 +124,9 @@ public struct BunnyStreamPlayer: View {
         throw VideoPlayerError.drmNotSupported
       }
       
-      var video = Video(videoConfigResponse: videoConfigResponse.video, cdn: cdn)
-      
+      var video = Video(response: videoConfigResponse)
       // If Public Video (no access key), heatmap is not loaded - heatmapLoader is nil
-      let heatmap = try? await heatmapLoader?.loadHeatmap(videoId: videoId, libraryId: libraryId, cdn: cdn)
+      let heatmap = try? await heatmapLoader?.loadHeatmap(videoId: videoId, libraryId: libraryId)
       
       VideoPlayerConfig(response: videoConfigResponse).map { self.videoConfig = $0 }
       let player = MediaPlayer.make(video: video)
@@ -143,6 +136,7 @@ public struct BunnyStreamPlayer: View {
       if let playerIcons {
         self.theme.images = playerIcons
       }
+      
       loadingState = .loaded(player, video, heatmap ?? Heatmap(data: [:]))
     } catch let error as VideoPlayerError {
       print("[BunnyStreamPlayer Error]: \(error)")

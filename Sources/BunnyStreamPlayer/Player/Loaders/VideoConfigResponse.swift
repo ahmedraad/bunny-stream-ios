@@ -11,6 +11,10 @@ struct VideoConfigResponse: Decodable {
   var showHeatmap: Bool
   var controls: Controls
   var enableDRM: Bool
+  var thumbnailUrl: String
+  var videoPlaylistUrl: String
+  var captionsPath: String?
+  var seekPath: String?
 }
 
 extension VideoConfigResponse {

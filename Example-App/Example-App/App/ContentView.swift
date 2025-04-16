@@ -13,7 +13,6 @@ struct ContentView: View {
   @EnvironmentObject var dependenciesManager: DependenciesManager
   @State private var isShowingSheet = false
   @State private var tempAccessKey: String = ""
-  @State private var cdnHostname: String = ""
   @State private var libraryId: String = ""
   @State private var isStreamingPresented: Bool = false
   @State private var isShowingVideoIdAlert = false
@@ -79,7 +78,6 @@ struct ContentView: View {
     })
     .onAppear {
       tempAccessKey = dependenciesManager.accessKey
-      cdnHostname = dependenciesManager.cdnHostname
       libraryId = String(dependenciesManager.libraryId)
     }
   }
@@ -98,11 +96,6 @@ private extension ContentView {
               .autocapitalization(.none)
               .disableAutocorrection(true)
             
-          }
-          Section("CDN Hostname") {
-            TextField("Enter CDN Hostname", text: $cdnHostname)
-              .autocapitalization(.none)
-              .disableAutocorrection(true)
           }
           Section("Video Library ID") {
             TextField("Enter your Library ID", text: $libraryId)
@@ -131,7 +124,6 @@ private extension ContentView {
 
   private func saveConfig() {
     dependenciesManager.storedAccessKey = tempAccessKey
-    dependenciesManager.cdnHostname = cdnHostname
     dependenciesManager.libraryId = Int(libraryId) ?? .zero
     isShowingSheet = false
   }

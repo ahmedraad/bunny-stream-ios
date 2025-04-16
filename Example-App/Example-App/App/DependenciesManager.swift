@@ -16,7 +16,6 @@ class DependenciesManager: ObservableObject {
   }
   @Published var accessKey: String
   
-  @AppStorage("cdnHostname") var cdnHostname: String = ""
   @AppStorage("libraryId") var libraryId: Int = .zero
   
   var tusVideoUploader: TUSVideoUploader
