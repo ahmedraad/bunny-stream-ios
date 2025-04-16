@@ -14,13 +14,10 @@
     "%lld views" : {
 
     },
-    "Access Key" : {
-
-    },
-    "Access your Key" : {
-
-    },
     "Actions" : {
+
+    },
+    "API Key" : {
 
     },
     "BunnyStream Configuration" : {
@@ -35,22 +32,19 @@
     "Cancel" : {
 
     },
-    "CDN Hostname" : {
-
-    },
     "Configuration" : {
 
     },
     "Direct Video Play" : {
 
     },
-    "Enter CDN Gostname" : {
-
-    },
-    "Enter Library ID" : {
-
-    },
     "Enter Video ID" : {
+
+    },
+    "Enter your API Key" : {
+
+    },
+    "Enter your Library ID" : {
 
     },
     "Error: %@" : {
@@ -72,9 +66,6 @@
           }
         }
       }
-    },
-    "Library ID" : {
-
     },
     "No videos!" : {
 
@@ -110,6 +101,9 @@
 
     },
     "Video ID" : {
+
+    },
+    "Video Library ID" : {
 
     },
     "Video List" : {

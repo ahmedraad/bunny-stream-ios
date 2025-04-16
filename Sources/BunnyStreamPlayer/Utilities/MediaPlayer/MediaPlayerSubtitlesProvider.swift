@@ -12,7 +12,7 @@ class MediaPlayerSubtitlesProvider {
   
   func loadSubtitles() async throws {
     for caption in video.captions {
-      guard let url = caption.url(cdn: video.cdn, videoId: video.guid) else { return }
+      guard let url = URL(string: caption.captionsPath ?? "") else { return }
       let (data, _) = try await URLSession.shared.data(from: url)
       let subtitles = try Subtitles(data: data, expectedExtension: "vtt", encoding: .utf8)
       await subtitlesActor.updateSubtitles(key: caption.languageCode, subtitles: subtitles)

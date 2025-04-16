@@ -10,8 +10,7 @@ import SwiftUI
 
 struct VideoListRow: View {
   var video: VideoResponseInfo
-  var cdn: String
-  
+
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 16)
@@ -39,41 +38,42 @@ extension VideoListRow {
   var imageView: some View {
     GeometryReader { geometry in
       VStack {
-        AsyncImage(url: video.thumbnailFileURL(cdn: cdn)) { phase in
-          switch phase {
-          case .empty:
-            ProgressView()
-              .transition(.opacity)
-          case .success(let image):
-            image
-              .resizable()
-              .transition(.opacity)
-              .aspectRatio(contentMode: .fill)
-              .overlay {
-                LinearGradient(
-                  gradient: Gradient(
-                    colors: [
-                      .clear,
-                      .black.opacity(
-                        0.7
-                      )]
-                  ),
-                  startPoint: .center,
-                  endPoint: .bottom
-                )
-              }
-          case .failure:
+        // No Thumbnail is available at this time
+//        AsyncImage(url: video.thumbnailFileURL()) { phase in
+//          switch phase {
+//          case .empty:
+//            ProgressView()
+//              .transition(.opacity)
+//          case .success(let image):
+//            image
+//              .resizable()
+//              .transition(.opacity)
+//              .aspectRatio(contentMode: .fill)
+//              .overlay {
+//                LinearGradient(
+//                  gradient: Gradient(
+//                    colors: [
+//                      .clear,
+//                      .black.opacity(
+//                        0.7
+//                      )]
+//                  ),
+//                  startPoint: .center,
+//                  endPoint: .bottom
+//                )
+//              }
+//          case .failure:
             Image(systemName: "photo")
               .resizable()
               .foregroundColor(.black.opacity(0.2))
               .scaledToFit()
               .frame(width: 50)
               .transition(.opacity)
-          @unknown default:
-            EmptyView()
-          }
-        }
-        .clipped()
+//          @unknown default:
+//            EmptyView()
+//          }
+//        }
+//        .clipped()
       }
       .frame(width: geometry.size.width, height: 230)
     }
