@@ -120,10 +120,6 @@ public struct BunnyStreamPlayer: View {
     loadingState = .loading
     do {
       let videoConfigResponse = try await videoPlayerConfigLoader.load(libraryId: libraryId, videoId: videoId)
-      guard videoConfigResponse.enableDRM == false else {
-        throw VideoPlayerError.drmNotSupported
-      }
-      
       var video = Video(response: videoConfigResponse)
       // If Public Video (no access key), heatmap is not loaded - heatmapLoader is nil
       let heatmap = try? await heatmapLoader?.loadHeatmap(videoId: videoId, libraryId: libraryId)
