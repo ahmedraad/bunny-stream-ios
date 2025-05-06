@@ -85,5 +85,6 @@ struct VideoPlayerDemoView: View {
 ## Structs
 -   [BunnyStreamPlayer](structs/BunnyStreamPlayer.md)
 -   [PlayerIcons](structs/PlayerIcons.md)
+-   [VideoPlayerConfigLoader](structs/VideoPlayerConfigLoader.md)
 
 Copyright (c) 2019 BunnyWay d.o.o.
