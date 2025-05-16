@@ -179,6 +179,7 @@ private extension SeekBarView {
   }
   
   func chapterWidth(for chapter: Chapter) -> CGFloat {
+    guard !viewModel.duration.isZero else { return 0 }
     let chapterWidthPercentage = chapter.widthPercentage(duration: viewModel.duration)
     return max(chapterWidthPercentage * adjustedWidth, .zero)
   }
@@ -196,6 +197,7 @@ private extension SeekBarView {
   }
   
   func playedWidth(for chapter: Chapter) -> CGFloat {
+    guard !chapter.end.isZero else { return 0 }
     let playedChapterWidthPercentage = playedDuration(in: chapter) / CGFloat(chapter.end - chapter.start)
     return max(playedChapterWidthPercentage * chapterWidth(for: chapter), .zero)
   }
