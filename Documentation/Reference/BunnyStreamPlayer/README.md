@@ -86,5 +86,11 @@ struct VideoPlayerDemoView: View {
 -   [BunnyStreamPlayer](structs/BunnyStreamPlayer.md)
 -   [PlayerIcons](structs/PlayerIcons.md)
 -   [VideoPlayerConfigLoader](structs/VideoPlayerConfigLoader.md)
+## Enums
+-   [Lingua](enums/Lingua.md)
+-   [Lingua.Error](enums/Lingua.Error.md)
+-   [Lingua.LiveStream](enums/Lingua.LiveStream.md)
+-   [Lingua.Player](enums/Lingua.Player.md)
+-   [Lingua.Settings](enums/Lingua.Settings.md)
 
 Copyright (c) 2019 BunnyWay d.o.o.

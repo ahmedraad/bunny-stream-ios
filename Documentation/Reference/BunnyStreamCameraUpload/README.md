@@ -69,5 +69,9 @@ struct VideoStreamDemoView: View {
 
 ## Structs
 -   [BunnyStreamCameraUploadView](structs/BunnyStreamCameraUploadView.md)
+## Enums
+-   [Lingua](enums/Lingua.md)
+-   [Lingua.Error](enums/Lingua.Error.md)
+-   [Lingua.LiveStream](enums/Lingua.LiveStream.md)
 
 Copyright (c) 2019 BunnyWay d.o.o.
