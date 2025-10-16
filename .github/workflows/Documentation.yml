@@ -51,8 +51,12 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Update documentation"
+        git add -A
+        if git diff --cached --quiet; then
+          echo "No documentation updates to commit; skipping commit step."
+        else
+          git commit -m "Update documentation"
+        fi
     
     - name: Push Changes
       uses: ad-m/github-push-action@master
