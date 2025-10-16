@@ -21,17 +21,18 @@ jobs:
       run: |
         set -euo pipefail
         defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+        defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
       
     - name: Load Latest Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
         
-    - name: Build project
+    - name: Clean project
       run: swift package clean
 
     - name: Build project
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -destination 'name=iPhone 14 Pro' -scheme 'Bunny-Package' | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -destination 'name=iPhone 14 Pro' -scheme 'Bunny-Package' -skipPackagePluginValidation | xcpretty
 
     - name: Run tests
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -destination 'name=iPhone 14 Pro' -scheme 'Bunny-Package' | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -destination 'name=iPhone 14 Pro' -scheme 'Bunny-Package' -skipPackagePluginValidation | xcpretty
