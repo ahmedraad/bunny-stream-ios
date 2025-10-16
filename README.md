@@ -272,6 +272,42 @@ do {
 }
 ```
 
+## Troubleshooting
+
+### Build Plugin Validation Error
+
+If you encounter an error related to the OpenAPI Generator plugin when building the project (either in Xcode or from the command line), this is because Swift build plugins require explicit trust before first use. Here's how to fix it:
+
+**For Xcode Users:**
+1. Open the project in Xcode
+2. Try to build the project (⌘+B)
+3. You'll see a dialog asking you to trust the "OpenAPIGenerator" plugin
+4. Click "Trust & Enable" to allow the plugin to run
+5. Build again - it should now work
+
+**For Command Line Builds:**
+
+Run this command before building:
+```bash
+defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+```
+
+Then build with the skip validation flag:
+```bash
+xcodebuild -scheme Bunny-Package -skipPackagePluginValidation
+```
+
+Or if using Swift Package Manager:
+```bash
+swift build
+```
+
+**For CI/CD Environments:**
+
+Add the `-skipPackagePluginValidation` flag to your build commands. See our [GitHub Actions workflows](.github/workflows/BuildAndTest.yml) for reference implementation.
+
+This is a security feature in Xcode that requires manual approval for build plugins. Once trusted locally, you won't see this error again on your machine.
+
 ## License
 
 Bunny Stream iOS is licensed under the [MIT License](LICENSE). See the LICENSE file for more details.
