@@ -47,7 +47,7 @@ public struct BunnyStreamPlayer: View {
   ///
   /// This initializer sets up the video player with the necessary configurations
   /// such as access key, video ID, library ID. Optionally, custom player
-  /// icons can be provided. If no accessKey is provided, only Public videos will be playable.
+  /// icons can be provided.
   ///
   /// - Parameters:
   ///   - accessKey: The access key for authentication. Can be `nil` for public videos.
@@ -76,7 +76,7 @@ public struct BunnyStreamPlayer: View {
     self.videoId = videoId
     self.libraryId = libraryId
     if let accessKey {
-      self.heatmapLoader = HeatmapLoader(bunnyStreamAPI: .init(accessKey: accessKey))
+      self.heatmapLoader = HeatmapLoader(accessKey: accessKey)
     }
     if let playerIcons {
       self.playerIcons = playerIcons
